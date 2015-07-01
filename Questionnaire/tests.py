@@ -6,11 +6,12 @@ from django.test import TestCase
 from django.utils import timezone
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.contrib.auth import get_user_model
 
 from .models import Questionnaire, ChoiceQuestion, NonChoiceQuestion
 from .models import Answer, SingleChoiceAnswer, MultiChoiceAnswer, TextAnswer, FileAnswer
 from .models import Choice
-from .models import Activity, User
+from .models import Activity
 # Create your tests here.
 
 
@@ -18,9 +19,9 @@ class QuestionModelsTest(TestCase):
 
     def setUp(self):
         # create a default user who post the questionnaire
-        self.user = User.objects.create(username="some_user")
+        self.user = get_user_model().objects.create(username="some_user")
         # create a default user who answer the questions
-        self.guest = User.objects.create(username="guest")
+        self.guest = get_user_model().objects.create(username="guest")
         self.activity = Activity.objects.create(
             name="test",
             host=self.user,

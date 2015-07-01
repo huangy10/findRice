@@ -5,12 +5,12 @@ import os
 
 from django.test import TestCase
 
-from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.files import File
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.conf import settings
+from django.contrib.auth import get_user_model
 
 from .models import Activity, ActivityType, get_activity_poster_path, DEFAULT_POSTER_PATH
 from .models import AppliedBy, Approved, Like, Denied
@@ -20,7 +20,7 @@ from .models import AppliedBy, Approved, Like, Denied
 class ActivityModelTest(TestCase):
 
     def setUp(self):
-        self.user = User.objects.create(username="some_user")
+        self.user = get_user_model().objects.create(username="some_user")
         self.default_activity_type = ActivityType.objects.create(type_name="default",
                                                                  description="default")
         self.test_poster_path = os.path.join(settings.BASE_DIR, "Activity", 'testFiles', "test1.jpg")
@@ -37,7 +37,7 @@ class ActivityModelTest(TestCase):
             max_attend=10,
             poster=poster)
         self.activity.activity_type.add(self.default_activity_type)
-        self.guest = User.objects.create(username="guest")
+        self.guest = get_user_model().objects.create(username="guest")
 
     """下面的五个Test主要测试海报部分的功能"""
 
@@ -156,7 +156,7 @@ class ActivityModelTest(TestCase):
         application = AppliedBy.objects.create(user=self.guest,
                                                activity=self.activity)
         # 然后通过活动检索到申请者
-        candidate = User.objects.filter(applied_acts=self.activity)
+        candidate = get_user_model().objects.filter(applied_acts=self.activity)
         self.assertEqual(candidate[0], application.user)
 
         # 通过用户检索到其申请的活动
@@ -175,7 +175,7 @@ class ActivityModelTest(TestCase):
                                                activity=self.activity)
         application.cancel_this_apply()
 
-        candidates = User.objects.filter(applied_acts=self.activity).exclude(applied_by_relation__is_active=False)
+        candidates = get_user_model().objects.filter(applied_acts=self.activity).exclude(applied_by_relation__is_active=False)
         # 取消之后应该为空
         self.assertEqual(len(candidates), 0)
 
@@ -283,12 +283,12 @@ class ActivityModelTest(TestCase):
         act = Activity.objects.filter(liked_by=self.guest, like_relation__is_active=True)
         self.assertEqual(act[0], like.activity)
         # 通过活动检索到like这个活动的用户
-        user = User.objects.filter(liked_acts=self.activity, like_relation__is_active=True)
+        user = get_user_model().objects.filter(liked_acts=self.activity, like_relation__is_active=True)
         self.assertEqual(user[0], like.user)
 
     def test_cancel_like_an_approve(self):
         like = Like.objects.create(user=self.guest,
                                    activity=self.activity)
         like.cancel_like()
-        user = User.objects.filter(liked_acts=self.activity, like_relation__is_active=True)
+        user = get_user_model().objects.filter(liked_acts=self.activity, like_relation__is_active=True)
         self.assertEqual(len(user), 0)

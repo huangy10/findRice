@@ -4,9 +4,10 @@ import uuid
 
 from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError, PermissionDenied
 from django.utils import timezone
+
+from .utils import active_required
 # Create your models here.
 
 DEFAULT_POSTER_PATH = os.path.join(settings.MEDIA_ROOT, 'defaultPosters', 'default.jpg')
@@ -41,7 +42,7 @@ class Activity(models.Model):
     activity_type = models.ManyToManyField(ActivityType)
 
     name = models.CharField(max_length=200, verbose_name="活动名称")
-    host = models.ForeignKey(User, verbose_name="主办方")
+    host = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="主办方")
     host_name = models.CharField(max_length=50, verbose_name="主办方名称")   # 注意这里的名称一开始是用User里面的名称填充的，但是可以修改
 
     location = models.CharField(max_length=200, verbose_name="活动地点")
@@ -72,18 +73,18 @@ class Activity(models.Model):
         (1, "已经开始"),
         (2, "已经结束"),
     ), default=0, verbose_name="活动状态")
-    manually_start_time = models.DateTimeField(verbose_name="手动开始时间")
-    manually_end_time = models.DateTimeField(verbose_name="手动结束时间")
+    manually_start_time = models.DateTimeField(verbose_name="手动开始时间", null=True)
+    manually_end_time = models.DateTimeField(verbose_name="手动结束时间", null=True)
 
     """下面是和活动关联的用户"""
 
-    applied_by = models.ManyToManyField(User, related_name="applied_acts", through="AppliedBy",
+    applied_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="applied_acts", through="AppliedBy",
                                         verbose_name="申请用户")
-    denied = models.ManyToManyField(User, related_name="denied_acts", through="Denied",
+    denied = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="denied_acts", through="Denied",
                                     verbose_name="已拒绝的申请")
-    approved = models.ManyToManyField(User, related_name="approved_acts", through="Approved",
+    approved = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="approved_acts", through="Approved",
                                       verbose_name="已批准的申请")
-    liked_by = models.ManyToManyField(User, related_name="liked_acts", through="Like",
+    liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="liked_acts", through="Like",
                                       verbose_name="关注的用户")
 
     def __str__(self):
@@ -104,19 +105,9 @@ class Activity(models.Model):
         verbose_name_plural = "活动"
 
 
-def active_required(method):
-    """定义一个装饰器，来确保方法在执行前检查该类是否是active的，如果不是active的不执行方法"""
-    def wrapper(self, *args):
-        if not self.is_active:
-            return
-        else:
-            return method(self, *args)
-    return wrapper
-
-
 class AppliedBy(models.Model):
     activity = models.ForeignKey(Activity, related_name="applied_by_relation")
-    user = models.ForeignKey(User, related_name="applied_by_relation")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="applied_by_relation")
 
     apply_date = models.DateTimeField(auto_now_add=True, editable=False)
 
@@ -159,7 +150,7 @@ class AppliedBy(models.Model):
 
 class Denied(models.Model):
     activity = models.ForeignKey(Activity, related_name="denied_relation")
-    user = models.ForeignKey(User, related_name="denied_relation")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="denied_relation")
 
     deny_date = models.DateTimeField(auto_now=True, editable=False)
     deny_reason = models.CharField(max_length=100)
@@ -186,7 +177,7 @@ class Denied(models.Model):
 
 class Approved(models.Model):
     activity = models.ForeignKey(Activity, related_name="approved_relation")
-    user = models.ForeignKey(User, related_name="approved_relation")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="approved_relation")
 
     approve_date = models.DateTimeField(auto_now=True)
 
@@ -211,7 +202,7 @@ class Approved(models.Model):
 
 class Like(models.Model):
     activity = models.ForeignKey(Activity, related_name="like_relation")
-    user = models.ForeignKey(User, related_name="like_relation")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="like_relation")
 
     like_date = models.DateTimeField(auto_now=True)
 

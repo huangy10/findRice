@@ -12,8 +12,8 @@
       <column name="end_time" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="last_length" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="description" sqlType="TEXT" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="reward" sqlType="REAL" precision="2000000000" scale="10" nullable="false" jdbcType="6"/>
-      <column name="max_attend" sqlType="INTEGER UNSIGNED" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="reward" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="max_attend" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="poster" sqlType="VARCHAR(100)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="recommended" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="time_limited" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -24,14 +24,43 @@
       <column name="updated_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="host_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="is_active" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="recommended_level" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="min_attend" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="reward_for_share" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="reward_for_share_and_finished_percentage" sqlType="REAL" precision="2000000000" scale="10" nullable="false" jdbcType="6"/>
+      <column name="host_name" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="manually_end_time" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="manually_start_time" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_Activity_activity_1" columns="host_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_Activity_activity_activity_type_2" table="Activity_activity_activity_type" schema="" catalog="" columns="activity_id"/>
       <exported-key name="#FAKE_Activity_appliedby_2" table="Activity_appliedby" schema="" catalog="" columns="activity_id"/>
       <exported-key name="#FAKE_Activity_approved_2" table="Activity_approved" schema="" catalog="" columns="activity_id"/>
       <exported-key name="#FAKE_Activity_denied_2" table="Activity_denied" schema="" catalog="" columns="activity_id"/>
       <exported-key name="#FAKE_Activity_like_2" table="Activity_like" schema="" catalog="" columns="activity_id"/>
+      <exported-key name="#FAKE_Promotion_share_2" table="Promotion_share" schema="" catalog="" columns="activity_id"/>
       <exported-key name="#FAKE_Questionnaire_questionnaire_1" table="Questionnaire_questionnaire" schema="" catalog="" columns="activity_id"/>
       <index name="Activity_activity_8396f175" unique="true" columns="host_id"/>
+    </table>
+    <table name="Activity_activity_activity_type" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="activity_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="activitytype_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_Activity_activity_activity_type_1" columns="activitytype_id" ref-table="Activity_activitytype" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_Activity_activity_activity_type_2" columns="activity_id" ref-table="Activity_activity" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="Activity_activity_activity_type_d309c3e0" unique="true" columns="activitytype_id"/>
+      <index name="Activity_activity_activity_type_f8a3193a" unique="true" columns="activity_id"/>
+    </table>
+    <table name="Activity_activitytype" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="type_name" sqlType="VARCHAR(20)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="VARCHAR(100)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="display_order" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="modified_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <exported-key name="#FAKE_Activity_activity_activity_type_1" table="Activity_activity_activity_type" schema="" catalog="" columns="activitytype_id"/>
     </table>
     <table name="Activity_appliedby" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -82,10 +111,30 @@
       <index name="Activity_like_e8701ad4" unique="true" columns="user_id"/>
       <index name="Activity_like_f8a3193a" unique="true" columns="activity_id"/>
     </table>
+    <table name="Profile_riceteam" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="team_coin" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="host_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_Profile_riceteam_1" columns="host_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_Profile_riceteamcontribution_2" table="Profile_riceteamcontribution" schema="" catalog="" columns="team_id"/>
+    </table>
+    <table name="Profile_riceteamcontribution" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="contributed_coin" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="team_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_Profile_riceteamcontribution_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_Profile_riceteamcontribution_2" columns="team_id" ref-table="Profile_riceteam" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="Profile_riceteamcontribution_e8701ad4" unique="true" columns="user_id"/>
+      <index name="Profile_riceteamcontribution_f6a7ca40" unique="true" columns="team_id"/>
+    </table>
     <table name="Profile_userprofile" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="phoneNum" sqlType="VARCHAR(20)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="groupName" sqlType="VARCHAR(200)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="birthDate" sqlType="DATE" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="gender" sqlType="SMALLINT" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="avatar" sqlType="VARCHAR(100)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="identified" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -93,10 +142,37 @@
       <column name="coin" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="updated_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
-      <column name="birthDate" sqlType="DATE" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_Profile_userprofile_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
+    <table name="Promotion_share" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="total_reward_max" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="total_reward" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="activity_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="share_code" sqlType="VARCHAR(100)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_Promotion_share_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_Promotion_share_2" columns="activity_id" ref-table="Activity_activity" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_Promotion_sharerecord_2" table="Promotion_sharerecord" schema="" catalog="" columns="share_id"/>
+      <index name="Promotion_share_e8701ad4" unique="true" columns="user_id"/>
+      <index name="Promotion_share_f8a3193a" unique="true" columns="activity_id"/>
+    </table>
+    <table name="Promotion_sharerecord" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="create_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="finished" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="share_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="target_user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_Promotion_sharerecord_1" columns="target_user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_Promotion_sharerecord_2" columns="share_id" ref-table="Promotion_share" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="Promotion_sharerecord_35cad009" unique="true" columns="target_user_id"/>
+      <index name="Promotion_sharerecord_6dcc1338" unique="true" columns="share_id"/>
     </table>
     <table name="Questionnaire_choice" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -272,7 +348,11 @@
       <exported-key name="#FAKE_Activity_approved_1" table="Activity_approved" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_Activity_denied_1" table="Activity_denied" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_Activity_like_1" table="Activity_like" schema="" catalog="" columns="user_id"/>
+      <exported-key name="#FAKE_Profile_riceteam_1" table="Profile_riceteam" schema="" catalog="" columns="host_id"/>
+      <exported-key name="#FAKE_Profile_riceteamcontribution_1" table="Profile_riceteamcontribution" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_Profile_userprofile_1" table="Profile_userprofile" schema="" catalog="" columns="user_id"/>
+      <exported-key name="#FAKE_Promotion_share_1" table="Promotion_share" schema="" catalog="" columns="user_id"/>
+      <exported-key name="#FAKE_Promotion_sharerecord_1" table="Promotion_sharerecord" schema="" catalog="" columns="target_user_id"/>
       <exported-key name="#FAKE_Questionnaire_fileanswer_1" table="Questionnaire_fileanswer" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_Questionnaire_multichoiceanswer_1" table="Questionnaire_multichoiceanswer" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_Questionnaire_singlechoiceanswer_1" table="Questionnaire_singlechoiceanswer" schema="" catalog="" columns="user_id"/>

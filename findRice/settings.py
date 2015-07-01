@@ -1,3 +1,4 @@
+# coding=utf-8
 """
 Django settings for findRice project.
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = (
     'Activity',
     'Profile',
     'Questionnaire',
+    'Promotion',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -111,3 +113,8 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_PROFILE_MODULE = "Profile.UserProfile"
+
+
+"""下面是一些自定义的变量"""
+
+FR_SHARE_LINK_TEMPLATE = "http://zhaomi.biz/action/%s?code=%s"  # 分享链接模板
