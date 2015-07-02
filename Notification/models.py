@@ -5,6 +5,7 @@ from django.conf import settings
 from django.utils.functional import cached_property
 from django.core.exceptions import ObjectDoesNotExist
 from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 from Activity.models import Activity
 from Welfare.models import WelfareGift
@@ -25,6 +26,14 @@ class NotificationCenter(models.Model):
 
     def __str__(self):
         return self.user.name + " 的消息中心"
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_notification_center_automatically(sender, **kwargs):
+    user = kwargs["instance"]
+    created = kwargs["created"]
+    if created:
+        user.notification_center = NotificationCenter.objects.create(user=user)
 
 
 @receiver(send_notification)
@@ -83,11 +92,11 @@ class ActivityNotification(Notification):
     notification_center = models.ForeignKey(NotificationCenter, related_name="activity_notifications")
 
     notification_type = models.CharField(choices=(
-        "ready_requested", "就位确认",
-        "apply_approved", "申请通过",
-        "apply_full", "报名满",
-        "ready_rejected", "拒绝就位",
-        "share_finished", "分享完成"
+        ("ready_requested", "就位确认"),
+        ("apply_approved", "申请通过"),
+        ("apply_full", "报名满"),
+        ("ready_rejected", "拒绝就位"),
+        ("share_finished", "分享完成")
     ), max_length=20, verbose_name="消息类型")
 
     def clean(self):

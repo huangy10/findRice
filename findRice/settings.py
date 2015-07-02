@@ -42,6 +42,8 @@ INSTALLED_APPS = (
     'Profile',
     'Questionnaire',
     'Promotion',
+    'Notification',
+    'Welfare',
 )
 
 MIDDLEWARE_CLASSES = (

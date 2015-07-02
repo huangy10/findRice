@@ -25,3 +25,11 @@ class NotificationTest(TestCase):
             description="test",
             max_attend=10,
         )
+
+    def test_notification_center_creation(self):
+        center = self.user.notification_center
+
+    def test_system_notification(self):
+        notification = SystemNotification.objects.create(description="default",
+                                                         notification_center=self.user.notification_center)
+        self.assertEqual(self.user.notification_center.unread_notifications_count, 1)
