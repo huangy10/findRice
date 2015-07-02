@@ -4,11 +4,11 @@ import uuid
 
 from django.conf import settings
 from django.db import models
-from django.core.exceptions import ValidationError, PermissionDenied
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.utils import timezone
 
-from .utils import active_required
 # Create your models here.
+
 
 DEFAULT_POSTER_PATH = os.path.join(settings.MEDIA_ROOT, 'defaultPosters', 'default.jpg')
 
@@ -78,14 +78,8 @@ class Activity(models.Model):
 
     """下面是和活动关联的用户"""
 
-    applied_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="applied_acts", through="AppliedBy",
-                                        verbose_name="申请用户")
-    denied = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="denied_acts", through="Denied",
-                                    verbose_name="已拒绝的申请")
-    approved = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="approved_acts", through="Approved",
-                                      verbose_name="已批准的申请")
-    liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="liked_acts", through="Like",
-                                      verbose_name="关注的用户")
+    candidates = models.ManyToManyField(settings.AUTH_USER_MODEL, through="ApplicationThrough",
+                                        related_name="applied_activity")
 
     def __str__(self):
         return self.name
@@ -105,117 +99,32 @@ class Activity(models.Model):
         verbose_name_plural = "活动"
 
 
-class AppliedBy(models.Model):
-    activity = models.ForeignKey(Activity, related_name="applied_by_relation")
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="applied_by_relation")
+class ApplicationThrough(models.Model):
+    """这个类是对活动的申请的抽象"""
+    activity = models.ForeignKey(Activity, related_name="application_through")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="applications_through")
 
-    apply_date = models.DateTimeField(auto_now_add=True, editable=False)
+    apply_at = models.DateTimeField(verbose_name="申请日期", auto_now_add=True)  # 这个属性为该对象的创建日期，也就代表了最早的申请
+    updated_at = models.DateTimeField(auto_now=True, editable=False)
 
-    is_active = models.BooleanField(default=True)
+    status = models.CharField(choices=(
+        ("applying", "申请中"),
+        ("approved", "已批准"),
+        ("denied", "已拒绝"),
+        ("finished", "已完成")
+    ), default="applying", max_length=10, verbose_name="状态")
+    is_active = models.BooleanField(default=True, help_text="don't set this manually")
 
-    @active_required
-    def deny_this_apply(self, reason="未知原因"):
-        """拒绝这个申请"""
-        self.is_active = False
-        self.save()
-        deny = Denied.objects.get_or_create(activity=self.activity,
-                                            user=self.user,
-                                            deny_reason=reason)[0]
-        if not deny.is_active:
-            deny.is_active = True
-            deny.save()
-
-    @active_required
-    def cancel_this_apply(self):
-        """取消这次申请，这个由申请人发起"""
-        self.is_active = False
-        self.save()
-
-    @active_required
-    def approve_this_apply(self):
-        self.is_active = False
-        self.save()
-        approve = Approved.objects.get_or_create(user=self.user,
-                                                 activity=self.activity)[0]
-        if not approve.is_active:
-            approve.is_active = True
-            approve.save()
+    def save(self, *args, **kwargs):
+        super(ApplicationThrough, self).save(*args, **kwargs)
+        if self.status == 3:
+            try:
+                self.share_record.finished = True
+                self.share_record.save()
+            except ObjectDoesNotExist:
+                pass
 
     class Meta:
-        verbose_name = "申请"
-        verbose_name_plural = "申请"
-
-        unique_together = ("activity", "user")
-
-
-class Denied(models.Model):
-    activity = models.ForeignKey(Activity, related_name="denied_relation")
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="denied_relation")
-
-    deny_date = models.DateTimeField(auto_now=True, editable=False)
-    deny_reason = models.CharField(max_length=100)
-
-    is_active = models.BooleanField(default=True)
-
-    @active_required
-    def cancel_deny(self):
-        """取消这次拒绝，恢复为申请状态"""
-        self.is_active = False
-        self.save()
-        application = AppliedBy.objects.get(user=self.user,
-                                            activity=self.activity,
-                                            is_active=False)
-        application.is_active = True
-        application.save()
-
-    class Meta:
-        verbose_name = "拒绝"
-        verbose_name_plural = "拒绝"
-
-        unique_together = ("activity", "user")
-
-
-class Approved(models.Model):
-    activity = models.ForeignKey(Activity, related_name="approved_relation")
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="approved_relation")
-
-    approve_date = models.DateTimeField(auto_now=True)
-
-    is_active = models.BooleanField(default=True)
-
-    @active_required
-    def cancel_approve(self):
-        self.is_active = False
-        self.save()
-        application = AppliedBy.objects.get(user=self.user,
-                                            activity=self.activity,
-                                            is_active=False)
-        application.is_active=True
-        application.save()
-
-    class Meta:
-        verbose_name = "批准"
-        verbose_name_plural = "批准"
-
-        unique_together = ("activity", "user")
-
-
-class Like(models.Model):
-    activity = models.ForeignKey(Activity, related_name="like_relation")
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="like_relation")
-
-    like_date = models.DateTimeField(auto_now=True)
-
-    is_active = models.BooleanField(default=True)
-
-    @active_required
-    def cancel_like(self):
-        self.is_active = False
-        self.save()
-
-    class Meta:
-        verbose_name = "喜欢"
-        verbose_name_plural = "喜欢"
-
-        unique_together = ("activity", "user")
-
+        verbose_name = "参与"
+        verbose_name_plural = "参与"
+        unique_together = ["activity", "user"]

@@ -15,6 +15,19 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='AnswerSheet',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('modified_at', models.DateTimeField(auto_now=True)),
+                ('is_active', models.BooleanField(default=True)),
+            ],
+            options={
+                'verbose_name': '\u7b54\u5377',
+                'verbose_name_plural': '\u7b54\u5377',
+            },
+        ),
+        migrations.CreateModel(
             name='Choice',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -37,9 +50,6 @@ class Migration(migrations.Migration):
                 ('question', models.CharField(max_length=200, verbose_name=b'\xe9\x97\xae\xe9\xa2\x98')),
                 ('required', models.BooleanField(default=True, help_text=b'\xe8\xbf\x99\xe4\xb8\xaa\xe9\x97\xae\xe9\xa2\x98\xe6\x98\xaf\xe5\x90\xa6\xe5\xbf\x85\xe9\xa1\xbb\xe5\x9b\x9e\xe7\xad\x94')),
                 ('order_in_list', models.IntegerField(default=1)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('modified_at', models.DateTimeField(auto_now=True)),
-                ('is_active', models.BooleanField(default=True)),
                 ('multi_choice', models.BooleanField(default=False, verbose_name=b'\xe6\x98\xaf\xe5\x90\xa6\xe4\xb8\xba\xe5\xa4\x9a\xe9\x80\x89')),
             ],
             options={
@@ -51,10 +61,8 @@ class Migration(migrations.Migration):
             name='FileAnswer',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('modified_at', models.DateTimeField(auto_now=True)),
-                ('is_active', models.BooleanField(default=True)),
                 ('file', models.FileField(upload_to=Questionnaire.models.get_file_name_from_date)),
+                ('answer_sheet', models.ForeignKey(to='Questionnaire.AnswerSheet')),
             ],
             options={
                 'verbose_name': '\u6587\u4ef6\u9898',
@@ -65,12 +73,9 @@ class Migration(migrations.Migration):
             name='MultiChoiceAnswer',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('modified_at', models.DateTimeField(auto_now=True)),
-                ('is_active', models.BooleanField(default=True)),
+                ('answer_sheet', models.ForeignKey(to='Questionnaire.AnswerSheet')),
                 ('choices', models.ManyToManyField(related_name='multi_choice_answers', to='Questionnaire.Choice')),
                 ('question', models.ForeignKey(related_name='multi_choice_answers', to='Questionnaire.ChoiceQuestion')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': '\u591a\u9009\u9898',
@@ -84,9 +89,6 @@ class Migration(migrations.Migration):
                 ('question', models.CharField(max_length=200, verbose_name=b'\xe9\x97\xae\xe9\xa2\x98')),
                 ('required', models.BooleanField(default=True, help_text=b'\xe8\xbf\x99\xe4\xb8\xaa\xe9\x97\xae\xe9\xa2\x98\xe6\x98\xaf\xe5\x90\xa6\xe5\xbf\x85\xe9\xa1\xbb\xe5\x9b\x9e\xe7\xad\x94')),
                 ('order_in_list', models.IntegerField(default=1)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('modified_at', models.DateTimeField(auto_now=True)),
-                ('is_active', models.BooleanField(default=True)),
                 ('type', models.SmallIntegerField(default=0, verbose_name=b'\xe4\xb8\xbb\xe8\xa7\x82\xe9\xa2\x98\xe7\xb1\xbb\xe5\x9e\x8b', choices=[(0, b'\xe9\x97\xae\xe7\xad\x94\xe9\xa2\x98'), (1, b'\xe6\x96\x87\xe4\xbb\xb6\xe9\xa2\x98')])),
             ],
             options={
@@ -98,12 +100,9 @@ class Migration(migrations.Migration):
             name='SingleChoiceAnswer',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('modified_at', models.DateTimeField(auto_now=True)),
-                ('is_active', models.BooleanField(default=True)),
+                ('answer_sheet', models.ForeignKey(to='Questionnaire.AnswerSheet')),
                 ('choice', models.ForeignKey(related_name='single_choice_answers', to='Questionnaire.Choice')),
                 ('question', models.ForeignKey(related_name='single_choice_answer_set', to='Questionnaire.ChoiceQuestion')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': '\u5355\u9009\u9898',
@@ -114,12 +113,9 @@ class Migration(migrations.Migration):
             name='TextAnswer',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('modified_at', models.DateTimeField(auto_now=True)),
-                ('is_active', models.BooleanField(default=True)),
                 ('text', models.TextField()),
+                ('answer_sheet', models.ForeignKey(to='Questionnaire.AnswerSheet')),
                 ('question', models.ForeignKey(to='Questionnaire.NonChoiceQuestion')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name': '\u7b80\u7b54\u9898',
@@ -132,6 +128,11 @@ class Migration(migrations.Migration):
             field=models.BooleanField(default=True),
         ),
         migrations.AddField(
+            model_name='questionnaire',
+            name='participants',
+            field=models.ManyToManyField(to=settings.AUTH_USER_MODEL),
+        ),
+        migrations.AddField(
             model_name='nonchoicequestion',
             name='questionnaire',
             field=models.ForeignKey(to='Questionnaire.Questionnaire'),
@@ -142,11 +143,6 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(to='Questionnaire.NonChoiceQuestion'),
         ),
         migrations.AddField(
-            model_name='fileanswer',
-            name='user',
-            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
-        ),
-        migrations.AddField(
             model_name='choicequestion',
             name='questionnaire',
             field=models.ForeignKey(to='Questionnaire.Questionnaire'),
@@ -155,5 +151,15 @@ class Migration(migrations.Migration):
             model_name='choice',
             name='question',
             field=models.ForeignKey(related_name='choices', to='Questionnaire.ChoiceQuestion'),
+        ),
+        migrations.AddField(
+            model_name='answersheet',
+            name='questionnaire',
+            field=models.ForeignKey(to='Questionnaire.Questionnaire'),
+        ),
+        migrations.AddField(
+            model_name='answersheet',
+            name='user',
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
         ),
     ]

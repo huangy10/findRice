@@ -1,6 +1,7 @@
 # coding=utf-8
 import datetime
 import os
+import random
 
 from django.test import TestCase
 from django.utils import timezone
@@ -9,7 +10,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 
 from .models import Questionnaire, ChoiceQuestion, NonChoiceQuestion
-from .models import Answer, SingleChoiceAnswer, MultiChoiceAnswer, TextAnswer, FileAnswer
+from .models import AnswerSheet, SingleChoiceAnswer, MultiChoiceAnswer, TextAnswer, FileAnswer
 from .models import Choice
 from .models import Activity
 # Create your tests here.
@@ -78,6 +79,10 @@ class QuestionModelsTest(TestCase):
                                              order_in_list=3,
                                              type=1)
 
+        # 准备答题，创建一个answer_sheet
+        self.answer_sheet = AnswerSheet.objects.create(user=self.guest,
+                                                       questionnaire=self.questionnaire)
+
     """下面的测试测试回答问题的功能"""
 
     def test_answer_a_single_choice_question(self):
@@ -86,7 +91,7 @@ class QuestionModelsTest(TestCase):
                                                 order_in_list=1)[0]
         # 取出的选择应当不是可以复选的
         self.assertEqual(selected_choice.multi_choice, False)
-        answer = SingleChoiceAnswer.objects.create(user=self.guest,
+        answer = SingleChoiceAnswer.objects.create(answer_sheet=self.answer_sheet,
                                                    question=self.single_choice_question,
                                                    choice=selected_choice)
         # 然后检索这这个问题的所有回答
@@ -101,7 +106,7 @@ class QuestionModelsTest(TestCase):
         self.assertTrue(selected_choice_1.multi_choice)
         self.assertTrue(selected_choice_2.multi_choice)
 
-        answer = MultiChoiceAnswer.objects.create(user=self.guest,
+        answer = MultiChoiceAnswer.objects.create(answer_sheet=self.answer_sheet,
                                                   question=self.multi_choice_question)
         answer.choices.add(selected_choice_1)
         answer.choices.add(selected_choice_2)
@@ -110,7 +115,7 @@ class QuestionModelsTest(TestCase):
         self.assertEqual(answers[0], answer)
 
     def test_answer_a_text_question(self):
-        answer = TextAnswer.objects.create(user=self.guest,
+        answer = TextAnswer.objects.create(answer_sheet=self.answer_sheet,
                                            text="This is a test answer",
                                            question=self.text_question)
         answers = TextAnswer.objects.filter(question=self.text_question)
@@ -118,7 +123,7 @@ class QuestionModelsTest(TestCase):
 
     def test_answer_a_file_question(self):
         test_file_path = os.path.join(settings.BASE_DIR, "Activity", 'testFiles', "test1.jpg")
-        answer = FileAnswer.objects.create(user=self.guest,
+        answer = FileAnswer.objects.create(answer_sheet=self.answer_sheet,
                                            file=test_file_path,
                                            question=self.file_question)
         answers = FileAnswer.objects.filter(question=self.file_question)
@@ -129,28 +134,33 @@ class QuestionModelsTest(TestCase):
     def test_single_choice_answer_to_multi_choice_question(self):
         """将单选的答案映射给多选的问题, 应当抛出异常"""
         with self.assertRaises(ValidationError):
-            answer_single_choice = SingleChoiceAnswer.objects.create(user=self.guest,
+            answer_single_choice = SingleChoiceAnswer.objects.create(answer_sheet=self.answer_sheet,
                                                                      question=self.multi_choice_question,
                                                                      choice=self.single_choice[0])
+            answer_single_choice.save()
         with self.assertRaises(ValidationError):
-            answer_single_choice = SingleChoiceAnswer.objects.create(user=self.guest,
+            answer_single_choice = SingleChoiceAnswer.objects.create(answer_sheet=self.answer_sheet,
                                                                      question=self.single_choice_question,
                                                                      choice=self.multi_choice[0])
+            answer_single_choice.save()
         with self.assertRaises(ValidationError):
-            answer_single_choice = SingleChoiceAnswer.objects.create(user=self.guest,
+            answer_single_choice = SingleChoiceAnswer.objects.create(answer_sheet=self.answer_sheet,
                                                                      question=self.multi_choice_question,
                                                                      choice=self.multi_choice[0])
+            answer_single_choice.save()
 
     def test_multi_choice_answer_to_single_choice_question(self):
         """类似的，这个测试将多选的答案映射给单选的问题, 也应当抛出异常"""
         with self.assertRaises(ValidationError):
-            answer_multi_choice = MultiChoiceAnswer.objects.create(user=self.guest,
+            answer_multi_choice = MultiChoiceAnswer.objects.create(answer_sheet=self.answer_sheet,
                                                                    question=self.single_choice_question)
             answer_multi_choice.choices.add(self.multi_choice[0])
+            answer_multi_choice.save()
         with self.assertRaises(ValidationError):
-            answer_multi_choice = MultiChoiceAnswer.objects.create(user=self.guest,
+            answer_multi_choice = MultiChoiceAnswer.objects.create(answer_sheet=self.answer_sheet,
                                                                    question=self.single_choice_question)
             answer_multi_choice.choices.add(self.single_choice[0])
+            answer_multi_choice.save()
         # 注意下面的这个测试要放在form测试中才能进行
         # with self.assertRaises(ValidationError):
         #     answer_multi_choice = MultiChoiceAnswer.objects.create(user=self.guest,
@@ -172,6 +182,32 @@ class QuestionModelsTest(TestCase):
                                                            question=new_single_choice_question))
 
         with self.assertRaises(ValidationError):
-            answer = SingleChoiceAnswer.objects.create(user=self.guest,
+            answer = SingleChoiceAnswer.objects.create(answer_sheet=self.answer_sheet,
                                                        question=self.single_choice_question,
                                                        choice=new_single_choice[0])
+            answer.save()
+
+    """下面测试作为答卷整体的完整性"""
+
+    def test_answer_sheet_integrity_with_error(self):
+        count = 0
+        if random.random() > 0.5:
+            self.test_answer_a_single_choice_question()
+            count += 1
+        if random.random() > 0.5:
+            self.test_answer_a_multi_choice_question()
+            count += 1
+        if random.random() > 0.5:
+            self.test_answer_a_text_question()
+            count += 1
+        if count != 3 and random.random() > 0.5:
+            self.test_answer_a_file_question()
+        with self.assertRaises(ValidationError):
+            self.answer_sheet.clean()
+
+    def test_answer_sheet_integrity_without_error(self):
+        self.test_answer_a_single_choice_question()
+        self.test_answer_a_multi_choice_question()
+        self.test_answer_a_text_question()
+        self.test_answer_a_file_question()
+        self.answer_sheet.clean()

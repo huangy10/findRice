@@ -4,8 +4,8 @@ import hashlib
 from django.db import models
 from django.conf import settings
 
-from Activity.models import Activity
 from Activity.utils import active_required
+from Activity.models import Activity, ApplicationThrough
 from .signals import share_record_signal
 # Create your models here.
 
@@ -61,8 +61,8 @@ class ShareRecordManager(models.Manager):
 
 class ShareRecord(models.Model):
     share = models.ForeignKey(Share)    # 用户点击这个分享链接进入活动
-
     target_user = models.ForeignKey(settings.AUTH_USER_MODEL)   # 点击分享链接的用户
+    application = models.OneToOneField(ApplicationThrough, related_name="share_record", null=True, default=None)
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="分享日期")
 
@@ -87,10 +87,10 @@ class ShareRecord(models.Model):
                 self.share.total_reward = cur_share_reward
 
             get_actual_reward()
-            self.is_active = False
         super(ShareRecord, self).save(*args, **kwargs)
         if self.finished:
             share_record_signal.send(sender=ShareRecord, share_record=self)
+            self.is_active = False
 
     class Meta:
         verbose_name = "分享"
