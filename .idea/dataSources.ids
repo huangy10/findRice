@@ -35,6 +35,8 @@
       <foreign-key name="#FAKE_Activity_activity_1" columns="host_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <exported-key name="#FAKE_Activity_activity_activity_type_2" table="Activity_activity_activity_type" schema="" catalog="" columns="activity_id"/>
       <exported-key name="#FAKE_Activity_applicationthrough_2" table="Activity_applicationthrough" schema="" catalog="" columns="activity_id"/>
+      <exported-key name="#FAKE_Notification_activitynotification_2" table="Notification_activitynotification" schema="" catalog="" columns="related_activity_id"/>
+      <exported-key name="#FAKE_Notification_welfarenotification_1" table="Notification_welfarenotification" schema="" catalog="" columns="related_activity_id"/>
       <exported-key name="#FAKE_Promotion_share_2" table="Promotion_share" schema="" catalog="" columns="activity_id"/>
       <exported-key name="#FAKE_Questionnaire_questionnaire_1" table="Questionnaire_questionnaire" schema="" catalog="" columns="activity_id"/>
       <index name="Activity_activity_8396f175" unique="true" columns="host_id"/>
@@ -63,16 +65,68 @@
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="apply_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="updated_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="status" sqlType="SMALLINT" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="is_active" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="activity_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
-      <column name="is_active" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="status" sqlType="VARCHAR(10)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_Activity_applicationthrough_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="#FAKE_Activity_applicationthrough_2" columns="activity_id" ref-table="Activity_activity" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <exported-key name="#FAKE_Promotion_sharerecord_1" table="Promotion_sharerecord" schema="" catalog="" columns="application_id"/>
       <index name="Activity_applicationthrough_e8701ad4" unique="true" columns="user_id"/>
       <index name="Activity_applicationthrough_f8a3193a" unique="true" columns="activity_id"/>
+    </table>
+    <table name="Notification_activitynotification" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="description" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="read" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="notification_type" sqlType="VARCHAR(20)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="notification_center_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="related_activity_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="related_user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_Notification_activitynotification_1" columns="related_user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_Notification_activitynotification_2" columns="related_activity_id" ref-table="Activity_activity" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_Notification_activitynotification_3" columns="notification_center_id" ref-table="Notification_notificationcenter" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="Notification_activitynotification_78df12e4" unique="true" columns="related_user_id"/>
+      <index name="Notification_activitynotification_82e8d780" unique="true" columns="related_activity_id"/>
+      <index name="Notification_activitynotification_0658b044" unique="true" columns="notification_center_id"/>
+    </table>
+    <table name="Notification_notificationcenter" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_Notification_notificationcenter_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_Notification_activitynotification_3" table="Notification_activitynotification" schema="" catalog="" columns="notification_center_id"/>
+      <exported-key name="#FAKE_Notification_systemnotification_1" table="Notification_systemnotification" schema="" catalog="" columns="notification_center_id"/>
+      <exported-key name="#FAKE_Notification_welfarenotification_2" table="Notification_welfarenotification" schema="" catalog="" columns="notification_center_id"/>
+    </table>
+    <table name="Notification_systemnotification" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="description" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="read" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="notification_center_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_Notification_systemnotification_1" columns="notification_center_id" ref-table="Notification_notificationcenter" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="Notification_systemnotification_0658b044" unique="true" columns="notification_center_id"/>
+    </table>
+    <table name="Notification_welfarenotification" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="description" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="read" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="gift_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="notification_center_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="related_activity_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_Notification_welfarenotification_1" columns="related_activity_id" ref-table="Activity_activity" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_Notification_welfarenotification_2" columns="notification_center_id" ref-table="Notification_notificationcenter" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_Notification_welfarenotification_3" columns="gift_id" ref-table="Welfare_welfaregift" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="Notification_welfarenotification_82e8d780" unique="true" columns="related_activity_id"/>
+      <index name="Notification_welfarenotification_0658b044" unique="true" columns="notification_center_id"/>
+      <index name="Notification_welfarenotification_addd09df" unique="true" columns="gift_id"/>
     </table>
     <table name="Profile_riceteam" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -282,6 +336,12 @@
       <index name="Questionnaire_textanswer_7aa0f6ee" unique="true" columns="question_id"/>
       <index name="Questionnaire_textanswer_6dbfd740" unique="true" columns="answer_sheet_id"/>
     </table>
+    <table name="Welfare_welfaregift" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="address" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <exported-key name="#FAKE_Notification_welfarenotification_3" table="Notification_welfarenotification" schema="" catalog="" columns="gift_id"/>
+    </table>
     <table name="auth_group" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="name" sqlType="VARCHAR(80)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
@@ -325,6 +385,8 @@
       <primary-key columns="id"/>
       <exported-key name="#FAKE_Activity_activity_1" table="Activity_activity" schema="" catalog="" columns="host_id"/>
       <exported-key name="#FAKE_Activity_applicationthrough_1" table="Activity_applicationthrough" schema="" catalog="" columns="user_id"/>
+      <exported-key name="#FAKE_Notification_activitynotification_1" table="Notification_activitynotification" schema="" catalog="" columns="related_user_id"/>
+      <exported-key name="#FAKE_Notification_notificationcenter_1" table="Notification_notificationcenter" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_Profile_riceteam_1" table="Profile_riceteam" schema="" catalog="" columns="host_id"/>
       <exported-key name="#FAKE_Profile_riceteamcontribution_1" table="Profile_riceteamcontribution" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_Profile_userprofile_1" table="Profile_userprofile" schema="" catalog="" columns="user_id"/>
@@ -335,6 +397,7 @@
       <exported-key name="#FAKE_auth_user_groups_2" table="auth_user_groups" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_auth_user_user_permissions_2" table="auth_user_user_permissions" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_django_admin_log_1" table="django_admin_log" schema="" catalog="" columns="user_id"/>
+      <exported-key name="#FAKE_social_auth_usersocialauth_1" table="social_auth_usersocialauth" schema="" catalog="" columns="user_id"/>
     </table>
     <table name="auth_user_groups" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -392,6 +455,41 @@
       <column name="expire_date" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <primary-key columns="session_key"/>
       <index name="django_session_de54fa62" unique="true" columns="expire_date"/>
+    </table>
+    <table name="social_auth_association" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="server_url" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="handle" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="secret" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="issued" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="lifetime" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="assoc_type" sqlType="VARCHAR(64)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <primary-key columns="id"/>
+    </table>
+    <table name="social_auth_code" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="code" sqlType="VARCHAR(32)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="verified" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="email" sqlType="VARCHAR(254)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <index name="social_auth_code_c1336794" unique="true" columns="code"/>
+    </table>
+    <table name="social_auth_nonce" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="server_url" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="timestamp" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="salt" sqlType="VARCHAR(65)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <primary-key columns="id"/>
+    </table>
+    <table name="social_auth_usersocialauth" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="provider" sqlType="VARCHAR(32)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="uid" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="extra_data" sqlType="TEXT" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_social_auth_usersocialauth_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="social_auth_usersocialauth_e8701ad4" unique="true" columns="user_id"/>
     </table>
     <table name="sqlite_sequence" schema="" catalog="" type="TABLE">
       <column name="name" sqlType="" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>

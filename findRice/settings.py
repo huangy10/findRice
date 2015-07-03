@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
     'Activity',
     'Profile',
     'Questionnaire',
@@ -70,6 +71,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -120,3 +123,31 @@ AUTH_PROFILE_MODULE = "Profile.UserProfile"
 """下面是一些自定义的变量"""
 
 FR_SHARE_LINK_TEMPLATE = "http://zhaomi.biz/action/%s?code=%s"  # 分享链接模板
+
+
+"""导入第三方登陆模块的设置"""
+
+try:
+    from social_settings import *
+except ImportError:
+    pass
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.weibo.WeiboOAuth2',
+    'social.backends.qq.QQOAuth2',
+    'social.backends.weixin.WeixinOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'Profile.pipeline.set_profile_info',  # <--- set the path to the function
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details'
+)
