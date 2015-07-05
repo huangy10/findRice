@@ -1,0 +1,48 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>登陆页面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "build/login.js" %}"></script>
+</head>
+<body>
+    <div id="header">
+        <a class="logo" href="/">找米</a>
+        <a class="quit" href="/"></a>
+    </div>
+
+    <div id="container">
+        <p id="login-txt">登陆</p>
+        <form action="/login" method="post">
+            {% csrf_token %}
+            <div id="username-c">
+                <input id="username" placeholder="请输入邮箱/用户名"></input>
+            </div>
+            <div id="pwd-c">
+                <input id="pwd" type="password" placeholder="请输入密码"></input>
+            </div>
+            <div id="login-btn-c" class="fn-clr">
+                <button type="submit" class="z-btn login-btn">登陆</button>
+                <a class="z-btn register-btn" href="/demo/register.html">注册</a>
+            </div>
+            <div id="login-splitline" class="fn-clr">
+                <span id="left-bottom"></span>
+                <span id="right-bottom"></span>
+            </div>
+            <div id="login-others">
+                <span id="or-txt">或</span>
+                <p>通过社交账号直接登录</p>
+                <div id="socials">
+                    <span id="wechat"></span>
+                    <span id="qq"></span>
+                    <span id="sina" class="last"></span>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+</body>
+</html>

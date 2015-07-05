@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>创建活动第三步</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/build/create.js"></script>
+</head>
+<body>
+<div id="content">
+    <div id="header">
+        <a href="//zhaomi.biz" id="logo">找米</a>
+        <div id="area">
+            <em>北京</em>
+        </div>
+        <div id="reg" class="action"><button class="z-btn">注册/登陆</button></div>
+        <div id="pub" class="action"><button class="z-btn">发布活动</button></div>
+        <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
+    </div>
+    <div id="action-bg">
+        <img src="/assets/imgs/detail-banner.png">
+        <div id="progress" class="z-process">
+          <ul class="z-steps">
+            <li class="z-node z-first-finish"><div class="z-process-label">活动基本信息</div></li>
+            <li class="z-bar z-bar-finish"><div class="z-far"></div></li>
+            <li class="z-node z-current"><div class="z-process-label">活动报名条件</div></li>
+            <li class="z-bar z-bar-finish"><div class="z-far"></div></li>
+            <li class="z-node z-last-finish"><div class="z-process-label">发布</div></li>
+          </ul>
+        </div>
+    </div>
+    <div id="action-container">
+        <div id="action-important" class="fn-clr">
+            <span class="action-name">护肤品家访</span>
+            <span class="action-hot">热门推荐</span>
+            <span class="action-price">&yen;600</span>
+            <span class="like selected"></span>
+            <span class="share"></span>
+        </div>
+        <p id="action-host"><span>主办方：TNS</span><span>类型：母婴</span></p>
+        <div id="action-info">
+            <p>a) 年龄：25-35岁</p>
+
+            <p>b) 收入：个人月收入8000元以上，家庭月收入2万元以上（个人无收入的，以家庭月收入为准）</p>
+
+            <p>c) 学历：专科以上</p>
+
+            <p>d) 其他：常规性规避医疗美容行业、调研、营销从业人员；半年内没有参加过市场调研活动；北京居住5年以上等</p>
+
+            <p>3、 激光嫩肤组：</p>
+            <p>a) 6个月内做过激光嫩肤类项目，包括光子嫩肤、点阵激光嫩肤、热玛吉等</p>
+        </div>
+        
+        <div id="action-items">
+            <p class="location fn-overflow" title="北京市海淀区颐和园东路">北京市海淀区颐和园东路</p>
+            <p class="num fn-overflow">7/13 人</p>
+            <p class="time fn-overflow">15/11/13 13:00 - 15/12/2</p>
+            <p class="extra fn-overflow">30m</p>
+        </div>
+        <div id="action-pic">
+            <img src="/assets/imgs/action-pic.png">
+        </div>
+        <div id="action-criteria">
+            <h2>报名条件</h2>
+            <div id="action-questions">
+                <div class="action-item fn-clr">
+                    <h3>1、请问您的学历是？</h3>
+                    <div class="action-answers">
+                        <ul>
+                            <li><span class="z-radio"></span>高中</li>
+                            <li><span class="z-radio selected"></span>大专</li>
+                            <li><span class="z-radio"></span>本科</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="action-item fn-clr">
+                    <h3>2、请问您的学历是？</h3>
+                    <div class="action-answers">
+                        <ul>
+                            <li><span class="z-checkbox selected"></span>高中</li>
+                            <li><span class="z-checkbox selected"></span>大专</li>
+                            <li><span class="z-checkbox"></span>本科</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="action-item fn-clr">
+                    <h3>3、请问您的学历是？</h3>
+                    <textarea></textarea>
+                </div>
+                <div class="action-item fn-clr">
+                    <h3>4、请上传您的营业执照</h3>
+                    <input type="file"/>
+                </div>
+            </div>
+        </div>
+        <div id="action-apply" class="fn-clr">
+            <button class="z-btn apply">报名</button>
+            <button class="z-btn share-bonus">分享获10米币</button>
+        </div>
+        <p class="hint">条件不达标？试试推广赚米币！</p>
+        <p class="hint">此活动负责人为发起者，与找米平台无关</p>
+    </div>
+</div>
+</body>    
+</html>

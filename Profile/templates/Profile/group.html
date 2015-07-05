@@ -1,0 +1,41 @@
+{% extends "Profile/mine_base.html" %}
+{% block title %}我的米团{% endblock %}
+
+{% block categories %}
+    <a class="mine-create" href="/mine/start?from=0&size=12>我发起的活动</a>
+    <a class="mine-apply" href="/mine/apply?from=0&size=12">我报名的活动</a>
+    <a class="mine-like" href="/mine/like?from=0&size=12">我关注的活动</a>
+    <a class="mine-group selected">我的米团</a>
+{% endblock %}
+
+
+{% block content_list %}
+    <div id="group-info">
+        <span id="my-group">我的团队<em>{{ user.rice_team.total_members }}</em>人</span>
+        <span id="group-mibi">团队米币<em>{{ user.rice_team.team_coin }}</em></span>
+    </div>
+    <div id="tbl">
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>贡献米币</th>
+                <th>团队米币</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for contrib in contributions %}
+                <tr>
+                <td>
+                    <span class="seqno">{{ forloop.counter }}.</span>
+                    <span class="portrait-c"><img src="{{ contrib.user.profile.avatar.url }}"></span>
+                    <span class="name">{{ contrib.user.profile.name }}</span>
+                </td>
+                <td class="center">{{ contrib.contributed_coin }}</td>
+                <td class="center">{{ contrib.user.rice_team.team_coin }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>注册页面 - 补充信息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "build/register.js" %}"></script>
+</head>
+<body>
+    <div id="header">
+        <a class="logo" href="/">找米</a>
+        <a class="quit" href="/"></a>
+    </div>
+
+    <div id="container">
+        <p class="title-txt">重置密码</p>
+        <form id="resetForm" action="/resetpwd" method="post">
+            {% csrf_token %}
+            <div id="mobile-wrapper" class="fn-clr">
+                <div id="mobile-c">
+                    {{ form.phoneNum }}
+                </div>
+                <button id="sendcode" class="z-btn">发送验证码</button>
+            </div>
+            <div id="verifycode-c">
+                {{ form.code }}
+            </div>
+            <div id="pwd-c">
+                {{ form.password1 }}
+            </div>
+            <div id="pwd-confirm-c">
+                {{ form.password2 }}
+            </div>
+            <div id="login-btn-c" class="fn-clr">
+                <button type="submit" class="z-btn register-btn">验证</button>
+            </div>
+        </form>
+        
+    </div>
+    <link rel="stylesheet" type="text/css" href="{% static "lib/bootstrap/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "lib/datepicker/bootstrap-datetimepicker.min.css" %}">
+    <script type="text/javascript" src="{% static "lib/bootstrap/js/bootstrap.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "lib/datepicker/bootstrap-datetimepicker.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "lib/datepicker/bootstrap-datetimepicker.zh-CN.js" %}"></script>
+</body>
+</html>

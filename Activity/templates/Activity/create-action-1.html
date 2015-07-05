@@ -1,0 +1,124 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>创建活动第一步</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "lib/cityselect/jquery.cityselect.js" %}"></script>
+    <script type="text/javascript" src="{% static "build/create-basic.js" %}"></script>
+</head>
+<body>
+<div id="content">
+    <div id="header">
+        <a href="//zhaomi.biz" id="logo">找米</a>
+        <div id="area">
+            <em>北京</em>
+        </div>
+        <div id="personal-info" class="action">
+            <img src="{{ user.profile.avatar.url }}" alt="我的个人信息">
+        </div>
+        <div id="msg" class="action"><button class="z-btn">消息</button></div>
+
+        <div id="pub" class="action"><button class="z-btn">发布活动</button></div>
+        <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
+    </div>
+    <div id="action-bg">
+        <img src="{% static "assets/imgs/detail-banner.png" %}">
+        {% block step_indicator %}
+        <div id="progress" class="z-process">
+          <ul class="z-steps">
+            <li class="z-node z-first-finish"><div class="z-process-label">活动基本信息</div></li>
+            <li class="z-bar z-bar-wait"><div class="z-far"></div></li>
+            <li class="z-node"><div class="z-process-label">活动报名条件</div></li>
+            <li class="z-bar z-bar-wait"><div class="z-far"></div></li>
+            <li class="z-node z-last-wait"><div class="z-process-label">发布</div></li>
+          </ul>
+        </div>
+        {% endblock %}
+    </div>
+    <div id="action-container">
+        {% block content %}
+        <div id="main">
+            <p class="title">活动名称</p>
+            {{ form.name }}
+            <p class="title">主办方</p>
+            <div class="content-w fn-clr">
+                {{ form.host_name }}
+                {% if user.profile.identified %}
+                {% else %}
+                    <span class="verified"></span>
+                    <button class="z-btn verifiedmember">申请成为认证用户</button>
+                {% endif %}
+            </div>
+            
+        </div>
+        <div id="secondary">
+            <p class="title title-img location">活动地点</p>
+            <div id="city">
+                <select class="prov"></select>省
+                <select class="city" disabled="disabled"></select>市/区
+                {{ form.location }}
+            </div>
+
+            <p class="title title-img datetime">活动时间</p>
+            <div id="datatime-c" class="fn-clr">
+                <div id="form_datetime_start" class="input-group date form_datetime">
+                    {{ form.start_time }}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+                <div id="form_datetime_end" class="input-group date form_datetime">
+                    {{ form.end_time }}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+            </div>
+            
+            <p class="title title-img duration">持续时间</p>
+            {{ form.day }}
+            {{ form.hour }}
+            {{ form.minute }}
+            <p class="title title-img count">活动人数</p>
+            {{ form.max_attend }}
+            <p class="title title-img money">奖励金额</p>
+            {{ form.reward }}
+        </div>
+        <div id="extra">
+            <p class="title">活动简介</p>
+            {{ form.description }}
+            <p class="title">活动类型</p>
+            <div id="action-type-c">
+                <p>请选择活动类型</p>
+                <ul id="action-type-droplist">
+                    <li data-val="0" data-txt="汽车">汽车</li>
+                    <li data-val="1" data-txt="母婴">母婴</li>
+                    <li data-val="2" data-txt="化妆品">化妆品</li>
+                    <li data-val="3" data-txt="奢侈品">奢侈品</li>
+                    <li data-val="4" data-txt="酒类">酒类</li>
+                    <li data-val="5" data-txt="房产">房产</li>
+                    <li data-val="6" data-txt="旅游">旅游</li>
+                    <li data-val="7" data-txt="游戏">游戏</li>
+                    <li data-val="8" data-txt="食品">食品</li>
+                    <li data-val="9" data-txt="其他">其他</li>
+                </ul>
+                {{ form.activity_type }}
+            </div>
+            <p class="title">活动海报</p>
+            <label id="poster-t" for="poster" class="z-btn">请选择活动海报</label>
+            <span id="poster-hint">仅支持png/jpg图片</span>
+            {{ form.poster }}
+        </div>
+        <div id="btns" class="fn-clr">
+            <button type="submit" class="z-btn next">下一步</button>
+        </div>
+        {% endblock %}
+    </div>
+</div>
+<link rel="stylesheet" type="text/css" href="{% static "lib/bootstrap/css/bootstrap.min.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "lib/datepicker/bootstrap-datetimepicker.min.css" %}">
+<script type="text/javascript" src="{% static "lib/bootstrap/js/bootstrap.min.js" %}"></script>
+<script type="text/javascript" src="{% static "lib/datepicker/bootstrap-datetimepicker.min.js" %}"></script>
+<script type="text/javascript" src="{% static "lib/datepicker/bootstrap-datetimepicker.zh-CN.js" %}"></script>
+</body>    
+</html>

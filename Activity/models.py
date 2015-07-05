@@ -3,6 +3,7 @@ import os
 import uuid
 
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.utils import timezone
@@ -22,6 +23,9 @@ class ActivityType(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     modified_at = models.DateTimeField(auto_now=True, editable=False)
 
+    def __str__(self):
+        return self.type_name.encode("utf-8")
+
     class Meta:
         verbose_name = "活动类型"
         verbose_name_plural = "活动类型"
@@ -39,7 +43,7 @@ class Activity(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
     is_active = models.BooleanField(default=True)   # 删除的适合将其设置为false即可
-    activity_type = models.ManyToManyField(ActivityType)
+    activity_type = models.ForeignKey(ActivityType)
 
     name = models.CharField(max_length=200, verbose_name="活动名称")
     host = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="主办方")
@@ -80,18 +84,18 @@ class Activity(models.Model):
 
     candidates = models.ManyToManyField(settings.AUTH_USER_MODEL, through="ApplicationThrough",
                                         related_name="applied_activity")
+    liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, through="ActivityLikeThrough",
+                                      related_name="liked_activity")
 
     def __str__(self):
-        return self.name
+        return self.name.encode("utf-8")
 
-    def save(self, *args, **kwargs):
-        cur = self.created_at
-        if cur is None:
-            cur = timezone.now()
-        if not (cur <= self.start_time <= self.end_time):
-            raise ValidationError("日期格式错误")
+    def get_duration_description(self):
+        return self.start_time.strftime("%y/%m/%d %H:%M")+" - "+self.end_time.strftime("%y/%m/%d")
 
-        super(Activity, self).save(*args, **kwargs)
+    def get_applying_num(self):
+        return ApplicationThrough.objects.filter(activity=self,
+                                                 status="applying").count()
 
     class Meta:
         ordering = ["-created_at"]
@@ -99,9 +103,19 @@ class Activity(models.Model):
         verbose_name_plural = "活动"
 
 
+class ActivityLikeThrough(models.Model):
+    activity = models.ForeignKey(Activity, related_name="like_through")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="like_through")
+
+    like_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        super(ActivityLikeThrough, self).save(*args, **kwargs)
+
+
 class ApplicationThrough(models.Model):
     """这个类是对活动的申请的抽象"""
-    activity = models.ForeignKey(Activity, related_name="application_through")
+    activity = models.ForeignKey(Activity, related_name="applications_through")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="applications_through")
 
     apply_at = models.DateTimeField(verbose_name="申请日期", auto_now_add=True)  # 这个属性为该对象的创建日期，也就代表了最早的申请
@@ -110,6 +124,7 @@ class ApplicationThrough(models.Model):
     status = models.CharField(choices=(
         ("applying", "申请中"),
         ("approved", "已批准"),
+        ("ready", "已就位"),
         ("denied", "已拒绝"),
         ("finished", "已完成")
     ), default="applying", max_length=10, verbose_name="状态")
@@ -117,7 +132,7 @@ class ApplicationThrough(models.Model):
 
     def save(self, *args, **kwargs):
         super(ApplicationThrough, self).save(*args, **kwargs)
-        if self.status == 3:
+        if self.status == "finished":
             try:
                 self.share_record.finished = True
                 self.share_record.save()
@@ -128,3 +143,20 @@ class ApplicationThrough(models.Model):
         verbose_name = "参与"
         verbose_name_plural = "参与"
         unique_together = ["activity", "user"]
+        ordering = ["-apply_at"]
+
+
+class ActivityVisitRecord(models.Model):
+    """用户访问活动历史记录"""
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    activity = models.ForeignKey(Activity)
+
+    visit_date = models.DateTimeField(auto_now_add=True)
+    visit_ip = models.GenericIPAddressField(default="0.0.0.0")
+    visit_location = models.CharField(max_length=255, default="-")
+    visit_device = models.CharField(max_length=255, default="-")
+
+    class Meta:
+        verbose_name = "访问记录"
+        verbose_name_plural = "访问记录"

@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.db import IntegrityError
 
 from .models import Share, ShareRecord
-from Activity.models import Activity, ApplicationThrough
+from Activity.models import Activity, ApplicationThrough, ActivityType
 # Create your tests here.
 
 
@@ -18,6 +18,8 @@ class ShareTest(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create(username="some_user")
         self.guest = get_user_model().objects.create(username="guest")
+        self.default_activity_type = ActivityType.objects.create(type_name="test",
+                                                                 description="test")
         self.activity = Activity.objects.create(
             name="test",
             host=self.user,
@@ -28,6 +30,7 @@ class ShareTest(TestCase):
             reward=10,
             description="test",
             max_attend=10,
+            activity_type=self.default_activity_type
         )
         self.share = Share.objects.create(user=self.user,
                                           activity=self.activity)
@@ -56,6 +59,8 @@ class ShareRecordTest(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create(username="some_user")
         self.guest = get_user_model().objects.create(username="guest")
+        self.default_activity_type = ActivityType.objects.create(type_name="test",
+                                                                 description="test")
         self.activity = Activity.objects.create(
             name="test",
             host=self.user,
@@ -66,6 +71,7 @@ class ShareRecordTest(TestCase):
             reward=10,
             description="test",
             max_attend=10,
+            activity_type=self.default_activity_type
         )
         self.share = Share.objects.create(user=self.user,
                                           activity=self.activity)
@@ -91,6 +97,8 @@ class CoinSystemTest(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create(username="some_user")
         self.guest = get_user_model().objects.create(username="guest")
+        self.default_activity_type = ActivityType.objects.create(type_name="test",
+                                                                 description="test")
         self.activity = Activity.objects.create(
             name="test",
             host=self.user,
@@ -101,6 +109,7 @@ class CoinSystemTest(TestCase):
             reward=10,
             description="test",
             max_attend=10,
+            activity_type=self.default_activity_type
         )
         self.share = Share.objects.create(user=self.user,
                                           activity=self.activity)
@@ -179,6 +188,7 @@ class CoinSystemTest(TestCase):
             reward_for_share_and_finished_percentage=0.07,
             description="test",
             max_attend=10,
+            activity_type=self.default_activity_type
         )
         another_share = Share.objects.create(user=self.user,
                                              activity=another_activity)

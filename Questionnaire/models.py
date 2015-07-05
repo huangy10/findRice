@@ -21,6 +21,9 @@ class Questionnaire(models.Model):
 
     participants = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
+    def __unicode__(self):
+        return self.activity.name.encode() + u" 的问卷"
+
     class Meta:
         verbose_name = "问卷"
         verbose_name_plural = "问卷"
@@ -38,6 +41,9 @@ class Question(models.Model):
     class Meta:
         """这个表不需要创建，创建其子类的表即可"""
         abstract = True
+
+    def __str__(self):
+        return self.question.encode("utf-8")
 
 
 class ChoiceQuestion(Question):
@@ -80,6 +86,13 @@ class Choice(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     modified_at = models.DateTimeField(auto_now=True, editable=False)
     is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        alphabeta = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        order = "Z"
+        if self.order_in_list < 26:
+            order = alphabeta[self.order_in_list-1]
+        return order + "."+self.description.encode("utf-8")
 
     class Meta:
         verbose_name = "选项"
@@ -141,6 +154,9 @@ class SingleChoiceAnswer(Answer):
             return True
         consistence_check()
 
+    def __str__(self):
+        return str(self.choice)
+
     def save(self, *args, **kwargs):
         self.clean()
         super(SingleChoiceAnswer, self).save(*args, **kwargs)
@@ -154,6 +170,14 @@ class MultiChoiceAnswer(Answer):
     """多选题的答案"""
     choices = models.ManyToManyField(Choice, related_name="multi_choice_answers")
     question = models.ForeignKey(ChoiceQuestion, related_name="multi_choice_answers")
+
+    def __str__(self):
+        choices = Choice.objects.filter(multi_choice_answers=self,
+                                        multi_choice=True).order_by("order_in_list")
+        des = ""
+        for c in choices:
+            des += (str(c)+" ")
+        return des
 
     def clean(self):
         def consistence_check():
@@ -184,6 +208,8 @@ class TextAnswer(Answer):
         verbose_name = "简答题"
         verbose_name_plural = "简答题"
 
+    def __str__(self):
+        return self.text
 
 def get_file_name_from_date(act, filename):
     ext = filename.split('.')[-1]
@@ -196,7 +222,14 @@ def get_file_name_from_date(act, filename):
 class FileAnswer(Answer):
     file = models.FileField(upload_to=get_file_name_from_date)
     question = models.ForeignKey(NonChoiceQuestion)
+    is_image = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "文件题"
         verbose_name_plural = "文件题"
+
+    def clean(self):
+        pass
+
+    def __str__(self):
+        return self.file

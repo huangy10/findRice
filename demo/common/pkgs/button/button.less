@@ -1,0 +1,228 @@
+.linear-graident(@colorStart, @colorEnd){
+    background-color: (@colorEnd + @colorStart) / 2;
+    background-image: -moz-linear-gradient(top, @colorStart, @colorEnd);
+    background-image: -ms-linear-gradient(top, @colorStart, @colorEnd);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@colorStart), to(@colorEnd));
+    background-image: -webkit-linear-gradient(top, @colorStart, @colorEnd);
+    background-image: -o-linear-gradient(top, @colorStart, @colorEnd);
+    background-image: linear-gradient(top, @colorStart, @colorEnd);
+}
+
+@btnFontColor: #666;
+@btnBorderColor: #999;
+@btnBackColor: #fff;
+@btnBackActiveColor: #E6E6E6;
+
+@btnFontHintColor: #ff7300;
+@btnBorderHintColor: #FF8315;
+@btnBackHintColor: #fff;
+@btnBackActiveHintColor: #FFEDDF;
+
+@btnFontCheckColor: #ff7300;
+@btnBorderCheckColor: #FF7300;
+@btnBackCheckColor: #fff;
+
+@btnImportantBorderColor: transparent;
+@btnImportantBorderTopColor: #FFAA3C;
+@btnImportantBorderBottomColor: #E4720D;
+@btnImportantFontColor: #fff;
+@btnImportantGraidentStart: #FF9726;
+@btnImportantGraidentEnd: #FF8315;
+@btnImportantActiveGraidentStart: #FF7300;
+@btnImportantActiveGraidentEnd: #FF7300;
+
+@btnActionBorderColor: #BFBFBF;
+@btnActionFontColor: #666;
+@btnActionGraidentStart: #FAFAFA;
+@btnActionGraidentEnd: #F0F0F0;
+
+@btnDisableFontColor: #B2B2B2;
+@btnBackDisableColor: #E6E6E6;
+
+@btnBorderWidth: 1px;
+@btnFontFamily: Helvetica Neue;
+
+.z-btn,
+.z-btn-important,
+.z-btn-hint,
+.z-btn-action,
+.z-btn-checked,
+.z-btn-disabled,
+.z-btn-pic {
+    display: inline-block;
+    min-width: 105px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 23px;
+    font-size: 14px;
+    vertical-align: middle;
+    overflow: visible;
+    border-radius: 5px;
+    cursor:pointer;
+    text-align: center;
+    font-family: @btnFontFamily;
+    &.small {
+      min-width: 50px;
+      height: 25px;
+      line-height: 25px;
+      padding: 0 15px;
+      font-size: 13px;
+    }
+}
+
+.z-btn {
+    border: solid @btnBorderWidth @btnBorderColor;
+    color: @btnFontColor;
+    background-color:@btnBackColor;
+    &:hover {
+        color: @btnFontColor;
+    }
+    &:active {
+        color: @btnFontColor;
+    }
+    &.pressing {
+        color: @btnFontColor;
+        background-color:@btnBackActiveColor;   
+    }
+}
+
+.z-btn-hint {
+    border: solid @btnBorderWidth @btnBorderHintColor;
+    color: @btnFontHintColor;
+    background-color:@btnBackHintColor;
+    &:hover {
+        color: @btnFontHintColor;
+    }
+    &:active {
+        color: @btnFontHintColor;
+    }
+    &.pressing {
+        color: @btnFontHintColor;
+        background-color:@btnBackActiveHintColor;
+    }
+}
+
+.z-btn-important {
+    border: solid @btnBorderWidth @btnImportantBorderColor;
+    border-left-color: @btnImportantBorderTopColor;
+    border-top-color: @btnImportantBorderTopColor;
+    border-bottom-color: @btnImportantBorderBottomColor;
+    color: @btnImportantFontColor;
+    .linear-graident(@btnImportantGraidentStart, @btnImportantGraidentEnd);
+    &:hover{
+        color: @btnImportantFontColor;
+    }
+    &:active{
+        color: @btnImportantFontColor;
+    }
+    &.pressing {
+        color: @btnImportantFontColor;
+        border: solid @btnBorderWidth @btnImportantBorderColor;
+        background-color: #ff7300;
+        background-image: none;
+    }
+}
+
+.z-btn-action {
+    border: solid @btnBorderWidth @btnActionBorderColor;
+    color: @btnActionFontColor;
+    .linear-graident(@btnActionGraidentStart, @btnActionGraidentEnd);
+    &:hover {
+        color: @btnActionFontColor;
+    }
+    &:active {
+        color: @btnActionFontColor;
+    }
+    &.pressing {
+        color: @btnActionFontColor;
+        background-color:@btnBackActiveColor;
+        background-image: none; 
+    }
+}
+
+.z-btn-checked {
+    position: relative;
+    border: solid @btnBorderWidth @btnBorderCheckColor;
+    color: @btnFontCheckColor;
+    background-color:@btnBackCheckColor;
+    &:hover {
+        color: @btnFontCheckColor;
+    }
+    &:active {
+        color: @btnFontCheckColor;
+    }
+    &.pressing {
+        background-color:@btnBackActiveHintColor;
+    }
+}
+
+.z-btn-pic {
+    position: relative;
+    padding-left: 50px;
+    display: inline-block;
+    border: solid @btnBorderWidth @btnActionBorderColor;
+    color: @btnFontColor;
+    .linear-graident(@btnActionGraidentStart, @btnActionGraidentEnd);
+    &:hover {
+        color: @btnFontColor;
+    }
+    &:active {
+        color: @btnFontColor;
+    }
+    &.pressing {
+        color: @btnFontColor;
+        background-color:@btnBackActiveColor;
+        background-image: none;
+    }
+    i {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 7px;
+      left: 20px;
+    }
+}
+.z-btn-disabled {
+    border: none;
+    color: @btnDisableFontColor;
+    background-color:@btnBackDisableColor;
+    &:hover {
+        color: @btnDisableFontColor;
+    }
+    &:active {
+        color: @btnDisableFontColor;
+    }
+}
+
+@media
+  screen and (device-width: 320px) and (device-aspect-ratio: 2/3),
+  screen and (device-width: 320px) and (device-aspect-ratio: 40/71) and (-webkit-min-device-pixel-ratio: 2) {
+    .z-btn,
+    .z-btn-important,
+    .z-btn-hint,
+    .z-btn-action,
+    .z-btn-checked,
+    .z-btn-disabled,
+    .z-btn-pic {
+      min-width: 90px;
+      height: 30px;
+      line-height: 30px;
+      padding: 0 10px;
+      &.small {
+        min-width: 48px;
+        height: 22px;
+        line-height: 22px;
+        padding: 0 6px;
+        font-size: 12px;
+      }
+    }
+
+    .z-btn-pic {
+      padding-left: 38px;
+      i {
+        top: 2px;
+        left: 11px;
+      }
+    }
+}

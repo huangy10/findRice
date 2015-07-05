@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>活动列表页面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/lib/unslider/unslider.js"></script>
+    <script type="text/javascript" src="/build/list.js"></script>
+</head>
+<body>
+<div id="content">
+    <div id="header">
+        <a href="//zhaomi.biz" id="logo">找米</a>
+        <div id="area">
+            <em>北京</em>
+        </div>
+        <div id="reg" class="action"><button class="z-btn">注册/登陆</button></div>
+        <div id="pub" class="action"><button class="z-btn">发布活动</button></div>
+        <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
+    </div>
+    <div id="banner">
+        <ul>
+            <li>
+                <a href="http://www.baidu.com"><img src="/assets/imgs/slider.jpg"></a>
+                <div class="banner-brief">
+                    <p class="banner-type">车展项目</p>
+                    <h2 class="banner-name">宝马i8车展</h2>
+                    <p class="banner-time">6月6日-6月8日，持续48小时</p>
+                    <p class="banner-location">网易婴童会议中心</p>
+                    <span class="banner-price">&yen;600</span>
+                </div>
+            </li>
+            <li>
+                <a href="http://www.1688.com"><img src="/assets/imgs/slider.jpg"></a>
+                <div class="banner-brief">
+                    <p class="banner-type">车展项目</p>
+                    <h2 class="banner-name">宝马i8车展</h2>
+                    <p class="banner-time">6月6日-6月8日，持续48小时</p>
+                    <p class="banner-location">网易婴童会议中心</p>
+                    <span class="banner-price">&yen;600</span>
+                </div>
+            </li>
+            <li>
+                <a href="http://www.taobao.com"><img src="/assets/imgs/slider.jpg"></a>
+                <div class="banner-brief">
+                    <p class="banner-type">车展项目</p>
+                    <h2 class="banner-name">宝马i8车展</h2>
+                    <p class="banner-time">6月6日-6月8日，持续48小时</p>
+                    <p class="banner-location">网易婴童会议中心</p>
+                    <span class="banner-price">&yen;600</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div id="filter">
+        <div id="hot-wrapper">
+            <span id="hot">找米热门</span>
+            <div id="hot-droplist">
+                <p>找米热门</p>
+                <ul>
+                    <li class="selected">热门推荐</li>
+                    <li>限时报名</li>
+                    <li>限额报名</li>
+                    <li>奖励金额</li>
+                </ul>
+            </div>    
+        </div>
+        
+        <div id="category-wrapper">
+            <span id="category">全部类别</span>
+            <div id="category-droplist">
+                <p>全部类别</p>
+                <ul>
+                    <li class="row-first selected">全部</li>
+                    <li class="row-second">汽车</li>
+                    <li class="row-third">母婴</li>
+                    <li class="row-first">化妆品</li>
+                    <li class="row-second">奢侈品</li>
+                    <li class="row-third">酒类</li>
+                    <li class="row-first">房产</li>
+                    <li class="row-second">旅游</li>
+                    <li class="row-third">游戏</li>
+                    <li class="row-first">食品</li>
+                    <li class="row-second">其他</li>
+                </ul>
+            </div>    
+        </div>
+    </div>
+    <div id="list">
+        <ul class="fn-clr">
+            <li class="action-card">
+                <div class="pic">
+                    <img src="/assets/imgs/action-pic.png">
+                </div>
+                <div class="brief-info">
+                    <div class="brief-important">
+                        <span class="title">护肤品家访</span>
+                        <span class="price">&yen;600</span>
+                        <span class="hot-tag">热门推荐</span>
+                    </div>
+                    <p class="host">主办方：TNS</p>
+                    <div class="criteria">
+                        <p class="fn-overflow">1、半年内未参加过TNS的活动；</p>
+                        <p>2、20-30岁女性；</p>
+                    </div>
+                </div>
+                <div class="items">
+                    <p class="location fn-overflow" title="北京市海淀区颐和园东路">北京市海淀区颐和园东路</p>
+                    <p class="num fn-overflow">7/13 人</p>
+                    <p class="time fn-overflow">15/11/13 13:00 - 15/12/2</p>
+                    <p class="extra fn-overflow">30m</p>
+                </div>
+                <span class="like"></span>
+                <span class="share"></span>
+            </li>
+            <li class="action-card">
+                <div class="pic">
+                    <img src="/assets/imgs/action-pic.png">
+                </div>
+                <div class="brief-info">
+                    <div class="brief-important">
+                        <span class="title">护肤品家访</span>
+                        <span class="price">&yen;600</span>
+                        <span class="hot-tag">热门推荐</span>
+                    </div>
+                    <p class="host">主办方：TNS</p>
+                    <div class="criteria">
+                        <p class="fn-overflow">1、半年内未参加过TNS的活动；</p>
+                        <p>2、20-30岁女性；</p>
+                    </div>
+                </div>
+                <div class="items">
+                    <p class="location fn-overflow" title="北京市海淀区颐和园东路">北京市海淀区颐和园东路</p>
+                    <p class="num fn-overflow">7/13 人</p>
+                    <p class="time fn-overflow">15/11/13 13:00 - 15/12/2</p>
+                    <p class="extra fn-overflow">30m</p>
+                </div>
+                <span class="like selected"></span>
+                <span class="share"></span>
+            </li>
+            <li class="action-card last">
+                <div class="pic">
+                    <img src="/assets/imgs/action-pic.png">
+                </div>
+                <div class="brief-info">
+                    <div class="brief-important">
+                        <span class="title">护肤品家访</span>
+                        <span class="price">&yen;600</span>
+                        <span class="hot-tag">热门推荐</span>
+                    </div>
+                    <p class="host">主办方：TNS</p>
+                    <div class="criteria">
+                        <p class="fn-overflow">1、半年内未参加过TNS的活动；</p>
+                        <p>2、20-30岁女性；</p>
+                    </div>
+                </div>
+                <div class="items">
+                    <p class="location fn-overflow" title="北京市海淀区颐和园东路">北京市海淀区颐和园东路</p>
+                    <p class="num fn-overflow">7/13 人</p>
+                    <p class="time fn-overflow">15/11/13 13:00 - 15/12/2</p>
+                    <p class="extra fn-overflow">30m</p>
+                </div>
+                <span class="like selected"></span>
+                <span class="share"></span>
+            </li>
+            <li class="action-card">
+                <div class="pic">
+                    <img src="/assets/imgs/action-pic.png">
+                </div>
+                <div class="brief-info">
+                    <div class="brief-important">
+                        <span class="title">护肤品家访</span>
+                        <span class="price">&yen;600</span>
+                        <span class="hot-tag">热门推荐</span>
+                    </div>
+                    <p class="host">主办方：TNS</p>
+                    <div class="criteria">
+                        <p class="fn-overflow">1、半年内未参加过TNS的活动；</p>
+                        <p>2、20-30岁女性；</p>
+                    </div>
+                </div>
+                <div class="items">
+                    <p class="location fn-overflow" title="北京市海淀区颐和园东路">北京市海淀区颐和园东路</p>
+                    <p class="num fn-overflow">7/13 人</p>
+                    <p class="time fn-overflow">15/11/13 13:00 - 15/12/2</p>
+                    <p class="extra fn-overflow">30m</p>
+                </div>
+                <span class="like"></span>
+                <span class="share"></span>
+            </li>
+            <li class="action-card">
+                <div class="pic">
+                    <img src="/assets/imgs/action-pic.png">
+                </div>
+                <div class="brief-info">
+                    <div class="brief-important">
+                        <span class="title">护肤品家访</span>
+                        <span class="price">&yen;600</span>
+                        <span class="hot-tag">热门推荐</span>
+                    </div>
+                    <p class="host">主办方：TNS</p>
+                    <div class="criteria">
+                        <p class="fn-overflow">1、半年内未参加过TNS的活动；</p>
+                        <p>2、20-30岁女性；</p>
+                    </div>
+                </div>
+                <div class="items">
+                    <p class="location fn-overflow" title="北京市海淀区颐和园东路">北京市海淀区颐和园东路</p>
+                    <p class="num fn-overflow">7/13 人</p>
+                    <p class="time fn-overflow">15/11/13 13:00 - 15/12/2</p>
+                    <p class="extra fn-overflow">30m</p>
+                </div>
+                <span class="like selected"></span>
+                <span class="share"></span>
+            </li>
+            <li class="action-card last">
+                <div class="pic">
+                    <img src="/assets/imgs/action-pic.png">
+                </div>
+                <div class="brief-info">
+                    <div class="brief-important">
+                        <span class="title">护肤品家访</span>
+                        <span class="price">&yen;600</span>
+                        <span class="hot-tag">热门推荐</span>
+                    </div>
+                    <p class="host">主办方：TNS</p>
+                    <div class="criteria">
+                        <p class="fn-overflow">1、半年内未参加过TNS的活动；</p>
+                        <p>2、20-30岁女性；</p>
+                    </div>
+                </div>
+                <div class="items">
+                    <p class="location fn-overflow" title="北京市海淀区颐和园东路">北京市海淀区颐和园东路</p>
+                    <p class="num fn-overflow">7/13 人</p>
+                    <p class="time fn-overflow">15/11/13 13:00 - 15/12/2</p>
+                    <p class="extra fn-overflow">30m</p>
+                </div>
+                <span class="like"></span>
+                <span class="share"></span>
+            </li>
+        </ul>
+    </div>
+    <div id="commercial">
+        <a href="http://www.tmall.com"><img src="/assets/imgs/banner.png"></a>
+    </div>
+</div>
+</body>    
+</html>

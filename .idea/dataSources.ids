@@ -31,25 +31,19 @@
       <column name="host_name" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="manually_end_time" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
       <column name="manually_start_time" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="activity_type_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <primary-key columns="id"/>
-      <foreign-key name="#FAKE_Activity_activity_1" columns="host_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <exported-key name="#FAKE_Activity_activity_activity_type_2" table="Activity_activity_activity_type" schema="" catalog="" columns="activity_id"/>
+      <foreign-key name="#FAKE_Activity_activity_1" columns="activity_type_id" ref-table="Activity_activitytype" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_Activity_activity_2" columns="host_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_Activity_activityvisitrecord_2" table="Activity_activityvisitrecord" schema="" catalog="" columns="activity_id"/>
       <exported-key name="#FAKE_Activity_applicationthrough_2" table="Activity_applicationthrough" schema="" catalog="" columns="activity_id"/>
+      <exported-key name="#FAKE_Homepage_homepageposter_1" table="Homepage_homepageposter" schema="" catalog="" columns="related_activity_id"/>
       <exported-key name="#FAKE_Notification_activitynotification_2" table="Notification_activitynotification" schema="" catalog="" columns="related_activity_id"/>
       <exported-key name="#FAKE_Notification_welfarenotification_1" table="Notification_welfarenotification" schema="" catalog="" columns="related_activity_id"/>
       <exported-key name="#FAKE_Promotion_share_2" table="Promotion_share" schema="" catalog="" columns="activity_id"/>
       <exported-key name="#FAKE_Questionnaire_questionnaire_1" table="Questionnaire_questionnaire" schema="" catalog="" columns="activity_id"/>
+      <index name="Activity_activity_b6159b48" unique="true" columns="activity_type_id"/>
       <index name="Activity_activity_8396f175" unique="true" columns="host_id"/>
-    </table>
-    <table name="Activity_activity_activity_type" schema="" catalog="" type="TABLE">
-      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
-      <column name="activity_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
-      <column name="activitytype_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
-      <primary-key columns="id"/>
-      <foreign-key name="#FAKE_Activity_activity_activity_type_1" columns="activitytype_id" ref-table="Activity_activitytype" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_Activity_activity_activity_type_2" columns="activity_id" ref-table="Activity_activity" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="Activity_activity_activity_type_d309c3e0" unique="true" columns="activitytype_id"/>
-      <index name="Activity_activity_activity_type_f8a3193a" unique="true" columns="activity_id"/>
     </table>
     <table name="Activity_activitytype" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -59,7 +53,21 @@
       <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="modified_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <primary-key columns="id"/>
-      <exported-key name="#FAKE_Activity_activity_activity_type_1" table="Activity_activity_activity_type" schema="" catalog="" columns="activitytype_id"/>
+      <exported-key name="#FAKE_Activity_activity_1" table="Activity_activity" schema="" catalog="" columns="activity_type_id"/>
+    </table>
+    <table name="Activity_activityvisitrecord" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="visit_date" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="visit_ip" sqlType="CHAR(39)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="visit_location" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="visit_device" sqlType="VARCHAR(255)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="activity_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_Activity_activityvisitrecord_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_Activity_activityvisitrecord_2" columns="activity_id" ref-table="Activity_activity" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="Activity_activityvisitrecord_e8701ad4" unique="true" columns="user_id"/>
+      <index name="Activity_activityvisitrecord_f8a3193a" unique="true" columns="activity_id"/>
     </table>
     <table name="Activity_applicationthrough" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -75,6 +83,25 @@
       <exported-key name="#FAKE_Promotion_sharerecord_1" table="Promotion_sharerecord" schema="" catalog="" columns="application_id"/>
       <index name="Activity_applicationthrough_e8701ad4" unique="true" columns="user_id"/>
       <index name="Activity_applicationthrough_f8a3193a" unique="true" columns="activity_id"/>
+    </table>
+    <table name="Homepage_homepageissue" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="issue_num" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <exported-key name="#FAKE_Homepage_homepageposter_2" table="Homepage_homepageposter" schema="" catalog="" columns="issue_id"/>
+    </table>
+    <table name="Homepage_homepageposter" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="poster" sqlType="VARCHAR(100)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="poster_type" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="issue_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="related_activity_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_Homepage_homepageposter_1" columns="related_activity_id" ref-table="Activity_activity" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_Homepage_homepageposter_2" columns="issue_id" ref-table="Homepage_homepageissue" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="Homepage_homepageposter_82e8d780" unique="true" columns="related_activity_id"/>
+      <index name="Homepage_homepageposter_12f3e382" unique="true" columns="issue_id"/>
     </table>
     <table name="Notification_activitynotification" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -152,15 +179,16 @@
       <column name="phoneNum" sqlType="VARCHAR(20)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="groupName" sqlType="VARCHAR(200)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="birthDate" sqlType="DATE" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="gender" sqlType="SMALLINT" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="avatar" sqlType="VARCHAR(100)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="identified" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="identified_date" sqlType="DATE" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
       <column name="coin" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="created_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="updated_at" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="name" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="is_active" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="gender" sqlType="VARCHAR(2)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_Profile_userprofile_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
     </table>
@@ -383,7 +411,8 @@
       <column name="date_joined" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="last_login" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
       <primary-key columns="id"/>
-      <exported-key name="#FAKE_Activity_activity_1" table="Activity_activity" schema="" catalog="" columns="host_id"/>
+      <exported-key name="#FAKE_Activity_activity_2" table="Activity_activity" schema="" catalog="" columns="host_id"/>
+      <exported-key name="#FAKE_Activity_activityvisitrecord_1" table="Activity_activityvisitrecord" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_Activity_applicationthrough_1" table="Activity_applicationthrough" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_Notification_activitynotification_1" table="Notification_activitynotification" schema="" catalog="" columns="related_user_id"/>
       <exported-key name="#FAKE_Notification_notificationcenter_1" table="Notification_notificationcenter" schema="" catalog="" columns="user_id"/>

@@ -1,0 +1,112 @@
+{# 这个模板需要的变量有 #}
+{# homepage_posters : 首页海报列表#}
+{# footer : 底栏海报 #}
+{# activity_types : 活动类型列表#}
+{# activities : 上首页的活动列表 #}
+{% load duration_filter %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>活动列表页面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "lib/unslider/unslider.js" %}"></script>
+    <script type="text/javascript" src="{% static "build/list.js" %}"></script>
+</head>
+<body>
+<div id="content">
+    <div id="header">
+        <a href="//zhaomi.biz" id="logo">找米</a>
+        <div id="area">
+            <em>北京</em>
+        </div>
+        <div id="reg" class="action"><button class="z-btn">注册/登陆</button></div>
+        <div id="pub" class="action"><button class="z-btn">发布活动</button></div>
+        <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
+    </div>
+    <div id="banner">
+        <ul>
+            {% for banner in homepage_posters %}
+                <li>
+                    <a href="{{ banner.related_activity.get_absolute_url }}">
+                        <img src="{{ banner.poster.url }}">
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="filter">
+        <div id="hot-wrapper">
+            <span id="hot">找米热门</span>
+            <div id="hot-droplist">
+                <p>找米热门</p>
+                <ul>
+                    <li class="selected">热门推荐</li>
+                    <li>限时报名</li>
+                    <li>限额报名</li>
+                    <li>奖励金额</li>
+                </ul>
+            </div>    
+        </div>
+        
+        <div id="category-wrapper">
+            <span id="category">全部类别</span>
+            <div id="category-droplist">
+                <p>全部类别</p>
+                <ul>
+                    <li class="row-first selected">全部</li>
+                    {% for type in activity_types %}
+                        <li class="{% cycle "row-second" "row-third" "row-first" as rows %}">
+                            {{ type.type_name }}
+                        </li>
+                    {% endfor %}
+                    <li class="{% cycle rows %}">
+                        其他
+                    </li>
+                </ul>
+            </div>    
+        </div>
+    </div>
+    <div id="list">
+        <ul class="fn-clr">
+            {% for act in activities %}
+                <li class="{% cycle "action-card" "action-card" "action-card last"%}">
+                    <div class="pic">
+                        <img src="{{ act.poster.url }}">
+                    </div>
+                <div class="brief-info">
+                    <div class="brief-important">
+                        <span class="title">{{ act.name }}</span>
+                        <span class="price">&yen;{{ act.reward }}</span>
+                        <span class="hot-tag">热门推荐</span>
+                    </div>
+                    <p class="host">主办方：{{ act.host_name }}</p>
+                    <div class="criteria">
+                        <p class="fn-overflow">
+                            {{ act.description|linebreaks }}
+                        </p>
+                    </div>
+                </div>
+                <div class="items">
+                    <p class="location fn-overflow" title="{{ act.location }}">{{ act.location }}</p>
+                    <p class="num fn-overflow">{{ act.get_applying_num }}/{{ act.max_attend }} 人</p>
+                    <p class="time fn-overflow">{{ act.get_duration_description }}</p>
+                    <p class="extra fn-overflow">{{ act.last_length|duration }}</p>
+                </div>
+                <span class="like"></span>
+                <span class="share"></span>
+                </li>
+                {% empty %}
+
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="commercial">
+        <a href="{{ footer.related_activity.get_absolute_url }}">
+            <img src="{{ footer.related_activity.poster.url }}">
+        </a>
+    </div>
+</div>
+</body>    
+</html>

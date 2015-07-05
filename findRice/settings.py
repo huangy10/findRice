@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'Promotion',
     'Notification',
     'Welfare',
+    'Homepage',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -110,9 +111,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'demo'),
+)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,  'templates'),
+    # os.path.join(BASE_DIR,  'templates'),
 )
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -151,3 +156,5 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details'
 )
+
+LOGIN_URL = "/login"

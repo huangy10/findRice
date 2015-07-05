@@ -25,7 +25,7 @@ class NotificationCenter(models.Model):
         return system_notification_num + activity_notification_num + welfare_notification_num
 
     def __str__(self):
-        return self.user.name + " 的消息中心"
+        return self.user.profile.name.encode("utf-8") + " 的消息中心"
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

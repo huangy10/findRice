@@ -1,0 +1,10 @@
+{% extends "Profile/mine_base.html" %}
+
+{% block title %}我关注的活动{% endblock %}
+
+{% block categories %}
+    <a class="mine-create" href="/mine/start?from=0&size=12">我发起的活动</a>
+    <a class="mine-apply" href="/mine/apply?from=0&size=12">我报名的活动</a>
+    <a class="mine-like selected">我关注的活动</a>
+    <a class="mine-group" href="/mine/group?from=0&size=12">我的米团</a>
+{% endblock %}

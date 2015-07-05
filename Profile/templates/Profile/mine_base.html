@@ -1,0 +1,101 @@
+{% load static %}
+{% load duration_filter %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "build/mine.js" %}"></script>
+</head>
+<body>
+<div id="content">
+    <div id="header">
+        <a href="//zhaomi.biz" id="logo">找米</a>
+        <div id="area">
+            <em>北京</em>
+        </div>
+        <div id="reg" class="action"><button class="z-btn">注册/登陆</button></div>
+        <div id="pub" class="action"><button class="z-btn">发布活动</button></div>
+        <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
+    </div>
+    <div id="mine-bg">
+        {% block personal %}
+        <div id="personal-info">
+            <span class="portrait"><img src="{{ user.profile.avatar.url }}"></span>
+            <div class="info-items">
+                <div class="main-items">
+                    <span class="name">{{ user.profile.name }}</span>
+                    <span class="numMibi">{{ user.profile.coin }}米币</span>
+                    <button class="z-btn exchange">兑换米币</button>
+                    <span class="edit"></span>
+                </div>
+                <div class="sub-items">
+                    <span class="mobile">{{ user.profile.phoneNum }}</span>
+                    <span class="gender">{{ user.profile.get_gender_display }}</span>
+                    <span class="age">{{ user.profile.age }}岁</span>
+                </div>
+            </div>
+        </div>
+        <img src="{% static "assets/imgs/detail-banner.png" %}">
+        {% endblock %}
+    </div>
+    <div id="mine-container">
+    {% block menu_bar %}
+        <div id="mine-type" class="fn-clr">
+            {% block categories %}
+            <a class="mine-create selected">我发起的活动</a>
+            <a class="mine-apply" href="/demo/apply.html">我报名的活动</a>
+            <a class="mine-like" href="/demo/like.html">我关注的活动</a>
+            <a class="mine-group" href="/demo/group.html">我的米团</a>
+            {% endblock %}
+            <span class="hotline">找米客服联系电话：400-22236678</span>
+        </div>
+    {% endblock %}
+        {% block content_list %}
+        <div id="list">
+            <ul class="fn-clr">
+                {% for act in activities %}
+                    <li class="{% cycle "action-card" "action-card" "action-card last" %}">
+                        <div class="pic">
+                            <img src="{{ act.poster.url }}">
+                        </div>
+                        <div class="brief-info">
+                            <div class="brief-important">
+                                <span class="title">{{ act.name }}</span>
+                                <span class="price">&yen;{{ act.reward }}</span>
+                                <span class="hot-tag">热门推荐</span>
+                            </div>
+                            <p class="host">主办方：{{ act.host_name }}</p>
+                            <div class="criteria">
+                                <p class="fn-overflow">
+                                    {{ act.description|linebreaks }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="items">
+                            <p class="location fn-overflow" title="{{ act.location }}">{{ act.location }}</p>
+                            <p class="num fn-overflow">{{ act.get_applying_num }}/{{ act.max_attend }} 人</p>
+                            <p class="time fn-overflow">{{ act.get_duration_description }}</p>
+                            <p class="extra fn-overflow">{{ act.last_length|duration }}</p>
+                        </div>
+                        <div class="operation">
+                            <div class="main"><button class="z-btn starting">已经开始</button></div>
+                            <div class="sub fn-clr">
+                                <span class="edit"></span>
+                                <span class="duplicate"></span>
+                                <span class="delete"></span>
+                                <span class="b-share"></span>
+                                <a class="z-btn view" href="/action/applicant">查看报名表单</a>
+                            </div>
+                        </div>
+                        <span class="c-share"></span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

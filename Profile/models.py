@@ -4,6 +4,7 @@ import uuid
 
 from django.db import models
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.utils.functional import cached_property
 from django.utils import timezone
 from django.db.models.signals import post_save
@@ -14,7 +15,7 @@ from Promotion.models import ShareRecord
 from Promotion.signals import share_record_signal
 # Create your models here.
 
-DEFAULT_PROFILE = os.path.join(settings.MEDIA_ROOT, 'default_avatars', 'default_avatar.jpg')
+DEFAULT_PROFILE = "media/default_avatars/default_avatar.jpg"
 
 
 def get_avatar_path(act, filename):
@@ -27,7 +28,7 @@ def get_avatar_path(act, filename):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name="profile")
-
+    is_active = models.BooleanField(default=False, verbose_name="是否填写的了账户信息")
     name = models.CharField(max_length=50, default="-")
 
     phoneNum = models.CharField(max_length=20, verbose_name="电话号码", default="-")
@@ -40,11 +41,11 @@ class UserProfile(models.Model):
         tz = timezone.get_current_timezone()
         return (tz.normalize(timezone.now()).date()-self.birthDate).days / 365
 
-    gender = models.SmallIntegerField(choices=(
-        (0, '男'),
-        (1, '女'),
-        (2, '保密'),
-    ), verbose_name="性别", default=2)
+    gender = models.CharField(choices=(
+        ('m', '男'),
+        ('f', '女'),
+        ('u', '未知'),
+    ), verbose_name="性别", default="u", max_length=2)
     avatar = models.ImageField(upload_to=get_avatar_path, default=DEFAULT_PROFILE,
                                verbose_name="头像")
     identified = models.BooleanField(default=False, verbose_name="是否认证")
@@ -56,7 +57,7 @@ class UserProfile(models.Model):
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     def __str__(self):
-        return self.user.username
+        return self.user.username.encode("utf-8")
 
     def save(self, *args, **kwargs):
 
@@ -80,9 +81,17 @@ def get_reward_from_share_record(sender, **kwargs):
     if share_record.finished:
         user.profile.coin += share_record.actual_reward_for_finish
         user.rice_team.team_coin += share_record.actual_reward_for_finish
+        contribution = RiceTeamContribution.objects.get_or_create(team=user.rice_team,
+                                                                  user=share_record.target_user)[0]
+        contribution.contributed_coin += share_record.actual_reward_for_finish
+        contribution.save()
     else:
         user.profile.coin += share_record.actual_reward_for_share
         user.rice_team.team_coin += share_record.actual_reward_for_share
+        contribution = RiceTeamContribution.objects.get_or_create(team=user.rice_team,
+                                                                  user=share_record.target_user)[0]
+        contribution.contributed_coin += share_record.actual_reward_for_share
+        contribution.save()
     user.profile.save()
 
 
@@ -100,9 +109,13 @@ def post_save_receiver(sender, **kwargs):
 
 class RiceTeam(models.Model):
     host = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name="米团主人", related_name="rice_team")       # 米团的主人
-    members = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name="米团成员", through="RiceTeamContribution")
+    members = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name="米团成员", through="RiceTeamContribution",
+                                     related_name="rice_team_as_member")
 
     team_coin = models.IntegerField(default=0, verbose_name="团队米币")
+
+    def total_members(self):
+        return RiceTeamContribution.objects.filter(team=self).count()
 
     class Meta:
         verbose_name = "米团"

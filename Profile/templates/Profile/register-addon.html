@@ -1,0 +1,65 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>注册页面 - 补充信息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "build/register.js" %}"></script>
+</head>
+<body>
+    <div id="header">
+        <a class="logo" href="/">找米</a>
+        <a class="quit" href="/"></a>
+    </div>
+
+    <div id="container">
+        <p id="login-txt">验证手机/补充信息</p>
+        <form action="/register-step-2" method="post">
+            {% csrf_token %}
+            <div id="portrait-c">
+                <img src="{% static "assets/imgs/portrait.png" %}"/>
+                <label for="{{ form.avatar.id_for_label }}"></label>
+                {{ form.avatar }}
+            </div>
+            <div id="mobile-wrapper" class="fn-clr">
+                <div id="mobile-c">
+                    {{ form.phoneNum }}
+                </div>
+                <button id="sendcode" class="z-btn">发送验证码</button>
+            </div>
+            <div id="verifycode-c">
+                {{ form.code }}
+            </div>
+            <div id="name-c">
+                {{ form.name }}
+            </div>
+            <div id="bday-c">
+                <div class="input-group date form_datetime">
+                    {{ form.birthDate }}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+            </div>
+            <div id="gender-c">
+                <p>请选择您的性别</p>
+                <ul id="gender-droplist">
+                    <li data-val="m" data-txt="男">男</li>
+                    <li data-val="f" data-txt="女">女</li>
+                </ul>
+                {{ form.gender }}
+            </div>
+            <div id="login-btn-c" class="fn-clr">
+                <button type="submit" class="z-btn register-btn">注册</button>
+                <a class="statement" href="/statement.html">找米免责声明</a>
+            </div>
+        </form>
+        
+    </div>
+    <link rel="stylesheet" type="text/css" href="{% static "lib/bootstrap/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "lib/datepicker/bootstrap-datetimepicker.min.css" %}">
+    <script type="text/javascript" src="{% static "lib/bootstrap/js/bootstrap.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "lib/datepicker/bootstrap-datetimepicker.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "lib/datepicker/bootstrap-datetimepicker.zh-CN.js" %}"></script>
+</body>
+</html>

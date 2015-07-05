@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>注册页面 - 基本信息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/build/register.js"></script>
+</head>
+<body>
+    <div id="header">
+        <a class="logo" href="/">找米</a>
+        <a class="quit" href="/"></a>
+    </div>
+
+    <div id="container">
+        <p id="login-txt">注册</p>
+        <form action="/login" method="post">
+            <div id="username-c">
+                <input id="username" placeholder="请输入邮箱/用户名"></input>
+            </div>
+            <div id="pwd-c">
+                <input id="pwd" type="password" placeholder="请输入密码"></input>
+            </div>
+            <div id="pwd-confirm-c">
+                <input id="pwd-confirm" type="password" placeholder="请再次输入密码"></input>
+            </div>
+            <div id="login-btn-c" class="fn-clr">
+                <button type="submit" class="z-btn register-btn">注册</button>
+            </div>
+            <div id="login-splitline" class="fn-clr">
+                <span id="left-bottom"></span>
+                <span id="right-bottom"></span>
+            </div>
+            <div id="login-others">
+                <span id="or-txt">或</span>
+                <p>通过社交账号直接登录</p>
+                <div id="socials">
+                    <span id="wechat"></span>
+                    <span id="qq"></span>
+                    <span id="sina" class="last"></span>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+</body>
+</html>

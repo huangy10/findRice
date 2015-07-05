@@ -12,7 +12,7 @@ from django.contrib.auth import get_user_model
 from .models import Questionnaire, ChoiceQuestion, NonChoiceQuestion
 from .models import AnswerSheet, SingleChoiceAnswer, MultiChoiceAnswer, TextAnswer, FileAnswer
 from .models import Choice
-from .models import Activity
+from Activity.models import ActivityType, Activity
 # Create your tests here.
 
 
@@ -23,6 +23,8 @@ class QuestionModelsTest(TestCase):
         self.user = get_user_model().objects.create(username="some_user")
         # create a default user who answer the questions
         self.guest = get_user_model().objects.create(username="guest")
+        self.default_activity_type = ActivityType.objects.create(type_name="test",
+                                                                 description="test")
         self.activity = Activity.objects.create(
             name="test",
             host=self.user,
@@ -33,6 +35,7 @@ class QuestionModelsTest(TestCase):
             reward=10,
             description="test",
             max_attend=10,
+            activity_type=self.default_activity_type
         )
         # create a default questionnaire
         self.questionnaire = Questionnaire.objects.create(activity=self.activity)
