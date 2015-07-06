@@ -158,3 +158,6 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 LOGIN_URL = "/login"
+
+SMS_KEY = "b2bc04ed9bbc52b10b3b68e5656eb08f"
+SMS_TEMPLATE = "您的验证码是%s【找米网】"

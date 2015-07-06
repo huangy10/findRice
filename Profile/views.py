@@ -1,30 +1,35 @@
 # coding=utf-8
+import random
+
+from django.utils import timezone
+from django.conf import settings
 from django.shortcuts import render
 from django.core.context_processors import csrf
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, Http404
-from django.views.decorators.http import require_http_methods, require_GET
+from django.http import HttpResponseRedirect, Http404, HttpResponse
+from django.views.decorators.http import require_http_methods, require_GET, require_POST
 
 from .forms import UserRegisterFormStep1, UserRegisterFormStep2
 from .forms import PasswordChangeForm
 from Activity.models import Activity
-from Profile.models import RiceTeamContribution, RiceTeam
+from .models import RiceTeamContribution, RiceTeam
+from .models import VerifyCode
+from .utils import send_sms
 # Create your views here.
 
 
 @require_http_methods(["GET", "POST"])
 def user_login(request):
     if request.method == "POST":
-        username = request.POST.get("username").strip()
-        pwd = request.POST.get("pwd").strip()
-
+        username = request.POST.get("username", "").strip()
+        pwd = request.POST.get("pwd", "").strip()
         user = auth.authenticate(username=username, password=pwd)
         if user is not None:
-            auth.login(user)
-            HttpResponseRedirect("/")
+            auth.login(request, user)
+            return HttpResponseRedirect("/")
         else:
-            HttpResponseRedirect("/login?error=invalid")
+            return HttpResponseRedirect("/login?error=invalid")
 
     args = {}
     args.update(csrf(request))
@@ -39,7 +44,6 @@ def register_step_1(request):
         form = UserRegisterFormStep1(request.POST)
         if form.is_valid():
             form.save()
-
             username = request.POST["username"]
             pwd = request.POST["password1"]
             new_user = auth.authenticate(username=username,
@@ -107,15 +111,16 @@ def reset_password(request):
 
 def from_size_check_required(method):
     def wrapper(request, *args, **kwargs):
-        if "from" not in request.GET or "size" not in request.GET:
-            raise Http404
         try:
-            start = int(request.GET.get("from"))
+            start = int(request.GET.get("from", "0"))
+        except ValueError:
+            start = 0
+        try:
             size = min(int(request.GET.get("size")), 12)
             if size < 0:
-                raise Http404
+                size = 12
         except ValueError:
-            raise Http404
+            size = 12
         return method(request, size=size, start=start,
                       *args, **kwargs)
     return wrapper
@@ -173,3 +178,31 @@ def mine_like(request, start, size):
         "activity": acts,
         "user": user
     })
+
+#
+def send_verify_code(request):
+    print "ENTER!!!!!!!"
+    phone = request.POST.get("mobile", "")
+    code = ""
+    for i in range(0,6):
+        code +=random.choice("1234567890")
+    print phone
+
+    if VerifyCode.objects.filter(phoneNum=phone, is_active=True).exists():
+        record = VerifyCode.objects.filter(phoneNum=phone, is_active=True)[0]
+        tz = timezone.get_current_timezone()
+        if (tz.normalize(timezone.now())-record.created_at).total_seconds() > 60:
+            record = VerifyCode.objects.create(phoneNum=phone, code=code)
+        else:
+            print "code request rejected"
+            return HttpResponse("")
+    else:
+        record = VerifyCode.objects.create(phoneNum=phone, code=code)
+
+    code = settings.SMS_TEMPLATE % code
+    response_status = send_sms(settings.SMS_KEY, code, phone)
+    if response_status != "200":
+        print response_status
+        record.is_active = False
+        record.save()
+    return HttpResponse("")

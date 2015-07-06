@@ -29,6 +29,7 @@ class ActivityType(models.Model):
     class Meta:
         verbose_name = "活动类型"
         verbose_name_plural = "活动类型"
+        ordering = ["-created_at"]
 
 
 def get_activity_poster_path(act, filename):

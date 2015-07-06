@@ -15,7 +15,7 @@ from Promotion.models import ShareRecord
 from Promotion.signals import share_record_signal
 # Create your models here.
 
-DEFAULT_PROFILE = "media/default_avatars/default_avatar.jpg"
+DEFAULT_PROFILE = "default_avatars/default_avatar.jpg"
 
 
 def get_avatar_path(act, filename):
@@ -131,6 +131,20 @@ class RiceTeamContribution(models.Model):
     class Meta:
         verbose_name_plural = "米团贡献"
         verbose_name = "米团贡献"
+
+
+class VerifyCode(models.Model):
+    phoneNum = models.CharField(max_length=20, verbose_name="号码")
+    code = models.CharField(max_length=6, verbose_name="验证码")
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = "验证码"
+        verbose_name_plural = "验证码"
+
+        ordering = ["-created_at"]
+
 
 
 

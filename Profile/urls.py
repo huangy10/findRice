@@ -9,4 +9,5 @@ urlpatterns = patterns("Profile.views",
                        url(r"^mine/apply", "mine_apply", name="mine_apply"),
                        url(r"^mine/group", "mine_group", name="mine_group"),
                        url(r"^mine/like", "mine_like", name="mine_like"),
+                       url(r"^sendcode/", "send_verify_code", name="send_code"),
                        )

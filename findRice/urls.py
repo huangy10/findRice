@@ -23,6 +23,7 @@ urlpatterns = patterns("",
     url(r'^$', "findRice.views.index_list"),
     url(r'^', include("Profile.urls")),
     url(r'^action/', include("Activity.urls")),
+    url(r'^search/', "findRice.views.search_list"),
 )
 
 if settings.DEBUG:

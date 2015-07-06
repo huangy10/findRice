@@ -5,8 +5,8 @@
 <head>
     <title>登陆页面</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "build/login.js" %}"></script>
+    <script type="text/javascript" src="//zhaomi.biz/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhaomi.biz/build/login.js"></script>
 </head>
 <body>
     <div id="header">
@@ -15,18 +15,18 @@
     </div>
 
     <div id="container">
-        <p id="login-txt">登陆</p>
-        <form action="/login" method="post">
+        <p class="title-txt">登陆</p>
+        <form id="login-form" action="/login" method="post" autocomplete="off">
             {% csrf_token %}
             <div id="username-c">
-                <input id="username" placeholder="请输入邮箱/用户名"></input>
+                <input id="username" name="username" placeholder="请输入邮箱/用户名"></input>
             </div>
             <div id="pwd-c">
-                <input id="pwd" type="password" placeholder="请输入密码"></input>
+                <input id="pwd" name="pwd" type="password" placeholder="请输入密码"></input>
             </div>
             <div id="login-btn-c" class="fn-clr">
                 <button type="submit" class="z-btn login-btn">登陆</button>
-                <a class="z-btn register-btn" href="/demo/register.html">注册</a>
+                <a class="z-btn register-btn" href="/register/basic">注册</a>
             </div>
             <div id="login-splitline" class="fn-clr">
                 <span id="left-bottom"></span>

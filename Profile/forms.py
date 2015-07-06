@@ -1,11 +1,15 @@
 # coding=utf-8
+import datetime
+
 from django.contrib.auth.forms import UserCreationForm
+from django.utils import timezone
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django import forms
 from django.core.exceptions import ObjectDoesNotExist
 
 from .models import UserProfile
+from .models import VerifyCode
 
 
 class UserRegisterFormStep1(UserCreationForm):
@@ -52,6 +56,11 @@ class UserRegisterFormStep1(UserCreationForm):
 
 class UserRegisterFormStep2(forms.ModelForm):
 
+    error_messages = {
+        "code_mismatch": u"验证码不匹配",
+        "phone_already_exist": u"该手机已注册"
+    }
+
     code = forms.CharField(max_length=6, widget=forms.TextInput(attrs={
         "id": "verifycode",
         "name": "verifycode",
@@ -63,6 +72,33 @@ class UserRegisterFormStep2(forms.ModelForm):
         profile.is_active = True
         profile.save()
         return profile
+
+    def clean_phoneNum(self):
+        phone = self.cleaned_data.get("phoneNum")
+        try:
+            user = get_user_model().objects.get(profile__phoneNum=phone, profile__is_active=True)
+            if user is not None:
+                raise forms.ValidationError(self.error_messages["phone_already_exist"],
+                                            code="phone_already_exist")
+        except ObjectDoesNotExist:
+            pass
+        return phone
+
+    def clean_code(self):
+        code = self.cleaned_data.get("code")
+        phone = self.cleaned_data.get("phoneNum")
+        try:
+            tz = timezone.get_current_timezone()
+            time_threshold = tz.normalize(timezone.now()) - datetime.timedelta(minutes=5)
+            record = VerifyCode.objects.filter(phoneNum=phone,
+                                               code=code,
+                                               is_active=True,
+                                               created_at__gt=time_threshold)
+            record.is_active = False
+        except ObjectDoesNotExist:
+            raise forms.ValidationError(self.error_messages["code_mismatch"],
+                                        code="code_mismatch")
+        return code
 
     class Meta:
         model = UserProfile
@@ -121,7 +157,8 @@ class PasswordChangeForm(forms.Form):
 
     error_messages = {
         'password_mismatch': "两次输入的密码不匹配",
-        'user_does_not_exist': "对应用户不存在"
+        'user_does_not_exist': "对应用户不存在",
+        "code_mismatch": u"验证码不匹配"
     }
 
     def __init__(self, *args, **kwargs):
@@ -149,6 +186,22 @@ class PasswordChangeForm(forms.Form):
                 code="user_does_not_exist"
             )
         return phone
+
+    def clean_code(self):
+        code = self.cleaned_data.get("code")
+        phone = self.cleaned_data.get("phoneNum")
+        try:
+            tz = timezone.get_current_timezone()
+            time_threshold = tz.normalize(timezone.now()) - datetime.timedelta(minutes=5)
+            record = VerifyCode.objects.filter(phoneNum=phone,
+                                               code=code,
+                                               is_active=True,
+                                               created_at__gt=time_threshold)
+            record.is_active = False
+            record.save()
+        except ObjectDoesNotExist:
+            raise forms.ValidationError(self.error_messages["code_mismatch"],
+                                        code="code_mismatch")
 
     def save(self, commit=True):
         if self.user is not None:

@@ -10,9 +10,10 @@
 <head>
     <title>活动列表页面</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "lib/unslider/unslider.js" %}"></script>
-    <script type="text/javascript" src="{% static "build/list.js" %}"></script>
+    <script type="text/javascript" src="//zhaomi.biz/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhaomi.biz/lib/unslider/unslider.js"></script>
+    <script type="text/javascript" src="//zhaomi.biz/lib/cityselect/jquery.cityselect.js"></script>
+    <script type="text/javascript" src="//zhaomi.biz/build/list.js"></script>
 </head>
 <body>
 <div id="content">
@@ -20,6 +21,10 @@
         <a href="//zhaomi.biz" id="logo">找米</a>
         <div id="area">
             <em>北京</em>
+            <div id="area-droplist">
+                <select class="prov"></select><span>省</span>
+                <select class="city" disabled="disabled"></select><span class="city-txt">市/区</span>
+            </div>
         </div>
         <div id="reg" class="action"><button class="z-btn">注册/登陆</button></div>
         <div id="pub" class="action"><button class="z-btn">发布活动</button></div>
@@ -40,24 +45,23 @@
         <div id="hot-wrapper">
             <span id="hot">找米热门</span>
             <div id="hot-droplist">
-                <p>找米热门</p>
+                <span class="droplist-hot">找米热门</span>
                 <ul>
-                    <li class="selected">热门推荐</li>
-                    <li>限时报名</li>
-                    <li>限额报名</li>
-                    <li>奖励金额</li>
+                    <li class="selected" data-type="0">热门推荐</li>
+                    <li data-type="1">限时报名</li>
+                    <li data-type="2">限额报名</li>
+                    <li data-type="3">奖励金额</li>
                 </ul>
-            </div>    
+            </div>
         </div>
-        
         <div id="category-wrapper">
             <span id="category">全部类别</span>
             <div id="category-droplist">
-                <p>全部类别</p>
+                <span class="droplist-category">全部类别</span>
                 <ul>
-                    <li class="row-first selected">全部</li>
+                     <li class="row-first selected" data-type="0">全部</li>
                     {% for type in activity_types %}
-                        <li class="{% cycle "row-second" "row-third" "row-first" as rows %}">
+                        <li class="{% cycle "row-second" "row-third" "row-first" as rows %}" data-type="{{ forloop.counter }}">
                             {{ type.type_name }}
                         </li>
                     {% endfor %}
@@ -65,7 +69,7 @@
                         其他
                     </li>
                 </ul>
-            </div>    
+            </div>
         </div>
     </div>
     <div id="list">
@@ -98,7 +102,6 @@
                 <span class="share"></span>
                 </li>
                 {% empty %}
-
             {% endfor %}
         </ul>
     </div>
