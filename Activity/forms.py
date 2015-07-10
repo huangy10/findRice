@@ -10,38 +10,41 @@ class ActivityCreationForm(forms.ModelForm):
         "should_be_int": u"应当填写整书",
         "invalid_activity_type": u"活动类型无效"
     }
-
-    day = forms.NumberInput(attrs={
+    day = forms.IntegerField(widget=forms.NumberInput(attrs={
         "class": "content time"
-    })
-    hour = forms.NumberInput(attrs={
+    }), required=False, initial=0)
+    hour = forms.IntegerField(widget=forms.NumberInput(attrs={
         "class": "content time"
-    })
-    minute = forms.NumberInput(attrs={
+    }), required=False, initial=0)
+    minute = forms.IntegerField(widget=forms.NumberInput(attrs={
         "class": "content time"
-    })
-    activity_type = forms.HiddenInput(attrs={
-        "id": "action_type",
+    }), required=False, initial=0)
+    activity_type = forms.CharField(max_length=10, widget=forms.HiddenInput(attrs={
+        "id": "action-type",
         "name": "action-type"
-    })
+    }))
+
+    def __init__(self, user=None, *args, **kwargs):
+        super(ActivityCreationForm, self).__init__(*args, **kwargs)
+        self.user = user
 
     def clean_day(self):
         day = self.cleaned_data.get("day")
-        if isinstance(day, int):
+        if not isinstance(day, int):
             raise forms.ValidationError(self.error_messages["should_be_int"],
                                         code="should_be_int")
         return day
 
     def clean_hour(self):
         hour = self.cleaned_data.get("hour")
-        if isinstance(hour, int):
+        if not isinstance(hour, int):
             raise forms.ValidationError(self.error_messages["should_be_int"],
                                         code="should_be_int")
         return hour
 
     def clean_minute(self):
         minute = self.cleaned_data.get("minute")
-        if isinstance(minute, int):
+        if not isinstance(minute, int):
             raise forms.ValidationError(self.error_messages["should_be_int"],
                                         code="should_be_int")
         return minute
@@ -59,9 +62,16 @@ class ActivityCreationForm(forms.ModelForm):
         return activity_type
 
     def save(self, commit=True):
-        obj = super(ActivityCreationForm, self).save(commit=True)
-        obj.activity_type = ActivityType.objects.all()[int(self.cleaned_data.get("activity_type"))]
+        obj = super(ActivityCreationForm, self).save(commit=False)
+        obj.last_length = self.cleaned_data["day"]*24*60 + self.cleaned_data["hour"]*60 + self.cleaned_data["minute"]
+        type_no = int(self.cleaned_data.get("activity_type"))
+        print type_no
+        if type_no == -1:
+            obj.activity_type = None
+        else:
+            obj.activity_type = ActivityType.objects.all()[type_no]
         obj.is_active = False   # 创建的表格在问卷生成以后才会有效
+        obj.host = self.user
         if commit:
             obj.save()
         return obj
@@ -73,8 +83,15 @@ class ActivityCreationForm(forms.ModelForm):
         widgets = {
             "name": forms.TextInput(attrs={
                 "id": "name",
-                "class": "content host",
+                "class": "content",
             }),
+            "host_name": forms.TextInput(attrs={
+                "id": "host",
+                "name": "host",
+                "class": "content host",
+                "placeholder": "龚子仪"
+            })
+            ,
             "location": forms.TextInput(attrs={
                 "id": "detail-addr",
                 "class": "content",

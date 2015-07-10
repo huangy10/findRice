@@ -18,7 +18,7 @@ required:必选项
 
 		// 默认值
 		settings=$.extend({
-			url:"/lib/cityselect/city.min.js",
+			url:"/static/lib/cityselect/city.min.js",
 			prov:null,
 			city:null,
 			dist:null,

@@ -124,7 +124,7 @@ class ActivityNotification(Notification):
 
 class WelfareNotification(Notification):
     gift = models.ForeignKey(WelfareGift, null=True)
-    related_activity = models.ForeignKey(Activity, null=True)
+    related_activity = models.ForeignKey(Activity)
     notification_center = models.ForeignKey(NotificationCenter, related_name="welfare_notifications")
 
     def clean(self):

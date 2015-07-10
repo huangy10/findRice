@@ -1,11 +1,15 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>创建活动第一步</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/lib/cityselect/jquery.cityselect.js"></script>
-    <script type="text/javascript" src="/build/create-criteria.js"></script>
+    <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
+    {# <script type="text/javascript" src="//zhaomi.biz/lib/jquery/jquery.min.js"></script> #}
+    <script type="text/javascript" src="{% static "lib/cityselect/jquery.cityselect.js" %}"></script>
+    {# <script type="text/javascript" src="//zhaomi.biz/lib/cityselect/jquery.cityselect.js"></script> #}
+    <script type="text/javascript" src="{% static "build/create-criteria.js" %}"></script>
+    {# <script type="text/javascript" src="//zhaomi.biz/build/create-criteria.js"></script> #}
 </head>
 <body>
 <div id="content">
@@ -19,7 +23,7 @@
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
     <div id="action-bg">
-        <img src="/assets/imgs/detail-banner.png">
+        <img src="{% static "assets/imgs/detail-banner.png" %}">
         <div id="progress" class="z-process">
           <ul class="z-steps">
             <li class="z-node z-first-finish"><div class="z-process-label">活动基本信息</div></li>

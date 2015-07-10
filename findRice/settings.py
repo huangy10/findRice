@@ -158,6 +158,19 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 LOGIN_URL = "/login"
+LOGIN_REDIRECT_URL = "/"
 
-SMS_KEY = "b2bc04ed9bbc52b10b3b68e5656eb08f"
+SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
+SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
+
+SOCIAL_AUTH_WEIXIN_KEY = ''
+SOCIAL_AUTH_WEIXIN_SECRET = ''
+
+SOCIAL_AUTH_QQ_KEY = ''
+SOCIAL_AUTH_QQ_SECRET = ''
+
+SOCIAL_AUTH_WEIBO_KEY = ''
+SOCIAL_AUTH_WEIBO_SECRET = ''
+
+SMS_KEY = "b2bc04ed9bbc52b10b3b68e5656eb08f"        # 云片网
 SMS_TEMPLATE = "您的验证码是%s【找米网】"

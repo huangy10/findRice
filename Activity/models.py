@@ -3,10 +3,9 @@ import os
 import uuid
 
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.db import models
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from django.utils import timezone
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 
@@ -44,7 +43,7 @@ class Activity(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
     is_active = models.BooleanField(default=True)   # 删除的适合将其设置为false即可
-    activity_type = models.ForeignKey(ActivityType)
+    activity_type = models.ForeignKey(ActivityType, null=True)
 
     name = models.CharField(max_length=200, verbose_name="活动名称")
     host = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="主办方")
@@ -78,8 +77,10 @@ class Activity(models.Model):
         (1, "已经开始"),
         (2, "已经结束"),
     ), default=0, verbose_name="活动状态")
-    manually_start_time = models.DateTimeField(verbose_name="手动开始时间", null=True)
-    manually_end_time = models.DateTimeField(verbose_name="手动结束时间", null=True)
+    manually_start_time = models.DateTimeField(verbose_name="手动开始时间", null=True, editable=False)
+    manually_end_time = models.DateTimeField(verbose_name="手动结束时间", null=True, editable=False)
+
+    viewed_times = models.BigIntegerField(verbose_name="浏览次数", default=0)
 
     """下面是和活动关联的用户"""
 
@@ -97,6 +98,9 @@ class Activity(models.Model):
     def get_applying_num(self):
         return ApplicationThrough.objects.filter(activity=self,
                                                  status="applying").count()
+
+    def get_absolute_url(self):
+        return reverse("detail", args=[str(self.id),])
 
     class Meta:
         ordering = ["-created_at"]

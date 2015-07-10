@@ -40,13 +40,15 @@
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(4);
-	__webpack_require__(30);
+	__webpack_require__(32);
+
+	var zhaomi = __webpack_require__(19);
+	var utils = __webpack_require__(18);
 
 	$(function() {
 	    // 处理在ff下的bug
@@ -58,18 +60,71 @@
 	        });
 	    }
 
-	    $('.form_datetime').datetimepicker({
-	        language: 'zh-CN',
-	        weekStart: 1,
-	        autoclose: 1,
-	        startView: 4,
-	        forceParse: 0,
-	        showMeridian: 1,
-	        minView: 2,
-	        maxView: 4,
-	        format: 'yyyy-mm-dd',
-	        initialDate: new Date('1990-01-01')
+	    // 第一步注册值校验
+	    $('#register-form').on('submit', function() {
+
+	        var username = $('#username').val();
+	        var pwd = $('#pwd').val();
+	        var confirmedPwd = $('#pwd-confirm').val();
+
+	        if (!username) {
+	            utils.warn('请填写邮箱/用户名!');
+	            return false;
+	        }
+
+	        if (!pwd) {
+	            utils.warn('请填写密码!');
+	            return false;
+	        }
+
+	        if (pwd !== confirmedPwd) {
+	            utils.warn('两次密码输入不相同!');
+	            return false;
+	        }
+
+	        return true;
 	    });
+
+	    // 第二步注册
+	    $('#sendcode').click(function() {
+	        var mobile = $('#mobile').val();
+
+	        zhaomi.postData('/sendcode', {
+	            mobile: mobile
+	        }, function() {
+	            utils.warn('已发送验证码!');
+	        })
+	    })
+	    
+	    // $('#register-pre').click(function() {
+
+	    //     zhaomi.postData('//zhaomi.biz/login', {
+	    //         username: username,
+	    //         pwd: pwd,
+	    //         confirmedPwd: confirmedPwd
+	    //     }, function() {
+	    //         // location.href = '//zhaomi.biz/register';
+	    //     })
+	    // });
+
+	    $('#register').click(function() {
+
+	    })
+
+	    if ($('.form_datetime').datetimepicker) {
+	        $('.form_datetime').datetimepicker({
+	            language: 'zh-CN',
+	            weekStart: 1,
+	            autoclose: 1,
+	            startView: 4,
+	            forceParse: 0,
+	            showMeridian: 1,
+	            minView: 2,
+	            maxView: 4,
+	            format: 'yyyy-mm-dd',
+	            initialDate: new Date('1990-01-01')
+	        });
+	    }
 
 	    var $genderContainer = $('#gender-c');
 	    var $genderDroplist = $genderContainer.find('#gender-droplist');
@@ -89,8 +144,10 @@
 	});
 
 /***/ },
-
-/***/ 4:
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
@@ -116,8 +173,7 @@
 	}
 
 /***/ },
-
-/***/ 5:
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -125,14 +181,13 @@
 
 
 	// module
-	exports.push([module.id, ".z-btn,\n.z-btn-important,\n.z-btn-hint,\n.z-btn-action,\n.z-btn-checked,\n.z-btn-disabled,\n.z-btn-pic {\n  display: inline-block;\n  min-width: 105px;\n  height: 40px;\n  line-height: 40px;\n  padding: 0 23px;\n  font-size: 14px;\n  vertical-align: middle;\n  overflow: visible;\n  border-radius: 5px;\n  cursor: pointer;\n  text-align: center;\n  font-family: Helvetica Neue;\n}\n.z-btn.small,\n.z-btn-important.small,\n.z-btn-hint.small,\n.z-btn-action.small,\n.z-btn-checked.small,\n.z-btn-disabled.small,\n.z-btn-pic.small {\n  min-width: 50px;\n  height: 25px;\n  line-height: 25px;\n  padding: 0 15px;\n  font-size: 13px;\n}\n.z-btn {\n  border: solid 1px #999999;\n  color: #666666;\n  background-color: #ffffff;\n}\n.z-btn:hover {\n  color: #666666;\n}\n.z-btn:active {\n  color: #666666;\n}\n.z-btn.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n}\n.z-btn-hint {\n  border: solid 1px #ff8315;\n  color: #ff7300;\n  background-color: #ffffff;\n}\n.z-btn-hint:hover {\n  color: #ff7300;\n}\n.z-btn-hint:active {\n  color: #ff7300;\n}\n.z-btn-hint.pressing {\n  color: #ff7300;\n  background-color: #ffeddf;\n}\n.z-btn-important {\n  border: solid 1px transparent;\n  border-left-color: #ffaa3c;\n  border-top-color: #ffaa3c;\n  border-bottom-color: #e4720d;\n  color: #ffffff;\n  background-color: #ff8d1e;\n  background-image: -moz-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -ms-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ff9726), to(#ff8315));\n  background-image: -webkit-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -o-linear-gradient(top, #ff9726, #ff8315);\n  background-image: linear-gradient(top, #ff9726, #ff8315);\n}\n.z-btn-important:hover {\n  color: #ffffff;\n}\n.z-btn-important:active {\n  color: #ffffff;\n}\n.z-btn-important.pressing {\n  color: #ffffff;\n  border: solid 1px transparent;\n  background-color: #ff7300;\n  background-image: none;\n}\n.z-btn-action {\n  border: solid 1px #bfbfbf;\n  color: #666666;\n  background-color: #f5f5f5;\n  background-image: -moz-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -ms-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#f0f0f0));\n  background-image: -webkit-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -o-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: linear-gradient(top, #fafafa, #f0f0f0);\n}\n.z-btn-action:hover {\n  color: #666666;\n}\n.z-btn-action:active {\n  color: #666666;\n}\n.z-btn-action.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n  background-image: none;\n}\n.z-btn-checked {\n  position: relative;\n  border: solid 1px #ff7300;\n  color: #ff7300;\n  background-color: #ffffff;\n}\n.z-btn-checked:hover {\n  color: #ff7300;\n}\n.z-btn-checked:active {\n  color: #ff7300;\n}\n.z-btn-checked.pressing {\n  background-color: #ffeddf;\n}\n.z-btn-pic {\n  position: relative;\n  padding-left: 50px;\n  display: inline-block;\n  border: solid 1px #bfbfbf;\n  color: #666666;\n  background-color: #f5f5f5;\n  background-image: -moz-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -ms-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#f0f0f0));\n  background-image: -webkit-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -o-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: linear-gradient(top, #fafafa, #f0f0f0);\n}\n.z-btn-pic:hover {\n  color: #666666;\n}\n.z-btn-pic:active {\n  color: #666666;\n}\n.z-btn-pic.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n  background-image: none;\n}\n.z-btn-pic i {\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  position: absolute;\n  top: 7px;\n  left: 20px;\n}\n.z-btn-disabled {\n  border: none;\n  color: #b2b2b2;\n  background-color: #e6e6e6;\n}\n.z-btn-disabled:hover {\n  color: #b2b2b2;\n}\n.z-btn-disabled:active {\n  color: #b2b2b2;\n}\n@media screen and (device-width: 320px) and (device-aspect-ratio: 2/3), screen and (device-width: 320px) and (device-aspect-ratio: 40/71) and (-webkit-min-device-pixel-ratio: 2) {\n  .z-btn,\n  .z-btn-important,\n  .z-btn-hint,\n  .z-btn-action,\n  .z-btn-checked,\n  .z-btn-disabled,\n  .z-btn-pic {\n    min-width: 90px;\n    height: 30px;\n    line-height: 30px;\n    padding: 0 10px;\n  }\n  .z-btn.small,\n  .z-btn-important.small,\n  .z-btn-hint.small,\n  .z-btn-action.small,\n  .z-btn-checked.small,\n  .z-btn-disabled.small,\n  .z-btn-pic.small {\n    min-width: 48px;\n    height: 22px;\n    line-height: 22px;\n    padding: 0 6px;\n    font-size: 12px;\n  }\n  .z-btn-pic {\n    padding-left: 38px;\n  }\n  .z-btn-pic i {\n    top: 2px;\n    left: 11px;\n  }\n}\n", ""]);
+	exports.push([module.id, ".z-btn,\n.z-btn-important,\n.z-btn-hint,\n.z-btn-action,\n.z-btn-checked,\n.z-btn-disabled,\n.z-btn-pic {\n  display: inline-block;\n  min-width: 105px;\n  height: 40px;\n  line-height: 40px;\n  padding: 0 23px;\n  font-size: 14px;\n  vertical-align: middle;\n  overflow: visible;\n  border-radius: 5px;\n  cursor: pointer;\n  text-align: center;\n  font-family: Helvetica Neue;\n}\n.z-btn.small,\n.z-btn-important.small,\n.z-btn-hint.small,\n.z-btn-action.small,\n.z-btn-checked.small,\n.z-btn-disabled.small,\n.z-btn-pic.small {\n  min-width: 50px;\n  height: 25px;\n  line-height: 25px;\n  padding: 0 15px;\n  font-size: 13px;\n}\n.z-btn {\n  border: solid 1px #999999;\n  color: #666666;\n  background-color: #ffffff;\n}\n.z-btn:hover {\n  color: #666666;\n}\n.z-btn:active {\n  color: #666666;\n}\n.z-btn.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n}\n.z-btn:focus {\n  outline: none;\n}\n.z-btn-hint {\n  border: solid 1px #ff8315;\n  color: #ff7300;\n  background-color: #ffffff;\n}\n.z-btn-hint:hover {\n  color: #ff7300;\n}\n.z-btn-hint:active {\n  color: #ff7300;\n}\n.z-btn-hint.pressing {\n  color: #ff7300;\n  background-color: #ffeddf;\n}\n.z-btn-important {\n  border: solid 1px transparent;\n  border-left-color: #ffaa3c;\n  border-top-color: #ffaa3c;\n  border-bottom-color: #e4720d;\n  color: #ffffff;\n  background-color: #ff8d1e;\n  background-image: -moz-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -ms-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ff9726), to(#ff8315));\n  background-image: -webkit-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -o-linear-gradient(top, #ff9726, #ff8315);\n  background-image: linear-gradient(top, #ff9726, #ff8315);\n}\n.z-btn-important:hover {\n  color: #ffffff;\n}\n.z-btn-important:active {\n  color: #ffffff;\n}\n.z-btn-important.pressing {\n  color: #ffffff;\n  border: solid 1px transparent;\n  background-color: #ff7300;\n  background-image: none;\n}\n.z-btn-action {\n  border: solid 1px #bfbfbf;\n  color: #666666;\n  background-color: #f5f5f5;\n  background-image: -moz-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -ms-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#f0f0f0));\n  background-image: -webkit-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -o-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: linear-gradient(top, #fafafa, #f0f0f0);\n}\n.z-btn-action:hover {\n  color: #666666;\n}\n.z-btn-action:active {\n  color: #666666;\n}\n.z-btn-action.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n  background-image: none;\n}\n.z-btn-checked {\n  position: relative;\n  border: solid 1px #ff7300;\n  color: #ff7300;\n  background-color: #ffffff;\n}\n.z-btn-checked:hover {\n  color: #ff7300;\n}\n.z-btn-checked:active {\n  color: #ff7300;\n}\n.z-btn-checked.pressing {\n  background-color: #ffeddf;\n}\n.z-btn-pic {\n  position: relative;\n  padding-left: 50px;\n  display: inline-block;\n  border: solid 1px #bfbfbf;\n  color: #666666;\n  background-color: #f5f5f5;\n  background-image: -moz-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -ms-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#f0f0f0));\n  background-image: -webkit-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -o-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: linear-gradient(top, #fafafa, #f0f0f0);\n}\n.z-btn-pic:hover {\n  color: #666666;\n}\n.z-btn-pic:active {\n  color: #666666;\n}\n.z-btn-pic.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n  background-image: none;\n}\n.z-btn-pic i {\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  position: absolute;\n  top: 7px;\n  left: 20px;\n}\n.z-btn-disabled {\n  border: none;\n  color: #b2b2b2;\n  background-color: #e6e6e6;\n}\n.z-btn-disabled:hover {\n  color: #b2b2b2;\n}\n.z-btn-disabled:active {\n  color: #b2b2b2;\n}\n@media screen and (device-width: 320px) and (device-aspect-ratio: 2/3), screen and (device-width: 320px) and (device-aspect-ratio: 40/71) and (-webkit-min-device-pixel-ratio: 2) {\n  .z-btn,\n  .z-btn-important,\n  .z-btn-hint,\n  .z-btn-action,\n  .z-btn-checked,\n  .z-btn-disabled,\n  .z-btn-pic {\n    min-width: 90px;\n    height: 30px;\n    line-height: 30px;\n    padding: 0 10px;\n  }\n  .z-btn.small,\n  .z-btn-important.small,\n  .z-btn-hint.small,\n  .z-btn-action.small,\n  .z-btn-checked.small,\n  .z-btn-disabled.small,\n  .z-btn-pic.small {\n    min-width: 48px;\n    height: 22px;\n    line-height: 22px;\n    padding: 0 6px;\n    font-size: 12px;\n  }\n  .z-btn-pic {\n    padding-left: 38px;\n  }\n  .z-btn-pic i {\n    top: 2px;\n    left: 11px;\n  }\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-
-/***/ 6:
+/* 6 */
 /***/ function(module, exports) {
 
 	/*
@@ -188,8 +243,7 @@
 
 
 /***/ },
-
-/***/ 7:
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -414,8 +468,11 @@
 
 
 /***/ },
-
-/***/ 12:
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -429,14 +486,92 @@
 
 
 /***/ },
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */
+/***/ function(module, exports) {
 
-/***/ 30:
+	// 根据传入参数拼装url，并跳转到该url
+	exports.goTo = function(params) {
+	    var oldParams = getUrlParameter();
+	    var newParams = _.extend({}, oldParams, params);
+
+	    location.href = '/search?' + $.param(newParams);
+	}
+
+	exports.assert = function(value, msg) {
+	    if (!value) {
+	        exports.warn(msg);
+	    }
+	}
+
+	exports.assertEquals = function(value, anotherValue, msg) {
+	    if (value !== anotherValue) {
+	        exports.warn(msg);   
+	    }
+	}
+
+	exports.warn = function(msg) {
+	    window.alert(msg);
+	}
+
+	function getUrlParameter() {
+	    var sPageURL = window.location.search.substring(1);
+	    var sURLVariables = sPageURL.split('&');
+	    var pairs;
+	    var ret = {};
+	    for (var i = 0; i < sURLVariables.length; i++) {
+	        var pairs = sURLVariables[i].split('=');
+	        if (pairs[0]) {
+	            ret[pairs[0]] = decodeURIComponent(pairs[1]);
+	        }
+	    }
+	    return ret;
+	}
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	var noop = function() {};
+
+	module.exports = {
+	    postData: function(url, data, successCallback, errorCallback) {
+
+	        var csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+	        $.ajax({
+	            url: url,
+	            type: 'post',
+	            data: $.extend(data, {csrfmiddlewaretoken: csrfToken}), 
+	            success: successCallback || noop,
+	            error: errorCallback || noop
+	        })
+	    }
+	}
+
+/***/ },
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */,
+/* 31 */,
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(31);
+	var content = __webpack_require__(33);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -456,24 +591,22 @@
 	}
 
 /***/ },
-
-/***/ 31:
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
 	// imports
 	exports.i(__webpack_require__(12), "");
-	exports.i(__webpack_require__(32), "");
+	exports.i(__webpack_require__(34), "");
 
 	// module
-	exports.push([module.id, "/*\n  以下为一些全局的常用功能class\n*/\n.fn-clr:after {\n  clear: both;\n  display: block;\n  height: 0;\n  content: \" \";\n}\n.fn-overflow {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#container .fn-hide {\n  display: none;\n}\n.fn-fl {\n  float: left;\n}\n.fn-fr {\n  float: right;\n}\nselect {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  width: 120px;\n  padding: 5px;\n  margin-right: 8px!important;\n}\n* {\n  box-sizing: border-box !important;\n}\nbody {\n  background: url(/static/assets/imgs/login-bg.png) no-repeat 0 0;\n  background-size: 100%;\n  padding-bottom: 50px;\n}\nbody #header {\n  height: 40px;\n  line-height: 40px;\n  padding: 10px;\n}\nbody #header .logo {\n  font-size: 36px;\n  color: white;\n}\nbody #header .quit {\n  float: right;\n  display: inline-block;\n  width: 36px;\n  height: 36px;\n  margin-right: 10px;\n  cursor: pointer;\n  background: url(/static/assets/imgs/icons.png) no-repeat -88px -350px;\n  -webkit-border-radius: 18px;\n  border-radius: 18px;\n  background-clip: padding-box;\n  background-color: grey;\n}\nbody #container {\n  width: 400px;\n  margin: 160px auto 0 auto;\n}\nbody #container .title-txt {\n  text-align: center;\n  color: white;\n  font-size: 40px;\n}\nbody #container #portrait-c {\n  position: relative;\n  width: 70px;\n  height: 70px;\n  -webkit-border-radius: 35px;\n  border-radius: 35px;\n  background-clip: padding-box;\n  background-color: #eee;\n  margin: 20px auto;\n}\nbody #container #portrait-c img {\n  width: 100%;\n}\nbody #container #portrait-c label {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  z-index: 100;\n  display: inline-block;\n  width: 48px;\n  height: 48px;\n  cursor: pointer;\n  background: url(/static/assets/imgs/icons.png) no-repeat -25px -478px;\n}\nbody #container #username-c,\nbody #container #pwd-c,\nbody #container #pwd-confirm-c,\nbody #container #verifycode-c {\n  height: 40px;\n  line-height: 40px;\n  padding-left: 36px;\n  border-bottom: 1px solid white;\n  background: url(/static/assets/imgs/icons.png) no-repeat -220px -397px;\n}\nbody #container #name-c,\nbody #container #bday-c,\nbody #container #gender-c {\n  height: 40px;\n  line-height: 40px;\n  margin-top: 20px;\n  border-bottom: 1px solid white;\n}\nbody #container #pwd-c {\n  margin-top: 20px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -223px -439px;\n}\nbody #container #pwd-confirm-c {\n  margin-top: 20px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -223px -489px;\n}\nbody #container #verifycode-c {\n  margin-top: 20px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -226px -592px;\n}\nbody #container #bday-c input.bday-i {\n  width: 320px;\n  padding: 0;\n}\nbody #container #gender-c {\n  position: relative;\n}\nbody #container #gender-c p {\n  width: 400px;\n  height: 40px;\n  line-height: 40px;\n  padding-right: 60px;\n  margin: 0;\n  background: url(/static/assets/imgs/icons.png) no-repeat 330px -166px;\n  color: #bbb;\n}\nbody #container #gender-c #gender-droplist {\n  position: absolute;\n  z-index: 200;\n  top: 39px;\n  left: 0;\n  display: none;\n  margin: 0;\n  padding: 0;\n}\nbody #container #gender-c #gender-droplist li {\n  display: inline-block;\n  width: 400px;\n  height: 40px;\n  line-height: 40px;\n  list-style: none;\n  background-color: #ddd;\n  text-indent: 20px;\n}\nbody #container #gender-c #gender-droplist li:hover {\n  background-color: #eee;\n}\nbody #container #mobile-wrapper #mobile-c {\n  width: 282px;\n  height: 40px;\n  line-height: 40px;\n  padding-left: 36px;\n  border-bottom: 1px solid white;\n  float: left;\n  background: url(/static/assets/imgs/icons.png) no-repeat -223px -538px;\n}\nbody #container #mobile-wrapper #mobile-c input {\n  width: 100%;\n}\nbody #container #mobile-wrapper #sendcode {\n  float: left;\n  height: 36px;\n  line-height: 36px;\n  padding: 0 8px;\n  margin-left: 10px;\n  background-color: #FFD12C;\n  color: white;\n  border: none;\n  -webkit-border-radius: 18px;\n  border-radius: 18px;\n  background-clip: padding-box;\n}\nbody #container .statement {\n  float: right;\n  margin-top: 17px;\n  margin-right: 8px;\n  color: white;\n  font-size: 14px;\n  text-decoration: underline;\n}\nbody #container input {\n  width: 360px;\n  border: none;\n  color: white;\n  background-color: transparent;\n  height: 24px;\n  line-height: 24px;\n}\nbody #container input:focus {\n  outline: none;\n}\nbody #container #login-btn-c {\n  padding-bottom: 10px;\n  margin-top: 20px;\n}\nbody #container #login-btn-c .z-btn {\n  float: right;\n  height: 36px;\n  line-height: 36px;\n  -webkit-border-radius: 18px;\n  border-radius: 18px;\n  background-clip: padding-box;\n  color: white;\n  box-sizing: border-box;\n  border: none;\n}\nbody #container #login-btn-c .register-btn {\n  background-color: #7ed321;\n}\nbody #container #login-splitline span {\n  display: inline-block;\n  width: 180px;\n  height: 30px;\n  border-bottom: 1px solid #eee;\n}\nbody #container #login-splitline #left-bottom {\n  float: left;\n}\nbody #container #login-splitline #right-bottom {\n  float: right;\n}\nbody #container #login-others {\n  text-align: center;\n  margin-top: -10px;\n  color: white;\n}\nbody #container #login-others #or-txt {\n  position: relative;\n  z-index: 100;\n  display: inline-block;\n  width: 30px;\n  height: 30px;\n  line-height: 30px;\n  margin-top: -30px;\n}\nbody #container #login-others p {\n  font-size: 14px;\n  color: #B8B8B8;\n  text-align: center;\n}\nbody #container #login-others #socials {\n  width: 200px;\n  margin: 10px auto;\n}\nbody #container #login-others #socials span {\n  float: left;\n  display: inline-block;\n  width: 36px;\n  height: 36px;\n  margin-right: 40px;\n  cursor: pointer;\n  background: url(/static/assets/imgs/icons.png) no-repeat -26px -284px;\n}\nbody #container #login-others #socials span.last {\n  margin-right: 0;\n}\nbody #container #login-others #socials #qq {\n  background: url(/static/assets/imgs/icons.png) no-repeat -29px -350px;\n}\nbody #container #login-others #socials #sina {\n  background: url(/static/assets/imgs/icons.png) no-repeat -30px -418px;\n}\nbody #container #resetForm {\n  margin-top: 40px;\n}\n", ""]);
+	exports.push([module.id, "/*\n  以下为一些全局的常用功能class\n*/\n.fn-clr:after {\n  clear: both;\n  display: block;\n  height: 0;\n  content: \" \";\n}\n.fn-overflow {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#container .fn-hide {\n  display: none;\n}\n.fn-fl {\n  float: left;\n}\n.fn-fr {\n  float: right;\n}\nselect {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  width: 120px;\n  padding: 5px;\n  margin-right: 8px!important;\n}\ninput:-webkit-autofill,\ntextarea:-webkit-autofill,\nselect:-webkit-autofill {\n  background-color: white!important;\n}\n.z-dialog {\n  display: none;\n}\n* {\n  box-sizing: border-box !important;\n}\nbody {\n  background: url(/static/assets/imgs/login-bg.png) no-repeat 0 0;\n  background-size: 100%;\n  padding-bottom: 50px;\n}\nbody #header {\n  height: 40px;\n  line-height: 40px;\n  padding: 10px;\n}\nbody #header .logo {\n  font-size: 36px;\n  color: white;\n}\nbody #header .quit {\n  float: right;\n  display: inline-block;\n  width: 36px;\n  height: 36px;\n  margin-right: 10px;\n  cursor: pointer;\n  background: url(/static/assets/imgs/icons.png) no-repeat -88px -350px;\n  -webkit-border-radius: 18px;\n  border-radius: 18px;\n  background-clip: padding-box;\n  background-color: grey;\n}\nbody #container {\n  width: 400px;\n  margin: 160px auto 0 auto;\n}\nbody #container .title-txt {\n  text-align: center;\n  color: white;\n  font-size: 40px;\n}\nbody #container #portrait-c {\n  position: relative;\n  width: 70px;\n  height: 70px;\n  -webkit-border-radius: 35px;\n  border-radius: 35px;\n  background-clip: padding-box;\n  background-color: #eee;\n  margin: 20px auto;\n}\nbody #container #portrait-c img {\n  width: 100%;\n}\nbody #container #portrait-c label {\n  position: absolute;\n  top: 10px;\n  left: 10px;\n  z-index: 100;\n  display: inline-block;\n  width: 48px;\n  height: 48px;\n  cursor: pointer;\n  background: url(/static/assets/imgs/icons.png) no-repeat -25px -478px;\n}\nbody #container #username-c,\nbody #container #pwd-c,\nbody #container #pwd-confirm-c,\nbody #container #verifycode-c {\n  height: 40px;\n  line-height: 40px;\n  padding-left: 36px;\n  border-bottom: 1px solid white;\n  background: url(/static/assets/imgs/icons.png) no-repeat -220px -397px;\n}\nbody #container #name-c,\nbody #container #bday-c,\nbody #container #gender-c {\n  height: 40px;\n  line-height: 40px;\n  margin-top: 20px;\n  border-bottom: 1px solid white;\n}\nbody #container #pwd-c {\n  margin-top: 20px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -223px -439px;\n}\nbody #container #pwd-confirm-c {\n  margin-top: 20px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -223px -489px;\n}\nbody #container #verifycode-c {\n  margin-top: 20px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -226px -592px;\n}\nbody #container #bday-c input.bday-i {\n  width: 320px;\n  padding: 0;\n}\nbody #container #gender-c {\n  position: relative;\n}\nbody #container #gender-c p {\n  width: 400px;\n  height: 40px;\n  line-height: 40px;\n  padding-right: 60px;\n  margin: 0;\n  background: url(/static/assets/imgs/icons.png) no-repeat 330px -166px;\n  color: #bbb;\n}\nbody #container #gender-c #gender-droplist {\n  position: absolute;\n  z-index: 200;\n  top: 39px;\n  left: 0;\n  display: none;\n  margin: 0;\n  padding: 0;\n}\nbody #container #gender-c #gender-droplist li {\n  display: inline-block;\n  width: 400px;\n  height: 40px;\n  line-height: 40px;\n  list-style: none;\n  background-color: #ddd;\n  text-indent: 20px;\n}\nbody #container #gender-c #gender-droplist li:hover {\n  background-color: #eee;\n}\nbody #container #mobile-wrapper #mobile-c {\n  width: 282px;\n  height: 40px;\n  line-height: 40px;\n  padding-left: 36px;\n  border-bottom: 1px solid white;\n  float: left;\n  background: url(/static/assets/imgs/icons.png) no-repeat -223px -538px;\n}\nbody #container #mobile-wrapper #mobile-c input {\n  width: 100%;\n}\nbody #container #mobile-wrapper #sendcode {\n  float: left;\n  height: 36px;\n  line-height: 36px;\n  padding: 0 8px;\n  margin-left: 10px;\n  background-color: #FFD12C;\n  color: white;\n  border: none;\n  -webkit-border-radius: 18px;\n  border-radius: 18px;\n  background-clip: padding-box;\n}\nbody #container .statement {\n  float: right;\n  margin-top: 17px;\n  margin-right: 8px;\n  color: white;\n  font-size: 14px;\n  text-decoration: underline;\n}\nbody #container input {\n  width: 360px;\n  border: none;\n  color: white;\n  background-color: transparent;\n  height: 24px;\n  line-height: 24px;\n}\nbody #container input:focus {\n  outline: none;\n}\nbody #container #login-btn-c {\n  padding-bottom: 10px;\n  margin-top: 20px;\n}\nbody #container #login-btn-c .z-btn {\n  float: right;\n  height: 36px;\n  line-height: 36px;\n  -webkit-border-radius: 18px;\n  border-radius: 18px;\n  background-clip: padding-box;\n  color: white;\n  box-sizing: border-box;\n  border: none;\n}\nbody #container #login-btn-c .register-btn {\n  background-color: #7ed321;\n}\nbody #container #login-splitline span {\n  display: inline-block;\n  width: 180px;\n  height: 30px;\n  border-bottom: 1px solid #eee;\n}\nbody #container #login-splitline #left-bottom {\n  float: left;\n}\nbody #container #login-splitline #right-bottom {\n  float: right;\n}\nbody #container #login-others {\n  text-align: center;\n  margin-top: -10px;\n  color: white;\n}\nbody #container #login-others #or-txt {\n  position: relative;\n  z-index: 100;\n  display: inline-block;\n  width: 30px;\n  height: 30px;\n  line-height: 30px;\n  margin-top: -30px;\n}\nbody #container #login-others p {\n  font-size: 14px;\n  color: #B8B8B8;\n  text-align: center;\n}\nbody #container #login-others #socials {\n  width: 200px;\n  margin: 10px auto;\n}\nbody #container #login-others #socials span {\n  float: left;\n  display: inline-block;\n  width: 36px;\n  height: 36px;\n  margin-right: 40px;\n  cursor: pointer;\n  background: url(/static/assets/imgs/icons.png) no-repeat -26px -284px;\n}\nbody #container #login-others #socials span.last {\n  margin-right: 0;\n}\nbody #container #login-others #socials #qq {\n  background: url(/static/assets/imgs/icons.png) no-repeat -29px -350px;\n}\nbody #container #login-others #socials #sina {\n  background: url(/static/assets/imgs/icons.png) no-repeat -30px -418px;\n}\nbody #container #resetForm {\n  margin-top: 40px;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-
-/***/ 32:
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -487,5 +620,4 @@
 
 
 /***/ }
-
-/******/ });
+/******/ ]);

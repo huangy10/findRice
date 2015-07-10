@@ -9,7 +9,7 @@ def duration(minutes):
     m = minutes % 60
     h = int(minutes / 60)
     d = int(h/24)
-    h -= d*2
+    h -= d*24
     if h > 0:
         description = "%sd%sh%sm" % (d, h, m)
     elif d > 0:

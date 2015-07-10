@@ -45,11 +45,11 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(4);
-	__webpack_require__(22);
+	__webpack_require__(23);
 
 	var header = __webpack_require__(13);
-	var share = __webpack_require__(21);
-	var utils = __webpack_require__(33);
+	var shareBox = __webpack_require__(25);
+	var utils = __webpack_require__(18);
 
 	$(function() {
 
@@ -66,10 +66,14 @@
 	    });
 
 	    $('.share').click(function() {
-	        share({
-	            webid: 'cqq',
-	            url: 'http://www.baidu.com',
-	            title: '测试share功能'
+	        var $actionCard = $(this).closest('.action-card');
+	        var id = $actionCard.data('id');
+	        var code = $actionCard.data('code');
+	        var shareLink = 'http://zhaomi.biz/action/' + id + '?code=' + code;
+
+	        shareBox.show({
+	            selector: '#share-dialog',
+	            shareLink: shareLink
 	        })
 	    });
 
@@ -139,7 +143,7 @@
 
 
 	// module
-	exports.push([module.id, ".z-btn,\n.z-btn-important,\n.z-btn-hint,\n.z-btn-action,\n.z-btn-checked,\n.z-btn-disabled,\n.z-btn-pic {\n  display: inline-block;\n  min-width: 105px;\n  height: 40px;\n  line-height: 40px;\n  padding: 0 23px;\n  font-size: 14px;\n  vertical-align: middle;\n  overflow: visible;\n  border-radius: 5px;\n  cursor: pointer;\n  text-align: center;\n  font-family: Helvetica Neue;\n}\n.z-btn.small,\n.z-btn-important.small,\n.z-btn-hint.small,\n.z-btn-action.small,\n.z-btn-checked.small,\n.z-btn-disabled.small,\n.z-btn-pic.small {\n  min-width: 50px;\n  height: 25px;\n  line-height: 25px;\n  padding: 0 15px;\n  font-size: 13px;\n}\n.z-btn {\n  border: solid 1px #999999;\n  color: #666666;\n  background-color: #ffffff;\n}\n.z-btn:hover {\n  color: #666666;\n}\n.z-btn:active {\n  color: #666666;\n}\n.z-btn.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n}\n.z-btn-hint {\n  border: solid 1px #ff8315;\n  color: #ff7300;\n  background-color: #ffffff;\n}\n.z-btn-hint:hover {\n  color: #ff7300;\n}\n.z-btn-hint:active {\n  color: #ff7300;\n}\n.z-btn-hint.pressing {\n  color: #ff7300;\n  background-color: #ffeddf;\n}\n.z-btn-important {\n  border: solid 1px transparent;\n  border-left-color: #ffaa3c;\n  border-top-color: #ffaa3c;\n  border-bottom-color: #e4720d;\n  color: #ffffff;\n  background-color: #ff8d1e;\n  background-image: -moz-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -ms-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ff9726), to(#ff8315));\n  background-image: -webkit-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -o-linear-gradient(top, #ff9726, #ff8315);\n  background-image: linear-gradient(top, #ff9726, #ff8315);\n}\n.z-btn-important:hover {\n  color: #ffffff;\n}\n.z-btn-important:active {\n  color: #ffffff;\n}\n.z-btn-important.pressing {\n  color: #ffffff;\n  border: solid 1px transparent;\n  background-color: #ff7300;\n  background-image: none;\n}\n.z-btn-action {\n  border: solid 1px #bfbfbf;\n  color: #666666;\n  background-color: #f5f5f5;\n  background-image: -moz-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -ms-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#f0f0f0));\n  background-image: -webkit-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -o-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: linear-gradient(top, #fafafa, #f0f0f0);\n}\n.z-btn-action:hover {\n  color: #666666;\n}\n.z-btn-action:active {\n  color: #666666;\n}\n.z-btn-action.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n  background-image: none;\n}\n.z-btn-checked {\n  position: relative;\n  border: solid 1px #ff7300;\n  color: #ff7300;\n  background-color: #ffffff;\n}\n.z-btn-checked:hover {\n  color: #ff7300;\n}\n.z-btn-checked:active {\n  color: #ff7300;\n}\n.z-btn-checked.pressing {\n  background-color: #ffeddf;\n}\n.z-btn-pic {\n  position: relative;\n  padding-left: 50px;\n  display: inline-block;\n  border: solid 1px #bfbfbf;\n  color: #666666;\n  background-color: #f5f5f5;\n  background-image: -moz-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -ms-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#f0f0f0));\n  background-image: -webkit-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -o-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: linear-gradient(top, #fafafa, #f0f0f0);\n}\n.z-btn-pic:hover {\n  color: #666666;\n}\n.z-btn-pic:active {\n  color: #666666;\n}\n.z-btn-pic.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n  background-image: none;\n}\n.z-btn-pic i {\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  position: absolute;\n  top: 7px;\n  left: 20px;\n}\n.z-btn-disabled {\n  border: none;\n  color: #b2b2b2;\n  background-color: #e6e6e6;\n}\n.z-btn-disabled:hover {\n  color: #b2b2b2;\n}\n.z-btn-disabled:active {\n  color: #b2b2b2;\n}\n@media screen and (device-width: 320px) and (device-aspect-ratio: 2/3), screen and (device-width: 320px) and (device-aspect-ratio: 40/71) and (-webkit-min-device-pixel-ratio: 2) {\n  .z-btn,\n  .z-btn-important,\n  .z-btn-hint,\n  .z-btn-action,\n  .z-btn-checked,\n  .z-btn-disabled,\n  .z-btn-pic {\n    min-width: 90px;\n    height: 30px;\n    line-height: 30px;\n    padding: 0 10px;\n  }\n  .z-btn.small,\n  .z-btn-important.small,\n  .z-btn-hint.small,\n  .z-btn-action.small,\n  .z-btn-checked.small,\n  .z-btn-disabled.small,\n  .z-btn-pic.small {\n    min-width: 48px;\n    height: 22px;\n    line-height: 22px;\n    padding: 0 6px;\n    font-size: 12px;\n  }\n  .z-btn-pic {\n    padding-left: 38px;\n  }\n  .z-btn-pic i {\n    top: 2px;\n    left: 11px;\n  }\n}\n", ""]);
+	exports.push([module.id, ".z-btn,\n.z-btn-important,\n.z-btn-hint,\n.z-btn-action,\n.z-btn-checked,\n.z-btn-disabled,\n.z-btn-pic {\n  display: inline-block;\n  min-width: 105px;\n  height: 40px;\n  line-height: 40px;\n  padding: 0 23px;\n  font-size: 14px;\n  vertical-align: middle;\n  overflow: visible;\n  border-radius: 5px;\n  cursor: pointer;\n  text-align: center;\n  font-family: Helvetica Neue;\n}\n.z-btn.small,\n.z-btn-important.small,\n.z-btn-hint.small,\n.z-btn-action.small,\n.z-btn-checked.small,\n.z-btn-disabled.small,\n.z-btn-pic.small {\n  min-width: 50px;\n  height: 25px;\n  line-height: 25px;\n  padding: 0 15px;\n  font-size: 13px;\n}\n.z-btn {\n  border: solid 1px #999999;\n  color: #666666;\n  background-color: #ffffff;\n}\n.z-btn:hover {\n  color: #666666;\n}\n.z-btn:active {\n  color: #666666;\n}\n.z-btn.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n}\n.z-btn:focus {\n  outline: none;\n}\n.z-btn-hint {\n  border: solid 1px #ff8315;\n  color: #ff7300;\n  background-color: #ffffff;\n}\n.z-btn-hint:hover {\n  color: #ff7300;\n}\n.z-btn-hint:active {\n  color: #ff7300;\n}\n.z-btn-hint.pressing {\n  color: #ff7300;\n  background-color: #ffeddf;\n}\n.z-btn-important {\n  border: solid 1px transparent;\n  border-left-color: #ffaa3c;\n  border-top-color: #ffaa3c;\n  border-bottom-color: #e4720d;\n  color: #ffffff;\n  background-color: #ff8d1e;\n  background-image: -moz-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -ms-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ff9726), to(#ff8315));\n  background-image: -webkit-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -o-linear-gradient(top, #ff9726, #ff8315);\n  background-image: linear-gradient(top, #ff9726, #ff8315);\n}\n.z-btn-important:hover {\n  color: #ffffff;\n}\n.z-btn-important:active {\n  color: #ffffff;\n}\n.z-btn-important.pressing {\n  color: #ffffff;\n  border: solid 1px transparent;\n  background-color: #ff7300;\n  background-image: none;\n}\n.z-btn-action {\n  border: solid 1px #bfbfbf;\n  color: #666666;\n  background-color: #f5f5f5;\n  background-image: -moz-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -ms-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#f0f0f0));\n  background-image: -webkit-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -o-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: linear-gradient(top, #fafafa, #f0f0f0);\n}\n.z-btn-action:hover {\n  color: #666666;\n}\n.z-btn-action:active {\n  color: #666666;\n}\n.z-btn-action.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n  background-image: none;\n}\n.z-btn-checked {\n  position: relative;\n  border: solid 1px #ff7300;\n  color: #ff7300;\n  background-color: #ffffff;\n}\n.z-btn-checked:hover {\n  color: #ff7300;\n}\n.z-btn-checked:active {\n  color: #ff7300;\n}\n.z-btn-checked.pressing {\n  background-color: #ffeddf;\n}\n.z-btn-pic {\n  position: relative;\n  padding-left: 50px;\n  display: inline-block;\n  border: solid 1px #bfbfbf;\n  color: #666666;\n  background-color: #f5f5f5;\n  background-image: -moz-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -ms-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#f0f0f0));\n  background-image: -webkit-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -o-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: linear-gradient(top, #fafafa, #f0f0f0);\n}\n.z-btn-pic:hover {\n  color: #666666;\n}\n.z-btn-pic:active {\n  color: #666666;\n}\n.z-btn-pic.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n  background-image: none;\n}\n.z-btn-pic i {\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  position: absolute;\n  top: 7px;\n  left: 20px;\n}\n.z-btn-disabled {\n  border: none;\n  color: #b2b2b2;\n  background-color: #e6e6e6;\n}\n.z-btn-disabled:hover {\n  color: #b2b2b2;\n}\n.z-btn-disabled:active {\n  color: #b2b2b2;\n}\n@media screen and (device-width: 320px) and (device-aspect-ratio: 2/3), screen and (device-width: 320px) and (device-aspect-ratio: 40/71) and (-webkit-min-device-pixel-ratio: 2) {\n  .z-btn,\n  .z-btn-important,\n  .z-btn-hint,\n  .z-btn-action,\n  .z-btn-checked,\n  .z-btn-disabled,\n  .z-btn-pic {\n    min-width: 90px;\n    height: 30px;\n    line-height: 30px;\n    padding: 0 10px;\n  }\n  .z-btn.small,\n  .z-btn-important.small,\n  .z-btn-hint.small,\n  .z-btn-action.small,\n  .z-btn-checked.small,\n  .z-btn-disabled.small,\n  .z-btn-pic.small {\n    min-width: 48px;\n    height: 22px;\n    line-height: 22px;\n    padding: 0 6px;\n    font-size: 12px;\n  }\n  .z-btn-pic {\n    padding-left: 38px;\n  }\n  .z-btn-pic i {\n    top: 2px;\n    left: 11px;\n  }\n}\n", ""]);
 
 	// exports
 
@@ -449,7 +453,7 @@
 
 	__webpack_require__(14);
 	var _ = __webpack_require__(16);
-	var utils = __webpack_require__(33);
+	var utils = __webpack_require__(18);
 
 	// export something which is related to header
 	module.exports = function() {}
@@ -501,7 +505,9 @@
 	        }
 	    })
 
-	    
+	    $doc.on('click', '.cancel-create', function() {
+	        
+	    })
 	});
 
 /***/ },
@@ -539,7 +545,7 @@
 	exports.i(__webpack_require__(12), "");
 
 	// module
-	exports.push([module.id, "/*\n  以下为一些全局的常用功能class\n*/\n.fn-clr:after {\n  clear: both;\n  display: block;\n  height: 0;\n  content: \" \";\n}\n.fn-overflow {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#container .fn-hide {\n  display: none;\n}\n.fn-fl {\n  float: left;\n}\n.fn-fr {\n  float: right;\n}\nselect {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  width: 120px;\n  padding: 5px;\n  margin-right: 8px!important;\n}\n* {\n  box-sizing: border-box !important;\n}\n#header {\n  height: 48px;\n  background-color: white;\n  font-size: 18px;\n  color: #747474;\n}\n#header #logo {\n  display: inline-block;\n  float: left;\n  padding-left: 12px;\n  margin-top: 8px;\n  font-size: 34px;\n  color: #5e5e5e;\n  line-height: 1;\n}\n#header #area {\n  position: relative;\n  float: left;\n  margin-left: 12px;\n  padding-right: 36px;\n  vertical-align: middle;\n  z-index: 200;\n  background: url(/static/assets/imgs/icons.png) no-repeat 12px -100px;\n}\n#header #area em {\n  font-style: normal;\n  display: inline-block;\n  width: 60px;\n  height: 48px;\n  line-height: 48px;\n}\n#header #area #area-droplist {\n  display: none;\n  position: absolute;\n  top: 48px;\n  left: 0;\n  width: 400px;\n  height: 32px;\n  line-height: 32px;\n  padding-top: 8px;\n}\n#header #area #area-droplist .prov,\n#header #area #area-droplist .city {\n  float: left;\n  height: 32px;\n  line-height: 24px;\n}\n#header #area #area-droplist span {\n  float: left;\n  display: inline-block;\n  width: 32px;\n  height: 32px;\n  line-height: 32px;\n}\n#header #area #area-droplist span.city-txt {\n  width: 60px;\n}\n#header .action {\n  float: right;\n  margin-right: 12px;\n}\n#header .action button {\n  height: 28px;\n  line-height: 24px;\n  border: 1px solid #cfcfcf;\n  background-color: transparent;\n  font-size: 14px;\n  outline: none;\n  -webkit-border-radius: 14px;\n  border-radius: 14px;\n  background-clip: padding-box;\n}\n#header #reg button {\n  margin-top: 12px;\n}\n#header #pub button {\n  padding-left: 30px;\n  margin-top: 12px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -210px -182px;\n}\n#header #msg button {\n  padding-left: 40px;\n  padding-right: 12px;\n  min-width: 80px;\n  margin-top: 12px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -222px -827px;\n}\n#header #personal-info {\n  width: 32px;\n  height: 32px;\n  margin-top: 8px;\n  background-color: #ccc;\n  cursor: pointer;\n  -webkit-border-radius: 40px;\n  border-radius: 40px;\n  background-clip: padding-box;\n}\n#header #personal-info img {\n  width: 100%;\n}\n#header #search input {\n  width: 140px;\n  height: 28px;\n  line-height: 28px;\n  padding-left: 36px;\n  margin-top: 12px;\n  border: 1px solid #cfcfcf;\n  font-size: 14px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -210px -224px;\n  -webkit-border-radius: 12px;\n  border-radius: 12px;\n  background-clip: padding-box;\n}\n", ""]);
+	exports.push([module.id, "/*\n  以下为一些全局的常用功能class\n*/\n.fn-clr:after {\n  clear: both;\n  display: block;\n  height: 0;\n  content: \" \";\n}\n.fn-overflow {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#container .fn-hide {\n  display: none;\n}\n.fn-fl {\n  float: left;\n}\n.fn-fr {\n  float: right;\n}\nselect {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  width: 120px;\n  padding: 5px;\n  margin-right: 8px!important;\n}\ninput:-webkit-autofill,\ntextarea:-webkit-autofill,\nselect:-webkit-autofill {\n  background-color: white!important;\n}\n.z-dialog {\n  display: none;\n}\n* {\n  box-sizing: border-box !important;\n}\n#header {\n  height: 48px;\n  background-color: white;\n  font-size: 18px;\n  color: #747474;\n}\n#header #logo {\n  display: inline-block;\n  float: left;\n  padding-left: 12px;\n  margin-top: 8px;\n  font-size: 34px;\n  color: #5e5e5e;\n  line-height: 1;\n}\n#header #area {\n  position: relative;\n  float: left;\n  margin-left: 12px;\n  padding-right: 36px;\n  vertical-align: middle;\n  z-index: 200;\n  background: url(/static/assets/imgs/icons.png) no-repeat 12px -100px;\n}\n#header #area em {\n  font-style: normal;\n  display: inline-block;\n  width: 60px;\n  height: 48px;\n  line-height: 48px;\n}\n#header #area #area-droplist {\n  display: none;\n  position: absolute;\n  top: 48px;\n  left: 0;\n  width: 400px;\n  height: 32px;\n  line-height: 32px;\n  padding-top: 8px;\n}\n#header #area #area-droplist .prov,\n#header #area #area-droplist .city {\n  float: left;\n  height: 32px;\n  line-height: 24px;\n}\n#header #area #area-droplist span {\n  float: left;\n  display: inline-block;\n  width: 32px;\n  height: 32px;\n  line-height: 32px;\n}\n#header #area #area-droplist span.city-txt {\n  width: 60px;\n}\n#header .action {\n  float: right;\n  margin-top: 12px;\n  margin-right: 12px;\n}\n#header .action a {\n  height: 28px;\n  line-height: 28px;\n  border: 1px solid #cfcfcf;\n  background-color: transparent;\n  font-size: 14px;\n  outline: none;\n  -webkit-border-radius: 14px;\n  border-radius: 14px;\n  background-clip: padding-box;\n}\n#header #pub a {\n  padding-left: 30px;\n  padding-right: 12px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -210px -182px;\n}\n#header #pub.cancel-create {\n  background-color: #888;\n  -webkit-border-radius: 14px;\n  border-radius: 14px;\n  background-clip: padding-box;\n}\n#header #pub.cancel-create a {\n  color: white;\n  background: url(/static/assets/imgs/icons.png) no-repeat -88px -355px;\n}\n#header #msg a {\n  padding-left: 40px;\n  padding-right: 12px;\n  min-width: 80px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -222px -827px;\n}\n#header #personal-info {\n  width: 32px;\n  height: 32px;\n  margin-top: 8px;\n  background-color: #888;\n  cursor: pointer;\n  overflow: hidden;\n  -webkit-border-radius: 40px;\n  border-radius: 40px;\n  background-clip: padding-box;\n}\n#header #personal-info img {\n  width: 100%;\n}\n#header #personal-info .logout {\n  display: inline-block;\n  width: 32px;\n  height: 32px;\n  border: none;\n  background: url(/static/assets/imgs/icons.png) no-repeat -90px -351px;\n}\n#header #search input {\n  width: 160px;\n  height: 28px;\n  line-height: 28px;\n  padding-left: 36px;\n  border: 1px solid #cfcfcf;\n  font-size: 14px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -210px -224px;\n  -webkit-border-radius: 14px;\n  border-radius: 14px;\n  background-clip: padding-box;\n}\n", ""]);
 
 	// exports
 
@@ -669,10 +675,52 @@
 
 
 /***/ },
-/* 18 */,
+/* 18 */
+/***/ function(module, exports) {
+
+	// 根据传入参数拼装url，并跳转到该url
+	exports.goTo = function(params) {
+	    var oldParams = getUrlParameter();
+	    var newParams = _.extend({}, oldParams, params);
+
+	    location.href = '/search?' + $.param(newParams);
+	}
+
+	exports.assert = function(value, msg) {
+	    if (!value) {
+	        exports.warn(msg);
+	    }
+	}
+
+	exports.assertEquals = function(value, anotherValue, msg) {
+	    if (value !== anotherValue) {
+	        exports.warn(msg);   
+	    }
+	}
+
+	exports.warn = function(msg) {
+	    window.alert(msg);
+	}
+
+	function getUrlParameter() {
+	    var sPageURL = window.location.search.substring(1);
+	    var sURLVariables = sPageURL.split('&');
+	    var pairs;
+	    var ret = {};
+	    for (var i = 0; i < sURLVariables.length; i++) {
+	        var pairs = sURLVariables[i].split('=');
+	        if (pairs[0]) {
+	            ret[pairs[0]] = decodeURIComponent(pairs[1]);
+	        }
+	    }
+	    return ret;
+	}
+
+/***/ },
 /* 19 */,
 /* 20 */,
-/* 21 */
+/* 21 */,
+/* 22 */
 /***/ function(module, exports) {
 
 	// http://www.jiathis.com/help/html/share-with-jiathis-api
@@ -683,20 +731,27 @@
 	        return;
 	    }
 
+	    var title = options.title || '找米分享';
+
+	    // $("#share-dialog").dialog({
+	    //     resizable: false,
+	    //     width: 500,
+	    //     title: '通过链接分享：'
+	    // });
 	    window.open('http://www.jiathis.com/send/?webid=' +
 	        options.webid + '&url=' + 
 	        options.url + '&title=' +
-	        options.title);
+	        title);
 	}
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(23);
+	var content = __webpack_require__(24);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -716,7 +771,7 @@
 	}
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -724,44 +779,57 @@
 	exports.i(__webpack_require__(12), "");
 
 	// module
-	exports.push([module.id, "/*\n  以下为一些全局的常用功能class\n*/\n.fn-clr:after {\n  clear: both;\n  display: block;\n  height: 0;\n  content: \" \";\n}\n.fn-overflow {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#container .fn-hide {\n  display: none;\n}\n.fn-fl {\n  float: left;\n}\n.fn-fr {\n  float: right;\n}\nselect {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  width: 120px;\n  padding: 5px;\n  margin-right: 8px!important;\n}\n* {\n  box-sizing: border-box !important;\n}\nbody {\n  background-color: #eaeaea;\n}\n#content {\n  width: 1190px;\n  min-height: 500px;\n  margin: 0 auto;\n}\n#content #banner {\n  position: relative;\n  overflow: auto;\n  height: 700px!important;\n  z-index: 100;\n}\n#content #banner ul {\n  margin: 0;\n  padding: 0;\n}\n#content #banner ul li {\n  position: relative;\n  float: left;\n}\n#content #banner ul li img {\n  width: 1190px;\n}\n#content #banner ul li .banner-brief {\n  position: absolute;\n  top: 40px;\n  right: 70px;\n  width: 410px;\n  border-bottom: 1px solid #bebebe;\n  font-family: 'HeiTi SC';\n  font-size: 18px;\n}\n#content #banner ul li .banner-brief .banner-type {\n  font-size: 36px;\n  margin: 0;\n}\n#content #banner ul li .banner-brief .banner-name {\n  font-size: 48px;\n  margin: 20px 0 10px;\n}\n#content #banner ul li .banner-brief .banner-time {\n  height: 30px;\n  line-height: 30px;\n  margin: 8px 0;\n  padding-left: 36px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -216px -90px;\n}\n#content #banner ul li .banner-brief .banner-location {\n  height: 30px;\n  line-height: 30px;\n  margin: 8px 0;\n  padding-left: 36px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -216px -15px;\n}\n#content #banner ul li .banner-brief .banner-price {\n  font-size: 40px;\n  color: #ff4545;\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n}\n#content #banner li {\n  list-style: none;\n}\n#content #banner .dots {\n  position: absolute;\n  bottom: 30px;\n  right: 30px;\n  margin: 0;\n}\n#content #banner .dots .dot {\n  float: left;\n  width: 18px;\n  height: 18px;\n  line-height: 18px;\n  border: 1px solid #f2f2f2;\n  background-color: white;\n  margin-left: 6px;\n  text-indent: -9999px;\n  cursor: pointer;\n}\n#content #banner .dots .dot.active {\n  background-color: #ff7300;\n}\n#content #filter {\n  height: 80px;\n  line-height: 80px;\n  text-align: center;\n  background-color: white;\n  font-size: 30px;\n}\n#content #filter #hot-wrapper {\n  position: relative;\n  display: inline-block;\n  z-index: 100;\n}\n#content #filter #hot-wrapper #hot {\n  padding: 0 60px;\n  display: inline-block;\n  background: url(/static/assets/imgs/icons.png) no-repeat 164px -144px;\n}\n#content #filter #hot-wrapper #hot-droplist {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: -80px;\n  width: 400px;\n  height: 220px;\n  padding: 0 30px 20px 30px;\n  border: 1px solid #ccc;\n  background-color: white;\n}\n#content #filter #hot-wrapper #hot-droplist p {\n  text-align: center;\n  border-bottom: 1px solid #ccc;\n  margin: 0;\n  margin-bottom: 20px;\n}\n#content #filter #hot-wrapper #hot-droplist .droplist-hot {\n  display: inline-block;\n  width: 240px;\n  padding: 0 60px;\n  height: 80px;\n  line-height: 80px;\n  background: url(/static/assets/imgs/icons.png) no-repeat 164px -204px;\n}\n#content #filter #hot-wrapper #hot-droplist ul {\n  margin: 0;\n  padding: 0;\n}\n#content #filter #hot-wrapper #hot-droplist ul li {\n  list-style: none;\n  float: left;\n  height: 50px;\n  line-height: 50px;\n  width: 49%;\n  color: #727272;\n  cursor: pointer;\n}\n#content #filter #hot-wrapper #hot-droplist ul li:hover,\n#content #filter #hot-wrapper #hot-droplist ul li.selected {\n  color: black;\n}\n#content #filter #hot-wrapper:hover {\n  z-index: 101;\n}\n#content #filter #hot-wrapper:hover #hot-droplist {\n  display: block;\n}\n#content #filter #category-wrapper {\n  position: relative;\n  display: inline-block;\n  z-index: 100;\n}\n#content #filter #category-wrapper #category {\n  padding: 0 60px;\n  display: inline-block;\n  background: url(/static/assets/imgs/icons.png) no-repeat 164px -144px;\n}\n#content #filter #category-wrapper #category-droplist {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: -80px;\n  width: 400px;\n  height: 320px;\n  padding: 0 30px 20px 30px;\n  border: 1px solid #ccc;\n  background-color: white;\n}\n#content #filter #category-wrapper #category-droplist p {\n  text-align: center;\n  border-bottom: 1px solid #ccc;\n  margin: 0;\n  margin-bottom: 20px;\n}\n#content #filter #category-wrapper #category-droplist .droplist-category {\n  display: inline-block;\n  width: 240px;\n  padding: 0 60px;\n  height: 80px;\n  line-height: 80px;\n  background: url(/static/assets/imgs/icons.png) no-repeat 164px -204px;\n}\n#content #filter #category-wrapper #category-droplist ul {\n  margin: 0;\n  padding: 0;\n}\n#content #filter #category-wrapper #category-droplist ul li {\n  list-style: none;\n  float: left;\n  height: 50px;\n  line-height: 50px;\n  width: 33%;\n  color: #727272;\n  cursor: pointer;\n}\n#content #filter #category-wrapper #category-droplist ul li:hover,\n#content #filter #category-wrapper #category-droplist ul li.selected {\n  color: black;\n}\n#content #filter #category-wrapper #category-droplist ul li.row-first {\n  text-align: left;\n}\n#content #filter #category-wrapper #category-droplist ul li.row-second {\n  text-align: center;\n}\n#content #filter #category-wrapper #category-droplist ul li.row-third {\n  text-align: right;\n}\n#content #filter #category-wrapper:hover {\n  z-index: 101;\n}\n#content #filter #category-wrapper:hover #category-droplist {\n  display: block;\n}\n#content #list {\n  padding: 30px 30px 10px 30px;\n}\n#content #list ul {\n  margin: 0;\n  padding: 0;\n}\n#content #list ul li.action-card {\n  position: relative;\n  float: left;\n  width: 32%;\n  margin-right: 2%;\n  margin-bottom: 20px;\n  list-style: none;\n  color: #727272;\n  -webkit-border-radius: 10px;\n  border-radius: 10px;\n  background-clip: padding-box;\n  background-color: white;\n}\n#content #list ul li.action-card img {\n  width: 100%;\n  -webkit-border-radius: 10px 10px 0 0;\n  border-radius: 10px 10px 0 0;\n  background-clip: padding-box;\n}\n#content #list ul li.action-card .brief-info {\n  margin: 10px;\n  border-bottom: 1px solid #f1f1f1;\n}\n#content #list ul li.action-card .brief-info .brief-important .title {\n  width: 170px;\n  display: inline-block;\n  height: 30px;\n  overflow: hidden;\n  font-size: 30px;\n}\n#content #list ul li.action-card .brief-info .brief-important .title:hover {\n  color: #ff7300;\n}\n#content #list ul li.action-card .brief-info .brief-important .price {\n  float: right;\n  color: #ff4545;\n  font-size: 24px;\n  margin-top: 5px;\n}\n#content #list ul li.action-card .brief-info .brief-important .hot-tag {\n  float: right;\n  padding: 2px;\n  margin-top: 5px;\n  margin-right: 16px;\n  background-color: #ff7a7a;\n  color: white;\n}\n#content #list ul li.action-card .brief-info .host {\n  margin-top: 6px;\n  font-size: 12px;\n  color: #b8b8b8;\n}\n#content #list ul li.action-card .brief-info .criteria {\n  margin: 12px 0;\n}\n#content #list ul li.action-card .brief-info .criteria p {\n  margin: 6px 0;\n}\n#content #list ul li.action-card .items {\n  padding: 0 10px 12px 10px;\n}\n#content #list ul li.action-card .items p {\n  height: 32px;\n  line-height: 32px;\n  margin: 0;\n  padding-left: 36px;\n  background: url(/static/assets/imgs/icons.png) no-repeat 0 0;\n}\n#content #list ul li.action-card .items .location {\n  background-position: -216px -15px;\n}\n#content #list ul li.action-card .items .num {\n  background-position: -216px -51px;\n}\n#content #list ul li.action-card .items .time {\n  background-position: -216px -90px;\n}\n#content #list ul li.action-card .items .extra {\n  background-position: -216px -127px;\n}\n#content #list ul li.action-card.last {\n  margin: 0;\n}\n#content #list ul li.action-card:hover {\n  cursor: pointer;\n  -webkit-box-shadow: 2px 7px 9px 0 #808080;\n  box-shadow: 2px 7px 9px 0 #808080;\n}\n#content #list ul li.action-card .like {\n  position: absolute;\n  top: 10px;\n  right: 20px;\n  display: inline-block;\n  width: 30px;\n  height: 30px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -87px -58px;\n}\n#content #list ul li.action-card .like.selected {\n  background-position: -87px -15px;\n}\n#content #list ul li.action-card .share {\n  position: absolute;\n  top: 10px;\n  right: 70px;\n  display: inline-block;\n  width: 30px;\n  height: 30px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -28px -59px;\n}\n#content #commercial img {\n  width: 100%;\n}\n", ""]);
+	exports.push([module.id, "/*\n  以下为一些全局的常用功能class\n*/\n.fn-clr:after {\n  clear: both;\n  display: block;\n  height: 0;\n  content: \" \";\n}\n.fn-overflow {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#container .fn-hide {\n  display: none;\n}\n.fn-fl {\n  float: left;\n}\n.fn-fr {\n  float: right;\n}\nselect {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  width: 120px;\n  padding: 5px;\n  margin-right: 8px!important;\n}\ninput:-webkit-autofill,\ntextarea:-webkit-autofill,\nselect:-webkit-autofill {\n  background-color: white!important;\n}\n.z-dialog {\n  display: none;\n}\n* {\n  box-sizing: border-box !important;\n}\nbody {\n  background-color: #eaeaea;\n}\n#content {\n  width: 1190px;\n  min-height: 500px;\n  margin: 0 auto;\n}\n#content #banner {\n  position: relative;\n  overflow: auto;\n  height: 700px!important;\n  z-index: 100;\n}\n#content #banner ul {\n  margin: 0;\n  padding: 0;\n}\n#content #banner ul li {\n  position: relative;\n  float: left;\n}\n#content #banner ul li img {\n  width: 1190px;\n}\n#content #banner ul li .banner-brief {\n  position: absolute;\n  top: 40px;\n  right: 70px;\n  width: 410px;\n  border-bottom: 1px solid #bebebe;\n  font-family: 'HeiTi SC';\n  font-size: 18px;\n}\n#content #banner ul li .banner-brief .banner-type {\n  font-size: 36px;\n  margin: 0;\n}\n#content #banner ul li .banner-brief .banner-name {\n  font-size: 48px;\n  margin: 20px 0 10px;\n}\n#content #banner ul li .banner-brief .banner-time {\n  height: 30px;\n  line-height: 30px;\n  margin: 8px 0;\n  padding-left: 36px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -216px -90px;\n}\n#content #banner ul li .banner-brief .banner-location {\n  height: 30px;\n  line-height: 30px;\n  margin: 8px 0;\n  padding-left: 36px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -216px -15px;\n}\n#content #banner ul li .banner-brief .banner-price {\n  font-size: 40px;\n  color: #ff4545;\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n}\n#content #banner li {\n  list-style: none;\n}\n#content #banner .dots {\n  position: absolute;\n  bottom: 30px;\n  right: 30px;\n  margin: 0;\n}\n#content #banner .dots .dot {\n  float: left;\n  width: 18px;\n  height: 18px;\n  line-height: 18px;\n  border: 1px solid #f2f2f2;\n  background-color: white;\n  margin-left: 6px;\n  text-indent: -9999px;\n  cursor: pointer;\n}\n#content #banner .dots .dot.active {\n  background-color: #ff7300;\n}\n#content #filter {\n  height: 80px;\n  line-height: 80px;\n  text-align: center;\n  background-color: white;\n  font-size: 30px;\n}\n#content #filter #hot-wrapper {\n  position: relative;\n  display: inline-block;\n  z-index: 100;\n}\n#content #filter #hot-wrapper #hot {\n  padding: 0 60px;\n  display: inline-block;\n  background: url(/static/assets/imgs/icons.png) no-repeat 164px -144px;\n}\n#content #filter #hot-wrapper #hot-droplist {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: -80px;\n  width: 400px;\n  height: 220px;\n  padding: 0 30px 20px 30px;\n  border: 1px solid #ccc;\n  background-color: white;\n}\n#content #filter #hot-wrapper #hot-droplist p {\n  text-align: center;\n  border-bottom: 1px solid #ccc;\n  margin: 0;\n  margin-bottom: 20px;\n}\n#content #filter #hot-wrapper #hot-droplist .droplist-hot {\n  display: inline-block;\n  width: 240px;\n  padding: 0 60px;\n  height: 80px;\n  line-height: 80px;\n  background: url(/static/assets/imgs/icons.png) no-repeat 164px -204px;\n}\n#content #filter #hot-wrapper #hot-droplist ul {\n  margin: 0;\n  padding: 0;\n}\n#content #filter #hot-wrapper #hot-droplist ul li {\n  list-style: none;\n  float: left;\n  height: 50px;\n  line-height: 50px;\n  width: 49%;\n  color: #727272;\n  cursor: pointer;\n}\n#content #filter #hot-wrapper #hot-droplist ul li:hover,\n#content #filter #hot-wrapper #hot-droplist ul li.selected {\n  color: black;\n}\n#content #filter #hot-wrapper:hover {\n  z-index: 101;\n}\n#content #filter #hot-wrapper:hover #hot-droplist {\n  display: block;\n}\n#content #filter #category-wrapper {\n  position: relative;\n  display: inline-block;\n  z-index: 100;\n}\n#content #filter #category-wrapper #category {\n  padding: 0 60px;\n  display: inline-block;\n  background: url(/static/assets/imgs/icons.png) no-repeat 164px -144px;\n}\n#content #filter #category-wrapper #category-droplist {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: -80px;\n  width: 400px;\n  height: 320px;\n  padding: 0 30px 20px 30px;\n  border: 1px solid #ccc;\n  background-color: white;\n}\n#content #filter #category-wrapper #category-droplist p {\n  text-align: center;\n  border-bottom: 1px solid #ccc;\n  margin: 0;\n  margin-bottom: 20px;\n}\n#content #filter #category-wrapper #category-droplist .droplist-category {\n  display: inline-block;\n  width: 240px;\n  padding: 0 60px;\n  height: 80px;\n  line-height: 80px;\n  background: url(/static/assets/imgs/icons.png) no-repeat 164px -204px;\n}\n#content #filter #category-wrapper #category-droplist ul {\n  margin: 0;\n  padding: 0;\n}\n#content #filter #category-wrapper #category-droplist ul li {\n  list-style: none;\n  float: left;\n  height: 50px;\n  line-height: 50px;\n  width: 33%;\n  color: #727272;\n  cursor: pointer;\n}\n#content #filter #category-wrapper #category-droplist ul li:hover,\n#content #filter #category-wrapper #category-droplist ul li.selected {\n  color: black;\n}\n#content #filter #category-wrapper #category-droplist ul li.row-first {\n  text-align: left;\n}\n#content #filter #category-wrapper #category-droplist ul li.row-second {\n  text-align: center;\n}\n#content #filter #category-wrapper #category-droplist ul li.row-third {\n  text-align: right;\n}\n#content #filter #category-wrapper:hover {\n  z-index: 101;\n}\n#content #filter #category-wrapper:hover #category-droplist {\n  display: block;\n}\n#content #list {\n  padding: 30px 30px 10px 30px;\n}\n#content #list ul {\n  margin: 0;\n  padding: 0;\n}\n#content #list ul li.action-card {\n  position: relative;\n  float: left;\n  width: 32%;\n  margin-right: 2%;\n  margin-bottom: 20px;\n  list-style: none;\n  color: #727272;\n  -webkit-border-radius: 10px;\n  border-radius: 10px;\n  background-clip: padding-box;\n  background-color: white;\n}\n#content #list ul li.action-card img {\n  width: 100%;\n  -webkit-border-radius: 10px 10px 0 0;\n  border-radius: 10px 10px 0 0;\n  background-clip: padding-box;\n}\n#content #list ul li.action-card .brief-info {\n  margin: 10px;\n  border-bottom: 1px solid #f1f1f1;\n}\n#content #list ul li.action-card .brief-info .brief-important .title {\n  width: 170px;\n  display: inline-block;\n  height: 30px;\n  overflow: hidden;\n  font-size: 30px;\n}\n#content #list ul li.action-card .brief-info .brief-important .title:hover {\n  color: #ff7300;\n}\n#content #list ul li.action-card .brief-info .brief-important .price {\n  float: right;\n  color: #ff4545;\n  font-size: 24px;\n  margin-top: 5px;\n}\n#content #list ul li.action-card .brief-info .brief-important .hot-tag {\n  float: right;\n  padding: 2px;\n  margin-top: 5px;\n  margin-right: 16px;\n  background-color: #ff7a7a;\n  color: white;\n}\n#content #list ul li.action-card .brief-info .host {\n  margin-top: 6px;\n  font-size: 12px;\n  color: #b8b8b8;\n}\n#content #list ul li.action-card .brief-info .criteria {\n  margin: 12px 0;\n}\n#content #list ul li.action-card .brief-info .criteria p {\n  margin: 6px 0;\n}\n#content #list ul li.action-card .items {\n  padding: 0 10px 12px 10px;\n}\n#content #list ul li.action-card .items p {\n  height: 32px;\n  line-height: 32px;\n  margin: 0;\n  padding-left: 36px;\n  background: url(/static/assets/imgs/icons.png) no-repeat 0 0;\n}\n#content #list ul li.action-card .items .location {\n  background-position: -216px -15px;\n}\n#content #list ul li.action-card .items .num {\n  background-position: -216px -51px;\n}\n#content #list ul li.action-card .items .time {\n  background-position: -216px -90px;\n}\n#content #list ul li.action-card .items .extra {\n  background-position: -216px -127px;\n}\n#content #list ul li.action-card.last {\n  margin: 0;\n}\n#content #list ul li.action-card:hover {\n  cursor: pointer;\n  -webkit-box-shadow: 2px 7px 9px 0 #808080;\n  box-shadow: 2px 7px 9px 0 #808080;\n}\n#content #list ul li.action-card .like {\n  position: absolute;\n  top: 10px;\n  right: 20px;\n  display: inline-block;\n  width: 30px;\n  height: 30px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -87px -58px;\n}\n#content #list ul li.action-card .like.selected {\n  background-position: -87px -15px;\n}\n#content #list ul li.action-card .share {\n  position: absolute;\n  top: 10px;\n  right: 70px;\n  display: inline-block;\n  width: 30px;\n  height: 30px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -28px -59px;\n}\n#content #commercial img {\n  width: 100%;\n}\n#share-dialog {\n  text-align: center;\n  padding-bottom: 20px;\n}\n#share-dialog .share-link {\n  display: inline-block;\n  padding-bottom: 6px;\n  border-bottom: 1px solid #eee;\n  text-align: center;\n}\n#share-dialog .dialog-txt {\n  text-align: center;\n}\n#share-dialog .share-qrcode {\n  display: inline-block;\n  width: 200px;\n  height: 200px;\n  text-align: center;\n  margin-bottom: 20px;\n}\n#share-dialog .socials {\n  width: 400px;\n  margin: 10px auto;\n}\n#share-dialog .socials span {\n  float: left;\n  display: inline-block;\n  width: 72px;\n  height: 72px;\n  margin: 0 16px;\n  cursor: pointer;\n  background: url(/static/assets/imgs/icons.png) no-repeat -29px -882px;\n}\n#share-dialog .socials span.last {\n  margin-right: 0;\n}\n#share-dialog .socials #wechat {\n  cursor: default;\n}\n#share-dialog .socials #wechat-group {\n  background: url(/static/assets/imgs/icons.png) no-repeat -25px -772px;\n  cursor: default;\n}\n#share-dialog .socials #qq {\n  background: url(/static/assets/imgs/icons.png) no-repeat -132px -772px;\n}\n#share-dialog .socials #sina {\n  background: url(/static/assets/imgs/icons.png) no-repeat -132px -882px;\n}\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */
-/***/ function(module, exports) {
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
 
-	// 根据传入参数拼装url，并跳转到该url
-	exports.goTo = function(params) {
-	    var oldParams = getUrlParameter();
-	    var newParams = _.extend({}, oldParams, params);
+	var share = __webpack_require__(22);
 
-	    location.href = '/search?' + $.param(newParams);
-	}
+	module.exports = {
+	    /**
+	     * 展示分享框
+	     *
+	     * @param data
+	     *  - selector
+	     *  - shareLink
+	     *  - width
+	     */
+	    show: function(data) {
 
-	function getUrlParameter() {
-	    var sPageURL = window.location.search.substring(1);
-	    var sURLVariables = sPageURL.split('&');
-	    var pairs;
-	    var ret = {};
-	    for (var i = 0; i < sURLVariables.length; i++) {
-	        var pairs = sURLVariables[i].split('=');
-	        if (pairs[0]) {
-	            ret[pairs[0]] = decodeURIComponent(pairs[1]);
+	        if (!data || !data.selector || !data.shareLink) {
+	            return;
 	        }
+
+	        var selector = data.selector;
+	        var shareLink = data.shareLink;
+	        var width = data.width || 500;
+
+
+	        $(selector).find('.share-qrcode').empty().qrcode({
+	            text: shareLink,
+	            width: 200,
+	            height: 200
+	        });
+
+	        $(selector).dialog({
+	            resizable: false,
+	            width: width,
+	            title: '通过链接分享'
+	        });
+
+	        $(selector).on('click', '.socials span', function() {
+	            var webid = $(this).data('webid');
+	            share({
+	                webid: webid,
+	                url: shareLink
+	            })
+	        })
 	    }
-	    return ret;
 	}
 
 /***/ }

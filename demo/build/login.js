@@ -45,12 +45,32 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(4);
-	__webpack_require__(24);
+	__webpack_require__(26);
+
+	var zhaomi = __webpack_require__(19);
+	var utils = __webpack_require__(18);
 
 	$(function() {
 	    $doc = $(document);
 
 	    $('body').height($doc.height());
+
+	    $('#login-form').on('submit', function() {
+	        var username = $('#username').val();
+	        var pwd = $('#pwd').val();
+
+	        if (!username) {
+	            utils.warn('请填写邮箱/用户名!');
+	            return false;
+	        }
+
+	        if (!pwd) {
+	            utils.warn('请填写密码!');
+	            return false;
+	        }
+
+	        return true;
+	    });
 	});
 
 /***/ },
@@ -91,7 +111,7 @@
 
 
 	// module
-	exports.push([module.id, ".z-btn,\n.z-btn-important,\n.z-btn-hint,\n.z-btn-action,\n.z-btn-checked,\n.z-btn-disabled,\n.z-btn-pic {\n  display: inline-block;\n  min-width: 105px;\n  height: 40px;\n  line-height: 40px;\n  padding: 0 23px;\n  font-size: 14px;\n  vertical-align: middle;\n  overflow: visible;\n  border-radius: 5px;\n  cursor: pointer;\n  text-align: center;\n  font-family: Helvetica Neue;\n}\n.z-btn.small,\n.z-btn-important.small,\n.z-btn-hint.small,\n.z-btn-action.small,\n.z-btn-checked.small,\n.z-btn-disabled.small,\n.z-btn-pic.small {\n  min-width: 50px;\n  height: 25px;\n  line-height: 25px;\n  padding: 0 15px;\n  font-size: 13px;\n}\n.z-btn {\n  border: solid 1px #999999;\n  color: #666666;\n  background-color: #ffffff;\n}\n.z-btn:hover {\n  color: #666666;\n}\n.z-btn:active {\n  color: #666666;\n}\n.z-btn.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n}\n.z-btn-hint {\n  border: solid 1px #ff8315;\n  color: #ff7300;\n  background-color: #ffffff;\n}\n.z-btn-hint:hover {\n  color: #ff7300;\n}\n.z-btn-hint:active {\n  color: #ff7300;\n}\n.z-btn-hint.pressing {\n  color: #ff7300;\n  background-color: #ffeddf;\n}\n.z-btn-important {\n  border: solid 1px transparent;\n  border-left-color: #ffaa3c;\n  border-top-color: #ffaa3c;\n  border-bottom-color: #e4720d;\n  color: #ffffff;\n  background-color: #ff8d1e;\n  background-image: -moz-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -ms-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ff9726), to(#ff8315));\n  background-image: -webkit-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -o-linear-gradient(top, #ff9726, #ff8315);\n  background-image: linear-gradient(top, #ff9726, #ff8315);\n}\n.z-btn-important:hover {\n  color: #ffffff;\n}\n.z-btn-important:active {\n  color: #ffffff;\n}\n.z-btn-important.pressing {\n  color: #ffffff;\n  border: solid 1px transparent;\n  background-color: #ff7300;\n  background-image: none;\n}\n.z-btn-action {\n  border: solid 1px #bfbfbf;\n  color: #666666;\n  background-color: #f5f5f5;\n  background-image: -moz-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -ms-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#f0f0f0));\n  background-image: -webkit-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -o-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: linear-gradient(top, #fafafa, #f0f0f0);\n}\n.z-btn-action:hover {\n  color: #666666;\n}\n.z-btn-action:active {\n  color: #666666;\n}\n.z-btn-action.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n  background-image: none;\n}\n.z-btn-checked {\n  position: relative;\n  border: solid 1px #ff7300;\n  color: #ff7300;\n  background-color: #ffffff;\n}\n.z-btn-checked:hover {\n  color: #ff7300;\n}\n.z-btn-checked:active {\n  color: #ff7300;\n}\n.z-btn-checked.pressing {\n  background-color: #ffeddf;\n}\n.z-btn-pic {\n  position: relative;\n  padding-left: 50px;\n  display: inline-block;\n  border: solid 1px #bfbfbf;\n  color: #666666;\n  background-color: #f5f5f5;\n  background-image: -moz-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -ms-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#f0f0f0));\n  background-image: -webkit-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -o-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: linear-gradient(top, #fafafa, #f0f0f0);\n}\n.z-btn-pic:hover {\n  color: #666666;\n}\n.z-btn-pic:active {\n  color: #666666;\n}\n.z-btn-pic.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n  background-image: none;\n}\n.z-btn-pic i {\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  position: absolute;\n  top: 7px;\n  left: 20px;\n}\n.z-btn-disabled {\n  border: none;\n  color: #b2b2b2;\n  background-color: #e6e6e6;\n}\n.z-btn-disabled:hover {\n  color: #b2b2b2;\n}\n.z-btn-disabled:active {\n  color: #b2b2b2;\n}\n@media screen and (device-width: 320px) and (device-aspect-ratio: 2/3), screen and (device-width: 320px) and (device-aspect-ratio: 40/71) and (-webkit-min-device-pixel-ratio: 2) {\n  .z-btn,\n  .z-btn-important,\n  .z-btn-hint,\n  .z-btn-action,\n  .z-btn-checked,\n  .z-btn-disabled,\n  .z-btn-pic {\n    min-width: 90px;\n    height: 30px;\n    line-height: 30px;\n    padding: 0 10px;\n  }\n  .z-btn.small,\n  .z-btn-important.small,\n  .z-btn-hint.small,\n  .z-btn-action.small,\n  .z-btn-checked.small,\n  .z-btn-disabled.small,\n  .z-btn-pic.small {\n    min-width: 48px;\n    height: 22px;\n    line-height: 22px;\n    padding: 0 6px;\n    font-size: 12px;\n  }\n  .z-btn-pic {\n    padding-left: 38px;\n  }\n  .z-btn-pic i {\n    top: 2px;\n    left: 11px;\n  }\n}\n", ""]);
+	exports.push([module.id, ".z-btn,\n.z-btn-important,\n.z-btn-hint,\n.z-btn-action,\n.z-btn-checked,\n.z-btn-disabled,\n.z-btn-pic {\n  display: inline-block;\n  min-width: 105px;\n  height: 40px;\n  line-height: 40px;\n  padding: 0 23px;\n  font-size: 14px;\n  vertical-align: middle;\n  overflow: visible;\n  border-radius: 5px;\n  cursor: pointer;\n  text-align: center;\n  font-family: Helvetica Neue;\n}\n.z-btn.small,\n.z-btn-important.small,\n.z-btn-hint.small,\n.z-btn-action.small,\n.z-btn-checked.small,\n.z-btn-disabled.small,\n.z-btn-pic.small {\n  min-width: 50px;\n  height: 25px;\n  line-height: 25px;\n  padding: 0 15px;\n  font-size: 13px;\n}\n.z-btn {\n  border: solid 1px #999999;\n  color: #666666;\n  background-color: #ffffff;\n}\n.z-btn:hover {\n  color: #666666;\n}\n.z-btn:active {\n  color: #666666;\n}\n.z-btn.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n}\n.z-btn:focus {\n  outline: none;\n}\n.z-btn-hint {\n  border: solid 1px #ff8315;\n  color: #ff7300;\n  background-color: #ffffff;\n}\n.z-btn-hint:hover {\n  color: #ff7300;\n}\n.z-btn-hint:active {\n  color: #ff7300;\n}\n.z-btn-hint.pressing {\n  color: #ff7300;\n  background-color: #ffeddf;\n}\n.z-btn-important {\n  border: solid 1px transparent;\n  border-left-color: #ffaa3c;\n  border-top-color: #ffaa3c;\n  border-bottom-color: #e4720d;\n  color: #ffffff;\n  background-color: #ff8d1e;\n  background-image: -moz-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -ms-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ff9726), to(#ff8315));\n  background-image: -webkit-linear-gradient(top, #ff9726, #ff8315);\n  background-image: -o-linear-gradient(top, #ff9726, #ff8315);\n  background-image: linear-gradient(top, #ff9726, #ff8315);\n}\n.z-btn-important:hover {\n  color: #ffffff;\n}\n.z-btn-important:active {\n  color: #ffffff;\n}\n.z-btn-important.pressing {\n  color: #ffffff;\n  border: solid 1px transparent;\n  background-color: #ff7300;\n  background-image: none;\n}\n.z-btn-action {\n  border: solid 1px #bfbfbf;\n  color: #666666;\n  background-color: #f5f5f5;\n  background-image: -moz-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -ms-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#f0f0f0));\n  background-image: -webkit-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -o-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: linear-gradient(top, #fafafa, #f0f0f0);\n}\n.z-btn-action:hover {\n  color: #666666;\n}\n.z-btn-action:active {\n  color: #666666;\n}\n.z-btn-action.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n  background-image: none;\n}\n.z-btn-checked {\n  position: relative;\n  border: solid 1px #ff7300;\n  color: #ff7300;\n  background-color: #ffffff;\n}\n.z-btn-checked:hover {\n  color: #ff7300;\n}\n.z-btn-checked:active {\n  color: #ff7300;\n}\n.z-btn-checked.pressing {\n  background-color: #ffeddf;\n}\n.z-btn-pic {\n  position: relative;\n  padding-left: 50px;\n  display: inline-block;\n  border: solid 1px #bfbfbf;\n  color: #666666;\n  background-color: #f5f5f5;\n  background-image: -moz-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -ms-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#f0f0f0));\n  background-image: -webkit-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: -o-linear-gradient(top, #fafafa, #f0f0f0);\n  background-image: linear-gradient(top, #fafafa, #f0f0f0);\n}\n.z-btn-pic:hover {\n  color: #666666;\n}\n.z-btn-pic:active {\n  color: #666666;\n}\n.z-btn-pic.pressing {\n  color: #666666;\n  background-color: #e6e6e6;\n  background-image: none;\n}\n.z-btn-pic i {\n  display: inline-block;\n  width: 24px;\n  height: 24px;\n  position: absolute;\n  top: 7px;\n  left: 20px;\n}\n.z-btn-disabled {\n  border: none;\n  color: #b2b2b2;\n  background-color: #e6e6e6;\n}\n.z-btn-disabled:hover {\n  color: #b2b2b2;\n}\n.z-btn-disabled:active {\n  color: #b2b2b2;\n}\n@media screen and (device-width: 320px) and (device-aspect-ratio: 2/3), screen and (device-width: 320px) and (device-aspect-ratio: 40/71) and (-webkit-min-device-pixel-ratio: 2) {\n  .z-btn,\n  .z-btn-important,\n  .z-btn-hint,\n  .z-btn-action,\n  .z-btn-checked,\n  .z-btn-disabled,\n  .z-btn-pic {\n    min-width: 90px;\n    height: 30px;\n    line-height: 30px;\n    padding: 0 10px;\n  }\n  .z-btn.small,\n  .z-btn-important.small,\n  .z-btn-hint.small,\n  .z-btn-action.small,\n  .z-btn-checked.small,\n  .z-btn-disabled.small,\n  .z-btn-pic.small {\n    min-width: 48px;\n    height: 22px;\n    line-height: 22px;\n    padding: 0 6px;\n    font-size: 12px;\n  }\n  .z-btn-pic {\n    padding-left: 38px;\n  }\n  .z-btn-pic i {\n    top: 2px;\n    left: 11px;\n  }\n}\n", ""]);
 
 	// exports
 
@@ -401,19 +421,81 @@
 /* 15 */,
 /* 16 */,
 /* 17 */,
-/* 18 */,
-/* 19 */,
+/* 18 */
+/***/ function(module, exports) {
+
+	// 根据传入参数拼装url，并跳转到该url
+	exports.goTo = function(params) {
+	    var oldParams = getUrlParameter();
+	    var newParams = _.extend({}, oldParams, params);
+
+	    location.href = '/search?' + $.param(newParams);
+	}
+
+	exports.assert = function(value, msg) {
+	    if (!value) {
+	        exports.warn(msg);
+	    }
+	}
+
+	exports.assertEquals = function(value, anotherValue, msg) {
+	    if (value !== anotherValue) {
+	        exports.warn(msg);   
+	    }
+	}
+
+	exports.warn = function(msg) {
+	    window.alert(msg);
+	}
+
+	function getUrlParameter() {
+	    var sPageURL = window.location.search.substring(1);
+	    var sURLVariables = sPageURL.split('&');
+	    var pairs;
+	    var ret = {};
+	    for (var i = 0; i < sURLVariables.length; i++) {
+	        var pairs = sURLVariables[i].split('=');
+	        if (pairs[0]) {
+	            ret[pairs[0]] = decodeURIComponent(pairs[1]);
+	        }
+	    }
+	    return ret;
+	}
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	var noop = function() {};
+
+	module.exports = {
+	    postData: function(url, data, successCallback, errorCallback) {
+
+	        var csrfToken = $('input[name=csrfmiddlewaretoken]').val();
+	        $.ajax({
+	            url: url,
+	            type: 'post',
+	            data: $.extend(data, {csrfmiddlewaretoken: csrfToken}), 
+	            success: successCallback || noop,
+	            error: errorCallback || noop
+	        })
+	    }
+	}
+
+/***/ },
 /* 20 */,
 /* 21 */,
 /* 22 */,
 /* 23 */,
-/* 24 */
+/* 24 */,
+/* 25 */,
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(25);
+	var content = __webpack_require__(27);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -433,7 +515,7 @@
 	}
 
 /***/ },
-/* 25 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -441,7 +523,7 @@
 	exports.i(__webpack_require__(12), "");
 
 	// module
-	exports.push([module.id, "/*\n  以下为一些全局的常用功能class\n*/\n.fn-clr:after {\n  clear: both;\n  display: block;\n  height: 0;\n  content: \" \";\n}\n.fn-overflow {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#container .fn-hide {\n  display: none;\n}\n.fn-fl {\n  float: left;\n}\n.fn-fr {\n  float: right;\n}\nselect {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  width: 120px;\n  padding: 5px;\n  margin-right: 8px!important;\n}\n* {\n  box-sizing: border-box !important;\n}\nbody {\n  background: url(/static/assets/imgs/login-bg.png) no-repeat 0 0;\n  background-size: 100%;\n  padding-bottom: 50px;\n}\nbody #header {\n  height: 40px;\n  line-height: 40px;\n  padding: 10px;\n}\nbody #header .logo {\n  font-size: 36px;\n  color: white;\n}\nbody #header .quit {\n  float: right;\n  display: inline-block;\n  width: 36px;\n  height: 36px;\n  margin-right: 10px;\n  cursor: pointer;\n  background: url(/static/assets/imgs/icons.png) no-repeat -88px -350px;\n  -webkit-border-radius: 18px;\n  border-radius: 18px;\n  background-clip: padding-box;\n  background-color: grey;\n}\nbody #container {\n  width: 400px;\n  margin: 160px auto 0 auto;\n}\nbody #container .title-txt {\n  text-align: center;\n  color: white;\n  font-size: 40px;\n}\nbody #container #username-c {\n  height: 40px;\n  line-height: 40px;\n  padding-left: 36px;\n  border-bottom: 1px solid white;\n  background: url(/static/assets/imgs/icons.png) no-repeat -220px -397px;\n}\nbody #container #pwd-c {\n  height: 40px;\n  line-height: 40px;\n  padding-left: 36px;\n  border-bottom: 1px solid white;\n  margin-top: 20px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -223px -439px;\n}\nbody #container input {\n  width: 360px;\n  border: none;\n  color: white;\n  background-color: transparent;\n  height: 24px;\n  line-height: 24px;\n}\nbody #container input:focus {\n  outline: none;\n}\nbody #container #login-btn-c {\n  position: relative;\n  z-index: 50;\n  padding-bottom: 10px;\n  margin-top: 20px;\n}\nbody #container #login-btn-c .login-btn,\nbody #container #login-btn-c .register-btn {\n  float: right;\n  height: 36px;\n  line-height: 36px;\n  -webkit-border-radius: 18px;\n  border-radius: 18px;\n  background-clip: padding-box;\n  color: white;\n  box-sizing: border-box;\n}\nbody #container #login-btn-c .login-btn {\n  background-color: #7ed321;\n}\nbody #container #login-btn-c .register-btn {\n  border: 1px solid white;\n  background-color: transparent;\n  margin-right: 20px;\n}\nbody #container #login-btn-c .reset-pwd {\n  text-decoration: underline;\n  float: right;\n  margin-right: 16px;\n  margin-top: 17px;\n  color: white;\n}\nbody #container #login-splitline span {\n  display: inline-block;\n  width: 180px;\n  height: 30px;\n  border-bottom: 1px solid #eee;\n}\nbody #container #login-splitline #left-bottom {\n  float: left;\n}\nbody #container #login-splitline #right-bottom {\n  float: right;\n}\nbody #container #login-others {\n  text-align: center;\n  margin-top: -10px;\n  color: white;\n}\nbody #container #login-others #or-txt {\n  position: relative;\n  z-index: 100;\n  display: inline-block;\n  width: 30px;\n  height: 30px;\n  line-height: 30px;\n  margin-top: -30px;\n}\nbody #container #login-others p {\n  font-size: 14px;\n  color: #B8B8B8;\n  text-align: center;\n}\nbody #container #login-others #socials {\n  width: 200px;\n  margin: 10px auto;\n}\nbody #container #login-others #socials span {\n  float: left;\n  display: inline-block;\n  width: 36px;\n  height: 36px;\n  margin-right: 40px;\n  cursor: pointer;\n  background: url(/static/assets/imgs/icons.png) no-repeat -26px -284px;\n}\nbody #container #login-others #socials span.last {\n  margin-right: 0;\n}\nbody #container #login-others #socials #qq {\n  background: url(/static/assets/imgs/icons.png) no-repeat -29px -350px;\n}\nbody #container #login-others #socials #sina {\n  background: url(/static/assets/imgs/icons.png) no-repeat -30px -418px;\n}\n", ""]);
+	exports.push([module.id, "/*\n  以下为一些全局的常用功能class\n*/\n.fn-clr:after {\n  clear: both;\n  display: block;\n  height: 0;\n  content: \" \";\n}\n.fn-overflow {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n#container .fn-hide {\n  display: none;\n}\n.fn-fl {\n  float: left;\n}\n.fn-fr {\n  float: right;\n}\nselect {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  width: 120px;\n  padding: 5px;\n  margin-right: 8px!important;\n}\ninput:-webkit-autofill,\ntextarea:-webkit-autofill,\nselect:-webkit-autofill {\n  background-color: white!important;\n}\n.z-dialog {\n  display: none;\n}\n* {\n  box-sizing: border-box !important;\n}\nbody {\n  background: url(/static/assets/imgs/login-bg.png) no-repeat 0 0;\n  background-size: 100%;\n  padding-bottom: 50px;\n}\nbody #header {\n  height: 40px;\n  line-height: 40px;\n  padding: 10px;\n}\nbody #header .logo {\n  font-size: 36px;\n  color: white;\n}\nbody #header .quit {\n  float: right;\n  display: inline-block;\n  width: 36px;\n  height: 36px;\n  margin-right: 10px;\n  cursor: pointer;\n  background: url(/static/assets/imgs/icons.png) no-repeat -88px -350px;\n  -webkit-border-radius: 18px;\n  border-radius: 18px;\n  background-clip: padding-box;\n  background-color: grey;\n}\nbody #container {\n  width: 400px;\n  margin: 160px auto 0 auto;\n}\nbody #container .title-txt {\n  text-align: center;\n  color: white;\n  font-size: 40px;\n}\nbody #container #username-c {\n  height: 40px;\n  line-height: 40px;\n  padding-left: 36px;\n  border-bottom: 1px solid white;\n  background: url(/static/assets/imgs/icons.png) no-repeat -220px -397px;\n}\nbody #container #pwd-c {\n  height: 40px;\n  line-height: 40px;\n  padding-left: 36px;\n  border-bottom: 1px solid white;\n  margin-top: 20px;\n  background: url(/static/assets/imgs/icons.png) no-repeat -223px -439px;\n}\nbody #container input {\n  width: 360px;\n  border: none;\n  color: white;\n  background-color: transparent;\n  height: 24px;\n  line-height: 24px;\n}\nbody #container input:focus {\n  outline: none;\n}\nbody #container #login-btn-c {\n  position: relative;\n  z-index: 50;\n  padding-bottom: 10px;\n  margin-top: 20px;\n}\nbody #container #login-btn-c .login-btn,\nbody #container #login-btn-c .register-btn {\n  float: right;\n  height: 36px;\n  line-height: 36px;\n  -webkit-border-radius: 18px;\n  border-radius: 18px;\n  background-clip: padding-box;\n  color: white;\n  box-sizing: border-box;\n}\nbody #container #login-btn-c .login-btn {\n  background-color: #7ed321;\n}\nbody #container #login-btn-c .register-btn {\n  border: 1px solid white;\n  background-color: transparent;\n  margin-right: 20px;\n}\nbody #container #login-btn-c .reset-pwd {\n  text-decoration: underline;\n  float: right;\n  margin-right: 16px;\n  margin-top: 17px;\n  color: white;\n}\nbody #container #login-splitline span {\n  display: inline-block;\n  width: 180px;\n  height: 30px;\n  border-bottom: 1px solid #eee;\n}\nbody #container #login-splitline #left-bottom {\n  float: left;\n}\nbody #container #login-splitline #right-bottom {\n  float: right;\n}\nbody #container #login-others {\n  text-align: center;\n  margin-top: -10px;\n  color: white;\n}\nbody #container #login-others #or-txt {\n  position: relative;\n  z-index: 100;\n  display: inline-block;\n  width: 30px;\n  height: 30px;\n  line-height: 30px;\n  margin-top: -30px;\n}\nbody #container #login-others p {\n  font-size: 14px;\n  color: #B8B8B8;\n  text-align: center;\n}\nbody #container #login-others #socials {\n  width: 200px;\n  margin: 10px auto;\n}\nbody #container #login-others #socials span {\n  float: left;\n  display: inline-block;\n  width: 36px;\n  height: 36px;\n  margin-right: 40px;\n  cursor: pointer;\n  background: url(/static/assets/imgs/icons.png) no-repeat -26px -284px;\n}\nbody #container #login-others #socials span.last {\n  margin-right: 0;\n}\nbody #container #login-others #socials #qq {\n  background: url(/static/assets/imgs/icons.png) no-repeat -29px -350px;\n}\nbody #container #login-others #socials #sina {\n  background: url(/static/assets/imgs/icons.png) no-repeat -30px -418px;\n}\n", ""]);
 
 	// exports
 

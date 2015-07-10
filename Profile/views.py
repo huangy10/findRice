@@ -1,5 +1,8 @@
 # coding=utf-8
 import random
+import re
+import simplejson
+import json
 
 from django.utils import timezone
 from django.conf import settings
@@ -11,7 +14,7 @@ from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
 
 from .forms import UserRegisterFormStep1, UserRegisterFormStep2
-from .forms import PasswordChangeForm
+from .forms import PasswordChangeForm, ProfileChangeForm
 from Activity.models import Activity
 from .models import RiceTeamContribution, RiceTeam
 from .models import VerifyCode
@@ -27,14 +30,38 @@ def user_login(request):
         user = auth.authenticate(username=username, password=pwd)
         if user is not None:
             auth.login(request, user)
-            return HttpResponseRedirect("/")
+            success_info = {
+                "success": True,
+                "data": {
+                    "url": request.GET.get("next", "/")
+                }
+            }
+            return HttpResponse(json.dumps(success_info), content_type="application/json")
+            # return HttpResponseRedirect(request.GET.get("next", "/"))
         else:
-            return HttpResponseRedirect("/login?error=invalid")
+            error_info = {
+                "success": False
+            }
+            if not auth.get_user_model().objects.filter(username=username).exists():
+                error_info["data"] = {
+                    "username": "该用户名不存在"
+                }
+            else:
+                error_info["data"] = {
+                    "pwd": "密码错误"
+                }
+            return HttpResponse(json.dumps(error_info), content_type="application/json")
 
     args = {}
     args.update(csrf(request))
 
     return render(request, "Profile/login.html", args)
+
+
+@login_required()
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect("/")
 
 
 @require_http_methods(["GET", "POST"])
@@ -49,10 +76,30 @@ def register_step_1(request):
             new_user = auth.authenticate(username=username,
                                          password=pwd)
             auth.login(request, new_user)
-            return HttpResponseRedirect("/register")
+            success_info = {
+                "success": True,
+                "data": {
+                    "url": "/register"
+                }
+            }
+            return HttpResponse(json.dumps(success_info), content_type="application/json")
         else:
-            print "form invalid"
+            error_info = {
+                "success": False
+            }
+            errors = form.errors
+            data = {}
+            if "password1" in errors:
+                data["pwd"] = errors["password1"][0]
+            if "password2" in errors:
+                data["pwd-confirm"] = errors["password2"][0]
+            if "username" in errors:
+                data["username"] = errors["username"][0]
+            else:
+                data["unknown"] = "未知错误，请联系管理员"
+            error_info["data"] = data
             print form.errors
+            return HttpResponse(json.dumps(error_info), content_type="application/json")
 
     args = {}
     args.update(csrf(request))
@@ -64,19 +111,32 @@ def register_step_1(request):
 @require_http_methods(["GET", "POST"])
 def register_step_2(request):
     user = request.user
-    print user
     if not user.is_authenticated() or user.profile.is_active:
         return HttpResponseRedirect("/register/basic")
 
     form = UserRegisterFormStep2()
     if request.method == "POST":
-        form = UserRegisterFormStep2(request.POST, instance=user.profile, initial={})
+        form = UserRegisterFormStep2(request.POST, request.FILES, instance=user.profile, initial={})
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect("/")
+            success_info = {
+                "success": True,
+                "data": {
+                    "url": "/"
+                }
+            }
+            return HttpResponse(json.dumps(success_info), "application/json")
         else:
-            print "form invalid"
             print form.errors
+            errors = form.errors
+            error_info = {"success": False}
+            data = {}
+            if "code" in errors:
+                data["verifycode"] = errors["code"][0]
+            if "phoneNum" in errors:
+                data["mobile"] = errors["phoneNum"][0]
+            error_info["data"] = data
+            return HttpResponse(json.dumps(error_info), content_type="application/json")
 
     args = {}
     args.update(csrf(request))
@@ -87,20 +147,38 @@ def register_step_2(request):
 
 @require_http_methods(["GET", "POST"])
 def reset_password(request):
+    print "start reset password"
     form = PasswordChangeForm()
     if request.method == "POST":
         form = PasswordChangeForm(request.POST)
         if form.is_valid():
-            print "change pwd form valid"
             user = form.save()
             username = user.username
             pwd = form.cleaned_data["password1"]
             new_user = auth.authenticate(username=username, password=pwd)
             auth.login(request, new_user)
-            return HttpResponseRedirect("/")
+            success_info = {
+                "success": True,
+                "data": {
+                    "url": "/"
+                }
+            }
+            return HttpResponse(json.dumps(success_info), content_type="application/json")
         else:
-            print "form invalid"
             print form.errors
+            error_info = {"success": False}
+            data = {}
+            errors = form.errors
+            if "password1" in errors:
+                data["pwd"] = errors["password1"][0]
+            if "password2" in errors:
+                data["pwd-confirm"] = errors["password2"][0]
+            if "phoneNum" in errors:
+                data["mobile"] = errors["phoneNum"][0]
+            if "code" in errors:
+                data["verifycode"] = errors["code"][0]
+            error_info["data"] = data
+            return HttpResponse(json.dumps(error_info), content_type="application/json")
 
     args = {}
     args.update(csrf(request))
@@ -109,18 +187,43 @@ def reset_password(request):
     return render(request, "Profile/reset-pwd.html", args)
 
 
+@login_required()
+def user_profile_modify(request):
+    if request.method == "POST":
+        form = ProfileChangeForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            return HttpResponse(simplejson.dumps({"success": True, "data": {}}),
+                                content_type="application/json")
+        else:
+            print form.errors
+            return HttpResponse(simplejson.dumps({"success": False, "data": {"unknown": "未知错误，请联系管理员"}}),
+                                content_type="application/json")
+
+    else:
+        form = ProfileChangeForm()
+        args = {}
+        args.update(csrf(request))
+        args["form"] = form
+        args["user"] = request.user
+
+        return render(request, "Profile/modify-person-info.html", args)
+
+
+
+
 def from_size_check_required(method):
     def wrapper(request, *args, **kwargs):
         try:
             start = int(request.GET.get("from", "0"))
         except ValueError:
-            start = 0
+            raise Http404
         try:
-            size = min(int(request.GET.get("size")), 12)
+            size = int(request.GET.get("size", "12"))
             if size < 0:
-                size = 12
+                raise Http404
         except ValueError:
-            size = 12
+            raise Http404
         return method(request, size=size, start=start,
                       *args, **kwargs)
     return wrapper
@@ -161,7 +264,7 @@ def mine_group(request, start, size):
     user = request.user
     contributions = RiceTeamContribution.objects.filter(team=user.rice_team,
                                                         user__profile__is_active=True)[start:start+size]
-    return render(request, "Profile/apply.html", {
+    return render(request, "Profile/group.html", {
         "user": user,
         "contributions": contributions
     })
@@ -179,30 +282,37 @@ def mine_like(request, start, size):
         "user": user
     })
 
-#
+
 def send_verify_code(request):
-    print "ENTER!!!!!!!"
     phone = request.POST.get("mobile", "")
-    code = ""
-    for i in range(0,6):
-        code +=random.choice("1234567890")
     print phone
+    code = ""
+    for i in range(0, 6):
+        code += random.choice("1234567890")
 
     if VerifyCode.objects.filter(phoneNum=phone, is_active=True).exists():
+
         record = VerifyCode.objects.filter(phoneNum=phone, is_active=True)[0]
         tz = timezone.get_current_timezone()
         if (tz.normalize(timezone.now())-record.created_at).total_seconds() > 60:
+            print "A"
+            VerifyCode.objects.filter(phoneNum=phone).update(is_active=False)
+            print "C"
             record = VerifyCode.objects.create(phoneNum=phone, code=code)
         else:
             print "code request rejected"
             return HttpResponse("")
     else:
+        print "B"
         record = VerifyCode.objects.create(phoneNum=phone, code=code)
 
     code = settings.SMS_TEMPLATE % code
+    print code
     response_status = send_sms(settings.SMS_KEY, code, phone)
-    if response_status != "200":
-        print response_status
+    status_code = int(re.match(r'\{"code":(-?\d+),.*', response_status).group(1))
+    print response_status
+    if status_code != 0:
+        print "error!"
         record.is_active = False
         record.save()
     return HttpResponse("")

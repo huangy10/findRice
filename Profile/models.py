@@ -29,12 +29,11 @@ def get_avatar_path(act, filename):
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name="profile")
     is_active = models.BooleanField(default=False, verbose_name="是否填写的了账户信息")
-    name = models.CharField(max_length=50, default="-")
+    name = models.CharField(max_length=50, default="")
 
-    phoneNum = models.CharField(max_length=20, verbose_name="电话号码", default="-")
-    groupName = models.CharField(max_length=200, verbose_name="公司名称", default="-")
-    birthDate = models.DateField(verbose_name="出生日期",
-                                 default=timezone.datetime(year=1970, month=1, day=1).date())
+    phoneNum = models.CharField(max_length=20, verbose_name="电话号码", default="")
+    groupName = models.CharField(max_length=200, verbose_name="公司名称", default="")
+    birthDate = models.DateField(verbose_name="出生日期", default="")
 
     @cached_property
     def age(self):
@@ -63,7 +62,8 @@ class UserProfile(models.Model):
 
         if self.identified and self.identified_date is None:
             self.identified_date = timezone.now()
-
+        if self.birthDate == "":
+            self.birthDate = timezone.datetime(year=1970, month=1, day=1).date()
         super(UserProfile, self).save(*args, **kwargs)
 
     class Meta:

@@ -15,7 +15,7 @@ sms_send_uri = "/" + version + "/sms/send.json"
 
 
 def send_sms(apikey, text, mobile):
-    params = urllib.urlencode({'apikey': apikey, 'text': text, 'mobile':mobile})
+    params = urllib.urlencode({'apikey': apikey, 'text': text, 'mobile': mobile})
     headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
     conn = httplib.HTTPConnection(host, port=port, timeout=30)
     conn.request("POST", sms_send_uri, params, headers)

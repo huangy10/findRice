@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>消息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="//zhaomi.biz/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhaomi.biz/build/message.js"></script>
+</head>
+<body>
+<div id="content">
+    <div id="header">
+        <a href="/" id="logo">找米</a>
+        <div id="personal-info" class="action">
+            <img src="{{ user.profile.avatar.url }}" alt="我的个人信息">
+        </div>
+        <div id="msg" class="action"><a href="/user/msg" class="z-btn">消息</a></div>
+        <div id="pub" class="action"><a href="/action/new/edit/1" class="z-btn">发布活动</a></div>
+        <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
+    </div>
+    <div id="action-bg">
+        <span class="msg-txt">消息</span>
+        <img src="{% static "assets/imgs/detail-banner.png" %}">
+    </div>
+    <div id="action-container">
+        <div class="msg-content">
+            <div class="msg-item">
+                <span class="title">系统消息</span><br/>
+                <span class="msg">系统消息</span>
+                <button class="z-btn reject-btn">拒绝</button>
+            </div>
+            <div class="msg-item">
+                <span class="title">通知</span><br/>
+                <span class="msg fn-overflow">您的 化妆品家访，已报满</span>
+                <button class="z-btn confirm-btn">确认前往</button>
+                <button class="z-btn reject-btn">拒绝</button>
+            </div>
+            <div class="msg-item">
+                <span class="title">通知</span><br/>
+                <span class="msg long fn-overflow">您符合 化妆品家访 的活动要求，我们向您赠送优惠卡</span>
+                <button class="z-btn confirm-btn">领取</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>    
+</html>

@@ -4,3 +4,4 @@ django-annoying==0.8.2
 python-social-auth==0.2.11
 django-formtools==1.0
 django-send-messages==1.0.0
+simplejson=3.7.3

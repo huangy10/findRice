@@ -23,19 +23,36 @@ class UserRegisterFormStep1(UserCreationForm):
                 "placeholder": u"请输入邮箱/用户名"
             })
         }
+        error_messages = {
+            "username": {
+                "unique": "该用户名已存在"
+            }
+        }
 
     error_messages = {
         'password_mismatch': "两次输入的密码不匹配",
-        'username_too_short': "用户名太短"
+        'username_too_short': "用户名太短",
+        'password_too_short': "密码太短，密码的长度至少为8位"
         }
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
         "id": "pwd",
+        "name": "pwd",
         "placeholder": u"请输入密码"
     }))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={
         "id": "pwd-confirm",
+        "name": "pwd-confirm",
         "placeholder": u"请再次输入密码"
     }))
+
+
+
+    def clean_password1(self):
+        password1 = self.cleaned_data["password1"]
+        if len(password1) < 8:
+            raise forms.ValidationError(self.error_messages["password_too_short"],
+                                        code="password_too_short")
+        return password1
 
     def clean_username(self):
         username = self.cleaned_data.get("username")
@@ -90,12 +107,14 @@ class UserRegisterFormStep2(forms.ModelForm):
         try:
             tz = timezone.get_current_timezone()
             time_threshold = tz.normalize(timezone.now()) - datetime.timedelta(minutes=5)
-            record = VerifyCode.objects.filter(phoneNum=phone,
-                                               code=code,
-                                               is_active=True,
-                                               created_at__gt=time_threshold)
+            record = VerifyCode.objects.get(phoneNum=phone,
+                                            code=code,
+                                            is_active=True,
+                                            created_at__gt=time_threshold)
             record.is_active = False
-        except ObjectDoesNotExist:
+            record.save()
+        except (ObjectDoesNotExist, IndexError):
+            print "the code posted is %s" % code
             raise forms.ValidationError(self.error_messages["code_mismatch"],
                                         code="code_mismatch")
         return code
@@ -136,29 +155,30 @@ class PasswordChangeForm(forms.Form):
 
     phoneNum = forms.CharField(max_length=20, widget=forms.TextInput(attrs={
         "id": "mobile",
-        "placeholder": u"请输入手机号码",
+        "placeholder": "请输入手机号码",
     }))
 
     code = forms.CharField(max_length=10, widget=forms.TextInput(attrs={
         "id": "verifycode",
         "name": "verifycode",
-        "placeholder": u"请输入验证码"
+        "placeholder": "请输入验证码"
     }))
 
     password1 = forms.CharField(max_length=30, widget=forms.PasswordInput(attrs={
         "id": "pwd",
-        "placeholder": u"请输入密码"
+        "placeholder": "请输入密码"
     }))
 
     password2 = forms.CharField(max_length=30, widget=forms.PasswordInput(attrs={
         "id": "pwd-confirm",
-        "placeholder": u"请再次输入密码"
+        "placeholder": "请再次输入密码"
     }))
 
     error_messages = {
         'password_mismatch': "两次输入的密码不匹配",
         'user_does_not_exist': "对应用户不存在",
-        "code_mismatch": u"验证码不匹配"
+        "code_mismatch": "验证码不匹配",
+        "password_too_short": "密码太短，密码的长度至少在8位",
     }
 
     def __init__(self, *args, **kwargs):
@@ -174,6 +194,11 @@ class PasswordChangeForm(forms.Form):
                 code='password_mismatch',
             )
         return password2
+
+    def clean_password1(self):
+        password1 = self.cleaned_data.get("password1")
+        if len(password1) < 8:
+            raise forms.ValidationError()
 
     def clean_phoneNum(self):
         phone = self.cleaned_data.get("phoneNum")
@@ -193,10 +218,10 @@ class PasswordChangeForm(forms.Form):
         try:
             tz = timezone.get_current_timezone()
             time_threshold = tz.normalize(timezone.now()) - datetime.timedelta(minutes=5)
-            record = VerifyCode.objects.filter(phoneNum=phone,
-                                               code=code,
-                                               is_active=True,
-                                               created_at__gt=time_threshold)
+            record = VerifyCode.objects.get(phoneNum=phone,
+                                            code=code,
+                                            is_active=True,
+                                            created_at__gt=time_threshold)
             record.is_active = False
             record.save()
         except ObjectDoesNotExist:
@@ -208,3 +233,37 @@ class PasswordChangeForm(forms.Form):
             self.user.set_password(self.cleaned_data["password1"])
             self.user.save()
         return self.user
+
+
+class ProfileChangeForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ("name", "phoneNum", "birthDate", "avatar", "gender")
+        widgets = {
+            "phoneNum": forms.TextInput(attrs={
+                "id": "mobile",
+                "placeholder": u"请输入手机号码",
+            }),
+            "name": forms.TextInput(attrs={
+                "id": "name",
+                "name": "name",
+                "placeholder": u"请输入姓名/企业名",
+            }),
+            "birthDate": forms.TextInput(attrs={
+                "id": "bday",
+                "name": "bday",
+                "class": "form-control bday-i",
+                "size": "16",
+                "value": "",
+                "readonly placeholder": u"请选择您的出生日期",
+            }),
+            "gender": forms.HiddenInput(attrs={
+                "id": "gender",
+                "name": "gender",
+            }),
+            "avatar": forms.FileInput(attrs={
+                "id": "portrait",
+                "class": "fn-hide",
+            }),
+        }

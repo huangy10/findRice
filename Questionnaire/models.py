@@ -13,6 +13,7 @@ from Activity.models import Activity
 
 class Questionnaire(models.Model):
     """这个类是整个问卷的抽象"""
+    # 一个活动可能对应多个问卷，最新的一个为发布的问卷，旧的版本可以视为历史记录
     activity = models.ForeignKey(Activity)
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
@@ -21,13 +22,13 @@ class Questionnaire(models.Model):
 
     participants = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
-    def __unicode__(self):
-        return self.activity.name.encode() + u" 的问卷"
+    def __str__(self):
+        return (self.activity.name + " 的问卷").encode("utf-8")
 
     class Meta:
         verbose_name = "问卷"
         verbose_name_plural = "问卷"
-        ordering = ["-modified_at"]
+        ordering = ["-created_at"]
 
 
 class Question(models.Model):
@@ -97,6 +98,7 @@ class Choice(models.Model):
     class Meta:
         verbose_name = "选项"
         verbose_name_plural = "选项"
+        ordering = ["order_in_list"]
 
 
 class AnswerSheet(models.Model):
@@ -210,6 +212,7 @@ class TextAnswer(Answer):
 
     def __str__(self):
         return self.text
+
 
 def get_file_name_from_date(act, filename):
     ext = filename.split('.')[-1]

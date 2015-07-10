@@ -6,12 +6,14 @@
     <title>活动详情页面</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
+    {# <script type="text/javascript" src="//zhaomi.biz/lib/jquery/jquery.min.js"></script> #}
     <script type="text/javascript" src="{% static "build/detail.js" %}"></script>
+    {# <script type="text/javascript" src="//zhaomi.biz/build/detail.js"></script> #}
 </head>
 <body>
 <div id="content">
     <div id="header">
-        <a href="//zhaomi.biz" id="logo">找米</a>
+        <a href="/" id="logo">找米</a>
         <div id="area">
             <em>北京</em>
         </div>
@@ -51,34 +53,42 @@
         <div id="detail-criteria">
             <h2>报名条件</h2>
             <div id="detail-questions">
+            {% for q in single_choice_questions %}
                 <div class="detail-item fn-clr">
-                    <h3>1、请问您的学历是？</h3>
+                    <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
                     <div class="detail-answers">
                         <ul>
-                            <li><span class="z-radio"></span>高中</li>
-                            <li><span class="z-radio selected"></span>大专</li>
-                            <li><span class="z-radio"></span>本科</li>
+                            {% for c in q.choices.all %}
+                                <li><span class="z-radio"></span>{{ c.description }}</li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
+            {% endfor %}
+            {% for q in multi_choice_questions %}
                 <div class="detail-item fn-clr">
-                    <h3>2、请问您的学历是？</h3>
+                    <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
                     <div class="detail-answers">
                         <ul>
-                            <li><span class="z-checkbox selected"></span>高中</li>
-                            <li><span class="z-checkbox selected"></span>大专</li>
-                            <li><span class="z-checkbox"></span>本科</li>
+                            {% for c in q.choices.all %}
+                                <li><span class="z-radio"></span>{{ c.description }}</li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
+            {% endfor %}
+            {% for q in text_questions %}
                 <div class="detail-item fn-clr">
-                    <h3>3、请问您的学历是？</h3>
+                    <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
                     <textarea></textarea>
                 </div>
+            {% endfor %}
+            {% for q in file_questions %}
                 <div class="detail-item fn-clr">
-                    <h3>4、请上传您的营业执照</h3>
+                    <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
                     <input type="file"/>
                 </div>
+            {% endfor %}
             </div>
         </div>
         <div id="detail-apply" class="fn-clr">

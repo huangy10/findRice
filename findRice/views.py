@@ -15,11 +15,15 @@ def index_list(request):
     activities = Activity.objects.filter(recommended=True).order_by("recommended_level", "-created_at")
     act_types = ActivityType.objects.all()
 
+    user = None
+    if request.user.is_authenticated():
+        user = request.user
     return render(request, "list.html", {
         "homepage_posters": banners,
         "footer": footer,
         "activity_types": act_types,
-        "activities": activities
+        "activities": activities,
+        "user": user,
     })
 
 
@@ -30,24 +34,20 @@ def search_list(request):
     loc = request.GET.get("loc", "")
     act = None
 
-    print hot, stype, q, loc
-
-    order_in_reward = False
-
     def filter_hot(activity):
         if activity is None:
             queryset = Activity.objects
         else:
             queryset = activity
         if hot == "0":
+            print "hot 0"
             activity = queryset.filter(recommended=True,
                                        is_active=True).order_by("-recommended_level", '-created_at')[0:12]
         elif hot == "1":
             activity = queryset.filter(time_limited=True, is_active=True)
         elif hot == "2":
             activity = queryset.filter(num_limited=True, is_active=True)
-        elif hot == "4":
-            order_in_reward = True
+        elif hot == "3":
             activity = queryset.all()
         else:
             activity = queryset.all()
@@ -63,9 +63,9 @@ def search_list(request):
             queryset = activity
         try:
             stype_num = int(stype)
-            if stype_num <= 0:
+            if stype_num == 0 or stype_num > len(act_types):
                 return activity
-            elif stype_num > len(act_types):
+            elif stype_num < 0:
                 return queryset.filter(activity_type=None)
             else:
                 type_obj = act_types[stype_num-1]
@@ -102,7 +102,7 @@ def search_list(request):
 
     act = filter_loc(act)
 
-    if order_in_reward and act is not None:
+    if hot == "3" and act is not None:
         act = act.order_by("-reward")
 
     recent_issue = HomepageIssue.objects.all()[0]

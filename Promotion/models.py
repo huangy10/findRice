@@ -7,12 +7,13 @@ from django.conf import settings
 from Activity.utils import active_required
 from Activity.models import Activity, ApplicationThrough
 from .signals import share_record_signal
+from findRice.utils import field_is_active_validator
 # Create your models here.
 
 
 class Share(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)  # 发起分享的用户
-    activity = models.ForeignKey(Activity)      # 被分享的活动
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, validators=[field_is_active_validator])  # 发起分享的用户
+    activity = models.ForeignKey(Activity, validators=[field_is_active_validator])      # 被分享的活动
 
     total_reward_max = models.IntegerField(default=500)
     total_reward = models.IntegerField(default=0)   # 从这个分享中得到的奖励
@@ -21,6 +22,9 @@ class Share(models.Model):
     is_active = models.BooleanField(default=True)
 
     share_code = models.CharField(max_length=100, editable=False, null=True)
+
+    def check_user(self):
+        pass
 
     def get_share_link(self):
         return settings.FR_SHARE_LINK_TEMPLATE % (self.activity_id, self.share_code)
@@ -60,9 +64,10 @@ class ShareRecordManager(models.Manager):
 
 
 class ShareRecord(models.Model):
-    share = models.ForeignKey(Share)    # 用户点击这个分享链接进入活动
-    target_user = models.ForeignKey(settings.AUTH_USER_MODEL)   # 点击分享链接的用户
-    application = models.OneToOneField(ApplicationThrough, related_name="share_record", null=True, default=None)
+    share = models.ForeignKey(Share, validators=[field_is_active_validator])    # 用户点击这个分享链接进入活动
+    target_user = models.ForeignKey(settings.AUTH_USER_MODEL, validators=[field_is_active_validator])   # 点击分享链接的用户
+    application = models.OneToOneField(ApplicationThrough, related_name="share_record", null=True, default=None,
+                                       validators=[field_is_active_validator])
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="分享日期")
 

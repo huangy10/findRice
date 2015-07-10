@@ -6,21 +6,22 @@
     <title>{% block title %}{% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script type="text/javascript" src="//zhaomi.biz/lib/jquery/jquery.min.js"></script>
+    {# <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script> #}
     <script type="text/javascript" src="//zhaomi.biz/build/mine.js"></script>
+    {# <script type="text/javascript" src="{% static "build/mine.js" %}"></script>#}
 </head>
 <body>
 <div id="content">
     <div id="header">
-        <a href="//zhaomi.biz" id="logo">找米</a>
-        <div id="area">
-            <em>北京</em>
+        <a href="/" id="logo">找米</a>
+        <div id="personal-info" class="action">
+            <a href="/logout" class="logout" title="登出"></a>
         </div>
-        <div id="reg" class="action"><button class="z-btn">注册/登陆</button></div>
-        <div id="pub" class="action"><button class="z-btn">发布活动</button></div>
+        <div id="msg" class="action"><a href="/user/msg" class="z-btn">消息</a></div>
+        <div id="pub" class="action"><a href="/action/new/edit/1" class="z-btn">发布活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
     <div id="mine-bg">
-        {% block personal %}
         <div id="personal-info">
             <span class="portrait"><img src="{{ user.profile.avatar.url }}"></span>
             <div class="info-items">
@@ -37,17 +38,37 @@
                 </div>
             </div>
         </div>
+        <div id="personal-info-modify">
+            <form action="/user/modify" id="personal-info-form" enctype="multipart/form-data" method="post">
+                <div id="portrait-c">
+                    <img src="{{ user.profile.avatar.url }}"/>
+                    <label for="portrait"></label>
+                    <input id="portrait" name="portrait" type="file" class="fn-hide"></input>
+                </div>
+                <div class="info-items">
+                    <div class="main-items">
+                        <input id="info-name" name="name" type="text" placeholder="{{ user.profile.name }}"/>
+                    </div>
+                    <div class="sub-items">
+                        <input id="info-mobile" name="mobile" type="text" placeholder="{{ user.profile.phoneNum }}"></input>
+                        <input id="info-gender" name="gender" type="text" placeholder="{{ user.profile.get_gender_display }}"/>
+                        <input id="info-bday" name="bday" type="date" placeholder="{{ user.profile.birthDate }}"/>
+                        <button class="z-btn save-info">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {# <img src="//zhaomi.biz/assets/imgs/detail-banner.png"> #}
         <img src="{% static "assets/imgs/detail-banner.png" %}">
-        {% endblock %}
     </div>
     <div id="mine-container">
     {% block menu_bar %}
         <div id="mine-type" class="fn-clr">
             {% block categories %}
             <a class="mine-create selected">我发起的活动</a>
-            <a class="mine-apply" href="/demo/apply.html">我报名的活动</a>
-            <a class="mine-like" href="/demo/like.html">我关注的活动</a>
-            <a class="mine-group" href="/demo/group.html">我的米团</a>
+            <a class="mine-apply" href="/mine/apply">我报名的活动</a>
+            <a class="mine-like" href="/mine/like">我关注的活动</a>
+            <a class="mine-group" href="/mine/group">我的米团</a>
             {% endblock %}
             <span class="hotline">找米客服联系电话：400-22236678</span>
         </div>
