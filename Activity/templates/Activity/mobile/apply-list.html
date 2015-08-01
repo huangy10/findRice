@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+    <title>报名的列表</title>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/build/mine.js"></script>
+</head>
+<body>
+{% csrf_token %}
+<div class="wrapper" id="pageActivityApplyList">
+    <div class="header zui-flex" id="header">
+        <div class="zui-cell logo-warp">
+            <a href="/" class="logo item">找米</a>
+        </div>
+        <div class="zui-cell zui-flex-fixed ">
+            <div class="nav">
+                <a href="/searchpage" class="nav-item">
+                    <i class="zui-icon icon-search"></i>
+                </a>
+                <a href="/action/new/create/1" class="nav-item">
+                    <i class="zui-icon icon-plus"></i>
+                </a>
+                <a href="/user/msg" class="nav-item">
+                    {% if user.notification_center.unread_notifications_count %}
+                        <span class="number">{{ user.notification_center.unread_notifications_count }}</span>
+                    {% endif %}
+                    <i class="zui-icon icon-email"></i>
+                </a>
+                <a href="/mine/start" class="nav-item user">
+                    <img src="{{ user.profile.avatar.url }}" alt=""/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="mine">
+        <div class="mine-header">
+            <div class="zui-flex">
+                <div class="zui-cell">
+                    <span class="name">{{ act.name }} </span><span class="number"><i class="zui-icon icon-number"></i>{{ act.get_applying_num }}/{{ act.max_attend }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="mine-content" data-action="{{ act.id }}" id="mine-container">
+            {% for data in data_set %}
+                <div class="tr apply-item" data-target="{{ data.user.id }}">
+                    <div class="zui-flex tr-item">
+                        <div class="zui-cell zui-flex-fixed">{{ forloop.counter }}.
+                            <span class="img"><img src="{{ data.user.profile.avatar.url }}" alt=""/></span>
+                        </div>
+                        <div class="zui-cell "><span class="name">{{ data.user.profile.name }}</span></div>
+                        <div class="zui-cell zui-flex-fixed apply-item-content">
+                            {% if data.apply.status == "applying" %}
+                                <button class="zui-btn btn-refuse" data-optype="deny">拒绝</button>
+                                <button class="zui-btn btn-passed" data-optype="approve">通过</button>
+                            {% elif data.apply.status == "approved" %}
+                                <button class="zui-btn btn-passed" data-optype="finish">确认完成</button>
+                                <button class="zui-btn btn-passed" data-optype="approve_cancel">取消通过</button>
+                            {% elif data.apply.status == "denied" %}
+                                <button class="zui-btn btn-passed" data-optype="deny_cancel">取消拒绝</button>
+                                <button class="zui-btn btn-refuse">已谢绝</button>
+                            {% else %}
+                                <button class="zui-btn btn-passed" data-optype="finished">已完成</button>
+                            {% endif %}
+                        </div>
+                        <div class="zui-cell zui-flex-fixed"><div class="look-detail">详情 <i class="zui-icon icon-arrow-up"></i></div></div>
+                    </div>
+
+                    <div class="activity-msg-detail">
+                        <p>{{ data.user.profile.get_gender_display }} {{ data.user.profile.age }}岁  {{ data.user.profile.phoneNum }}</p>
+                        {% if data.answers %}
+                        <ul>
+                        {% for answer in data.answers %}
+                            <li>
+                                <div class="q-tt">{{ forloop.counter }}. {{ answer.question }}</div>
+                                {% if answer.file %}
+                                    <div class="q-an">
+                                    <img src="{{ answer.file.url }}" alt=""/>
+                                    </div>
+                                {% else %}
+                                    <div class="q-an">{{ answer }}</div>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

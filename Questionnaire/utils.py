@@ -39,14 +39,14 @@ def json_is_valid(json):
     return None
 
 
-def create_questionnaire_with_json(json, activity):
+def create_questionnaire_with_json(json, activity, is_active=True):
     """
     这个函数通过json格式的数据为一个给定的活动创建问卷
     json数据会先利用上面定义的json_is_valid来检查integrity
     """
     # 首先检查传递过来的json字典是否符合格式
     json_is_valid(json)
-    questionnaire = Questionnaire.objects.create(activity=activity)
+    questionnaire = Questionnaire.objects.create(activity=activity, is_active=is_active)
     questions_json = json["criteria"]
     i = 1
     for question_json in questions_json:
@@ -88,6 +88,7 @@ def create_questionnaire_with_json(json, activity):
                                              question=question_json["q"],
                                              type=FILE_QUESTION_TYPE)
             i += 1
+    return questionnaire
 
 
 def answer_json_is_valid(json, request):
@@ -105,8 +106,9 @@ def create_answer_set_with_json(json, request, questionnaire, user):
     # 创建一个答卷
     answer_set = AnswerSheet.objects.create(user=user,
                                             questionnaire=questionnaire)
+    questions = list(questionnaire.choicequestion_set.all()) + list(questionnaire.nonchoicequestion_set.all())
     try:
-        for (q, q_json) in zip(questionnaire.choicequestion_set.all(), json["answer"]):
+        for (q, q_json) in zip(questions, json["answer"]):
             if q_json["type"] == "radio":
                 c = Choice.objects.get(question=q, order_in_list=q_json["result"])
                 SingleChoiceAnswer.objects.create(answer_sheet=answer_set,
@@ -125,7 +127,8 @@ def create_answer_set_with_json(json, request, questionnaire, user):
             elif q_json["type"] == "upload":
                 FileAnswer.objects.create(answer_sheet=answer_set,
                                           question=q,
-                                          file=request.FILES[q_json["result"]])
+                                          file=request.FILES[q_json["name"]])
     except (ObjectDoesNotExist, IndexError):
         # 发生错误之后删除已经创建的答卷
         answer_set.delete()
+    return answer_set

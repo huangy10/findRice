@@ -8,9 +8,9 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('Welfare', '0001_initial'),
-        ('Activity', '0014_auto_20150702_1142'),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('Activity', '0001_initial'),
     ]
 
     operations = [
@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('description', models.CharField(default=b'', max_length=255)),
                 ('read', models.BooleanField(default=False, verbose_name=b'\xe6\x98\xaf\xe5\x90\xa6\xe5\xb7\xb2\xe9\x98\x85')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('notification_type', models.CharField(max_length=20, verbose_name=b'\xe6\xb6\x88\xe6\x81\xaf\xe7\xb1\xbb\xe5\x9e\x8b', choices=[(b'ready_requested', b'\xe5\xb0\xb1\xe4\xbd\x8d\xe7\xa1\xae\xe8\xae\xa4'), (b'apply_approved', b'\xe7\x94\xb3\xe8\xaf\xb7\xe9\x80\x9a\xe8\xbf\x87'), (b'apply_full', b'\xe6\x8a\xa5\xe5\x90\x8d\xe6\xbb\xa1'), (b'ready_rejected', b'\xe6\x8b\x92\xe7\xbb\x9d\xe5\xb0\xb1\xe4\xbd\x8d'), (b'share_finished', b'\xe5\x88\x86\xe4\xba\xab\xe5\xae\x8c\xe6\x88\x90')])),
+                ('notification_type', models.CharField(max_length=20, verbose_name=b'\xe6\xb6\x88\xe6\x81\xaf\xe7\xb1\xbb\xe5\x9e\x8b', choices=[(b'ready_requested', b'\xe5\xb0\xb1\xe4\xbd\x8d\xe7\xa1\xae\xe8\xae\xa4'), (b'apply_approved', b'\xe7\x94\xb3\xe8\xaf\xb7\xe9\x80\x9a\xe8\xbf\x87'), (b'apply_rejected', b'\xe7\x94\xb3\xe8\xaf\xb7\xe8\xa2\xab\xe6\x8b\x92'), (b'apply_full', b'\xe6\x8a\xa5\xe5\x90\x8d\xe6\xbb\xa1'), (b'ready_rejected', b'\xe6\x8b\x92\xe7\xbb\x9d\xe5\xb0\xb1\xe4\xbd\x8d'), (b'share_finished', b'\xe5\x88\x86\xe4\xba\xab\xe5\xae\x8c\xe6\x88\x90'), (b'activity_applied', b'\xe6\x9c\x89\xe4\xba\xba\xe6\x8a\xa5\xe5\x90\x8d')])),
             ],
             options={
                 'verbose_name': '\u901a\u77e5',
@@ -58,7 +58,7 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('gift', models.ForeignKey(to='Welfare.WelfareGift', null=True)),
                 ('notification_center', models.ForeignKey(related_name='welfare_notifications', to='Notification.NotificationCenter')),
-                ('related_activity', models.ForeignKey(to='Activity.Activity', null=True)),
+                ('related_activity', models.ForeignKey(to='Activity.Activity')),
             ],
             options={
                 'verbose_name': '\u798f\u5229',

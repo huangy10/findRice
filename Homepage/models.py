@@ -12,7 +12,7 @@ def get_poster_path(act, filename):
     ext = filename.split('.')[-1]
     filename = "%s.%s" % (uuid.uuid4(), ext)
     tz = timezone.get_current_timezone()
-    time = tz.normalize(timezone.now())
+    time = timezone.now()
     return "homepage_posters/%s/%s/%s/%s" % (time.year, time.month, time.day, filename)
 
 

@@ -1,103 +1,133 @@
 {% load staticfiles %}
 {% load duration_filter %}
+{% load sharelink %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>活动详情页面</title>
+    <title>{{ act.name }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
-    {# <script type="text/javascript" src="//zhaomi.biz/lib/jquery/jquery.min.js"></script> #}
-    <script type="text/javascript" src="{% static "build/detail.js" %}"></script>
-    {# <script type="text/javascript" src="//zhaomi.biz/build/detail.js"></script> #}
+    <link rel="icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    {# <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script> #}
+    {# <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script> #}
+    {# <script type="text/javascript" src="{% static "build/detail.js" %}"></script> #}
+    <link rel="stylesheet" href="//zhao-mi.net/lib/jqueryui/jquery-ui.css"/>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jqueryui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery-qrcode/jquery.qrcode.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/build/detail.js"></script>
 </head>
 <body>
 <div id="content">
     <div id="header">
         <a href="/" id="logo">找米</a>
-        <div id="area">
-            <em>北京</em>
-        </div>
-        <div id="reg" class="action"><button class="z-btn">注册/登陆</button></div>
-        <div id="pub" class="action"><button class="z-btn">发布活动</button></div>
+        {% if user %}
+            <a id="personal-info" class="action" href="/mine/start">
+                <img src="{{ user.profile.avatar.url }}" alt="我的个人信息">
+            </a>
+            <div id="msg" class="action">
+                <a href="/user/msg" class="z-btn">消息</a>
+                {% if user.notification_center.unread_notifications_count %}
+                    <span>{{ user.notification_center.unread_notifications_count }}</span>
+                {% endif %}
+            </div>
+        {% else %}
+            <div id="reg" class="action"><a class="z-btn" href="/register/basic">注册/登陆</a></div>
+        {% endif %}
+        <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
     <div id="detail-bg">
-        <img src="{% static "assets/imgs/detail-banner.png" %}">
+        <img src= "//zhao-mi.net/assets/imgs/detail-banner.png">
     </div>
-    <div id="detail-container">
-        <div id="detail-important" class="fn-clr">
-            <span class="detail-name">{{ act.name }}</span>
-            {% if act.recommended %}
-                <span class="detail-hot">热门推荐</span>
-            {% endif %}
-            <span class="detail-price">&yen;{{ act.reward }}</span>
-            <span class="like selected"></span>
-            <span class="share"></span>
-        </div>
-        <p id="detail-host"><span>主办方：{{ act.host.profile.name }}</span><span>类型：{{ act.activity_type.type_name }}</span></p>
-        <div id="detail-info">
-            <p>
-            {{ act.description|linebreaks }}
-            </p>
-        </div>
-        
-        <div id="detail-items">
-            <p class="location fn-overflow" title="{{ act.location }}">{{ act.location }}</p>
-            <p class="num fn-overflow">{{ act.get_applying_num }}/{{ act.max_attend }} 人</p>
-            <p class="time fn-overflow">{{ act.get_duration_description }}</p>
-            <p class="extra fn-overflow">{{ act.last_length|duration }}</p>
-        </div>
-        <div id="detail-pic">
-            <img src="{{ act.poster.url }}">
-        </div>
-        <div id="detail-criteria">
-            <h2>报名条件</h2>
-            <div id="detail-questions">
-            {% for q in single_choice_questions %}
-                <div class="detail-item fn-clr">
-                    <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
-                    <div class="detail-answers">
-                        <ul>
-                            {% for c in q.choices.all %}
-                                <li><span class="z-radio"></span>{{ c.description }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+    <div id="detail-container" data-link="{% share_link act %}">
+        <form id="apply-form" action="/action/{{ act.id }}/apply" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" value="{{ share_code }}" name="share_code">
+            <div id="detail-important" class="fn-clr">
+                <div class="detail-name-w">
+                    <span class="detail-name">{{ act.name }}</span>
+                    {% if act.recommended %}
+                        <span class="detail-hot">热门推荐</span>
+                    {% endif %}
+                    <span class="detail-price">&yen;{{ act.reward }}</span>
                 </div>
-            {% endfor %}
-            {% for q in multi_choice_questions %}
-                <div class="detail-item fn-clr">
-                    <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
-                    <div class="detail-answers">
-                        <ul>
-                            {% for c in q.choices.all %}
-                                <li><span class="z-radio"></span>{{ c.description }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                <div class="detail-oper">
+                    {% if like %}
+                        <span class="like selected" data-id="{{ act.id }}"></span>
+                    {% else %}
+                        <span class="like" data-id="{{ act.id }}"></span>
+                    {% endif %}
+                    <span class="share"></span>
                 </div>
-            {% endfor %}
-            {% for q in text_questions %}
-                <div class="detail-item fn-clr">
-                    <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
-                    <textarea></textarea>
-                </div>
-            {% endfor %}
-            {% for q in file_questions %}
-                <div class="detail-item fn-clr">
-                    <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
-                    <input type="file"/>
-                </div>
-            {% endfor %}
             </div>
-        </div>
-        <div id="detail-apply" class="fn-clr">
-            <button class="z-btn apply">报名</button>
-            <button class="z-btn share-bonus">分享获10米币</button>
-        </div>
-        <p class="hint">条件不达标？试试推广赚米币！</p>
-        <p class="hint">此活动负责人为发起者，与找米平台无关</p>
+            <p id="detail-host"><span>主办方：{{ act.host.profile.name }}</span><span>类型：{{ act.activity_type.type_name }}</span></p>
+            <div id="detail-info">
+                {% for line in act.description|seperate_to_p %}
+                    <p>{{ line }}</p>
+                {% endfor %}
+            </div>
+
+            <div id="detail-items">
+                <p class="location fn-overflow" title="{{ act.loc_description }}">{{ act.loc_description }}</p>
+                <p class="num fn-overflow">{{ act.get_applying_num }}/{{ act.max_attend }} 人</p>
+                <p class="time fn-overflow">{{ act.get_duration_description }}</p>
+                <p class="extra fn-overflow">{{ act.last_length|duration }}</p>
+            </div>
+            <div id="detail-pic">
+                <img src="{{ act.poster.url }}">
+            </div>
+            <div id="detail-criteria">
+                <h2>报名条件</h2>
+                <div id="detail-questions">
+                    {% for q in single_choice_questions %}
+                        <div class="detail-item fn-clr" data-type="radio">
+                            <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
+                            <div class="detail-answers">
+                                <ul>
+                                    {% for c in q.choices.all %}
+                                        <li><span class="z-radio"></span>{{ c.description }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% for q in multi_choice_questions %}
+                        <div class="detail-item fn-clr" data-type="checkbox">
+                            <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
+                            <div class="detail-answers">
+                                <ul>
+                                    {% for c in q.choices.all %}
+                                        <li><span class="z-checkbox"></span>{{ c.description }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% for q in text_questions %}
+                        <div class="detail-item fn-clr" data-type="question">
+                            <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
+                            <textarea></textarea>
+                        </div>
+                    {% endfor %}
+                    {% for q in file_questions %}
+                        <div class="detail-item fn-clr" data-type="upload">
+                            <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
+                            <input type="file" name="upload-file-{{ forloop.counter0 }}"/>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div id="detail-apply" class="fn-clr">
+                <button class="z-btn apply">报名</button>
+                <button class="z-btn share-bonus" type="button">分享获{{ act.share_reward }}米币</button>
+            </div>
+            <p class="hint">条件不达标？试试推广赚米币！</p>
+            <p class="hint">此活动负责人为发起者，与找米平台无关</p>
+        </form>
     </div>
 </div>
-</body>    
+</body>
 </html>

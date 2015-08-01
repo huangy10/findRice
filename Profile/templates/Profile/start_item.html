@@ -1,0 +1,33 @@
+{% extends "Profile/item_base.html" %}
+{% load sharelink %}
+{% block operation %}
+    <div class="main">
+        {% if act.is_published %}
+            {% if act.status == 0 %}
+                {% if act.accept_apply %}
+                    <button class="z-btn green">报名中</button>
+                    <a class="apply-forbidden" href="javascript:;">截止报名</a>
+                {% else %}
+                    <button class="z-btn red">截止报名</button>
+                    <a class="apply-resume" href="javascript:;">恢复报名</a>
+                {% endif %}
+            {% elif act.status == 1 %}
+                <button class="z-btn starting">已经开始</button>
+            {% else %}
+                <button class="z-btn red no-shift">已经结束</button>
+            {% endif %}
+        {% else %}
+            <button class="z-btn red">尚未发布</button>
+             <a class="publish" href="javascript:;">点击发布</a>
+        {% endif %}
+    </div>
+    <div class="sub fn-clr">
+        <span class="edit" data-action="/action/{{ act.id }}/edit/1" title="编辑活动"></span>
+        <span class="duplicate" data-action="/action/{{ act.id }}/duplicate" title="复制活动"></span>
+        <span class="delete" data-action="/action/{{ act.id }}/delete" title="删除活动"></span>
+        <span class="b-share" data-action="/action/{{ act.id }}/sharelink" data-link="{% share_link act %}" title="分享活动"></span>
+        <a class="z-btn view" href="/action/{{ act.id }}/applicant">查看报名表单</a>
+    </div>
+{% endblock %}
+
+{% block share %}<span class="c-share"></span>{% endblock %}

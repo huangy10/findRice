@@ -3,23 +3,37 @@ import random
 import re
 import simplejson
 import json
+import excel_response
+import logging
 
 from django.utils import timezone
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import get_user_model
 from django.core.context_processors import csrf
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, Http404, HttpResponse
+from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonResponse
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
+from django.core.exceptions import ObjectDoesNotExist
+from django.template.loader import render_to_string
+from django.db.models import F
 
 from .forms import UserRegisterFormStep1, UserRegisterFormStep2
 from .forms import PasswordChangeForm, ProfileChangeForm
-from Activity.models import Activity
-from .models import RiceTeamContribution, RiceTeam
+from Activity.models import Activity, ApplicationThrough
+from .models import RiceTeamContribution, UserProfile
 from .models import VerifyCode
-from .utils import send_sms
+from .utils import send_sms, from_size_check_required
+from Notification.signals import send_notification
+from Promotion.models import ShareRecord
+from Welfare.models import WelfareGift
+from findRice.utils import choose_template_by_device
+
+from social.backends.utils import load_backends
 # Create your views here.
+
+logger = logging.getLogger(__name__)
 
 
 @require_http_methods(["GET", "POST"])
@@ -28,12 +42,12 @@ def user_login(request):
         username = request.POST.get("username", "").strip()
         pwd = request.POST.get("pwd", "").strip()
         user = auth.authenticate(username=username, password=pwd)
-        if user is not None:
+        if user is not None and user.profile.is_active:
             auth.login(request, user)
             success_info = {
                 "success": True,
                 "data": {
-                    "url": request.GET.get("next", "/")
+                    "url": request.session.get("next", "/")
                 }
             }
             return HttpResponse(json.dumps(success_info), content_type="application/json")
@@ -52,10 +66,14 @@ def user_login(request):
                 }
             return HttpResponse(json.dumps(error_info), content_type="application/json")
 
+    request.session["next"] = request.GET.get("next", "/")
     args = {}
     args.update(csrf(request))
 
-    return render(request, "Profile/login.html", args)
+    available_backends = load_backends(settings.AUTHENTICATION_BACKENDS)
+    args["available_ends"] = available_backends
+
+    return render(request, choose_template_by_device(request, "Profile/login.html", "Profile/mobile/login.html"), args)
 
 
 @login_required()
@@ -70,12 +88,15 @@ def register_step_1(request):
     if request.method == "POST":
         form = UserRegisterFormStep1(request.POST)
         if form.is_valid():
-            form.save()
-            username = request.POST["username"]
-            pwd = request.POST["password1"]
-            new_user = auth.authenticate(username=username,
-                                         password=pwd)
-            auth.login(request, new_user)
+            user = form.save()
+            # username = request.POST["username"]
+            # pwd = request.POST["password1"]
+            # new_user = auth.authenticate(username=username,
+            #                              password=pwd)
+            # auth.login(request, new_user)
+            request.session["register_username"] = user.username
+            request.session["password"] = request.POST.get("password1", "")
+
             success_info = {
                 "success": True,
                 "data": {
@@ -88,6 +109,7 @@ def register_step_1(request):
                 "success": False
             }
             errors = form.errors
+            logger.debug(u"注册用户第一步失败，错误信息为: %s" % errors.as_data)
             data = {}
             if "password1" in errors:
                 data["pwd"] = errors["password1"][0]
@@ -95,30 +117,50 @@ def register_step_1(request):
                 data["pwd-confirm"] = errors["password2"][0]
             if "username" in errors:
                 data["username"] = errors["username"][0]
-            else:
+            if data == {}:
                 data["unknown"] = "未知错误，请联系管理员"
             error_info["data"] = data
-            print form.errors
             return HttpResponse(json.dumps(error_info), content_type="application/json")
+
+    if 'code' in request.GET:
+        # if Share code if founded in the GET parameters, then save it to the session
+        request.session['code'] = request.GET['code']
 
     args = {}
     args.update(csrf(request))
     args['form'] = form
-
-    return render(request, "Profile/register.html", args)
+    available_backends = load_backends(settings.AUTHENTICATION_BACKENDS)
+    args["available_ends"] = available_backends
+    return render(request,
+                  choose_template_by_device(request,
+                                            "Profile/register.html",
+                                            "Profile/mobile/register.html"),
+                  args)
 
 
 @require_http_methods(["GET", "POST"])
 def register_step_2(request):
-    user = request.user
-    if not user.is_authenticated() or user.profile.is_active:
-        return HttpResponseRedirect("/register/basic")
-
+    user = get_object_or_404(get_user_model(),
+                             username=request.session.get("register_username", ""),
+                             is_active=False,
+                             profile__is_active=False)
+    # if not user.is_authenticated() or user.profile.is_active:
+    #     return HttpResponseRedirect("/register/basic")
     form = UserRegisterFormStep2()
     if request.method == "POST":
         form = UserRegisterFormStep2(request.POST, request.FILES, instance=user.profile, initial={})
         if form.is_valid():
             form.save()
+            # User successfully registered,
+            if 'code' in request.session:
+                try:
+                    promote_profile = UserProfile.objects.get(promotion_code=request.session['code'])
+                    promote_profile.coin += 5
+                    promote_profile.save()
+                except ObjectDoesNotExist:
+                    return JsonResponse({'success': False, 'data': {'code': 'invalid share code'}})
+            auth_user = auth.authenticate(username=user.username, password=request.session["password"])
+            auth.login(request, auth_user)
             success_info = {
                 "success": True,
                 "data": {
@@ -127,14 +169,16 @@ def register_step_2(request):
             }
             return HttpResponse(json.dumps(success_info), "application/json")
         else:
-            print form.errors
             errors = form.errors
+            logger.debug(u"用户|%s(id: %s)|注册第二步失败，错误信息为: %s" % (user.profile.name, user.id, errors.as_data))
             error_info = {"success": False}
             data = {}
             if "code" in errors:
                 data["verifycode"] = errors["code"][0]
             if "phoneNum" in errors:
                 data["mobile"] = errors["phoneNum"][0]
+            if data == {}:
+                data["unknown"] = "未知错误，请联系管理员"
             error_info["data"] = data
             return HttpResponse(json.dumps(error_info), content_type="application/json")
 
@@ -142,19 +186,50 @@ def register_step_2(request):
     args.update(csrf(request))
     args['form'] = form
 
-    return render(request, "Profile/register-addon.html", args)
+    return render(request,
+                  choose_template_by_device(request,
+                                            "Profile/register-addon.html",
+                                            "Profile/mobile/register-addon.html"),
+                  args)
+
+
+@require_POST
+@login_required()
+def user_modify(request):
+    profile = request.user.profile
+    if "name" in request.POST:
+        profile.name = request.POST.get("name", "NAME")
+    if "bday" in request.POST:
+        profile.birthDate = timezone.datetime.strptime(request.POST["bday"], "%Y-%m-%d").date()
+    if "gender" in request.POST:
+        profile.gender = request.POST["gender"]
+    # if "mobile" in request.POST:
+    #     profile.phoneNum = request.POST["mobile"]
+    if "portrait" in request.FILES:
+        profile.avatar = request.FILES["portrait"]
+    profile.save()
+    data = {
+        "name": profile.name,
+        "gender": profile.get_gender_display(),
+        "age": str(profile.age) + u'岁',
+        "portrait": profile.avatar.url
+    }
+    logger.debug(u'用户信息修改成功，修改值为%s' % data)
+    return JsonResponse({
+        "success": True,
+        "data": data
+    })
 
 
 @require_http_methods(["GET", "POST"])
 def reset_password(request):
-    print "start reset password"
     form = PasswordChangeForm()
     if request.method == "POST":
         form = PasswordChangeForm(request.POST)
         if form.is_valid():
             user = form.save()
             username = user.username
-            pwd = form.cleaned_data["password1"]
+            pwd = request.POST.get("password1")
             new_user = auth.authenticate(username=username, password=pwd)
             auth.login(request, new_user)
             success_info = {
@@ -165,7 +240,6 @@ def reset_password(request):
             }
             return HttpResponse(json.dumps(success_info), content_type="application/json")
         else:
-            print form.errors
             error_info = {"success": False}
             data = {}
             errors = form.errors
@@ -177,6 +251,8 @@ def reset_password(request):
                 data["mobile"] = errors["phoneNum"][0]
             if "code" in errors:
                 data["verifycode"] = errors["code"][0]
+            if data == {}:
+                data["unknown"] = "未知错误，请联系管理员"
             error_info["data"] = data
             return HttpResponse(json.dumps(error_info), content_type="application/json")
 
@@ -184,7 +260,7 @@ def reset_password(request):
     args.update(csrf(request))
     args['form'] = form
 
-    return render(request, "Profile/reset-pwd.html", args)
+    return render(request, choose_template_by_device(request, "Profile/reset-pwd.html", "Profile/mobile/reset-pwd.html"), args)
 
 
 @login_required()
@@ -196,7 +272,8 @@ def user_profile_modify(request):
             return HttpResponse(simplejson.dumps({"success": True, "data": {}}),
                                 content_type="application/json")
         else:
-            print form.errors
+            logger.debug(u"用户|%s(id: %s)|信息修改失败，错误信息为: %s" % (
+                request.user.profile.name, request.user.id, form.errors.as_data))
             return HttpResponse(simplejson.dumps({"success": False, "data": {"unknown": "未知错误，请联系管理员"}}),
                                 content_type="application/json")
 
@@ -206,27 +283,11 @@ def user_profile_modify(request):
         args.update(csrf(request))
         args["form"] = form
         args["user"] = request.user
-
-        return render(request, "Profile/modify-person-info.html", args)
-
-
-
-
-def from_size_check_required(method):
-    def wrapper(request, *args, **kwargs):
-        try:
-            start = int(request.GET.get("from", "0"))
-        except ValueError:
-            raise Http404
-        try:
-            size = int(request.GET.get("size", "12"))
-            if size < 0:
-                raise Http404
-        except ValueError:
-            raise Http404
-        return method(request, size=size, start=start,
-                      *args, **kwargs)
-    return wrapper
+        return render(request,
+                      choose_template_by_device(request,
+                                                "Profile/modify-person-info.html",
+                                                "Profile/mobile/modify-person-info.html"),
+                      args)
 
 
 @require_GET
@@ -236,10 +297,19 @@ def mine_start(request, start, size):
     """我发布的活动"""
     user = request.user
     acts = Activity.objects.filter(host=user, is_active=True).order_by("-created_at")[start: start+size]
-    return render(request, "Profile/start.html", {
+    if "callback" in request.GET:
+        data = render_to_string(choose_template_by_device(request,
+                                                          "Profile/start_item.html",
+                                                          "Profile/mobile/start_item.html"),
+                                {"activities": acts, "user": user})
+        data = {"html": data, "size": len(acts)}
+        return HttpResponse(request.GET.get("callback", "")+'('+json.dumps(data)+')', content_type="text/javascript")
+    args = {
         "activities": acts,
         "user": user
-    })
+    }
+    args.update(csrf(request))
+    return render(request, choose_template_by_device(request, "Profile/start.html", "Profile/mobile/start.html"), args)
 
 @require_GET
 @login_required()
@@ -248,12 +318,22 @@ def mine_apply(request, start, size):
     """我申请的活动"""
     user = request.user
     acts = Activity.objects.filter(applications_through__user=user,
-                                   applications_through__status="applying",
+                                   applications_through__status__in=["applying", "approved", "denied", "finished"],
+                                   applications_through__is_active=True,
                                    is_active=True)[start:start+size]
-    return render(request, "Profile/apply.html", {
-        "activity": acts,
+    if "callback" in request.GET:
+        data = render_to_string(choose_template_by_device(request,
+                                                          "Profile/apply_item.html",
+                                                          "Profile/mobile/apply_item.html"),
+                                {"activities": acts, "user": user})
+        data = {"html": data, "size": len(acts)}
+        return HttpResponse(request.GET.get("callback", "")+'('+json.dumps(data)+')', content_type="text/javascript")
+    args = {
+        "activities": acts,
         "user": user
-    })
+    }
+    args.update(csrf(request))
+    return render(request, choose_template_by_device(request, "Profile/apply.html", "Profile/mobile/apply.html"), args)
 
 
 @require_GET
@@ -264,10 +344,12 @@ def mine_group(request, start, size):
     user = request.user
     contributions = RiceTeamContribution.objects.filter(team=user.rice_team,
                                                         user__profile__is_active=True)[start:start+size]
-    return render(request, "Profile/group.html", {
+    args = {
         "user": user,
         "contributions": contributions
-    })
+    }
+    args.update(csrf(request))
+    return render(request, choose_template_by_device(request, "Profile/group.html", "Profile/mobile/group.html"), args)
 
 
 @require_GET
@@ -276,16 +358,26 @@ def mine_group(request, start, size):
 def mine_like(request, start, size):
     """我关注的活动"""
     user = request.user
-    acts = Activity.objects.filter(like_through__user=user, is_active=True)[start:start+size]
-    return render(request, "Profile/like.html", {
-        "activity": acts,
+    acts = Activity.objects.filter(like_through__user=user,
+                                   is_active=True,
+                                   like_through__is_active=True)[start:start+size]
+    if "callback" in request.GET:
+        data = render_to_string(choose_template_by_device(request,
+                                                          "Profile/like_item.html",
+                                                          "Profile/mobile/like_item.html"),
+                                {"activities": acts, "user": user})
+        data = {"html": data, "size": len(acts)}
+        return HttpResponse(request.GET.get("callback", "")+'('+json.dumps(data)+')', content_type="text/javascript")
+    args = {
+        "activities": acts,
         "user": user
-    })
+    }
+    args.update(csrf(request))
+    return render(request, choose_template_by_device(request, "Profile/like.html", "Profile/mobile/like.html"), args)
 
 
 def send_verify_code(request):
     phone = request.POST.get("mobile", "")
-    print phone
     code = ""
     for i in range(0, 6):
         code += random.choice("1234567890")
@@ -293,26 +385,171 @@ def send_verify_code(request):
     if VerifyCode.objects.filter(phoneNum=phone, is_active=True).exists():
 
         record = VerifyCode.objects.filter(phoneNum=phone, is_active=True)[0]
-        tz = timezone.get_current_timezone()
-        if (tz.normalize(timezone.now())-record.created_at).total_seconds() > 60:
-            print "A"
+        if (timezone.now()-record.created_at).total_seconds() > 60:
             VerifyCode.objects.filter(phoneNum=phone).update(is_active=False)
-            print "C"
             record = VerifyCode.objects.create(phoneNum=phone, code=code)
         else:
-            print "code request rejected"
-            return HttpResponse("")
+            return JsonResponse({'success': False, 'data': {}})
     else:
-        print "B"
         record = VerifyCode.objects.create(phoneNum=phone, code=code)
 
     code = settings.SMS_TEMPLATE % code
-    print code
     response_status = send_sms(settings.SMS_KEY, code, phone)
     status_code = int(re.match(r'\{"code":(-?\d+),.*', response_status).group(1))
-    print response_status
     if status_code != 0:
-        print "error!"
         record.is_active = False
         record.save()
-    return HttpResponse("")
+        return JsonResponse({'success': False, 'data': {}})
+    return JsonResponse({'success': True})
+
+
+@login_required()
+def manage_an_activity(request):
+    if request.method == "POST":
+        optype = request.POST.get("optype", "")
+        action_id = request.POST.get("action", "")
+        target_id = request.POST.get("target", "")
+    else:
+        optype = request.GET.get("optype", "")
+        action_id = request.GET.get("action", "")
+        target_id = request.GET.get("target", "")
+    activity = get_object_or_404(Activity, id=int(action_id))
+    if not activity.host == request.user:
+        return JsonResponse({"success": False, "data": {"error": "Permission Denied"}})
+    elif not activity.is_active:
+        return JsonResponse({"success": False, "data": {"error": "该活动不存在"}})
+    if optype == "approve":
+        if ApplicationThrough.objects.filter(activity=activity, is_active=True, status="approved").count() >= activity.max_attend:
+            return JsonResponse({"success": True, "data": {"error": "该活动已报满"}})
+        target = get_object_or_404(get_user_model(), id=target_id)
+        applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
+        applicant.status = "approved"
+        applicant.save()
+        # send a message to the target
+        send_notification.send(sender=get_user_model(),
+                               notification_center=target.notification_center,
+                               notification_type="activity_notification",
+                               activity=activity,
+                               user=target,
+                               activity_notification_type="apply_approved")
+        return JsonResponse({"success": True, "data": {}})
+    elif optype == "approve_cancel":
+        target = get_object_or_404(get_user_model(), id=target_id)
+        applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
+        if not applicant.status == "approved":
+            return JsonResponse({"success": False, "data": {}})
+        applicant.status = "applying"
+        applicant.save()
+        # I'm not sure about which kind of notification should be sent here
+        return JsonResponse({"success": True, "data": {}})
+    elif optype == "deny":
+        target = get_object_or_404(get_user_model(), id=target_id)
+        applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
+        applicant.status = "denied"
+        applicant.save()
+        # No notification if defined here
+        # send a message to the target
+        send_notification.send(sender=get_user_model(),
+                               notification_center=target.notification_center,
+                               notification_type="activity_notification",
+                               activity=activity,
+                               user=target,
+                               activity_notification_type="apply_rejected")
+        return JsonResponse({"success": True, "data": {}})
+    elif optype == "deny_cancel":
+        target = get_object_or_404(get_user_model(), id=target_id)
+        applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
+        if not applicant.status == "denied":
+            return JsonResponse({"success": False, "data": {}})
+        applicant.status = "applying"
+        applicant.save()
+        return JsonResponse({"success": True, "data": {}})
+    elif optype == "finish":
+        target = get_object_or_404(get_user_model(), id=target_id)
+        applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
+        if not (applicant.status == "approved" and activity.status == 2):
+            return JsonResponse({"success": False, "data": {}})
+        applicant.status = "finished"
+        applicant.save()
+        # Send Notification to the target user
+        send_notification.send(sender=get_user_model(),
+                               notification_center=target.notification_center,
+                               notification_type='activity_notification',
+                               activity=activity,
+                               user=target,
+                               activity_notification_type='activity_finished')
+        # Check if this target user is recommended
+        try:
+            share_record = ShareRecord.objects.get(application=applicant,
+                                                   target_user=target,
+                                                   is_active=True)
+            share_record.finished = True
+            share_record.save()
+            send_notification.send(sender=get_user_model(),
+                                   notification_center=share_record.share.user.notification_center,
+                                   notification_type="activity_notification",
+                                   activity=activity,
+                                   user=target,
+                                   activity_notification_type="share_finished")
+        except ObjectDoesNotExist:
+            logger.debug(u"用户|%s(id: %s)|完成了活动|%s(id: %s)|，但是没有找到相应分享链接" % (
+                target.username, target.id, activity.name, activity.id))
+        return JsonResponse({"success": True, "data": {}})
+    elif optype == "finish_cancel":
+        return JsonResponse({"success": False, "data": {}})
+    elif optype == "detail":
+        pass
+    elif optype == "excel":
+        def generate_excel_data():
+            applicants = ApplicationThrough.objects.filter(activity=activity,
+                                                           is_active=True)
+            column_names = [u"用户姓名", u"性别", u"出生日期", u"年龄", u"联系方式", u"报名时间", u"申请状态"]
+
+            def row_generator(app):
+                # accept the applicant data as input, output the row data for the excel file
+                row_user_profile = app.user.profile
+                row_data = [row_user_profile.name,
+                            row_user_profile.get_gender_display(),
+                            row_user_profile.birthDate,
+                            row_user_profile.age,
+                            row_user_profile.phoneNum,
+                            timezone.make_naive(timezone.localtime(app.apply_at)),
+                            app.get_status_display()]
+                return row_data
+
+            data = map(row_generator, applicants)
+            return [column_names] + data
+        excel_data = generate_excel_data()
+        return excel_response.ExcelResponse(excel_data, output_name=(activity.name+u"报名列表").encode("utf-8"))
+    elif optype == "ready_required":
+        pass
+
+
+@login_required()
+def mine_info(request):
+    user = request.user
+    args = {"user": user}
+    args.update(csrf(request))
+    return render(request, "Profile/mobile/mine.html", args)
+
+
+@require_POST
+@login_required()
+def exchange_for_rmb(request):
+    """This view is responsible for managing the rice coin exchange"""
+    coin = int(request.POST['num'])                # 需要兑换的米币数量
+    zfb_accout = request.POST['alipay']         # 对应的支付宝账户
+    rmb = coin * 1
+    profile = request.user.profile
+    print coin, request.user.profile.coin
+    if coin > request.user.profile.coin:
+        logger.debug(u"兑换米币失败，对应的用户为|%s(id: %s)|，兑换的米币为%s, 米币余额为%s" %
+                     (request.user.profile.name, request.user.username, rmb, request.user.profile.coin))
+        return JsonResponse({'success': False, 'data': {'coin': u'米币不足'}})
+    else:
+        WelfareGift.objects.create(target=request.user, zfb_account=zfb_accout, rmb=rmb)
+        profile.coin -= rmb
+        profile.save()
+        logger.debug(u"兑换米币成功，对应的用户为|%s(id: %s)|，兑换的米币为%s, 米币余额为%s" %
+                     (request.user.profile.name, request.user.username, rmb, request.user.profile.coin))
+        return JsonResponse({'success': True, 'data': {'coin': profile.coin}})

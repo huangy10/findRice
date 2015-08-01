@@ -15,6 +15,7 @@
         <span id="group-mibi">团队米币<em>{{ user.rice_team.team_coin }}</em></span>
     </div>
     <div id="tbl">
+	{% if contributions %}
         <table>
             <thead>
             <tr>
@@ -29,7 +30,7 @@
                 <td>
                     <span class="seqno">{{ forloop.counter }}.</span>
                     <span class="portrait-c"><img src="{{ contrib.user.profile.avatar.url }}"></span>
-                    <span class="name">{{ contrib.user.profile.name }}</span>
+                    <span class="name fn-overflow" title="{{ contrib.user.profile.name }}">{{ contrib.user.profile.name }}</span>
                 </td>
                 <td class="center">{{ contrib.contributed_coin }}</td>
                 <td class="center">{{ contrib.user.rice_team.team_coin }}</td>
@@ -37,5 +38,6 @@
             {% endfor %}
             </tbody>
         </table>
+	{% endif %}
     </div>
 {% endblock %}

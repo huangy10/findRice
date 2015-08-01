@@ -1,0 +1,68 @@
+{% extends "Profile/mobile/item_base.html" %}
+
+{% block operation %}
+    {% if act.is_published %}
+        {% if act.status == 0 %}
+            {% if act.accept_apply %}
+                {# Note: the code below has been deprecated #}
+                <div class="zui-align-center activity-status">
+                    <div class="zui-btn zui-btn-important btn-nostart">尚未开始</div>
+                    <span class="btn-tip-text">点击可开始</span>
+                </div>
+                <!--<button class="z-btn green">报名中</button>-->
+                <!--<a class="apply-forbidden" href="javascript:;">截止报名</a>-->
+            {% else %}
+                <button class="z-btn red">截止报名</button>
+                <a class="apply-resume" href="javascript:;">恢复报名</a>
+            {% endif %}
+        {% elif act.status == 1 %}
+            <div class="zui-align-center activity-status">
+                <div class="zui-btn zui-btn-action btn-start">已经开始</div>
+                <span class="btn-tip-text">点击可结束</span>
+            </div>
+            <!--<button class="z-btn starting">已经开始</button>-->
+        {% else %}
+            <div class="zui-align-center activity-status">
+                <div class="zui-btn zui-btn-important btn-end">已经结束</div>
+                <span class="btn-tip-text">点击可开始</span>
+            </div>
+            <!--<button class="z-btn red no-shift">已经结束</button>-->
+        {% endif %}
+    {% else %}
+        <div class="zui-align-center activity-status">
+            <div class="zui-btn zui-btn-important btn-nostart">尚未发布</div>
+            <span class="btn-tip-text publish">点击发布</span>
+{#            <button class="zui-btn red">尚未发布</button>#}
+{#            <a class="publish" href="javascript:;">点击发布</a>#}
+        </div>
+    {% endif %}
+
+    <div class="activity-operation">
+        <div class="zui-flex">
+            <div class="zui-cell">
+                <a href="//zhao-mi.net/m/demo/activity-apply-list.html" class="zui-btn">查看报名表单</a>
+            </div>
+{#            <div class="zui-cell zui-flex-fixed">#}
+{#                <div class="operation-btn ">#}
+{#                    <i class="zui-icon icon-share"></i>#}
+{#                </div>#}
+{#            </div>#}
+            <div class="zui-cell zui-flex-fixed">
+                <div class="operation-btn delete" data-action="/action/{{ act.id }}/delete">
+                    <i class="zui-icon icon-delete"></i>
+                </div>
+
+            </div>
+            <div class="zui-cell zui-flex-fixed">
+                <div class="operation-btn duplicate" data-action="/action/{{ act.id }}/duplicate">
+                    <i class="zui-icon icon-copy"></i>
+                </div>
+            </div>
+            <div class="zui-cell zui-flex-fixed">
+                <div class="operation-btn edit" data-action="/action/{{ act.id }}/edit/1">
+                    <i class="zui-icon icon-edit"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

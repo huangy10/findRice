@@ -1,0 +1,28 @@
+{% extends "Profile/mobile/item_base.html" %}
+{% load loadApplicantInfo %}
+{% block operation %}
+    <div class="main">
+    {% load_applicant act user %}
+    {% if applicant %}
+        {% if act.status == 0 %}
+            <div class="zui-align-center activity-status">
+                <div class="zui-btn zui-btn-action btn-applying">报名中</div>
+            </div>
+            <!--<a href="javascript:;" class="unapply">取消申请</a>-->
+        {% elif act.status == 1 %}
+            <div class="zui-align-center activity-status">
+                <div class="zui-btn zui-btn-action btn-start">已经开始</div>
+            </div>
+            <!--<button class="z-btn starting">已经开始</button>-->
+        {% else %}
+            <div class="zui-align-center activity-status">
+                <div class="zui-btn zui-btn-important btn-end">已经结束</div>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="zui-align-center activity-status">
+            <div class="zui-btn btn-noapply">未报名</div>
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}

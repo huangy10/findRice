@@ -1,0 +1,138 @@
+{% load duration_filter %}
+<!doctype html>
+<html>
+<head>
+    <title>个人中心</title>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
+    <link href="//zhao-mi.net/m/lib/mobiscroll/css/mobiscroll.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery-form/jquery.form.js"></script>
+    <script src="//zhao-mi.net/m/lib/mobiscroll/js/mobiscroll.js" type="text/javascript"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/build/mine.js"></script>
+</head>
+<body>
+<div class="wrapper" id="pageMine">
+    <div class="header zui-flex" id="header">
+        <div class="zui-cell logo-warp">
+            <a href="/" class="logo item">找米</a>
+        </div>
+        <div class="">
+            <div class="nav">
+                <a href="/searchpage" class="nav-item">
+                    <i class="zui-icon icon-search"></i>
+                </a>
+                <a href="/action/new/create/1" class="nav-item">
+                    <i class="zui-icon icon-plus"></i>
+                </a>
+                <a href="/user/msg" class="nav-item active">
+                    {% if user.notification_center.unread_notifications_count %}
+                        <span class="number">{{ user.notification_center.unread_notifications_count }}</span>
+                    {% endif %}
+                    <i class="zui-icon icon-email"></i>
+                </a>
+                <a href="/mine/start" class="nav-item user">
+                    <img src="{{ user.profile.avatar.url }}" alt=""/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="tab-wrapper top-tab">
+        <div class="tab clearfix">
+            <div class="tab-item active">
+                <a href="/mine/start" class="tab-item-a">我发起的活动</a>
+            </div>
+            <div class="tab-item">
+                <a href="/mine/apply" class="tab-item-a">我报名的活动</a>
+            </div>
+            <div class="tab-item">
+                <a href="/mine/like" class="tab-item-a">我关注的活动</a>
+            </div>
+            <div class="tab-item">
+                <a href="/mine/group" class="tab-item-a">我的米团</a>
+            </div>
+            <div class="tab-item">
+                <a href="/mine/info" class="tab-item-a">我的信息</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-center" id="userCenterPage">
+        <div id="user-msg" class="content">
+            <form id="personal-info-form" action="/user/modify" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="user-msg">
+                    <div class="user-pic">
+                        <div class="img upload-img-box">
+                            <img src="{{ user.profile.avatar.url }}" alt="" class=""/>
+                            <label for="upload-image" class="upload-image">
+                                <i class="zui-icon icon-photo"></i>
+                                <input type="file" name="portrait" id="upload-image" />
+                            </label>
+                        </div>
+                        <div class="btn-edit ">
+                            <i class="zui-icon icon-edit"></i>修改信息
+                        </div>
+
+                        <button type="submit" class="zui-btn btn-save">
+                            保存
+                        </button>
+                    </div>
+                    <div class="name edit-item" id="name">
+                        <input type="text" class="zui-input edit-input user-name" name="name" value="{{ user.profile.name }}" />
+                        <span class="display-text user-name-text">{{ user.profile.name }}</span>
+                    </div>
+                    <div class="mibi">
+                        {{ user.profile.coin }}个米币
+                    </div>
+                </div>
+                <div class="operation-content">
+                    <div class="zui-align-center ops">
+                        <a href="javascript:void(0)" class="zui-btn exchange">兑换米币</a>
+                    </div>
+                    <div class="other-msg">
+
+                        <div class="edit-item mobile">
+                            <span class="display-text">{{ user.profile.phoneNum }}</span>
+                        </div>
+
+                        <div class="edit-item gender" id="gender">
+                            <select name="gender" class="edit-input" value="{{ user.profile.gender }}">
+                                <option value="m" {% if user.profile.gender == 'm' %}selected{% endif %}>男</option>
+                                <option value="f" {% if user.profile.gender == 'f' %}selected{% endif %}>女</option>
+                            </select>
+                            <span class="display-text">{{ user.profile.get_gender_display }}</span>
+                        </div>
+
+                        <div class="edit-item bday" id="age">
+                            <input type="text" name="bday" value="{{ user.profile.birthDate|datefilter }}" placeholder="请选择生日" class="zui-input edit-input" />
+                            <span class="display-text">{{ user.profile.age }}岁</span>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="exchange-box">
+        <p class="exchange-txt">米币余额大于200的用户可以兑换米币提现，找米平台将于每月1日，15日向您的支付宝打款</p>
+        <div class="exchange-input">
+            <div class="exchange-item">
+                <span class="exchange-img exchange-img-mi"></span>
+                <input type="text" class="exchange-num" placeholder="请填写您希望兑换的米币金额">
+            </div>
+            <div class="exchange-item">
+                <span class="exchange-img exchange-img-alipay"></span>
+                <input type="text" class="exchange-alipay" placeholder="请留下您的支付宝账号">
+            </div>
+        </div>
+        <div class="exchange-btn">
+            <button class="zui-btn green">兑换</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

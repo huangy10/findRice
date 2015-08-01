@@ -1,0 +1,237 @@
+{% load duration_filter %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>创建活动第一步</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="//zhao-mi.net/m/lib/mobiscroll/css/mobiscroll.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
+    <script src="//zhao-mi.net/m/lib/mobiscroll/js/mobiscroll.js" type="text/javascript"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/build/create-basic.js"></script>
+</head>
+<body>
+<div  class="wrapper page-process-01" id="pageCreateAction">
+    <div class="header zui-flex" id="header">
+        <div class="zui-cell logo-warp">
+            <a href="/" class="logo item">找米</a>
+        </div>
+        <div class="zui-cell zui-flex-fixed ">
+            <div class="nav">
+                <a href="/searchpage" class="nav-item">
+                    <i class="zui-icon icon-search"></i>
+                </a>
+                <a href="/" class="nav-item {% if not act %}active{% endif %}">
+                    <i class="zui-icon icon-plus"></i>
+                </a>
+                <a href="/user/msg" class="nav-item">
+                    {% if user.notification_center.unread_notifications_count %}
+                        <span class="number">{{ user.notification_center.unread_notifications_count }}</span>
+                    {% endif %}
+                    <i class="zui-icon icon-email"></i>
+                </a>
+                <a href="/mine/start" class="nav-item user">
+                    <img src="{{ user.profile.avatar.url }}" alt=""/>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="banner">
+
+        <div class="process  zui-flex">
+            <div class="zui-cell zui-flex-fixed">
+                <div class="step step-01">1</div>
+            </div>
+            <div class="zui-cell"><div class="line"></div></div>
+            <div class="zui-cell zui-flex-fixed">
+                <div class="step step-02">2</div>
+            </div>
+            <div class="zui-cell"><div class="line"></div></div>
+            <div class="zui-cell zui-flex-fixed">
+                <div class="step step-03">3</div>
+            </div>
+
+        </div>
+        <img src="//zhao-mi.net/m/modules/detail/img/banner.jpg" alt=""/>
+    </div>
+
+    <div class="main">
+        {% if editing %}
+            <form id="create-action-first" action="/action/{{ action_id }}/edit/1" method="post" id="createActionStep" class="step-01" enctype="multipart/form-data">
+        {% else %}
+            {% if action_id %}
+                <form id="create-action-first" action="/action/{{ action_id }}/create/1" method="post" id="createActionStep" class="step-01" enctype="multipart/form-data">
+            {% else %}
+                <form id="create-action-first" action="/action/new/create/1" method="post" id="createActionStep" class="step-01" enctype="multipart/form-data">
+            {% endif %}
+        {% endif %}
+            {% csrf_token %}
+            <ul>
+                <li>
+                    <div class="active-name">活动名称</div>
+                    <div class="input-wrapper">
+                        <input name="name" type="text" class="zui-input-text" value="{{ act.name }}" id="name" data-required="true" placeholder="请输入活动名称" {% if act %}value="{{ act.name }}"{% endif %}/>
+                    </div>
+                </li>
+                <li>
+                    <div class="active-name">主办方</div>
+                    <div class="input-wrapper">
+                        <input class="zui-input-text" id="host" name="host_name" readonly value="{{ user.profile.name }}">
+{#                        <span class="zui-input-text" id="hostName">{{ user.profile.name }}</span>#}
+                    </div>
+                    <div class="zui-align-right">
+                        <div class="zui-btn">申请成为实名用户</div><i class="zui-icon icon-medal"></i>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="active-name"><i class="zui-icon icon-address"></i>活动地点</div>
+                    <div class="input-wrapper">
+                        <input id="prov_city" type="text" data-required="true"  data-select-area="true" data-select-target="#NowProvince,#NowCity" data-select-title="请选择省份" class="zui-input-text" value="{{ act.province }} {{ act.city }}" id="city" readonly placeholder="选择地区" />
+                        <br/>
+                        <input name="location" type="text" class="zui-input-text" id="other-local-msg" placeholder="输入详细地点" data-required="true" {% if act %}value="{{ act.location }}"{% endif %} />
+                    </div>
+                </li>
+
+                <li>
+                    <div class="active-name"><i class="zui-icon icon-date"></i>活动时间</div>
+                    <div class="input-wrapper ">
+                        <div class="zui-flex">
+                            <div class="zui-cell">
+				<label class="start-date-lbl date-lbl" for="start-date">
+                                <input id="start-date" type="hidden" readonly="readonly"  data-required="true" name="start_time" class="zui-input-text select-date-time" {% if act %}value="{{ act.start_time|datetime_filter }}"{% endif %} placeholder="选择开始时间" />
+                                <span class="ph">{% if act %}{{ act.start_time|datetime_filter}}{% else %}请选择开始时间{% endif %}</span>
+				</label>
+			    </div>
+                            <div class="zui-cell end-time">
+				<label class="end-date-lbl date-lbl" for="end-date">
+                                <input id="end-date" type="hidden" readonly="readonly"  data-required="true" name="end_time" class="zui-cell zui-input-text select-date-time" {% if act %}value="{{ act.end_time|datetime_filter }}"{% endif %} placeholder="选择结束时间" />
+                            <span class="ph">{% if act %}{{ act.end_time|datetime_filter}}{% else %}请选择结束时间{% endif %}</span>
+			    </label>
+			    </div>
+                        </div>
+                        <div class="Validform_checktip  Validform_wrong"></div>
+                    </div>
+
+                </li>
+
+                <li>
+                    <div class="active-name"><i class="zui-icon icon-distance"></i>持续时间</div>
+                    <div class="input-wrapper distance-input">
+                        <div class="zui-flex">
+                            <div class="zui-flex zui-cell">
+                                <div class="zui-cell">
+                                    <input id="id_day" type="text" class="zui-input-text distance-day" name="day" {% if act %}value="{{ act.day }}"{% endif %} data-rule-type="number" />
+                                </div>
+                                <span class="zui-cell "><span class="text">天</span></span>
+                            </div>
+                            <div class="zui-flex zui-cell">
+                                <div class="zui-cell ">
+                                    <input id="id_hour" type="text" class="zui-input-text distance-hour" name="hour" {% if act %}value="{{ act.hour }}"{% endif %} data-rule-type="number" data-min-length="0" data-max-length="23" data-error-msg="请输入0~23" />
+                                </div>
+                                <span class="zui-cell "><span class="text">时</span></span>
+
+                            </div>
+                            <div class="zui-flex zui-cell">
+                                <div class="zui-cell">
+                                    <input id="id_minute" type="text" class="zui-input-text distance-minute" name="minute" {% if act %}value="{{ act.minute }}"{% endif %} data-rule-type="number" data-min-length="0" data-max-length="59" data-error-msg="请输入0~59" />
+                                </div>
+                                <span class="zui-cell "><span class="text">分</span></span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+
+                <li>
+                    <div class="active-name"><i class="zui-icon icon-number"></i>活动人数</div>
+                    <div class="input-wrapper">
+                        <input name="max_attend" type="text" class="zui-input-text" id="id_max_attend" {% if act %}value="{{ act.max_attend }}"{% endif %} placeholder="请输入活动人数" data-rule-type="number" data-min-length="1" data-error-msg="最少人数为1"/>
+                    </div>
+                </li>
+
+
+                <li>
+                    <div class="active-name"><i class="zui-icon icon-price"></i>奖励金额</div>
+                    <div class="input-wrapper">
+                        <input type="text" name="reward" class="zui-input-text" id="id_reward" placeholder="请输入活动奖励" data-rule-type="number" data-min-length="0" data-error-msg="输入有误" data-required="true"
+                                {% if act %}value="{{ act.reward }}"{% endif %}/>
+                    </div>
+                </li>
+
+
+                <li>
+                    <div class="active-name">活动简介</div>
+                    <div class="input-wrapper">
+                        <textarea name="description" id="desc" cols="30" rows="10" class="zui-input-textarea"  placeholder="请输入活动简介" data-required="required" >{% if act %}{{ act.reward }}{% endif %}</textarea>
+                    </div>
+                </li>
+
+
+                <li>
+                    <div class="active-name">活动类型</div>
+                    <div class="input-wrapper select-wrapper">
+                        <input type="hidden" name="activity_type" id="action-type" data-required="true" value="{{ act.activity_type.display_order }}" />
+                        <span  class="select-activity-type"  >
+                            {% if act_type %}
+                                {{ act_type }}
+                            {% else %}
+                                请选择活动类型
+                            {% endif %}
+                        </span>
+
+                        <div class="select-list-content">
+                            {% for type in types %}
+                                <span data-val="{{ forloop.counter0 }}">{{ type.type_name }}</span>
+                            {% endfor %}
+                            <span data-val="-1">其他</span>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li>
+                    <div class="active-name">活动海报</div>
+                    <div class="input-wrapper">
+                        <input type="file" class="zui-input-text" id="poster" placeholder="请选胎动一张活动海报" name="poster"/>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="zui-align-right">
+                <button type="submit" class="zui-btn zui-btn-action">下一步</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+<!--下拉弹出部分 end-->
+<div class="selectdialog" id="SelectDialog">
+    <div class="select-dia-mask">
+    </div>
+    <div class="select-dia-table">
+        <div class="select-dia-cell">
+            <div class="select-dia ">
+            </div>
+        </div>
+    </div>
+</div>
+<script id="dialogarea" type="text/html">
+    <h3>{% templatetag openvariable %}title{% templatetag closevariable %}</h3>
+    <div class="select-dia-con">
+        <ul class="area select-dia-list">
+            {% templatetag openvariable %}each list as value i{% templatetag closevariable %}
+            <li data-value="{% templatetag openvariable %}value.Value{% templatetag closevariable %}" data-index="{% templatetag openvariable %}value.Key{% templatetag closevariable %}" class="select-area-check" data-target="{% templatetag openvariable %}target{% templatetag closevariable %}">{% templatetag openvariable %}value.Value{% templatetag closevariable %}</li>
+            {% templatetag openvariable %}/each{% templatetag closevariable %}
+        </ul>
+    </div>
+</script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>重置密码</title>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery-form/jquery.form.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/build/register.js"></script>
+</head>
+<body>
+<div class="wrapper" id="pageReset">
+    <div class="header">
+        <a href="/" class="zhaomi">找米</a> <a href="/" class="cancel-login"><i class="zui-icon icon-close"></i>取消重置</a>
+    </div>
+    <div class="login-title zui-align-center">重置密码</div>
+    <div class="access-box">
+        <form action="/resetpwd" method="post" class="reset-password" id="resetForm">
+            {% csrf_token %}
+             <div class="input-verifycode zui-flex">
+                 <div class="input-wrapper zui-cell zui-flex">
+                             <div class="zui-flex-fixed icon"><i class="zui-icon icon-phone"></i></div>
+                             <div class="zui-cell"><input type="text" id="mobile" class="phoneNum" placeholder="请输入手机号" name="phoneNum"/></div>
+                 </div>
+                 <div class="zui-flex-fixed">
+                     <a class="zui-btn btn-send-verifycode" id="sendcode">发送验证码</a>
+                 </div>
+             </div>
+            <div class="input-wrapper zui-flex">
+                <div class="zui-flex-fixed icon"><i class="zui-icon icon-verifycode"></i></div>
+                <div class="zui-cell"><input type="text" id="verifycode" name="code" class="zui-cell" placeholder="请输入验证码"/></div>
+            </div>
+
+            <div class="input-wrapper zui-flex">
+                <div class="zui-flex-fixed icon"><i class="zui-icon icon-pwd"></i></div>
+                <div class="zui-cell"><input type="password" maxlength="25"  id="pwd" name="password1" class="zui-cell" placeholder="请输入您的新密码"/></div>
+            </div>
+            <div class="input-wrapper zui-flex">
+                <div class="zui-flex-fixed icon"><i class="zui-icon icon-lock2"></i></div>
+                <div class="zui-cell"><input type="password" id="pwd-confirm" name="password2" class="zui-cell" placeholder="再次输入您的新密码"/></div>
+            </div>
+
+
+            <div class="zui-align-right bottom-text">
+                <button type="submit" class="zui-btn zui-btn-action login-btn">提交</button>
+            </div>
+
+
+            <div class="verify-result-msg ">
+                <div class="input-wrapper zui-flex error">
+                    <div class="zui-flex-fixed icon"><i class="zui-icon icon-lock"></i></div>
+                    <div class="zui-cell"><span class="verify-pwd">*****</span><span class="error-text"></span></div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

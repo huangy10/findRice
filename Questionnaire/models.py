@@ -38,7 +38,8 @@ class Question(models.Model):
 
     questionnaire = models.ForeignKey(Questionnaire)
     order_in_list = models.IntegerField(default=1)  # 在问卷列表中的顺序，从1开始
-
+    
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
     class Meta:
         """这个表不需要创建，创建其子类的表即可"""
         abstract = True
@@ -56,6 +57,7 @@ class ChoiceQuestion(Question):
     class Meta:
         verbose_name = "选择题"
         verbose_name_plural = "选择题"
+	ordering = ["created_at"]
 
 
 TEXT_QUESTION_TYPE = 0
@@ -73,6 +75,7 @@ class NonChoiceQuestion(Question):
     class Meta:
         verbose_name = "主观题"
         verbose_name_plural = "主观题"
+	ordering = ["created_at"]
 
 
 class Choice(models.Model):
@@ -92,7 +95,7 @@ class Choice(models.Model):
         alphabeta = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         order = "Z"
         if self.order_in_list < 26:
-            order = alphabeta[self.order_in_list-1]
+            order = alphabeta[self.order_in_list]
         return order + "."+self.description.encode("utf-8")
 
     class Meta:
@@ -109,6 +112,9 @@ class AnswerSheet(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     modified_at = models.DateTimeField(auto_now=True, editable=False)
     is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.user.profile.name.encode("utf-8")
 
     def clean(self):
         # 检索出必答的题目
@@ -178,6 +184,7 @@ class MultiChoiceAnswer(Answer):
                                         multi_choice=True).order_by("order_in_list")
         des = ""
         for c in choices:
+
             des += (str(c)+" ")
         return des
 
@@ -211,19 +218,18 @@ class TextAnswer(Answer):
         verbose_name_plural = "简答题"
 
     def __str__(self):
-        return self.text
+        return self.text.encode("utf-8")
 
 
-def get_file_name_from_date(act, filename):
+def get_file_name_from_date(ans, filename):
     ext = filename.split('.')[-1]
     filename = "%s.%s" % (uuid.uuid4(), ext)
-    tz = timezone.get_current_timezone()
-    time = tz.normalize(act.created_at)
+    time = timezone.now()
     return "file_answers/%s/%s/%s/%s" % (time.year, time.month, time.day, filename)
 
 
 class FileAnswer(Answer):
-    file = models.FileField(upload_to=get_file_name_from_date)
+    file = models.ImageField(upload_to=get_file_name_from_date)
     question = models.ForeignKey(NonChoiceQuestion)
     is_image = models.BooleanField(default=True)
 
@@ -233,6 +239,3 @@ class FileAnswer(Answer):
 
     def clean(self):
         pass
-
-    def __str__(self):
-        return self.file

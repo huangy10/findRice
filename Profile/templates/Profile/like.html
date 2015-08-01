@@ -1,5 +1,6 @@
 {% extends "Profile/mine_base.html" %}
-
+{% load loadApplicantInfo %}
+{% load loadLikeInfo %}
 {% block title %}我关注的活动{% endblock %}
 
 {% block categories %}
@@ -7,4 +8,31 @@
     <a class="mine-apply" href="/mine/apply?from=0&size=12">我报名的活动</a>
     <a class="mine-like selected">我关注的活动</a>
     <a class="mine-group" href="/mine/group?from=0&size=12">我的米团</a>
+{% endblock %}
+
+{% block operation %}
+    <div class="main">
+    {% load_applicant act user %}
+    {% if applicant %}
+        {% if act.status == 0 %}
+            <button class="z-btn green">报名中</button>
+            <a href="javascript:;" class="unapply">取消申请</a>
+        {% elif act.status == 1 %}
+            <button class="z-btn starting">已经开始</button>
+        {% else %}
+            <button class="z-btn red no-shift">已经结束</button>
+        {% endif %}
+    {% else %}
+        <button class="z-btn notapplyed">未报名</button>
+    {% endif %}
+    </div>
+{% endblock %}
+{% block share %}
+    <span class="share"></span>
+    {% load_like act user %}
+    {% if like %}
+    <span class="like selected"></span>
+    {% else %}
+    <span class="like"></span>
+    {% endif %}
 {% endblock %}

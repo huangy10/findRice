@@ -4,11 +4,14 @@
 <head>
     <title>注册页面 - 基本信息</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="icon" type="image/png" href="//zhao-mi.net/favicon.png">
     {# <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script> #}
+    {# <script type="text/javascript" src="{% static "lib/jquery-form/jquery.form.js" %}"></script> #}
     {# <script type="text/javascript" src="{% static "build/register.js" %}"></script> #}
-    <script type="text/javascript" src="//zhaomi.biz/lib/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="//zhaomi.biz/lib/jquery-form/jquery.form.js"></script>
-    <script type="text/javascript" src="//zhaomi.biz/build/register.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/build/register.js"></script>
 </head>
 <body>
     <div id="header">
@@ -40,9 +43,12 @@
                 <span id="or-txt">或</span>
                 <p>通过社交账号直接登录</p>
                 <div id="socials">
-                    <span id="wechat"></span>
-                    <span id="qq"></span>
-                    <span id="sina" class="last"></span>
+                    <a href="" id="wechat"></a>
+                    <a href="{% url "social:begin" backend='qq' %}" id="qq"><i class="zui-icon icon-qq"></i></a>
+                    <a href="" id="sina" class="last"></a>
+{#                    <a id="wechat"></a>#}
+{#                    <span id="qq"></span>#}
+{#                    <span id="sina" class="last"></span>#}
                 </div>
             </div>
         </form>

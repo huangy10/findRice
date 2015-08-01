@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>注册</title>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="//zhao-mi.net/m/lib/mobiscroll/css/mobiscroll_002.css" rel="stylesheet" type="text/css">
+    <link href="//zhao-mi.net/m/lib/mobiscroll/css/mobiscroll.css" rel="stylesheet" type="text/css">
+    <link href="//zhao-mi.net/m/lib/mobiscroll/css/mobiscroll_003.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
+    <script src="//zhao-mi.net/m/lib/mobiscroll/js/mobiscroll_002.js" type="text/javascript"></script>
+    <script src="//zhao-mi.net/m/lib/mobiscroll/js/mobiscroll_004.js" type="text/javascript"></script>
+    <script src="//zhao-mi.net/m/lib/mobiscroll/js/mobiscroll.js" type="text/javascript"></script>
+    <script src="//zhao-mi.net/m/lib/mobiscroll/js/mobiscroll_003.js" type="text/javascript"></script>
+    <script src="//zhao-mi.net/m/lib/mobiscroll/js/mobiscroll_005.js" type="text/javascript"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery-form/jquery.form.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/build/register.js"></script>
+
+</head>
+<body>
+<div class="wrapper" id="pageRegister">
+    <div class="header">
+        <a href="/" class="zhaomi logo logo-white">找米</a> <a href="/" class="cancel-login"><i class="zui-icon icon-close"></i>取消注册</a>
+    </div>
+    <div class="register-title zui-align-center">验证手机/补充信息</div>
+    <form action="/register" method="post" enctype="multipart/form-data" id="register">
+        {% csrf_token %}
+        <div class="zui-aligin-center">
+            <div class="upload-img-box img">
+                <img src="//zhao-mi.net/m/assets/img/user.png" alt="" class=""/>
+                <label for="upload-image" class="upload-image">
+                    <i class="zui-icon icon-photo-gray"></i>
+                    <input type="file" name="avatar" id="upload-image" />
+                </label>
+            </div>
+        </div>
+        <div class="access-box">
+            <div class="input-verifycode zui-flex">
+                <div class="input-wrapper zui-cell zui-flex">
+                    <div class="zui-flex-fixed icon"><i class="zui-icon icon-phone"></i></div>
+                    <div class="zui-cell"><input id="mobile" type="text" placeholder="请输入手机号" name="phoneNum" class="phone"/></div>
+                </div>
+                <div class="zui-flex-fixed">
+                    <a class="zui-btn btn-send-verifycode" id="sendcode">发送验证码</a>
+                </div>
+            </div>
+
+            <div class="input-wrapper zui-flex">
+                <div class="zui-flex-fixed icon"><i class="zui-icon icon-verifycode"></i></div>
+                <div class="zui-cell"><input type="text" id="verifycode" name="code"  class="zui-cell" placeholder="请输入验证码"/></div>
+            </div>
+            <div class="input-wrapper zui-flex">
+                <div class="zui-cell"><input type="text" class="zui-cell" placeholder="请输入姓名/企业名" name="name" id="name"/></div>
+            </div>
+
+            <div class="input-wrapper zui-flex">
+                <div class="zui-cell">
+                    <input id="bday" readonly="readonly" name="birthDate" id="appDate" type="text" placeholder="请输入日期" />
+                </div>
+                <div class="zui-flex-fixed">
+                    <i class="zui-icon icon-arrow-up"></i>
+                </div>
+            </div>
+
+            <div class="input-wrapper zui-flex">
+                <div class="zui-cell">
+                    <select name="gender" id="gender">
+                        <option value="m">男</option>
+                        <option value="f">女</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="zui-align-right bottom-text">
+                <a class="zm-declaration" href="//zhao-mi.net/m/demo/declaration.html">找米免费声明</a>
+                <button type="submit" class="zui-btn zui-btn-action register-btn">注册</button>
+            </div>
+
+
+            <div class="verify-result-msg ">
+                <div class="input-wrapper zui-flex error">
+                    <div class="zui-flex-fixed icon"><i class="zui-icon icon-lock"></i></div>
+                    <div class="zui-cell"><span class="verify-pwd">*****</span><span class="error-text"></span></div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

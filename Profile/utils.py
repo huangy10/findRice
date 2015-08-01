@@ -4,6 +4,8 @@
 import httplib
 import urllib
 
+from django.http import Http404
+
 # 服务地址
 host = "yunpian.com"
 # 端口号
@@ -23,3 +25,20 @@ def send_sms(apikey, text, mobile):
     response_str = response.read()
     conn.close()
     return response_str
+
+
+def from_size_check_required(method):
+    def wrapper(request, *args, **kwargs):
+        try:
+            start = int(request.GET.get("from", "0"))
+        except ValueError:
+            raise Http404
+        try:
+            size = int(request.GET.get("size", "12"))
+            if size < 0:
+                raise Http404
+        except ValueError:
+            raise Http404
+        return method(request, size=size, start=start,
+                      *args, **kwargs)
+    return wrapper

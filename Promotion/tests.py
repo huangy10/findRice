@@ -42,7 +42,7 @@ class ShareTest(TestCase):
 
     def test_share_link_creation(self):
         share_link = self.share.get_share_link()
-        groups = re.match(r"^http://zhaomi.biz/action/(\d+)\?code=(\S+)$", share_link).groups()
+        groups = re.match(r"^/action/(\d+)\?code=(\S+)$", share_link).groups()
         self.assertEqual(groups[0], str(self.share.activity_id))
         self.assertEqual(groups[1], self.share.share_code)
 
@@ -158,8 +158,8 @@ class CoinSystemTest(TestCase):
     def test_auto_settlement(self):
         """测试自动结算"""
         # 点击进入活动，生成记录
-        share_record = ShareRecord.objects.create(share=self.share,
-                                                  target_user=self.guest)
+        share_record = ShareRecord.objects.get_or_create(share=self.share,
+                                                         target_user=self.guest)[0]
         reward = self.activity.reward_for_share     # 分享应该得到的奖励
         reward_for_finished = self.activity.reward_for_share_and_finished_percentage * self.activity.reward
         # 成功进入活动，注意问卷填写与检查不在这里测试范围之内

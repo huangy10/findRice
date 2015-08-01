@@ -1,26 +1,38 @@
 # coding=utf-8
 import os
 import uuid
+import copy
 
 from django.conf import settings
 from django.db import models
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.utils import timezone
+from django.core.exceptions import ValidationError, ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.urlresolvers import reverse
 
 # Create your models here.
 
 
-DEFAULT_POSTER_PATH = os.path.join(settings.MEDIA_ROOT, 'defaultPosters', 'default.jpg')
+DEFAULT_POSTER_PATH = "defaultPosters/default.jpg"
+
+
+class ActivityTypeManager(models.Manager):
+
+    def create(self, **kwargs):
+        num = ActivityType.objects.all().count()
+        kwargs.update({"display_order": num})
+        return super(ActivityTypeManager, self).create(**kwargs)
 
 
 class ActivityType(models.Model):
     """为了活动类型的可扩展性，这里将活动类型设定为一个类，由后台设置"""
     type_name = models.CharField(max_length=20)
     description = models.CharField(max_length=100)  # 类型描述应该精简
-    display_order = models.IntegerField(default=0)  # 显示排序的按照这个值进行排序，如果出现相同的值，其属性可能会不稳定
+    display_order = models.IntegerField(default=0, editable=False)  # 显示排序的按照这个值进行排序，如果出现相同的值，其属性可能会不稳定
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     modified_at = models.DateTimeField(auto_now=True, editable=False)
+
+    objects = ActivityTypeManager()
 
     def __str__(self):
         return self.type_name.encode("utf-8")
@@ -28,12 +40,12 @@ class ActivityType(models.Model):
     class Meta:
         verbose_name = "活动类型"
         verbose_name_plural = "活动类型"
-        ordering = ["-created_at"]
+        ordering = ["display_order"]
 
 
 def get_activity_poster_path(act, filename):
     ext = filename.split('.')[-1]
-    filename = "%s.%s" % (uuid.uuid4(), ext)
+    filename = ("%s.%s" % (uuid.uuid4(), ext)).replace("-", "")
     time = act.created_at
     return "posters/%s/%s/%s/%s" % (time.year, time.month, time.day, filename)
 
@@ -43,6 +55,9 @@ class Activity(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
     is_active = models.BooleanField(default=True)   # 删除的适合将其设置为false即可
+    is_published = models.BooleanField(default=False)
+    accept_apply = models.BooleanField(default=True)
+
     activity_type = models.ForeignKey(ActivityType, null=True)
 
     name = models.CharField(max_length=200, verbose_name="活动名称")
@@ -50,16 +65,46 @@ class Activity(models.Model):
     host_name = models.CharField(max_length=50, verbose_name="主办方名称")   # 注意这里的名称一开始是用User里面的名称填充的，但是可以修改
 
     location = models.CharField(max_length=200, verbose_name="活动地点")
+    province = models.CharField(max_length=20, verbose_name="省份")
+    city = models.CharField(max_length=100, verbose_name="城市")
+
+    @property
+    def loc_description(self):
+        if self.city == u"全部地区":
+            return self.province + self.location
+        return self.province + self.city+self.location
+
     description = models.TextField(verbose_name="活动简介")
 
     start_time = models.DateTimeField(verbose_name="开始时间")
     end_time = models.DateTimeField(verbose_name="结束时间")
     last_length = models.IntegerField(verbose_name="持续时间(min)")
 
+    @property
+    def day(self):
+        return self.last_length / (60*24)
+
+    @property
+    def hour(self):
+        return (self.last_length / 60) % 24
+
+    @property
+    def minute(self):
+        return self.last_length % 60
+
     reward = models.IntegerField(verbose_name="奖励金额")
-    reward_for_share = models.IntegerField(default=5)       # 分享这个活动所得到的奖励
+    # 分享这个活动所得到的奖励， 这个一个属性被废弃，但是暂时未删除，这个属性主要涉及到Promotion应用中对分享的处理
+    reward_for_share = models.IntegerField(default=0)
     # 其他用户经由分享链接完成活动时分享人获得的奖励比例
     reward_for_share_and_finished_percentage = models.FloatField(default=0.1)
+    # This property is the maximum share reward one user can get.
+    # The administrator can change it. However, the new value won't affect the share records which are created before
+    # the change
+    reward_share_limit = models.IntegerField(default=500, verbose_name='分享奖励上限')
+
+    @property
+    def share_reward(self):
+        return int(self.reward * self.reward_for_share_and_finished_percentage)
 
     max_attend = models.IntegerField(verbose_name="允许报名的最大人数", default=10)
     min_attend = models.IntegerField(verbose_name="最少需要的人数", default=0)
@@ -72,11 +117,26 @@ class Activity(models.Model):
     num_limited = models.BooleanField(default=False, verbose_name="限额报名")
     identified = models.BooleanField(default=False, verbose_name="是否认证")
 
-    status = models.IntegerField(choices=(
+    act_status = models.IntegerField(choices=(
         (0, "尚未开始"),
         (1, "已经开始"),
         (2, "已经结束"),
     ), default=0, verbose_name="活动状态")
+
+    @property
+    def status(self):
+        now = timezone.now()
+        if now < self.start_time:
+            self.act_status = 0
+        elif now < self.end_time:
+            self.act_status = 1
+        else:
+            if self.act_status != 2:
+                pass
+            self.act_status = 2
+
+        return self.act_status
+
     manually_start_time = models.DateTimeField(verbose_name="手动开始时间", null=True, editable=False)
     manually_end_time = models.DateTimeField(verbose_name="手动结束时间", null=True, editable=False)
 
@@ -89,18 +149,32 @@ class Activity(models.Model):
     liked_by = models.ManyToManyField(settings.AUTH_USER_MODEL, through="ActivityLikeThrough",
                                       related_name="liked_activity")
 
+    """备份对象，注意备份对象应该总是in_active的"""
+    backup = models.ForeignKey("self", related_name="master", null=True, blank=True)
+
     def __str__(self):
         return self.name.encode("utf-8")
 
     def get_duration_description(self):
-        return self.start_time.strftime("%y/%m/%d %H:%M")+" - "+self.end_time.strftime("%y/%m/%d")
+        tz = timezone.get_current_timezone()
+        return tz.normalize(self.start_time).strftime("%y/%m/%d %H:%M")+" - "+tz.normalize(self.end_time).strftime("%y/%m/%d")
 
     def get_applying_num(self):
         return ApplicationThrough.objects.filter(activity=self,
-                                                 status="applying").count()
+                                                 status="approved").count()
 
     def get_absolute_url(self):
         return reverse("detail", args=[str(self.id),])
+
+    def get_backup(self):
+        if self.backup is None:
+            tmp = copy.copy(self)
+            tmp.id = None
+            tmp.is_active = False
+            tmp.save()
+            self.backup = tmp
+            self.save()
+        return self.backup
 
     class Meta:
         ordering = ["-created_at"]
@@ -111,11 +185,40 @@ class Activity(models.Model):
 class ActivityLikeThrough(models.Model):
     activity = models.ForeignKey(Activity, related_name="like_through")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="like_through")
+    is_active = models.BooleanField(default=True)
 
     like_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
         super(ActivityLikeThrough, self).save(*args, **kwargs)
+
+
+class ApplicationThroughManager(models.Manager):
+
+    def try_to_apply(self, **kwargs):
+        act = kwargs["activity"]
+        user = kwargs["user"]
+        if act.status != 0 or not act.accept_apply:
+            try:
+                obj = super(ApplicationThroughManager, self).get(activity=act, user=user, is_active=True)
+                return obj, False, "该活动无法申请，活动已完成或活动报名已关闭"
+            except ObjectDoesNotExist:
+                return None, False, "该活动无法申请，活动已完成或活动报名已关闭"
+            except MultipleObjectsReturned:
+                return None, False, "该活动无法申请，活动已完成或活动报名已关闭"
+        else:
+            obj, created = super(ApplicationThroughManager, self).get_or_create(activity=act, user=user)
+            if not obj.is_active:
+                obj.is_active = True
+                obj.status = "applying"
+                obj.apply_at = timezone.now()
+                obj.save()
+                return obj, True
+            else:
+                if created:
+                    return obj, created
+                else:
+                    return obj, created, "已经报名过该活动"
 
 
 class ApplicationThrough(models.Model):
@@ -134,6 +237,8 @@ class ApplicationThrough(models.Model):
         ("finished", "已完成")
     ), default="applying", max_length=10, verbose_name="状态")
     is_active = models.BooleanField(default=True, help_text="don't set this manually")
+
+    objects = ApplicationThroughManager()
 
     def save(self, *args, **kwargs):
         super(ApplicationThrough, self).save(*args, **kwargs)

@@ -1,0 +1,107 @@
+{% load duration_filter %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>创建活动第三步</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/build/create-basic.js"></script>
+</head>
+<body>
+<div class="wrapper page-process-03" id="pageCreateAction">
+    <div class="header zui-flex" id="header">
+        <div class="zui-cell logo-warp">
+            <a href="/" class="logo item">找米</a>
+        </div>
+        <div class="zui-cell zui-flex-fixed ">
+            <div class="nav">
+                <a href="/searchpage" class="nav-item">
+                    <i class="zui-icon icon-search"></i>
+                </a>
+                <a href="/" class="nav-item active">
+                    <i class="zui-icon icon-plus"></i>
+                </a>
+                <a href="/user/msg" class="nav-item">
+                    {% if user.notification_center.unread_notifications_count %}
+                        <span class="number">{{ user.notification_center.unread_notifications_count }}</span>
+                    {% endif %}
+                    <i class="zui-icon icon-email"></i>
+                </a>
+                <a href="/mine/start" class="nav-item user">
+                    <img src="{{ user.profile.avatar.url }}" alt=""/>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <div class="banner">
+
+        <div class="process zui-flex">
+            <div class="zui-cell zui-flex-fixed">
+                <div class="step step-01">1</div>
+            </div>
+            <div class="zui-cell">
+                <div class="line"></div>
+            </div>
+            <div class="zui-cell zui-flex-fixed">
+                <div class="step step-02">2</div>
+            </div>
+            <div class="zui-cell">
+                <div class="line"></div>
+            </div>
+            <div class="zui-cell zui-flex-fixed">
+                <div class="step step-03">3</div>
+            </div>
+        </div>
+        <img src="//zhao-mi.net/m/modules/detail/img/banner.jpg" alt=""/>
+    </div>
+
+    <div class="main">
+        <div class="process-content">
+            <div class="detail">
+                <div class="title">{{ act.name }}
+                    <div class="m-tag">
+                        {% if act.recommended %}
+                        <span class="hot">热门推荐</span>
+                        {% endif %}
+                        <span class="price">￥{{ act.reward }}</span>
+                    </div>
+                </div>
+                <div class="title-desc"><i class="zui-icon icon-medal"></i>主办方：{{ act.host.profile.name }} 类型：{{ act.activity_type.type_name }}</div>
+                <div class="content">
+                    {{ act.description|linebreaks }}
+                </div>
+                <div class="concact-msg">
+                    <div class="address"><i class="zui-icon icon-address"></i>{{ act.loc_description }}</div>
+                    <div class="date"><i class="zui-icon icon-date"></i>{{ act.get_duration_description }}</div>
+                    <div class="distance"><i class="zui-icon icon-distance"></i>{{ act.last_length|duration }}</div>
+                    <div class="number"><i class="zui-icon icon-number"></i> {{ act.get_applying_num }}/{{ act.max_attend }}</div>
+
+                </div>
+
+                <img src="//zhao-mi.net/m/modules/detail/img/banner.jpg" alt="" class="img"/>
+            </div>
+
+        </div>
+
+        <div class="zui-align-right bottom-wrapper">
+            <form action="/action/{{ act_id }}/publish" id="create-action-final" method="post">
+                {% csrf_token %}
+                <a href="/statement" class="zui-link">找米免费声明</a>
+                <a class="zui-btn" id="save" data-action="/action/{{ act_id }}/save">保存</a>
+                {% if show_publish %}
+                <a class="zui-btn zui-btn-action" id="publish">发布</a>
+                {% endif %}
+            </form>
+        </div>
+        <div class="zui-align-right ">
+            <a href="" class="zui-btn">申请成为认证用户</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

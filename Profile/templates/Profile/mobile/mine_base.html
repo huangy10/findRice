@@ -1,0 +1,123 @@
+{% load duration_filter %}
+{% load check_act_num %}
+<!doctype html>
+<html>
+<head>
+    <title>{% block title %}我报名的活动{% endblock %}</title>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/build/mine.js"></script>
+</head>
+<body>
+{% csrf_token %}
+<div class="wrapper" id="pageActivityApply">
+    <div class="header zui-flex" id="header">
+        <div class="zui-cell logo-warp">
+            <a href="/" class="logo item">找米</a>
+        </div>
+        <div class="zui-cell zui-flex-fixed ">
+            <div class="nav">
+                <a href="/searchpage" class="nav-item">
+                    <i class="zui-icon icon-search"></i>
+                </a>
+                <a href="/action/new/create/1" class="nav-item">
+                    <i class="zui-icon icon-plus"></i>
+                </a>
+                <a href="/user/msg" class="nav-item">
+                    {% if user.notification_center.unread_notifications_count %}
+                    <span class="number">{{ user.notification_center.unread_notifications_count }}</span>
+                    {% endif %}
+                    <i class="zui-icon icon-email"></i>
+                </a>
+                <a href="/logout" class="nav-item user active">
+                    <img src="{{ user.profile.avatar.url }}" alt=""/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="tab-wrapper top-tab">
+        <div class="tab clearfix">
+            {% block categories %}
+            <div class="tab-item ">
+                <a href="/mine/start" class="tab-item-a">我发起的活动</a>
+            </div>
+            <div class="tab-item active">
+                <a href="/mine/apply" class="tab-item-a">我报名的活动</a>
+            </div>
+            <div class="tab-item">
+                <a href="/mine/like" class="tab-item-a">我关注的活动</a>
+            </div>
+            <div class="tab-item">
+                <a href="/mine/group" class="tab-item-a">我的米团</a>
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+    <div class="main activity-lists">
+        {% block content_list %}
+            {% for act in activities %}
+                <div class="activity-list-item" data-id="{{ act.id }}">
+                    <div class="zui-flex list-item">
+                        <div class="zui-flex zui-flex-fixed thumbnail">
+                            <img src="{{ act.poster.url }}" alt=""/>
+                        </div>
+                        <div class="zui-cell">
+                            <div class="list-item-desc">
+                                <a  href="/action/{{ act.id }}/detail" class="tt">{{ act.name }}</a>
+                                <div class="item zui-flex">
+                                    <div class="zui-cell">
+                                        <div class="address"><i class="zui-icon icon-address"></i>{{ act.loc_description }}</div>
+                                    </div>
+                                    <div class="zui-cell zui-flex-fixed">
+                                        <div class="number"><i class="zui-icon icon-number"></i> {{ act.get_applying_num }}/{{ act.max_attend }}</div>
+                                    </div>
+                                </div>
+                                <div class="item zui-flex">
+                                    <div class="zui-cell">
+                                        <div class="date"><i class="zui-icon icon-date"></i>{{ act.get_duration_description }}     </div>
+                                    </div>
+                                    <div class="zui-cell zui-flex-fixed">
+                                        <div class="distance"><i class="zui-icon icon-distance"></i>{{ act.last_length|duration }}</div>
+                                    </div>
+                                </div>
+                                <div class="item m-tag">
+                                    <div class="m-tag-inner">
+                                        {% if act.is_recommended %}
+                                        <span class="hot">热门推荐</span>
+                                        {% endif %}
+                                        <span class="price">￥{{ act.reward }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% block operation %}
+                    <div class="zui-align-center activity-status">
+                        <div class="zui-btn zui-btn-action btn-applying">报名中</div>
+                    </div>
+                    {% endblock %}
+                    {% block share %}{% endblock %}
+                    <!--<div class="zui-align-center activity-status">-->
+                    <!--<div class="zui-btn btn-pass"><i class="zui-icon icon-success"></i>已通过</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="zui-align-center activity-status">-->
+                    <!--<div class="zui-btn btn-refuse">已谢绝</div>-->
+                    <!--</div>-->
+                </div>
+            {% endfor %}
+        {% endblock %}
+    </div>
+    {% block loadmore %}
+        {% if activities|list_num >= 12 %}
+            <div class="more">
+                <button class="zui-btn more-btn">加载更多</button>
+                <span class="no-more">没有更多了</span>
+            </div>
+        {% endif %}
+    {% endblock %}
+</div>
+</body>
+</html>

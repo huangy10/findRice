@@ -1,5 +1,4 @@
 {% extends "Profile/mine_base.html" %}
-
 {% block title %}申请列表{% endblock %}
 {% block menu_bar %}{% endblock %}
 
@@ -10,7 +9,7 @@
     </div>
     <div id="apply-list">
         {% for data in data_set %}
-        <div class="apply-item">
+        <div class="apply-item" data-target="{{ data.user.id }}">
             <div class="apply-item-content fn-clr">
                     <span class="portrait">
                         <img src="{{ data.user.profile.avatar.url }}" alt="">
@@ -18,16 +17,16 @@
                 <span class="name">{{ data.user.profile.name }}</span>
                 <span class="detail">详情</span>
                 {% if data.apply.status == "applying" %}
-                    <button class="z-btn approve">通过</button>
-                    <button class="z-btn reject">拒绝</button>
+                    <button class="z-btn green" data-optype="approve">通过</button>
+                    <button class="z-btn red" data-optype="deny">拒绝</button>
                 {% elif data.apply.status == "approved" %}
-                    <button class="z-btn reject">拒绝</button>
-                    <button class="z-btn approve">确认完成</button>
+                    <button class="z-btn green" data-optype="finish">确认完成</button>
+                    <button class="z-btn green" data-optype="approve_cancel">取消通过</button>
                 {% elif data.apply.status == "denied" %}
-                    <button class="z-btn rejected">已谢绝</button>
-                    <button class="z-btn approve">通过</button>
+                    <button class="z-btn green" data-optype="deny_cancel">取消拒绝</button>
+                    <button class="z-btn red">已谢绝</button>
                 {% else %}
-                    <button class="z-btn completed">已完成</button>
+                    <button class="z-btn green" data-optype="finished">已完成</button>
                 {% endif %}
             </div>
             <div class="detail-content">
@@ -36,24 +35,27 @@
                     <span>{{ data.user.profile.age }}岁</span>
                     <span>{{ data.user.profile.phoneNum }}</span>
                 </div>
+                {% if data.answers %}
                 <div class="apply-answers">
                     {% for answer in data.answers %}
                         <div class="apply-answer">
                             <p>{{ answer.question }}</p>
                             {% if answer.file %}
-                                <span>{{ answer }}</span>
+                                <div class="answer-img">
+                                <img src="{{ answer.file.url }}" alt="">
+                                </div>
                             {% else %}
                                 <span>{{ answer }}</span>
                             {% endif %}
                         </div>
                     {% endfor %}
+                {% endif %}
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
     <div id="apply-extra">
-        <p class="export">导出成excel</p>
-        <button class="z-btn confirm">就位确认</button>
+        <a class="export" href="/mine/manage?action={{ act.id }}&optype=excel">导出成excel</a>
     </div>
 {% endblock %}

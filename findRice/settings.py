@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
+    'django_user_agents',
     'Activity',
     'Profile',
     'Questionnaire',
@@ -57,6 +58,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
 )
 
 ROOT_URLCONF = 'findRice.urls'
@@ -88,7 +90,7 @@ WSGI_APPLICATION = 'findRice.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
     }
 }
 
@@ -127,7 +129,7 @@ AUTH_PROFILE_MODULE = "Profile.UserProfile"
 
 """下面是一些自定义的变量"""
 
-FR_SHARE_LINK_TEMPLATE = "http://zhaomi.biz/action/%s?code=%s"  # 分享链接模板
+FR_SHARE_LINK_TEMPLATE = "/action/%s?code=%s"  # 分享链接模板
 
 
 """导入第三方登陆模块的设置"""
@@ -159,6 +161,7 @@ SOCIAL_AUTH_PIPELINE = (
 
 LOGIN_URL = "/login"
 LOGIN_REDIRECT_URL = "/"
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
@@ -166,11 +169,68 @@ SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
 SOCIAL_AUTH_WEIXIN_KEY = ''
 SOCIAL_AUTH_WEIXIN_SECRET = ''
 
-SOCIAL_AUTH_QQ_KEY = ''
-SOCIAL_AUTH_QQ_SECRET = ''
+SOCIAL_AUTH_QQ_KEY = '101237228'
+SOCIAL_AUTH_QQ_SECRET = 'db373313738366dacdaf5ce2f1af3dac'
 
 SOCIAL_AUTH_WEIBO_KEY = ''
 SOCIAL_AUTH_WEIBO_SECRET = ''
 
 SMS_KEY = "b2bc04ed9bbc52b10b3b68e5656eb08f"        # 云片网
 SMS_TEMPLATE = "您的验证码是%s【找米网】"
+
+###################################################################
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+        },
+    },
+    'handlers': {
+        'default': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'logs/mylog.log',
+            'maxBytes': 1024 * 1024 * 5,  # 5MB
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+        'request_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'logs/django_request.log',
+            'maxBytes': 1024 * 1024 * 5,
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+        'error': {
+            'level': 'WARNING',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'logs/my_error_log.log',
+            'maxBytes': 1024 * 1024 * 5,  # 5MB
+            'backupCount': 5,
+            'formatter': 'standard',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['default'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['request_handler', ],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        "error_logger": {
+            'handlers': ['error'],
+            'level': 'WARNING',
+            'propagate': True
+        }
+    },
+}
+
+

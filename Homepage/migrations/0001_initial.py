@@ -8,7 +8,7 @@ import Homepage.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Activity', '0016_auto_20150704_1032'),
+        ('Activity', '0001_initial'),
     ]
 
     operations = [
@@ -22,6 +22,7 @@ class Migration(migrations.Migration):
             options={
                 'ordering': ['-created_at'],
                 'verbose_name': '\u9996\u9875',
+                'verbose_name_plural': '\u9996\u9875',
             },
         ),
         migrations.CreateModel(

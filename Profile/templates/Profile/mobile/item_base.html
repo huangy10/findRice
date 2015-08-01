@@ -1,0 +1,41 @@
+{% load duration_filter %}
+{% for act in activities %}
+    <div class="activity-list-item" data-id="{{ act.id }}">
+        <div class="zui-flex list-item">
+            <div class="zui-flex zui-flex-fixed thumbnail">
+                <img src="{{ act.poster.url }}" alt=""/>
+            </div>
+            <div class="zui-cell">
+                <div class="list-item-desc">
+                    <a  href="/action/{{ act.id }}/detail" class="tt">{{ act.name }}</a>
+                    <div class="item zui-flex">
+                        <div class="zui-cell">
+                            <div class="address"><i class="zui-icon icon-address"></i>{{ act.loc_description }}</div>
+                        </div>
+                        <div class="zui-cell zui-flex-fixed">
+                            <div class="number"><i class="zui-icon icon-number"></i> {{ act.get_applying_num }}/{{ act.max_attend }}</div>
+                        </div>
+                    </div>
+                    <div class="item zui-flex">
+                        <div class="zui-cell">
+                            <div class="date"><i class="zui-icon icon-date"></i>{{ act.get_duration_description }}     </div>
+                        </div>
+                        <div class="zui-cell zui-flex-fixed">
+                            <div class="distance"><i class="zui-icon icon-distance"></i>{{ act.last_length|duration }}</div>
+                        </div>
+                    </div>
+                    <div class="item m-tag">
+                        <div class="m-tag-inner">
+                            {% if act.is_recommended %}
+                                <span class="hot">热门推荐</span>
+                            {% endif %}
+                            <span class="price">￥{{ act.reward }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% block operation %}{% endblock %}
+        {% block share %}{% endblock %}
+    </div>
+{% endfor %}

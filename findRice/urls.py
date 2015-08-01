@@ -21,11 +21,14 @@ from django.conf.urls.static import static
 urlpatterns = patterns("",
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', "findRice.views.index_list"),
+
     url(r'^', include("social.apps.django_app.urls", namespace="social")),
-    url(r'^', include("Profile.urls")),
+    url(r'^', include("Profile.urls", namespace='profile')),
     url(r'^action/', include("Activity.urls")),
     url(r'^search$', "findRice.views.search_list"),
-    url(r'^msg/', include("Profile.urls")),
+    url(r'^searchpage$', "findRice.views.search_page"),
+    url(r'^statement$', 'findRice.views.statement'),
+    url(r'^user/msg', include("Notification.urls")),
 )
 
 if settings.DEBUG:

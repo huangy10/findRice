@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>注册</title>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery-form/jquery.form.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/build/register.js"></script>
+</head>
+<body>
+<div class="wrapper" id="pageLogin">
+    <div class="header">
+        <a href="/" class="zhaomi logo logo-white">找米</a> <a href="/" class="cancel-login"><i class="zui-icon icon-close"></i>取消注册</a>
+    </div>
+    <div class="login-title zui-align-center">注册</div>
+    <div class="access-box">
+        <form action="/register/basic" method="post" id="register-form">
+            {% csrf_token %}
+            <div class="input-wrapper zui-flex">
+                <div class="zui-flex-fixed icon"><i class="zui-icon icon-user"></i></div>
+                <div class="zui-cell"><input type="text" maxlength="25"  id="username" name="username" class="zui-cell" placeholder="请输入邮箱/用户名"/></div>
+            </div>
+            <div class="input-wrapper zui-flex">
+                <div class="zui-flex-fixed icon"><i class="zui-icon icon-pwd"></i></div>
+                <div class="zui-cell"><input type="password" id="pwd" name="password1" class="zui-cell" placeholder="请输入密码"/></div>
+            </div>
+            <div class="input-wrapper zui-flex">
+                <div class="zui-flex-fixed icon"><i class="zui-icon icon-pwd"></i></div>
+                <div class="zui-cell"><input type="password" id="pwd-confirm" name="password2" class="zui-cell" placeholder="请再次输入密码"/></div>
+            </div>
+
+
+            <div class="zui-align-right bottom-text">
+                <button type="submit" class="zui-btn zui-btn-action register-btn">注册</button>
+            </div>
+
+            <div id="login-splitline" class="fn-clr">
+                <span id="left-bottom"></span>
+                <span id="right-bottom"></span>
+            </div>
+            <div id="login-others">
+                <span id="or-txt">或</span>
+                <p>通过社交账号直接登录</p>
+                <div id="socials">
+                    <a href="" id="wechat"><i class="zui-icon icon-wechat"></i></a>
+                    <a href="{% url "social:begin" backend=available_ends.qq %}" id="qq"><i class="zui-icon icon-qq"></i></a>
+                    <a href="" id="sina" class="last"><i class="zui-icon icon-sina"></i></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

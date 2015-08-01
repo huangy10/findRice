@@ -1,0 +1,161 @@
+{% load duration_filter %}
+{% load sharelink %}
+{% load check_act_num %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>找米</title>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/build/list.js"></script>
+</head>
+<body>
+{% csrf_token %}
+<div class="wrapper" id="pageList">
+    <div class="header zui-flex">
+        <div class="zui-cell logo-warp">
+            <div class="logo item">找米</div>
+            <div class="city item"  data-select-area="true" data-select-target="#NowProvince,#NowCity" data-select-title="请选择省份">
+                {% if param.city %}
+                    {{ param.city }}
+                {% else %}
+                    地区选择
+                {% endif %}
+                <i class="item zui-icon icon-arrow-up"></i>
+            </div>
+        </div>
+        <div class="nav">
+            <a href="/searchpage" class="nav-item">
+                <i class="zui-icon icon-search"></i>
+            </a>
+            <a href="/action/new/create/1" class="nav-item">
+                <i class="zui-icon icon-plus"></i>
+            </a>
+            {% if user %}
+                <a href="/user/msg" class="nav-item">
+                {% if user.notification_center.unread_notifications_count %}
+                    <span class="number">{{ user.notification_center.unread_notifications_count }}</span>
+                {% endif %}
+                    <i class="zui-icon icon-email"></i>
+                </a>
+                <a href="/mine/start" class="nav-item user">
+                    <img src="{{ user.profile.avatar.url }}" alt=""/>
+                </a>
+            {% else %}
+                <a href="/login" class="nav-item btn-login">
+                    <span>登录</span>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="banner">
+
+        <ul>
+            {% for banner in homepage_posters %}
+                <li>
+                    <a href="{{ banner.related_activity.get_absolute_url }}">
+                        <img src="{{ banner.poster.url }}">
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="main">
+        <div class="tab-wrapper" id="cateList">
+            <div class="tab zui-flex">
+                <div class="tab-item zui-cell ">找米热门 <i class="zui-icon icon-arrow-up"></i></div>
+                <div class="tab-item zui-cell">全部类别 <i class="zui-icon icon-arrow-up"></i></div>
+            </div>
+            <div class="tab-content">
+                <div class="tab-content-item">
+                    <ul class="clearfix" data-type-name="hot">
+                        <li {% if param.hot == "0" %}class="active"{% endif %}><a data-type="0">热门推荐</a></li>
+                        <li {% if param.hot == "1" %}class="active"{% endif %}><a  data-type="1" >限时报名</a></li>
+                        <li {% if param.hot == "2" %}class="active"{% endif %}><a  data-type="2">限额报名</a></li>
+                        <li {% if param.hot == "3" %}class="active"{% endif %}><a  data-type="3">奖励金额</a></li>
+                    </ul>
+                </div>
+                <div class="tab-content-item active">
+                    <ul class="clearfix" data-type-name="type">
+                        <li {% if param.type == 0 %}class="active"{% endif %}><a href="" data-type-name="hot" data-type="0">全部热门</a></li>
+                        {% for type in activity_types %}
+                            <li {% if param.type == forloop.counter %}class="active"{% endif %}><a data-type="{{ forloop.counter }}">{{ type.type_name }}</a></li>
+                        {% endfor %}
+                        <li {% if param.type == -1 %}class="active"{% endif %}><a  data-type="-1">其它</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="activity-lists">
+            {% for act in activities %}
+                <a href="/action/{{ act.id }}/detail" class="activity-list-item zui-flex">
+                    <div class="zui-flex zui-flex-fixed thumbnail">
+                        <img src="{{ act.poster.url }}" alt=""/>
+                    </div>
+                    <div class="zui-cell">
+                        <div class="list-item-desc">
+                            <h3 class="tt">{{ act.name }}</h3>
+                            <div class="item zui-flex">
+                                <div class="zui-cell">
+                                    <div class="address"><i class="zui-icon icon-address"></i>{{ act.loc_description }}</div>
+                                </div>
+                                <div class="zui-cell zui-flex-fixed">
+                                    <div class="number"><i class="zui-icon icon-number"></i>{{ act.get_applying_num }}/{{ act.max_attend }}</div>
+                                </div>
+                            </div>
+                            <div class="item zui-flex">
+                                <div class="zui-cell">
+                                    <div class="date"><i class="zui-icon icon-date"></i>{{ act.get_duration_description }}     </div>
+                                </div>
+                                <div class="zui-cell zui-flex-fixed">
+                                    <div class="distance"><i class="zui-icon icon-distance"></i>{{ act.last_length|duration }}</div>
+                                </div>
+                            </div>
+                            <div class="item m-tag">
+                                <div class="m-tag-inner">
+                                    {% if act.recommended %}
+                                        <span class="hot">热门推荐</span>
+                                    {% endif %}
+                                    <span class="price">￥{{ act.reward }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+        {% if activities|list_num >= 12 %}
+            <div class="more">
+                <button class="zui-btn more-btn">加载更多</button>
+                <span class="no-more">没有更多了</span>
+            </div>
+        {% endif %}
+    </div>
+
+</div>
+<div class="selectdialog" id="SelectDialog">
+    <div class="select-dia-mask">
+    </div>
+    <div class="select-dia-table">
+        <div class="select-dia-cell">
+            <div class="select-dia ">
+            </div>
+        </div>
+    </div>
+</div>
+<script id="dialogarea" type="text/html">
+    <h3>{% templatetag openvariable %}title{% templatetag closevariable %}</h3>
+    <div class="select-dia-con">
+        <ul class="area select-dia-list">
+            {% templatetag openvariable %}each list as value i{% templatetag closevariable %}
+            <li data-value="{% templatetag openvariable %}value.Value{% templatetag closevariable %}" data-index="{% templatetag openvariable %}value.Key{% templatetag closevariable %}" class="select-area-check" data-target="{% templatetag openvariable %}target{% templatetag closevariable %}">{% templatetag openvariable %}value.Value{% templatetag closevariable %}</li>
+            {% templatetag openvariable %}/each{% templatetag closevariable %}
+        </ul>
+    </div>
+</script>
+
+</body>
+</html>

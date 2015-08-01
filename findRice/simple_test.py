@@ -91,7 +91,6 @@ def test_create_answer_set_with_dict(dict, questionnaire, user, test_file):
                                           file=test_file)
     except (ObjectDoesNotExist, IndexError):
         # 发生错误之后删除已经创建的答卷
-        print "A"
         answer_set.delete()
         return False
 

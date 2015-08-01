@@ -5,40 +5,63 @@
 {# activities : 上首页的活动列表 #}
 {% load duration_filter %}
 {% load staticfiles %}
+{% load sharelink %}
+{% load loadLikeInfo %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>活动列表页面</title>
+    <title>找米</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    {# <script type="text/javascript" src="//zhaomi.biz/lib/jquery/jquery.min.js"></script> #}
-    {# <script type="text/javascript" src="//zhaomi.biz/lib/unslider/unslider.js"></script> #}
-    {# <script type="text/javascript" src="//zhaomi.biz/lib/cityselect/jquery.cityselect.js"></script> #}
-    {# <script type="text/javascript" src="//zhaomi.biz/build/list.js"></script> #}
-    <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "lib/unslider/unslider.js" %}"></script>
-    <script type="text/javascript" src="{% static "lib/cityselect/jquery.cityselect.js" %}"></script>
-    <script type="text/javascript" src="{% static "build/list.js" %}"></script>
+    <meta property="qc:admins" content="360766720175516654" />
+    <meta property="wb:webmaster" content="e738ba9a5a97a68f" />
+    <link rel="icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <link rel="stylesheet" href="//zhao-mi.net/lib/jqueryui/jquery-ui.css"/>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jqueryui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery-qrcode/jquery.qrcode.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/unslider/unslider.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/cityselect/jquery.cityselect.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/build/list.js"></script>
+    {# <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script> #}
+    {# <script type="text/javascript" src="{% static "lib/unslider/unslider.js" %}"></script> #}
+    {# <script type="text/javascript" src="{% static "lib/cityselect/jquery.cityselect.js" %}"></script> #}
+    {# <script type="text/javascript" src="{% static "build/list.js" %}"></script> #}
 </head>
 <body>
+{% csrf_token %}
 <div id="content">
     <div id="header">
         <a href="/" id="logo">找米</a>
         <div id="area">
-            <em>北京</em>
+            <em>
+                {% if param.city %}
+                    {{ param.city }}
+                {% else %}
+                    地区选择
+                {% endif %}
+            </em>
+	    <i></i>
             <div id="area-droplist">
                 <select class="prov"></select><span>省</span>
                 <select class="city" disabled="disabled"></select><span class="city-txt">市/区</span>
+                <button class="z-btn">确定</button>
             </div>
         </div>
         {% if user %}
             <a id="personal-info" class="action" href="/mine/start">
                 <img src="{{ user.profile.avatar.url }}" alt="我的个人信息">
             </a>
-            <div id="msg" class="action"><a href="/user/msg" class="z-btn">消息</a></div>
+            <div id="msg" class="action">
+                <a href="/user/msg" class="z-btn">消息</a>
+                {% if user.notification_center.unread_notifications_count %}
+                    <span>{{ user.notification_center.unread_notifications_count }}</span>
+                {% endif %}
+            </div>
         {% else %}
-            <div id="reg" class="action"><a class="z-btn" href="/register/basic">注册/登陆</a></div>
+            <div id="reg" class="action"><a class="z-btn" href="/login">注册/登陆</a></div>
         {% endif %}
-        <div id="pub" class="action"><a href="/action/new/edit/1" class="z-btn">发布活动</a></div>
+        <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
     <div id="banner">
@@ -46,7 +69,11 @@
             {% for banner in homepage_posters %}
                 <li>
                     <a href="{{ banner.related_activity.get_absolute_url }}">
-                        <img src="{{ banner.poster.url }}">
+                        {% if forloop.first %}
+                            <img src="{{ banner.poster.url }}">
+                        {% else %}
+                            <img data-src="{{ banner.poster.url }}">
+                        {% endif %}
                     </a>
                 </li>
             {% endfor %}
@@ -58,10 +85,10 @@
             <div id="hot-droplist">
                 <span class="droplist-hot">找米热门</span>
                 <ul>
-                    <li class="selected" data-type="0">热门推荐</li>
-                    <li data-type="1">限时报名</li>
-                    <li data-type="2">限额报名</li>
-                    <li data-type="3">奖励金额</li>
+                    <li {% if param.hot == "0" %}class="selected"{% endif %} data-type="0">热门推荐</li>
+                    <li {% if param.hot == "1" %}class="selected"{% endif %} data-type="1">限时报名</li>
+                    <li {% if param.hot == "2" %}class="selected"{% endif %} data-type="2">限额报名</li>
+                    <li {% if param.hot == "3" %}class="selected"{% endif %}data-type="3">奖励金额</li>
                 </ul>
             </div>
         </div>
@@ -70,57 +97,60 @@
             <div id="category-droplist">
                 <span class="droplist-category">全部类别</span>
                 <ul>
-                     <li class="row-first selected" data-type="0">全部</li>
+                    <li class="row-first {% if param.type == 0 %}selected{% endif %}" data-type="0">全部</li>
                     {% for type in activity_types %}
-                    <li class="{% cycle "row-second" "row-third" "row-first" as rows %}" data-type="{{ forloop.counter }}">
-                        {{ type.type_name }}
-                    </li>
+                        <li class="{% cycle "row-second" "row-third" "row-first" as rows %} {% if param.type == forloop.counter %}selected{% endif %}" data-type="{{ forloop.counter }}">
+                            {{ type.type_name }}
+                        </li>
                     {% endfor %}
-                    <li class="{% cycle rows %}" data-type="-1">
+                    <li class="{% cycle rows %} {% if param.type == -1 %}selected{% endif %}" data-type="-1">
                         其他
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div id="list">
+    <div id="list" class="list">
         <ul class="fn-clr">
             {% for act in activities %}
-                <li class="{% cycle "action-card" "action-card" "action-card last"%}">
+                <li class="{% cycle "action-card" "action-card" "action-card last"%}" data-detail="/action/{{ act.id }}/detail" data-link="{% share_link act %}" data-id="{{ act.id }}">
                     <div class="pic">
                         <img src="{{ act.poster.url }}">
                     </div>
-                <div class="brief-info">
-                    <div class="brief-important">
-                        <span class="title">{{ act.name }}</span>
-                        <span class="price">&yen;{{ act.reward }}</span>
-                        <span class="hot-tag">热门推荐</span>
+                    <div class="brief-info">
+                        <div class="brief-important">
+                            <span class="title">{{ act.name }}</span>
+                            <span class="price">&yen;{{ act.reward }}</span>
+                            {% if act.recommended %}
+                                <span class="hot-tag">热门推荐</span>
+                            {% endif %}
+                        </div>
+                        <p class="host">主办方：{{ act.host_name }}</p>
+                        <div class="criteria">
+                            {%for line in act.description|two_line %}
+                                <p class="fn-overflow" title="{{ line }}">{{ line }}</p>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <p class="host">主办方：{{ act.host_name }}</p>
-                    <div class="criteria">
-                        <p class="fn-overflow">
-                            {{ act.description|linebreaks }}
-                        </p>
+                    <div class="items">
+                        <p class="location fn-overflow" title="{{ act.loc_description }}">{{ act.loc_description }}</p>
+                        <p class="num fn-overflow">{{ act.get_applying_num }}/{{ act.max_attend }} 人</p>
+                        <p class="time fn-overflow">{{ act.get_duration_description }}</p>
+                        <p class="extra fn-overflow">{{ act.last_length|duration }}</p>
                     </div>
-                </div>
-                <div class="items">
-                    <p class="location fn-overflow" title="{{ act.location }}">{{ act.location }}</p>
-                    <p class="num fn-overflow">{{ act.get_applying_num }}/{{ act.max_attend }} 人</p>
-                    <p class="time fn-overflow">{{ act.get_duration_description }}</p>
-                    <p class="extra fn-overflow">{{ act.last_length|duration }}</p>
-                </div>
-                <span class="like"></span>
-                <span class="share"></span>
+                    {% load_like act user %}
+                    <span class="like {% if like %}selected{% endif %}" data-id="{{ act.id }}"></span>
+                    <span class="share" data-id="{{ act.id }}"></span>
                 </li>
-                {% empty %}
+            {% empty %}
             {% endfor %}
         </ul>
     </div>
     <div id="commercial">
         <a href="{{ footer.related_activity.get_absolute_url }}">
-            <img src="{{ footer.related_activity.poster.url }}">
+            <img src="{{ footer.poster.url }}">
         </a>
     </div>
 </div>
-</body>    
+</body>
 </html>

@@ -4,24 +4,31 @@
 <head>
     <title>创建活动第一步</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "lib/cityselect/jquery.cityselect.js" %}"></script>
-    <script type="text/javascript" src="{% static "build/create-basic.js" %}"></script>
-    {# <script type="text/javascript" src="//zhaomi.biz/lib/jquery/jquery.min.js"></script> #}
-    {# <script type="text/javascript" src="//zhaomi.biz/lib/cityselect/jquery.cityselect.js"></script> #}
-    {# <script type="text/javascript" src="//zhaomi.biz/build/create-basic.js"></script> #}
+    <link rel="icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    {# <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script> #}
+    {# <script type="text/javascript" src="{% static "lib/jquery-form/jquery.form.js" %}"></script> #}
+    {# <script type="text/javascript" src="{% static "lib/cityselect/jquery.cityselect.js" %}"></script> #}
+    {# <script type="text/javascript" src="{% static "build/create-basic.js" %}"></script> #}
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/cityselect/jquery.cityselect.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/build/create-basic.js"></script>
 </head>
 <body>
 <div id="content">
     <div id="header">
         <a href="/" id="logo">找米</a>
-        <div id="personal-info" class="action">
-            <a id="personal-info" class="action" href="/mine/start">
-                <img src="{{ user.profile.avatar.url }}" alt="我的个人信息">
-            </a>
+        <a id="personal-info" class="action" href="/mine/start">
+            <img src="{{ user.profile.avatar.url }}" alt="我的个人信息">
+        </a>
+        <div id="msg" class="action">
+            <a href="/user/msg" class="z-btn">消息</a>
+            {% if user.notification_center.unread_notifications_count %}
+                <span class="number">{{ user.notification_center.unread_notifications_count }}</span>
+            {% endif %}
         </div>
-        <div id="msg" class="action"><a href="/user/msg" class="z-btn">消息</a></div>
-        <div id="pub" class="action"><a href="/action/new/edit/1" class="z-btn">发布活动</a></div>
+        <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
     <div id="action-bg">
@@ -40,7 +47,15 @@
     </div>
     <div id="action-container">
         {% block content %}
-            <form action="/action/new/edit/1" enctype="multipart/form-data" method="post">
+            {% if editing %}
+                <form id="create-action-first" action="/action/{{ action_id }}/edit/1" enctype="multipart/form-data" method="post">
+            {% else %}
+                {% if action_id %}
+                <form id="create-action-first" action="/action/{{ action_id }}/create/1" enctype="multipart/form-data" method="post">
+                {% else %}
+                <form id="create-action-first" action="/action/new/create/1" enctype="multipart/form-data" method="post">
+                {% endif %}
+            {% endif %}
             {% csrf_token %}
             <div id="main">
                 <p class="title">活动名称</p>
@@ -50,17 +65,20 @@
                     {{ form.host_name }}
                     {% if user.profile.identified %}
                     {% else %}
-                        <span class="verified"></span>
-                        <button class="z-btn verifiedmember">申请成为认证用户</button>
+                        {% if user.identified %}
+                            <span class="verified"></span>
+                        {% else %}
+                            <button class="z-btn verifiedmember">申请成为认证用户</button>
+                        {% endif %}
                     {% endif %}
                 </div>
 
             </div>
             <div id="secondary">
                 <p class="title title-img location">活动地点</p>
-                <div id="city">
-                    <select class="prov"></select>省
-                    <select class="city" disabled="disabled"></select>市/区
+                <div id="addr">
+                    <select id="prov" class="prov"></select>省
+                    <select id="city" class="city" disabled="disabled"></select>市/区
                     {{ form.location }}
                 </div>
 
@@ -92,7 +110,11 @@
                 {{ form.description }}
                 <p class="title">活动类型</p>
                 <div id="action-type-c">
-                    <p>请选择活动类型</p>
+                    {% if act_type %}
+                        <p>{{ act_type }}</p>
+                    {% else %}
+                        <p>请选择活动类型</p>
+                    {% endif %}
                     <ul id="action-type-droplist">
                         {% for type in types %}
                             <li data-val="{{ forloop.counter0 }}" data-txt="{{ type.type_name }}">{{ type.type_name }}</li>

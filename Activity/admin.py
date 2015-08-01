@@ -29,4 +29,3 @@ class ActivityAdmin(admin.ModelAdmin):
 class ActivityTypeAdmin(admin.ModelAdmin):
     list_display = ["type_name", "description"]
     ordering = ["display_order"]
-    inlines = [ActivityInline, ]

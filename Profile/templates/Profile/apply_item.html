@@ -1,0 +1,28 @@
+{% extends "Profile/item_base.html" %}
+{% load loadApplicantInfo %}
+{% load loadLikeInfo %}
+{% block operation %}
+    <div class="main">
+        {% load_applicant act user %}
+        {% if applicant.status == "applying" %}
+            <button class="z-btn green">报名中</button>
+            <a href="javascript:;" class="unapply">取消申请</a>
+        {% elif applicant.status == "approved" %}
+            <button class="z-btn passed">已通过</button>
+            <a href="javascript:;" class="unapply">取消申请</a>
+        {% elif applicant.status == "denied" %}
+            <button class="z-btn rejected">已谢绝</button>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block share %}
+    <span class="share"></span>
+    <span class="share"></span>
+    {% load_like act user %}
+    {% if like %}
+    <span class="like selected"></span>
+    {% else %}
+    <span class="like"></span>
+    {% endif %}
+{% endblock %}

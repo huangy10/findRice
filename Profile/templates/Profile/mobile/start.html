@@ -1,0 +1,84 @@
+{% extends "Profile/mobile/mine_base.html" %}
+
+{% block title%}我发起的活动{% endblock %}
+
+{% block categories %}
+    <div class="tab-item active">
+        <a href="/mine/start" class="tab-item-a">我发起的活动</a>
+    </div>
+    <div class="tab-item">
+        <a href="/mine/apply" class="tab-item-a">我报名的活动</a>
+    </div>
+    <div class="tab-item">
+        <a href="/mine/like" class="tab-item-a">我关注的活动</a>
+    </div>
+    <div class="tab-item">
+        <a href="/mine/group" class="tab-item-a">我的米团</a>
+    </div>
+    <div class="tab-item">
+        <a href="/mine/info" class="tab-item-a">我的信息</a>
+    </div>
+{% endblock %}
+
+{% block operation %}
+    {% if act.is_published %}
+        {% if act.status == 0 %}
+            {% if act.accept_apply %}
+                {# Note: the code below has been deprecated #}
+                <div class="zui-align-center activity-status">
+                    <div class="zui-btn zui-btn-action btn-nostart">报名中</div>
+                    <span class="btn-tip-text apply-forbidden">截止报名</span>
+                </div>
+            {% else %}
+                <div class="zui-align-center activity-status">
+                    <div class="zui-btn zui-btn-action btn-nostart">截止报名</div>
+                    <span class="btn-tip-text apply-resume">恢复报名</span>
+                </div>
+            {% endif %}
+        {% elif act.status == 1 %}
+            <div class="zui-align-center activity-status">
+                <div class="zui-btn zui-btn-action btn-start">已经开始</div>
+            </div>
+            <!--<button class="z-btn starting">已经开始</button>-->
+        {% else %}
+            <div class="zui-align-center activity-status">
+                <div class="zui-btn zui-btn-important btn-end">已经结束</div>
+            </div>
+            <!--<button class="z-btn red no-shift">已经结束</button>-->
+        {% endif %}
+    {% else %}
+        <div class="zui-align-center activity-status">
+            <div class="zui-btn zui-btn-important btn-nostart">尚未发布</div>
+            <span class="btn-tip-text publish">点击发布</span>
+        </div>
+    {% endif %}
+
+    <div class="activity-operation">
+        <div class="zui-flex">
+            <div class="zui-cell">
+                <a href="/action/{{ act.id }}/applicant" class="zui-btn">查看报名表单</a>
+            </div>
+{#            <div class="zui-cell zui-flex-fixed">#}
+{#                <div class="operation-btn share">#}
+{#                    <i class="zui-icon icon-share"></i>#}
+{#                </div>#}
+{#            </div>#}
+            <div class="zui-cell zui-flex-fixed">
+                <div class="operation-btn delete" data-action="/action/{{ act.id }}/delete">
+                    <i class="zui-icon icon-delete"></i>
+                </div>
+
+            </div>
+            <div class="zui-cell zui-flex-fixed">
+                <div class="operation-btn duplicate" data-action="/action/{{ act.id }}/duplicate">
+                    <i class="zui-icon icon-copy"></i>
+                </div>
+            </div>
+            <div class="zui-cell zui-flex-fixed">
+                <div class="operation-btn edit" data-action="/action/{{ act.id }}/edit/1">
+                    <i class="zui-icon icon-edit"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

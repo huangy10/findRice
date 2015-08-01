@@ -1,5 +1,6 @@
 # coding=utf-8
 from django import forms
+from django.utils import timezone
 
 from .models import Activity, ActivityType
 
@@ -7,8 +8,11 @@ from .models import Activity, ActivityType
 class ActivityCreationForm(forms.ModelForm):
 
     error_messages = {
-        "should_be_int": u"应当填写整书",
-        "invalid_activity_type": u"活动类型无效"
+        "should_be_int": u"应当填写整数",
+        "invalid_activity_type": u"活动类型无效",
+        "wrong_prov_city": u"省份/城市数据格式错误",
+        "start_time_error": u"活动不能在过去开始",
+        "end_time_error": u"活动不能在开始之前结束"
     }
     day = forms.IntegerField(widget=forms.NumberInput(attrs={
         "class": "content time"
@@ -61,11 +65,19 @@ class ActivityCreationForm(forms.ModelForm):
                                         code="invalid_activity_type")
         return activity_type
 
+    def clean(self):
+        start_time = self.cleaned_data['start_time']
+        now = timezone.now()
+        if start_time < now:
+            self.add_error('start_time', self.error_messages['start_time_error'])
+        end_time = self.cleaned_data['end_time']
+        if end_time < start_time:
+            self.add_error('end_time', self.error_messages['end_time_error'])
+
     def save(self, commit=True):
         obj = super(ActivityCreationForm, self).save(commit=False)
         obj.last_length = self.cleaned_data["day"]*24*60 + self.cleaned_data["hour"]*60 + self.cleaned_data["minute"]
         type_no = int(self.cleaned_data.get("activity_type"))
-        print type_no
         if type_no == -1:
             obj.activity_type = None
         else:
@@ -79,7 +91,7 @@ class ActivityCreationForm(forms.ModelForm):
     class Meta:
         model = Activity
         fields = ("name", "host_name", "location", "description",
-                  "start_time", "end_time", "poster", "max_attend", "reward")
+                  "start_time", "end_time", "poster", "max_attend", "reward", "city", "province")
         widgets = {
             "name": forms.TextInput(attrs={
                 "id": "name",
@@ -89,7 +101,7 @@ class ActivityCreationForm(forms.ModelForm):
                 "id": "host",
                 "name": "host",
                 "class": "content host",
-                "placeholder": "龚子仪"
+                "readonly": "readonly"
             })
             ,
             "location": forms.TextInput(attrs={

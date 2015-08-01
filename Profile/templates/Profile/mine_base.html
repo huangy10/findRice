@@ -1,14 +1,19 @@
 {% load static %}
 {% load duration_filter %}
+{% load sharelink %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" type="image/png" href="//zhao-mi.net/favicon.png">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script type="text/javascript" src="//zhaomi.biz/lib/jquery/jquery.min.js"></script>
-    {# <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script> #}
-    <script type="text/javascript" src="//zhaomi.biz/build/mine.js"></script>
-    {# <script type="text/javascript" src="{% static "build/mine.js" %}"></script>#}
+    <link rel="stylesheet" href="//zhao-mi.net/lib/jqueryui/jquery-ui.css"/>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery-qrcode/jquery.qrcode.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jqueryui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/build/mine.js"></script>
 </head>
 <body>
 <div id="content">
@@ -17,29 +22,36 @@
         <div id="personal-info" class="action">
             <a href="/logout" class="logout" title="登出"></a>
         </div>
-        <div id="msg" class="action"><a href="/user/msg" class="z-btn">消息</a></div>
-        <div id="pub" class="action"><a href="/action/new/edit/1" class="z-btn">发布活动</a></div>
+        <div id="msg" class="action">
+            <a href="/user/msg" class="z-btn">消息</a>
+            {% if user.notification_center.unread_notifications_count %}
+                <span>{{ user.notification_center.unread_notifications_count }}</span>
+            {% endif %}
+        </div>
+        <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
     <div id="mine-bg">
-        <div id="personal-info">
-            <span class="portrait"><img src="{{ user.profile.avatar.url }}"></span>
+        <div id="personal-info-origin">
+            <span class="portrait" id="portrait-origin"><img src="{{ user.profile.avatar.url }}"></span>
             <div class="info-items">
                 <div class="main-items">
-                    <span class="name">{{ user.profile.name }}</span>
+                    <span class="name fn-overflow" id="name">{{ user.profile.name }}</span>
                     <span class="numMibi">{{ user.profile.coin }}米币</span>
                     <button class="z-btn exchange">兑换米币</button>
+                    <button class="z-btn recommend" data-link="{{ user.profile.get_promotion_link }}">推广</button>
                     <span class="edit"></span>
                 </div>
                 <div class="sub-items">
-                    <span class="mobile">{{ user.profile.phoneNum }}</span>
-                    <span class="gender">{{ user.profile.get_gender_display }}</span>
-                    <span class="age">{{ user.profile.age }}岁</span>
+                    <span class="mobile" id="mobile">{{ user.profile.phoneNum }}</span>
+                    <span class="gender" id="gender">{{ user.profile.get_gender_display }}</span>
+                    <span class="age" id="age">{{ user.profile.age }}岁</span>
                 </div>
             </div>
         </div>
         <div id="personal-info-modify">
             <form action="/user/modify" id="personal-info-form" enctype="multipart/form-data" method="post">
+                {% csrf_token %}
                 <div id="portrait-c">
                     <img src="{{ user.profile.avatar.url }}"/>
                     <label for="portrait"></label>
@@ -47,21 +59,20 @@
                 </div>
                 <div class="info-items">
                     <div class="main-items">
-                        <input id="info-name" name="name" type="text" placeholder="{{ user.profile.name }}"/>
+                        <input id="info-name" name="name" type="text" value="{{ user.profile.name }}"/>
                     </div>
                     <div class="sub-items">
-                        <input id="info-mobile" name="mobile" type="text" placeholder="{{ user.profile.phoneNum }}"></input>
-                        <input id="info-gender" name="gender" type="text" placeholder="{{ user.profile.get_gender_display }}"/>
-                        <input id="info-bday" name="bday" type="date" placeholder="{{ user.profile.birthDate }}"/>
+                        <input id="info-gender" name="gender" type="text" value="{{ user.profile.get_gender_display }}"/>
+                        <input id="info-bday" name="bday" type="date" value="{{ user.profile.birthDate|datefilter }}"/>
                         <button class="z-btn save-info">保存</button>
                     </div>
                 </div>
             </form>
         </div>
-        {# <img src="//zhaomi.biz/assets/imgs/detail-banner.png"> #}
+        {# <img src="//zhao-mi.net/assets/imgs/detail-banner.png"> #}
         <img src="{% static "assets/imgs/detail-banner.png" %}">
     </div>
-    <div id="mine-container">
+    <div id="mine-container" {% if act %}data-action="{{ act.id }}"{% endif %}>
     {% block menu_bar %}
         <div id="mine-type" class="fn-clr">
             {% block categories %}
@@ -77,7 +88,7 @@
         <div id="list">
             <ul class="fn-clr">
                 {% for act in activities %}
-                    <li class="{% cycle "action-card" "action-card" "action-card last" %}">
+                    <li class="{% cycle "action-card" "action-card" "action-card last" %}" data-link="{% share_link act %}" data-id="{{ act.id }}">
                         <div class="pic">
                             <img src="{{ act.poster.url }}">
                         </div>
@@ -85,32 +96,52 @@
                             <div class="brief-important">
                                 <span class="title">{{ act.name }}</span>
                                 <span class="price">&yen;{{ act.reward }}</span>
-                                <span class="hot-tag">热门推荐</span>
+                                {% if act.recommended %}
+                                    <span class="hot-tag">热门推荐</span>
+                                {% endif %}
                             </div>
                             <p class="host">主办方：{{ act.host_name }}</p>
                             <div class="criteria">
-                                <p class="fn-overflow">
-                                    {{ act.description|linebreaks }}
-                                </p>
+                                {%for line in act.description|two_line %}
+                                    <p class="fn-overflow" title="{{ line }}">{{ line }}</p>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="items">
-                            <p class="location fn-overflow" title="{{ act.location }}">{{ act.location }}</p>
+                            <p class="location fn-overflow" title="{{ act.loc_description }}">{{ act.loc_description }}</p>
                             <p class="num fn-overflow">{{ act.get_applying_num }}/{{ act.max_attend }} 人</p>
                             <p class="time fn-overflow">{{ act.get_duration_description }}</p>
                             <p class="extra fn-overflow">{{ act.last_length|duration }}</p>
                         </div>
                         <div class="operation">
-                            <div class="main"><button class="z-btn starting">已经开始</button></div>
-                            <div class="sub fn-clr">
-                                <span class="edit"></span>
-                                <span class="duplicate"></span>
-                                <span class="delete"></span>
-                                <span class="b-share"></span>
-                                <a class="z-btn view" href="/action/applicant">查看报名表单</a>
+                            {% block operation %}
+                            <div class="main">
+                            {% if act.is_published %}
+                                {% if act.status == 0 %}
+                                    <button class="z-btn green">报名中</button>
+                                    <a href="">取消申请</a>
+                                {% elif act.status == 1 %}
+                                    <button class="z-btn starting">已经开始</button>
+                                {% else %}
+                                    <button class="z-btn red no-shift">已经结束</button>
+                                {% endif %}
+                            {% else %}
+                                <button class="z-btn red">尚未发布</button>
+                                <a href="">点击发布</a>
+                            {% endif %}
                             </div>
+                            <div class="sub fn-clr">
+                                <span class="edit" data-action="/action/{{ act.id }}/edit/1" title="编辑活动"></span>
+                                <span class="duplicate" data-action="/action/{{ act.id }}/duplicate" title="复制活动"></span>
+                                <span class="delete" data-action="/action/{{ act.id }}/delete" title="删除活动"></span>
+                                <span class="b-share" data-action="/action/{{ act.id }}/sharelink" data-link="{% share_link act %}" title="分享活动"></span>
+                                {% block check_applicant %}
+                                {% endblock %}
+                            </div>
+                            {% endblock %}
                         </div>
-                        <span class="c-share"></span>
+
+                        {% block share %}{% endblock %}
                     </li>
                 {% endfor %}
             </ul>

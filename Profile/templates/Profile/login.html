@@ -5,10 +5,13 @@
 <head>
     <title>登陆页面</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script type="text/javascript" src="//zhaomi.biz/lib/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="//zhaomi.biz/lib/jquery-form/jquery.form.js"></script>
+    <link rel="icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/build/login.js"></script>
     {# <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script> #}
-    <script type="text/javascript" src="//zhaomi.biz/build/login.js"></script>
+    {# <script type="text/javascript" src="{% static "lib/jquery-form/jquery.form.js" %}"></script> #}
     {# <script type="text/javascript" src="{% static "build/login.js" %}"></script> #}
 </head>
 <body>
@@ -30,6 +33,7 @@
             <div id="login-btn-c" class="fn-clr">
                 <button type="submit" class="z-btn login-btn">登陆</button>
                 <a class="z-btn register-btn" href="/register/basic">注册</a>
+                <a class="reset-pwd" href="/resetpwd">忘记密码</a>
             </div>
             <div id="login-splitline" class="fn-clr">
                 <span id="left-bottom"></span>
@@ -39,9 +43,9 @@
                 <span id="or-txt">或</span>
                 <p>通过社交账号直接登录</p>
                 <div id="socials">
-                    <span id="wechat"></span>
-                    <span id="qq"></span>
-                    <span id="sina" class="last"></span>
+                    <a id="wechat" href="{% url "social:begin" backend='weixin' %}"></a>
+                    <a id="qq" href="{% url "social:begin" backend='qq' %}"></a>
+                    <a id="sina" href="{% url "social:begin" backend='weibo' %}" class="last"></a>
                 </div>
             </div>
         </form>

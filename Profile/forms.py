@@ -1,18 +1,18 @@
 # coding=utf-8
 import datetime
+import logging
 
 from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from django import forms
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
 from .models import UserProfile
 from .models import VerifyCode
 
 
-class UserRegisterFormStep1(UserCreationForm):
+class UserRegisterFormStep1(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
@@ -31,7 +31,7 @@ class UserRegisterFormStep1(UserCreationForm):
 
     error_messages = {
         'password_mismatch': "两次输入的密码不匹配",
-        'username_too_short': "用户名太短",
+        'username_too_short': "用户名太短，长度至少在8位",
         'password_too_short': "密码太短，密码的长度至少为8位"
         }
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
@@ -44,8 +44,6 @@ class UserRegisterFormStep1(UserCreationForm):
         "name": "pwd-confirm",
         "placeholder": u"请再次输入密码"
     }))
-
-
 
     def clean_password1(self):
         password1 = self.cleaned_data["password1"]
@@ -64,8 +62,29 @@ class UserRegisterFormStep1(UserCreationForm):
             )
         return username
 
+    def clean(self):
+        try:
+            user = get_user_model().objects.get(username=self.cleaned_data['username'],
+                                                is_active=True,
+                                                profile__is_active=True)
+            if user:
+                self.add_error('username', u'该用户名已被注册')
+        except ObjectDoesNotExist:
+            pass
+
     def save(self, commit=True):
-        user = super(UserRegisterFormStep1, self).save(commit=False)
+        try:
+            # Check if the given username is already in the User list, and its profile is not activated
+            # If it does exist, then reuse it
+            print 'username:' + self.cleaned_data['username']
+            user = get_user_model().objects.get(username=self.cleaned_data['username'],
+                                                profile__is_active=False,
+                                                is_active=False)
+            user.set_password(self.cleaned_data["password1"])
+            logging.debug(u"User条目被复用: %s" % self.cleaned_data['username'])
+        except ObjectDoesNotExist:
+            user = super(UserRegisterFormStep1, self).save(commit=False)
+        user.is_active = False
         if commit:
             user.save()
         return user
@@ -87,17 +106,19 @@ class UserRegisterFormStep2(forms.ModelForm):
     def save(self, commit=True):
         profile = super(UserRegisterFormStep2, self).save(commit=False)
         profile.is_active = True
+        profile.user.is_active = True
         profile.save()
         return profile
 
     def clean_phoneNum(self):
         phone = self.cleaned_data.get("phoneNum")
         try:
-            user = get_user_model().objects.get(profile__phoneNum=phone, profile__is_active=True)
+            user = get_user_model().objects.get(profile__phoneNum=phone,
+                                                profile__is_active=True)
             if user is not None:
                 raise forms.ValidationError(self.error_messages["phone_already_exist"],
                                             code="phone_already_exist")
-        except ObjectDoesNotExist:
+        except (ObjectDoesNotExist, MultipleObjectsReturned):
             pass
         return phone
 
@@ -105,8 +126,7 @@ class UserRegisterFormStep2(forms.ModelForm):
         code = self.cleaned_data.get("code")
         phone = self.cleaned_data.get("phoneNum")
         try:
-            tz = timezone.get_current_timezone()
-            time_threshold = tz.normalize(timezone.now()) - datetime.timedelta(minutes=5)
+            time_threshold = timezone.now() - datetime.timedelta(minutes=5)
             record = VerifyCode.objects.get(phoneNum=phone,
                                             code=code,
                                             is_active=True,
@@ -114,7 +134,6 @@ class UserRegisterFormStep2(forms.ModelForm):
             record.is_active = False
             record.save()
         except (ObjectDoesNotExist, IndexError):
-            print "the code posted is %s" % code
             raise forms.ValidationError(self.error_messages["code_mismatch"],
                                         code="code_mismatch")
         return code
@@ -183,6 +202,7 @@ class PasswordChangeForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(PasswordChangeForm, self).__init__(*args, **kwargs)
+        self.record = None
         self.user = None
 
     def clean_password2(self):
@@ -198,12 +218,16 @@ class PasswordChangeForm(forms.Form):
     def clean_password1(self):
         password1 = self.cleaned_data.get("password1")
         if len(password1) < 8:
-            raise forms.ValidationError()
+            raise forms.ValidationError(
+                self.error_messages['password_too_short'],
+                code='password_too_short'
+            )
+        return password1
 
     def clean_phoneNum(self):
         phone = self.cleaned_data.get("phoneNum")
         try:
-            user = get_user_model().objects.get(profile__phoneNum=phone)
+            user = get_user_model().objects.get(profile__phoneNum=phone, profile__is_active=True)
             self.user = user
         except ObjectDoesNotExist:
             raise forms.ValidationError(
@@ -216,22 +240,27 @@ class PasswordChangeForm(forms.Form):
         code = self.cleaned_data.get("code")
         phone = self.cleaned_data.get("phoneNum")
         try:
-            tz = timezone.get_current_timezone()
-            time_threshold = tz.normalize(timezone.now()) - datetime.timedelta(minutes=5)
+            time_threshold = timezone.now() - datetime.timedelta(minutes=5)
             record = VerifyCode.objects.get(phoneNum=phone,
                                             code=code,
                                             is_active=True,
                                             created_at__gt=time_threshold)
-            record.is_active = False
-            record.save()
+            # record.is_active = False
+            # record.save()
+            self.record = record
         except ObjectDoesNotExist:
             raise forms.ValidationError(self.error_messages["code_mismatch"],
                                         code="code_mismatch")
+        return code
 
     def save(self, commit=True):
-        if self.user is not None:
+        if self.user is not None and commit:
             self.user.set_password(self.cleaned_data["password1"])
             self.user.save()
+            self.record.is_active = False
+            self.record.save()
+        else:
+            raise ValueError
         return self.user
 
 

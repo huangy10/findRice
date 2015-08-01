@@ -1,6 +1,7 @@
 # coding=utf-8
 import os
 import uuid
+import hashlib
 
 from django.db import models
 from django.conf import settings
@@ -15,14 +16,13 @@ from Promotion.models import ShareRecord
 from Promotion.signals import share_record_signal
 # Create your models here.
 
-DEFAULT_PROFILE = "default_avatars/default_avatar.jpg"
+DEFAULT_PROFILE = "default_avatars/default_avatar.png"
 
 
 def get_avatar_path(act, filename):
     ext = filename.split('.')[-1]
     filename = "%s.%s" % (uuid.uuid4(), ext)
-    tz = timezone.get_current_timezone()
-    time = tz.normalize(act.created_at)
+    time = act.created_at
     return "avatars/%s/%s/%s/%s" % (time.year, time.month, time.day, filename)
 
 
@@ -35,16 +35,15 @@ class UserProfile(models.Model):
     groupName = models.CharField(max_length=200, verbose_name="公司名称", default="")
     birthDate = models.DateField(verbose_name="出生日期", default="")
 
-    @cached_property
+    @property
     def age(self):
-        tz = timezone.get_current_timezone()
-        return (tz.normalize(timezone.now()).date()-self.birthDate).days / 365
+        return (timezone.now().date()-self.birthDate).days / 365
 
     gender = models.CharField(choices=(
         ('m', '男'),
         ('f', '女'),
         ('u', '未知'),
-    ), verbose_name="性别", default="u", max_length=2)
+    ), verbose_name="性别", max_length=2)
     avatar = models.ImageField(upload_to=get_avatar_path, default=DEFAULT_PROFILE,
                                verbose_name="头像")
     identified = models.BooleanField(default=False, verbose_name="是否认证")
@@ -55,6 +54,11 @@ class UserProfile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
+    promotion_code = models.CharField(max_length=100, editable=False, null=True)
+
+    def get_promotion_link(self):
+        return "http://zhao-mi.net/register/basic?code=%s" % self.promotion_code
+
     def __str__(self):
         return self.user.username.encode("utf-8")
 
@@ -62,8 +66,10 @@ class UserProfile(models.Model):
 
         if self.identified and self.identified_date is None:
             self.identified_date = timezone.now()
-        if self.birthDate == "":
-            self.birthDate = timezone.datetime(year=1970, month=1, day=1).date()
+        if self.promotion_code is None:
+            raw_code = self.user.username + str(self.created_at) + "disturbing string"
+            md5 = hashlib.md5(raw_code.encode())
+            self.promotion_code = md5.hexdigest()
         super(UserProfile, self).save(*args, **kwargs)
 
     class Meta:
@@ -93,6 +99,7 @@ def get_reward_from_share_record(sender, **kwargs):
         contribution.contributed_coin += share_record.actual_reward_for_share
         contribution.save()
     user.profile.save()
+    user.rice_team.save()
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
@@ -100,7 +107,9 @@ def post_save_receiver(sender, **kwargs):
     user = kwargs["instance"]
     created = kwargs["created"]
     if created:         # 在创建一个user对象时为其生成一个profile
-        user.profile = UserProfile.objects.create(user=user)
+        user.profile = UserProfile.objects.create(user=user, gender="u",
+                                                  birthDate=timezone.datetime(year=1970, month=1, day=1).date(),
+                                                  name=user.username)
         # 以及一个米团
         user.rice_team = RiceTeam.objects.create(host=user)
     else:

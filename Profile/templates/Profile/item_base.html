@@ -1,0 +1,35 @@
+{% load duration_filter %}
+{% load sharelink %}
+{% for act in activities %}
+    <li class="{% cycle "action-card" "action-card" "action-card last" %}" data-link="{% share_link act %}" data-id="{{ act.id }}">
+        <div class="pic">
+            <img src="{{ act.poster.url }}">
+        </div>
+        <div class="brief-info">
+            <div class="brief-important">
+                <span class="title">{{ act.name }}</span>
+                <span class="price">&yen;{{ act.reward }}</span>
+                {% if act.recommended %}
+                    <span class="hot-tag">热门推荐</span>
+                {% endif %}
+            </div>
+            <p class="host">主办方：{{ act.host_name }}</p>
+            <div class="criteria">
+                {%for line in act.description|two_line %}
+                    <p class="fn-overflow" title="{{ line }}">{{ line }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="items">
+            <p class="location fn-overflow" title="{{ act.loc_description }}">{{ act.loc_description }}</p>
+            <p class="num fn-overflow">{{ act.get_applying_num }}/{{ act.max_attend }} 人</p>
+            <p class="time fn-overflow">{{ act.get_duration_description }}</p>
+            <p class="extra fn-overflow">{{ act.last_length|duration }}</p>
+        </div>
+        <div class="operation">
+            {% block operation %}
+            {% endblock %}
+        </div>
+        {% block share %}{% endblock %}
+    </li>
+{% endfor %}
