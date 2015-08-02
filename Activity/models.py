@@ -111,6 +111,17 @@ class Activity(models.Model):
 
     poster = models.ImageField(upload_to=get_activity_poster_path, verbose_name="海报",
                                default=DEFAULT_POSTER_PATH)
+    poster_zipped = models.ImageField(upload_to=get_activity_poster_path,
+                                      verbose_name='压缩海报', null=True, blank=True)
+
+    @property
+    def poster_zipped_first(self):
+        # 尝试取出压缩图片，如果压缩图片不存在，则取出取出原图
+        if self.poster_zipped:
+            return self.poster_zipped
+        else:
+            return self.poster
+
     recommended = models.BooleanField(default=False, verbose_name="热门推荐")
     recommended_level = models.IntegerField(default=0, verbose_name="推荐等级")          # 推荐等级，此值越高优先级越高，用于排序
     time_limited = models.BooleanField(default=False, verbose_name="限时报名")

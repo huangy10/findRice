@@ -12,7 +12,8 @@ class ActivityCreationForm(forms.ModelForm):
         "invalid_activity_type": u"活动类型无效",
         "wrong_prov_city": u"省份/城市数据格式错误",
         "start_time_error": u"活动不能在过去开始",
-        "end_time_error": u"活动不能在开始之前结束"
+        "end_time_error": u"活动不能在开始之前结束",
+        "last_length_error": u'持续时间太长'
     }
     day = forms.IntegerField(widget=forms.NumberInput(attrs={
         "class": "content time"

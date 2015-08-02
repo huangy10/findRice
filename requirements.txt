@@ -7,3 +7,4 @@ django-send-messages==1.0.0
 simplejson==3.7.3
 django-excel-response==1.0
 xlwt==1.0.0
+django-celery==3.1.16
