@@ -1,7 +1,7 @@
 {% load duration_filter %}
 {% load sharelink %}
 {% for act in activities %}
-    <div class="activity-list-item" data-id="{{ act.id }}" data-link="{% share_link act %}">
+    <div class="activity-list-item {% if act.status == 2 %}finished{% endif %}" data-id="{{ act.id }}" data-link="{% share_link act %}">
         <div class="zui-flex list-item">
             <div class="zui-flex zui-flex-fixed thumbnail">
                 <img src="{{ act.poster_url }}" alt=""/>

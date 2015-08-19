@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from findRice.celery import app
+from Notification.signals import send_notification
 
 @app.task()
 def create_zipped_poster(act, force=False):
@@ -21,11 +22,11 @@ def create_zipped_poster(act, force=False):
         w, h = im.size
         if w/W*H < h:
             tmp_h = int(W / w * h)
-            new_im = im.resize((int(W), tmp_h), resampe=Image.LANCZOS)
+            new_im = im.resize((int(W), tmp_h), resample=Image.LANCZOS)
             new_im = new_im.crop((0, tmp_h/2-int(H)/2, int(W), tmp_h/2+int(H)/2))
         else:
             tmp_w = int(H / h * w)
-            new_im = im.resize((tmp_w, int(H)), resampe=Image.LANCZOS)
+            new_im = im.resize((tmp_w, int(H)), resample=Image.LANCZOS)
             new_im = new_im.crop((tmp_w/2-int(W)/2, 0, tmp_w/2+int(W)/2, int(H)))
         # im.thumbnail((300, 220))
         zipped_io = StringIO.StringIO()
@@ -46,3 +47,22 @@ def limit_poster_size(act):
     限制海报的大小
     """
     pass
+
+
+@app.task()
+def send_del_notification_to_candidate(act):
+    """ 向该活动的所有参与者发送该活动已经被删除的通知
+    """
+    from Activity.models import ApplicationThrough
+    applicants = ApplicationThrough.objects.filter(is_active=True,
+                                                   activity=act,
+                                                   status__in=['applying', 'approved', 'ready'])
+    for applicant in applicants:
+        send_notification.send(sender=settings.AUTH_USER_MODEL,
+                               notification_type='activity_notification',
+                               notification_center=applicant.user.notification_center,
+                               activity=act,
+                               user=applicant.user,
+                               activity_notification_type='activity_deleted')
+
+    applicants.update(is_active=False)

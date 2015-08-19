@@ -126,10 +126,10 @@ class ShareRecord(models.Model):
         if self.finished and self.share.user is not None:
 
             def get_actual_reward():
-		if self.share.user == self.share.activity.host:
-		    self.actual_reward_for_finish = 0
+                if self.share.user == self.share.activity.host:
+                    self.actual_reward_for_finish = 0
                     self.actual_reward_for_share = 0
-		    logger.debug(u'分享自己创建的活动，不结算米币，发起分享的用户是%s' % self.share.user.username)
+                    logger.debug(u'分享自己创建的活动，不结算米币，发起分享的用户是%s' % self.share.user.username)
                     return
                 cur_share_reward = self.share.total_reward          # 取出当前奖励
                 cur_share_reward += self.share.activity.reward * \

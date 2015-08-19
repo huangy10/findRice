@@ -95,3 +95,18 @@
 2015-08-17 23:13:26,851 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars/2015/8/12/92f3bb0aa575467a813fdbbb5fa4b1ab.png'}
 2015-08-17 23:13:45,670 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars/2015/8/12/d18f100c03a2411f92b2a8be19f03bc6.png'}
 2015-08-17 23:33:55,088 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|Woody Huang2(id: lena)|，兑换的米币为1, 米币余额为0
+2015-08-19 22:22:49,808 [DEBUG] Activity.views: The share code is: ae304973db7e989006f24dd817c5a72e
+2015-08-19 22:23:56,046 [DEBUG] Activity.views: The share code is: f0769889aec07042f880f6d54eee00d6
+2015-08-19 22:23:57,472 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:1), 当前用户为|Lee|(huangyan142)
+2015-08-19 22:43:59,351 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
+2015-08-19 22:44:05,664 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=全部地区|全部地区|q=
+2015-08-19 22:53:14,760 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
+2015-08-19 22:55:05,564 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
+2015-08-19 22:57:27,080 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
+2015-08-19 22:57:34,376 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
+2015-08-19 22:57:39,133 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|海淀|q=
+2015-08-19 23:06:56,723 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:1), 当前用户为|Woody Huang2|(lena)
+2015-08-19 23:10:11,031 [DEBUG] Activity.forms: 上传的持续时间参数为0d2h0m, 计算得到的持续时间为120m
+2015-08-19 23:10:11,080 [DEBUG] Activity.views: 找到到问卷为id＝1, 其创建时间是2015-08-12 12:07:04.715957+00:00
+2015-08-19 23:10:18,487 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:1), 当前用户为|Woody Huang2|(lena)
+2015-08-19 23:10:18,505 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: lena|报名活动|id: 1|

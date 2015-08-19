@@ -24545,3 +24545,36 @@ KeyError: 'start_time'
 2015-08-17 23:05:48,938 [WARNING] django.request: Not Found: /apple-touch-icon.png
 2015-08-17 23:05:49,119 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
 2015-08-17 23:05:49,133 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-08-19 21:51:47,692 [WARNING] django.request: Not Found: /http:/www.taobao.com/
+2015-08-19 22:20:33,872 [ERROR] django.request: Internal Server Error: /user/msg
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 65, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Notification/views.py", line 21, in notification_center
+    msg_list = list(sys_msg[0:20]) + list(act_msg[0:20]) + list(wel_msg[0:20])
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/models/query.py", line 162, in __iter__
+    self._fetch_all()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/models/query.py", line 965, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/models/query.py", line 238, in iterator
+    results = compiler.execute_sql()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 837, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+ProgrammingError: column Notification_systemnotification.target_url does not exist
+LINE 1: ...ption", "Notification_systemnotification"."read", "Notificat...
+                                                             ^
+
+2015-08-19 22:20:34,337 [WARNING] django.request: Not Found: /favicon.ico
+2015-08-19 23:20:36,734 [WARNING] django.request: Not Found: /action/1/applicant

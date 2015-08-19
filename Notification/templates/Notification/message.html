@@ -42,7 +42,7 @@
                             {% if msg.reserved != '' %}
                                 <span class="bonus">获得{{ msg.reserved }}米币</span>
                             {% endif %}
-                            <span class="msg fn-overflow">{{ msg.description }}</span>
+                            <span class="msg fn-overflow">{% autoescape off %}{{ msg.description }}{% endautoescape %}</span>
                         {% endif %}
                         </div>
                     {% elif msg.related_activity%}

@@ -137,6 +137,7 @@ def search_list(request, start, size):
                 if prov == u"全部地区":
                     return activity
                 if city == u"全部地区":
+                    print city, prov
                     activity = queryset.filter(province=prov, is_active=True, is_published=True)
                 else:
                     activity = queryset.filter(city=city, province=prov, is_active=True, is_published=True)

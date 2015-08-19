@@ -93,7 +93,7 @@
                 <li>
                     <div class="active-name"><i class="zui-icon icon-address"></i>活动地点</div>
                     <div class="input-wrapper">
-                        <input id="prov_city" type="text" data-required="true"  data-select-area="true" data-select-target="#NowProvince,#NowCity" data-select-title="请选择省份" class="zui-input-text" value="{{ act.province }}{{ act.city }}" id="city" readonly placeholder="选择地区" />
+                        <input id="prov_city" type="text" data-required="true"  data-select-area="true" data-select-target="#NowProvince,#NowCity" data-select-title="请选择省份" class="zui-input-text" value="{{ act.province }} {{ act.city }}" id="city" readonly placeholder="选择地区" />
                         <br/>
                         <input name="location" type="text" class="zui-input-text" id="other-local-msg" placeholder="输入详细地点" data-required="true" {% if act %}value="{{ act.location }}"{% endif %} />
                     </div>

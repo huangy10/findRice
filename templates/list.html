@@ -114,7 +114,7 @@
     <div id="list" class="list">
         <ul class="fn-clr">
             {% for act in activities %}
-                <li class="{% cycle "action-card" "action-card" "action-card" "action-card last"%}" data-detail="/action/{{ act.id }}/detail" data-link="{% share_link act %}" data-id="{{ act.id }}">
+                <li class="{% cycle "action-card" "action-card" "action-card" "action-card last"%} {% if act.status == 2 %}finished{% endif %}" data-detail="/action/{{ act.id }}/detail" data-link="{% share_link act %}" data-id="{{ act.id }}">
                     <div class="pic">
                         <img src="{{ act.poster_url }}">
                     </div>

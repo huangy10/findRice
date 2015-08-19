@@ -14,6 +14,7 @@ from django.template.loader import render_to_string
 from .models import Activity, ApplicationThrough, ActivityType, ActivityLikeThrough
 from .forms import ActivityCreationForm
 from .utils import get_activity_session_representation
+from .tasks import send_del_notification_to_candidate
 from Questionnaire.models import SingleChoiceAnswer, MultiChoiceAnswer, TextAnswer, FileAnswer
 from Questionnaire.models import AnswerSheet, Questionnaire, ChoiceQuestion, NonChoiceQuestion
 from Questionnaire.utils import create_questionnaire_with_json, create_answer_set_with_json
@@ -32,7 +33,7 @@ logger = logging.getLogger(__name__)
 @login_required()
 @profile_active_required
 def check_applicant_list(request, action_id):
-    activity = get_object_or_404(Activity, id=action_id)
+    activity = get_object_or_404(Activity, id=action_id, is_active=True)
     user = request.user
     if activity.host != user:
         """如果当前用户并不是这个活动的发布者，那么跳转到活动的详情页"""
@@ -693,6 +694,7 @@ def del_an_activity(request, action_id):
 
     act.is_active = False
     act.save()
+    send_del_notification_to_candidate.delay(act)
     return HttpResponse(simplejson.dumps({"success": True, "data": {"url": "/mine/start"}}),
                         content_type="application/json")
 

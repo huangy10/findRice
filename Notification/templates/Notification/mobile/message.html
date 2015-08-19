@@ -50,7 +50,7 @@
                             </div>
                             <div class="zui-cell">
                                 <h4 class="h4">通知</h4>
-                                <p class="msg-text">{{ msg.description }}</p>
+                                <p class="msg-text">{% autoescape off %}{{ msg.description }}{% endautoescape %}</p>
                             </div>
                         </li>
                     {% elif msg.related_activity%}
