@@ -43,9 +43,9 @@
                 <span id="or-txt">或</span>
                 <p>通过社交账号直接登录</p>
                 <div id="socials">
-                    <a href="" id="wechat"></a>
-                    <a href="{% url "social:begin" backend='qq' %}" id="qq"><i class="zui-icon icon-qq"></i></a>
-                    <a href="" id="sina" class="last"></a>
+                    <a href="{% url "social:begin" backend='weixin' %}?next=/social/profile" id="wechat"></a>
+                    <a href="{% url "social:begin" backend='qq' %}?next=/social/profile" id="qq"><i class="zui-icon icon-qq"></i></a>
+                    <a href="{% url "social:begin" backend='weibo' %}?next=/social/profile" id="sina" class="last"></a>
 {#                    <a id="wechat"></a>#}
 {#                    <span id="qq"></span>#}
 {#                    <span id="sina" class="last"></span>#}

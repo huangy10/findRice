@@ -27,34 +27,34 @@
                 <a href="/action/new/create/1" class="nav-item">
                     <i class="zui-icon icon-plus"></i>
                 </a>
-                <a href="/user/msg" class="nav-item active">
+                <a href="/user/msg" class="nav-item">
                     {% if user.notification_center.unread_notifications_count %}
                         <span class="number">{{ user.notification_center.unread_notifications_count }}</span>
                     {% endif %}
                     <i class="zui-icon icon-email"></i>
                 </a>
                 <a href="/mine/start" class="nav-item user">
-                    <img src="{{ user.profile.avatar.url }}" alt=""/>
+                    <img src="{{ user.profile.avatar_url }}" alt=""/>
                 </a>
             </div>
         </div>
     </div>
     <div class="tab-wrapper top-tab">
         <div class="tab clearfix">
+            <div class="tab-item">
+                <a href="/mine/start" class="tab-item-a">已发布</a>
+            </div>
+            <div class="tab-item">
+                <a href="/mine/apply" class="tab-item-a">已报名</a>
+            </div>
+            <div class="tab-item">
+                <a href="/mine/like" class="tab-item-a">已关注</a>
+            </div>
+            <div class="tab-item">
+                <a href="/mine/group" class="tab-item-a">米团</a>
+            </div>
             <div class="tab-item active">
-                <a href="/mine/start" class="tab-item-a">我发起的活动</a>
-            </div>
-            <div class="tab-item">
-                <a href="/mine/apply" class="tab-item-a">我报名的活动</a>
-            </div>
-            <div class="tab-item">
-                <a href="/mine/like" class="tab-item-a">我关注的活动</a>
-            </div>
-            <div class="tab-item">
-                <a href="/mine/group" class="tab-item-a">我的米团</a>
-            </div>
-            <div class="tab-item">
-                <a href="/mine/info" class="tab-item-a">我的信息</a>
+                <a href="/mine/info?code={{ user.profile.promotion_code }}" class="tab-item-a">信息</a>
             </div>
         </div>
     </div>
@@ -66,7 +66,7 @@
                 <div class="user-msg">
                     <div class="user-pic">
                         <div class="img upload-img-box">
-                            <img src="{{ user.profile.avatar.url }}" alt="" class=""/>
+                            <img src="{{ user.profile.avatar_url }}" alt="" class=""/>
                             <label for="upload-image" class="upload-image">
                                 <i class="zui-icon icon-photo"></i>
                                 <input type="file" name="portrait" id="upload-image" />
@@ -90,7 +90,8 @@
                 </div>
                 <div class="operation-content">
                     <div class="zui-align-center ops">
-                        <a href="javascript:void(0)" class="zui-btn exchange">兑换米币</a>
+                        <button type="button" class="zui-btn exchange">兑换米币</button>
+			<button type="button" class="zui-btn share"><i class="zui-icon icon-qrcode"></i>推广</button>
                     </div>
                     <div class="other-msg">
 
@@ -131,6 +132,10 @@
         <div class="exchange-btn">
             <button class="zui-btn green">兑换</button>
         </div>
+    </div>
+    <div class="bottom">
+        <a href="/logout" class="zui-btn logout">退出登录</a>
+        <p class="hint">找米客服联系电话：400-22236678</p>
     </div>
 </div>
 

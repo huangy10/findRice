@@ -11,6 +11,7 @@
     <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
     <script src="//zhao-mi.net/m/lib/mobiscroll/js/mobiscroll.js" type="text/javascript"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/moment/moment.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/m/build/create-basic.js"></script>
 </head>
 <body>
@@ -34,7 +35,7 @@
                     <i class="zui-icon icon-email"></i>
                 </a>
                 <a href="/mine/start" class="nav-item user">
-                    <img src="{{ user.profile.avatar.url }}" alt=""/>
+                    <img src="{{ user.profile.avatar_url }}" alt=""/>
                 </a>
             </div>
 
@@ -92,7 +93,7 @@
                 <li>
                     <div class="active-name"><i class="zui-icon icon-address"></i>活动地点</div>
                     <div class="input-wrapper">
-                        <input id="prov_city" type="text" data-required="true"  data-select-area="true" data-select-target="#NowProvince,#NowCity" data-select-title="请选择省份" class="zui-input-text" value="{{ act.province }} {{ act.city }}" id="city" readonly placeholder="选择地区" />
+                        <input id="prov_city" type="text" data-required="true"  data-select-area="true" data-select-target="#NowProvince,#NowCity" data-select-title="请选择省份" class="zui-input-text" value="{{ act.province }}{{ act.city }}" id="city" readonly placeholder="选择地区" />
                         <br/>
                         <input name="location" type="text" class="zui-input-text" id="other-local-msg" placeholder="输入详细地点" data-required="true" {% if act %}value="{{ act.location }}"{% endif %} />
                     </div>
@@ -126,20 +127,20 @@
                         <div class="zui-flex">
                             <div class="zui-flex zui-cell">
                                 <div class="zui-cell">
-                                    <input id="id_day" type="text" class="zui-input-text distance-day" name="day" {% if act %}value="{{ act.day }}"{% endif %} data-rule-type="number" />
+                                    <input id="id_day" type="text" class="zui-input-text distance-day" name="day" {% if act %}value="{{ act.day }}"{% else %}value="0"{% endif %} data-rule-type="number" />
                                 </div>
                                 <span class="zui-cell "><span class="text">天</span></span>
                             </div>
                             <div class="zui-flex zui-cell">
                                 <div class="zui-cell ">
-                                    <input id="id_hour" type="text" class="zui-input-text distance-hour" name="hour" {% if act %}value="{{ act.hour }}"{% endif %} data-rule-type="number" data-min-length="0" data-max-length="23" data-error-msg="请输入0~23" />
+                                    <input id="id_hour" type="text" class="zui-input-text distance-hour" name="hour" {% if act %}value="{{ act.hour }}"{% else %}value="0"{% endif %} data-rule-type="number" data-min-length="0" data-max-length="23" data-error-msg="请输入0~23" />
                                 </div>
                                 <span class="zui-cell "><span class="text">时</span></span>
 
                             </div>
                             <div class="zui-flex zui-cell">
                                 <div class="zui-cell">
-                                    <input id="id_minute" type="text" class="zui-input-text distance-minute" name="minute" {% if act %}value="{{ act.minute }}"{% endif %} data-rule-type="number" data-min-length="0" data-max-length="59" data-error-msg="请输入0~59" />
+                                    <input id="id_minute" type="text" class="zui-input-text distance-minute" name="minute" {% if act %}value="{{ act.minute }}"{% else %}value="0"{% endif %} data-rule-type="number" data-min-length="0" data-max-length="59" data-error-msg="请输入0~59" />
                                 </div>
                                 <span class="zui-cell "><span class="text">分</span></span>
 
@@ -190,7 +191,6 @@
                             {% for type in types %}
                                 <span data-val="{{ forloop.counter0 }}">{{ type.type_name }}</span>
                             {% endfor %}
-                            <span data-val="-1">其他</span>
                         </div>
                     </div>
                 </li>

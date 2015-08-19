@@ -27,12 +27,12 @@
     </style>
 </head>
 <body>
-<div id="content">
-    <div id="header">
+<div id="header">
+    <div id="header-c">
         <a href="/" id="logo">找米</a>
         {% if user %}
             <a id="personal-info" class="action" href="/mine/start">
-                <img src="{{ user.profile.avatar.url }}" alt="我的个人信息">
+                <img src="{{ user.profile.avatar_url }}" alt="我的个人信息">
             </a>
         {% else %}
             <div id="reg" class="action"><a class="z-btn">注册/登陆</a></div>
@@ -40,6 +40,9 @@
         <div id="pub" class="action"><a class="z-btn">发布活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
+</div>
+<div id="content">
+
     <div id="detail-bg">
         <img src="//zhao-mi.net/assets/imgs/detail-banner.png">
     </div>

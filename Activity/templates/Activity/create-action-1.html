@@ -13,14 +13,15 @@
     <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/cityselect/jquery.cityselect.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/moment/moment.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/build/create-basic.js"></script>
 </head>
 <body>
-<div id="content">
-    <div id="header">
+<div id="header">
+    <div id="header-c">
         <a href="/" id="logo">找米</a>
         <a id="personal-info" class="action" href="/mine/start">
-            <img src="{{ user.profile.avatar.url }}" alt="我的个人信息">
+            <img src="{{ user.profile.avatar_url }}" alt="我的个人信息">
         </a>
         <div id="msg" class="action">
             <a href="/user/msg" class="z-btn">消息</a>
@@ -31,6 +32,8 @@
         <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
+</div>
+<div id="content">
     <div id="action-bg">
         <img src="{% static "assets/imgs/detail-banner.png" %}">
         {% block step_indicator %}
@@ -51,87 +54,86 @@
                 <form id="create-action-first" action="/action/{{ action_id }}/edit/1" enctype="multipart/form-data" method="post">
             {% else %}
                 {% if action_id %}
-                <form id="create-action-first" action="/action/{{ action_id }}/create/1" enctype="multipart/form-data" method="post">
+                    <form id="create-action-first" action="/action/{{ action_id }}/create/1" enctype="multipart/form-data" method="post">
                 {% else %}
-                <form id="create-action-first" action="/action/new/create/1" enctype="multipart/form-data" method="post">
+                    <form id="create-action-first" action="/action/new/create/1" enctype="multipart/form-data" method="post">
                 {% endif %}
             {% endif %}
-            {% csrf_token %}
-            <div id="main">
-                <p class="title">活动名称</p>
-                {{ form.name }}
-                <p class="title">主办方</p>
-                <div class="content-w fn-clr">
-                    {{ form.host_name }}
-                    {% if user.profile.identified %}
+        {% csrf_token %}
+        <div id="main">
+            <p class="title">活动名称</p>
+            {{ form.name }}
+            <p class="title">主办方</p>
+            <div class="content-w fn-clr">
+                {{ form.host_name }}
+                {% if user.profile.identified %}
+                {% else %}
+                    {% if user.identified %}
+                        <span class="verified"></span>
                     {% else %}
-                        {% if user.identified %}
-                            <span class="verified"></span>
-                        {% else %}
-                            <button class="z-btn verifiedmember">申请成为认证用户</button>
-                        {% endif %}
+                        <button class="z-btn verifiedmember">申请成为认证用户</button>
                     {% endif %}
-                </div>
+                {% endif %}
+            </div>
 
+        </div>
+        <div id="secondary">
+            <p class="title title-img location">活动地点</p>
+            <div id="addr">
+                <select id="prov" class="prov"></select>省
+                <select id="city" class="city" disabled="disabled"></select>市/区
+                {{ form.location }}
             </div>
-            <div id="secondary">
-                <p class="title title-img location">活动地点</p>
-                <div id="addr">
-                    <select id="prov" class="prov"></select>省
-                    <select id="city" class="city" disabled="disabled"></select>市/区
-                    {{ form.location }}
-                </div>
 
-                <p class="title title-img datetime">活动时间</p>
-                <div id="datatime-c" class="fn-clr">
-                    <div id="form_datetime_start" class="input-group date form_datetime">
-                        {{ form.start_time }}
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                    </div>
-                    <div id="form_datetime_end" class="input-group date form_datetime">
-                        {{ form.end_time }}
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                    </div>
+            <p class="title title-img datetime">活动时间</p>
+            <div id="datatime-c" class="fn-clr">
+                <div id="form_datetime_start" class="input-group date form_datetime">
+                    {{ form.start_time }}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                 </div>
+                <div id="form_datetime_end" class="input-group date form_datetime">
+                    {{ form.end_time }}
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+            </div>
 
-                <p class="title title-img duration">持续时间</p>
-                {{ form.day }}天
-                {{ form.hour }}小时
-                {{ form.minute }}分钟
-                <p class="title title-img count">活动人数</p>
-                {{ form.max_attend }}
-                <p class="title title-img money">奖励金额</p>
-                {{ form.reward }}
+            <p class="title title-img duration">持续时间</p>
+            {{ form.day }}天
+            {{ form.hour }}小时
+            {{ form.minute }}分钟
+            <p class="title title-img count">活动人数</p>
+            {{ form.max_attend }}
+            <p class="title title-img money">奖励金额</p>
+            {{ form.reward }}
+        </div>
+        <div id="extra">
+            <p class="title">活动简介</p>
+            {{ form.description }}
+            <p class="title">活动类型</p>
+            <div id="action-type-c">
+                {% if act_type %}
+                    <p>{{ act_type }}</p>
+                {% else %}
+                    <p>请选择活动类型</p>
+                {% endif %}
+                <ul id="action-type-droplist">
+                    {% for type in types %}
+                        <li data-val="{{ forloop.counter0 }}" data-txt="{{ type.type_name }}">{{ type.type_name }}</li>
+                    {% endfor %}
+                </ul>
+                {{ form.activity_type }}
             </div>
-            <div id="extra">
-                <p class="title">活动简介</p>
-                {{ form.description }}
-                <p class="title">活动类型</p>
-                <div id="action-type-c">
-                    {% if act_type %}
-                        <p>{{ act_type }}</p>
-                    {% else %}
-                        <p>请选择活动类型</p>
-                    {% endif %}
-                    <ul id="action-type-droplist">
-                        {% for type in types %}
-                            <li data-val="{{ forloop.counter0 }}" data-txt="{{ type.type_name }}">{{ type.type_name }}</li>
-                        {% endfor %}
-                        <li data-val="-1" data-txt="其他">其他</li>
-                    </ul>
-                    {{ form.activity_type }}
-                </div>
-                <p class="title">活动海报</p>
-                <label id="poster-t" for="poster" class="z-btn">请选择活动海报</label>
-                <span id="poster-hint">仅支持png/jpg图片</span>
-                {{ form.poster }}
-            </div>
-            <div id="btns" class="fn-clr">
-                <button type="submit" class="z-btn next">下一步</button>
-            </div>
-            </form>
+            <p class="title">活动海报</p>
+            <label id="poster-t" for="poster" class="z-btn">请选择活动海报</label>
+            <span id="poster-hint">仅支持png/jpg图片</span>
+            {{ form.poster }}
+        </div>
+        <div id="btns" class="fn-clr">
+            <button type="submit" class="z-btn next">下一步</button>
+        </div>
+        </form>
         {% endblock %}
     </div>
 </div>

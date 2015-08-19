@@ -2,9 +2,9 @@
 {% block title %}我的米团{% endblock %}
 
 {% block categories %}
-    <a class="mine-create" href="/mine/start?from=0&size=12">我发起的活动</a>
-    <a class="mine-apply" href="/mine/apply?from=0&size=12">我报名的活动</a>
-    <a class="mine-like" href="/mine/like?from=0&size=12">我关注的活动</a>
+    <a class="mine-create" href="/mine/start">我发起的活动</a>
+    <a class="mine-apply" href="/mine/apply">我报名的活动</a>
+    <a class="mine-like" href="/mine/like">我关注的活动</a>
     <a class="mine-group selected">我的米团</a>
 {% endblock %}
 
@@ -29,7 +29,7 @@
                 <tr>
                 <td>
                     <span class="seqno">{{ forloop.counter }}.</span>
-                    <span class="portrait-c"><img src="{{ contrib.user.profile.avatar.url }}"></span>
+                    <span class="portrait-c"><img src="{{ contrib.user.profile.avatar_url }}"></span>
                     <span class="name fn-overflow" title="{{ contrib.user.profile.name }}">{{ contrib.user.profile.name }}</span>
                 </td>
                 <td class="center">{{ contrib.contributed_coin }}</td>

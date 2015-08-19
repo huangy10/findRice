@@ -1,17 +1,21 @@
 {% load duration_filter %}
 {% load sharelink %}
 {% for act in activities %}
-    <li class="{% cycle "action-card" "action-card" "action-card last"%}" data-detail="/action/{{ act.id }}/detail" data-link="{% share_link act %}" data-id="{{ act.id }}">
+    <li class="{% cycle "action-card" "action-card" "action-card" "action-card last"%}" data-detail="/action/{{ act.id }}/detail" data-link="{% share_link act %}" data-id="{{ act.id }}">
         <div class="pic">
-            <img src="{{ act.poster.url }}">
+            <img src="{{ act.poster_url }}">
         </div>
         <div class="brief-info">
             <div class="brief-important">
                 <span class="title">{{ act.name }}</span>
                 <span class="price">&yen;{{ act.reward }}</span>
-                <span class="hot-tag">热门推荐</span>
             </div>
-            <p class="host">主办方：{{ act.host_name }}</p>
+            <div class="host">
+                <span class="host-c">主办方：{{ act.host_name }}</span>
+                {% if act.recommended %}
+                    <span class="hot-tag">热门推荐</span>
+                {% endif %}
+            </div>
             <div class="criteria">
                 {%for line in act.description|two_line %}
                     <p class="fn-overflow" title="{{ line }}">{{ line }}</p>

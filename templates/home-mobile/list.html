@@ -1,6 +1,7 @@
 {% load duration_filter %}
 {% load sharelink %}
 {% load check_act_num %}
+{% load sharelink %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +42,7 @@
                     <i class="zui-icon icon-email"></i>
                 </a>
                 <a href="/mine/start" class="nav-item user">
-                    <img src="{{ user.profile.avatar.url }}" alt=""/>
+                    <img src="{{ user.profile.avatar_url }}" alt=""/>
                 </a>
             {% else %}
                 <a href="/login" class="nav-item btn-login">
@@ -50,8 +51,8 @@
             {% endif %}
         </div>
     </div>
+    {% if homepage_posters %}
     <div class="banner">
-
         <ul>
             {% for banner in homepage_posters %}
                 <li>
@@ -62,6 +63,7 @@
             {% endfor %}
         </ul>
     </div>
+    {% endif %}
     <div class="main">
         <div class="tab-wrapper" id="cateList">
             <div class="tab zui-flex">
@@ -83,7 +85,6 @@
                         {% for type in activity_types %}
                             <li {% if param.type == forloop.counter %}class="active"{% endif %}><a data-type="{{ forloop.counter }}">{{ type.type_name }}</a></li>
                         {% endfor %}
-                        <li {% if param.type == -1 %}class="active"{% endif %}><a  data-type="-1">其它</a></li>
                     </ul>
                 </div>
             </div>
@@ -91,9 +92,9 @@
 
         <div class="activity-lists">
             {% for act in activities %}
-                <a href="/action/{{ act.id }}/detail" class="activity-list-item zui-flex">
+                <a href="{% share_link act %}" class="activity-list-item zui-flex">
                     <div class="zui-flex zui-flex-fixed thumbnail">
-                        <img src="{{ act.poster.url }}" alt=""/>
+                        <img src="{{ act.poster_url }}" alt=""/>
                     </div>
                     <div class="zui-cell">
                         <div class="list-item-desc">

@@ -5,11 +5,13 @@ from django.http import JsonResponse
 from .models import NotificationCenter, Notification
 from .models import SystemNotification, ActivityNotification, WelfareNotification
 from findRice.utils import choose_template_by_device
+from Profile.utils import profile_active_required
 
 # Create your views here.
 
 
 @login_required()
+@profile_active_required
 def notification_center(request):
     center = request.user.notification_center
     sys_msg = SystemNotification.objects.filter(notification_center=center)
@@ -35,6 +37,7 @@ def notification_center(request):
 
 
 @login_required()
+@profile_active_required
 def unread_messages(request):
     center = request.user.notification_center
     return JsonResponse({"success": True, "data": {"unread": center.unread_notifications_count}})

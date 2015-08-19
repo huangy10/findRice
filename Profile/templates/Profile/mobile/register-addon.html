@@ -24,7 +24,7 @@
         <a href="/" class="zhaomi logo logo-white">找米</a> <a href="/" class="cancel-login"><i class="zui-icon icon-close"></i>取消注册</a>
     </div>
     <div class="register-title zui-align-center">验证手机/补充信息</div>
-    <form action="/register" method="post" enctype="multipart/form-data" id="register">
+    <form action="{% if social %}/social/profile{% else %}/register{%endif%}" method="post" enctype="multipart/form-data" id="register">
         {% csrf_token %}
         <div class="zui-aligin-center">
             <div class="upload-img-box img">
@@ -33,6 +33,7 @@
                     <i class="zui-icon icon-photo-gray"></i>
                     <input type="file" name="avatar" id="upload-image" />
                 </label>
+		<span>头像上传成功</span>
             </div>
         </div>
         <div class="access-box">

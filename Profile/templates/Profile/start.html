@@ -4,9 +4,9 @@
 
 {% block categories %}
     <a class="mine-create selected">我发起的活动</a>
-            <a class="mine-apply" href="/mine/apply?from=0&size=12">我报名的活动</a>
-            <a class="mine-like" href="/mine/like?from=0&size=12">我关注的活动</a>
-            <a class="mine-group" href="/mine/group?from=0&size=12">我的米团</a>
+            <a class="mine-apply" href="/mine/apply">我报名的活动</a>
+            <a class="mine-like" href="/mine/like">我关注的活动</a>
+            <a class="mine-group" href="/mine/group">我的米团</a>
 {% endblock %}
 
 {% block check_applicant %}
@@ -39,7 +39,7 @@
         <span class="duplicate" data-action="/action/{{ act.id }}/duplicate" title="复制活动"></span>
         <span class="delete" data-action="/action/{{ act.id }}/delete" title="删除活动"></span>
         <span class="b-share" data-action="/action/{{ act.id }}/sharelink" data-link="{% share_link act %}" title="分享活动"></span>
-        <a class="z-btn view" href="/action/{{ act.id }}/applicant">查看报名表单</a>
+        <span class="z-btn view" data-action="/action/{{ act.id }}/applicant">查看报名表单</span>
     </div>
 {% endblock %}
 

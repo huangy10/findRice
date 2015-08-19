@@ -3,7 +3,7 @@
 {% for act in activities %}
     <li class="{% cycle "action-card" "action-card" "action-card last" %}" data-link="{% share_link act %}" data-id="{{ act.id }}">
         <div class="pic">
-            <img src="{{ act.poster.url }}">
+            <img src="{{ act.poster_url }}">
         </div>
         <div class="brief-info">
             <div class="brief-important">

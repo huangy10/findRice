@@ -23,12 +23,12 @@
                 <a href="/action/new/create/1" class="nav-item">
                     <i class="zui-icon icon-plus"></i>
                 </a>
-                <a href="/user/msg" class="nav-item active">
+                <a href="/user/msg" class="nav-item">
                     <span class="number">{{ user.notification_center.unread_notifications_count }}</span>
                     <i class="zui-icon icon-email"></i>
                 </a>
                 <a href="/mine/start" class="nav-item user">
-                    <img src="{{ user.profile.avatar.url }}" alt=""/>
+                    <img src="{{ user.profile.avatar_url }}" alt=""/>
                 </a>
             </div>
         </div>
@@ -36,19 +36,19 @@
     <div class="tab-wrapper top-tab">
         <div class="tab clearfix">
             <div class="tab-item ">
-                <a href="/mine/start" class="tab-item-a">我发起的活动</a>
+                <a href="/mine/start" class="tab-item-a">已发布</a>
             </div>
             <div class="tab-item">
-                <a href="/mine/apply" class="tab-item-a">我报名的活动</a>
+                <a href="/mine/apply" class="tab-item-a">已报名</a>
             </div>
             <div class="tab-item">
-                <a href="/mine/like" class="tab-item-a">我关注的活动</a>
+                <a href="/mine/like" class="tab-item-a">已关注</a>
             </div>
             <div class="tab-item active">
-                <a href="/mine/group" class="tab-item-a">我的米团</a>
+                <a href="/mine/group" class="tab-item-a">米团</a>
             </div>
             <div class="tab-item">
-                <a href="/mine/info" class="tab-item-a">我的信息</a>
+                <a href="/mine/info?code={{ user.profile.promotion_code }}" class="tab-item-a">信息</a>
             </div>
         </div>
     </div>
@@ -76,7 +76,7 @@
             {% for contrib in contributions %}
             <div class="tr">
                 <div class="zui-flex tr-item">
-                    <div class="zui-cell zui-flex-fixed">{{ forloop.counter }}. <span class="img"><img src="{{ contrib.user.profile.avatar.url }}" alt=""/></span> </div>
+                    <div class="zui-cell zui-flex-fixed">{{ forloop.counter }}. <span class="img"><img src="{{ contrib.user.profile.avatar_url }}" alt=""/></span> </div>
                     <div class="zui-cell "><span class="name">{{ contrib.user.profile.name }}</span></div>
                     <div class="zui-cell zui-flex-fixed"><span class="center">{{ contrib.contributed_coin }}</span></div>
                     <div class="zui-cell zui-flex-fixed"><span class="center">{{ contrib.user.rice_team.team_coin }}</span></div>

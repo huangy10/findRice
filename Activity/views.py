@@ -12,14 +12,15 @@ from django.contrib.auth import get_user_model
 from django.template.loader import render_to_string
 
 from .models import Activity, ApplicationThrough, ActivityType, ActivityLikeThrough
+from .forms import ActivityCreationForm
+from .utils import get_activity_session_representation
 from Questionnaire.models import SingleChoiceAnswer, MultiChoiceAnswer, TextAnswer, FileAnswer
 from Questionnaire.models import AnswerSheet, Questionnaire, ChoiceQuestion, NonChoiceQuestion
 from Questionnaire.utils import create_questionnaire_with_json, create_answer_set_with_json
 from Promotion.models import Share, ShareRecord
-from .forms import ActivityCreationForm
-from .utils import get_activity_session_representation
 from Notification.signals import send_notification
 from findRice.utils import choose_template_by_device
+from Profile.utils import profile_active_required
 
 # Create your views here.
 
@@ -29,6 +30,7 @@ logger = logging.getLogger(__name__)
 
 @require_GET
 @login_required()
+@profile_active_required
 def check_applicant_list(request, action_id):
     activity = get_object_or_404(Activity, id=action_id)
     user = request.user
@@ -88,7 +90,10 @@ def check_activity_detail(request, action_id):
         if request.user.is_authenticated():
             user = request.user
             like = ActivityLikeThrough.objects.filter(activity=activity, user=user).exists()
-
+	if 'code' in request.GET:
+	    logger.debug(u'The share code is: %s' % request.GET['code'])
+	else:
+	    logger.debug(u'Code not found')
         if "code" in request.GET and request.user.is_authenticated() and \
                 not ApplicationThrough.objects.filter(activity=activity, user=request.user).exists():
             share_code = request.GET.get("code", "")
@@ -149,17 +154,19 @@ def check_activity_detail(request, action_id):
 
 
 @require_POST
-@login_required()
 def apply_an_activity(request, action_id):
+    if not request.user.is_authenticated():
+        return JsonResponse({'success': True, 'data': {'url': '/login?next=/action/%s' % action_id}})
     activity = get_object_or_404(Activity, id=action_id)
     logger.debug(u"试图报名活动，对应活动为|{0:s}|(id:{1:d}), 当前用户为|{2:s}|({3:s})"
                  .format(activity.name, activity.id, request.user.profile.name, request.user.username))
-    if activity.host == request.user:
-        # 如果是当前登陆用户自己创建的活动，则跳转到申请列表页
-        # Log first
-        logger.debug(u"报名出错，试图报名自己的活动，对应活动为|%s|(id:%s), 当前用户为|%s|(%s)"
-                     % (activity.name, activity.id, request.user.profile.name, request.user.username))
-        return JsonResponse({"success": False, "data": {"error": "不能报名自己的活动"}})
+    # 2015/8/8 取消用户不得报名自己创建的活动的限制
+    # if activity.host == request.user:
+    #     # 如果是当前登陆用户自己创建的活动，则跳转到申请列表页
+    #     # Log first
+    #     logger.debug(u"报名出错，试图报名自己的活动，对应活动为|%s|(id:%s), 当前用户为|%s|(%s)"
+    #                  % (activity.name, activity.id, request.user.profile.name, request.user.username))
+    #     return JsonResponse({"success": False, "data": {"error": "不能报名自己的活动"}})
 
     # Check if there exist a valid questionnaire for this activity
     if Questionnaire.objects.filter(activity=activity, is_active=True).exists():
@@ -209,6 +216,7 @@ def apply_an_activity(request, action_id):
 
 
 @login_required()
+@profile_active_required
 def unapply_an_activity(request, action_id):
     activity = get_object_or_404(Activity, id=action_id)
     applicant = get_object_or_404(ApplicationThrough, activity=activity,
@@ -228,6 +236,7 @@ def unapply_an_activity(request, action_id):
 
 @require_POST
 @login_required()
+@profile_active_required
 def stop_accepting_apply(request, action_id):
     activity = get_object_or_404(Activity, id=action_id)
     if not activity.host == request.user:
@@ -239,6 +248,7 @@ def stop_accepting_apply(request, action_id):
 
 @require_POST
 @login_required()
+@profile_active_required
 def restart_accepting_apply(request, action_id):
     activity = get_object_or_404(Activity, id=action_id)
     if not activity.host == request.user:
@@ -249,6 +259,7 @@ def restart_accepting_apply(request, action_id):
 
 
 @login_required()
+@profile_active_required
 def create_new_activity_1(request):
     form = ActivityCreationForm(request.user, initial={"host_name": request.user.profile.name})
     if request.method == "POST":
@@ -296,6 +307,7 @@ def create_new_activity_1(request):
 
 @require_GET
 @login_required()
+@profile_active_required
 def edit_new_activity_1(request, action_id):
     """创建活动的第二步，首先检查session中的信息"""
     # 从第一步骤出来的
@@ -356,6 +368,7 @@ def edit_new_activity_1(request, action_id):
 
 
 @login_required()
+@profile_active_required
 def create_new_activity_2(request, action_id):
     """创建活动的第二步，首先检查session中的信息"""
     # 从第一步骤出来的
@@ -407,6 +420,7 @@ def create_new_activity_2(request, action_id):
 
 
 @login_required()
+@profile_active_required
 def publish_an_activity(request, action_id):
     activity = get_object_or_404(Activity, id=action_id)
     user = request.user
@@ -420,10 +434,11 @@ def publish_an_activity(request, action_id):
         activity.is_active = True
         activity.is_published = True
         activity.save()
+        share = Share.objects.get_or_create(user=request.user, activity=activity)[0]
         return JsonResponse({
             "success": True,
             "data": {
-                "url": "/action/%s/detail" % activity.id
+                "url": share.get_share_link()
             }
         })
 
@@ -467,13 +482,17 @@ def publish_an_activity(request, action_id):
 
 
 @login_required()
+@profile_active_required
 def edit_activity_1(request, action_id):
     activity = get_object_or_404(Activity, id=action_id, is_active=True)
     if not activity.host == request.user:
         return HttpResponseForbidden()
 
     form = ActivityCreationForm(request.user, instance=activity,
-                                initial={"activity_type": activity.activity_type.display_order})
+                                initial={"activity_type": activity.activity_type.display_order,
+                                         "hour": activity.hour,
+                                         "day": activity.day,
+                                         "minute": activity.minute})
     if request.method == "POST":
         form = ActivityCreationForm(request.user, request.POST, request.FILES,
                                     instance=activity.get_backup())
@@ -518,6 +537,7 @@ def edit_activity_1(request, action_id):
 
 
 @login_required()
+@profile_active_required
 def edit_activity_2(request, action_id):
     activity = get_object_or_404(Activity, id=action_id, is_active=True)
     if not activity.host == request.user:
@@ -526,6 +546,7 @@ def edit_activity_2(request, action_id):
     if request.method == "POST":
         data = simplejson.loads(request.POST["criteria"])
         # 从POST上来的json数据中构造问卷
+	logger.debug(u"编辑活动第二步，提交到新到问卷结构是{0}".format(request.POST["criteria"]))
         try:
             questionnaire = create_questionnaire_with_json({"criteria": data}, activity, is_active=False)
             request.session["questionnaire_id_tmp"] = questionnaire.id
@@ -561,10 +582,12 @@ def edit_activity_2(request, action_id):
         file_questions = NonChoiceQuestion.objects.filter(questionnaire=questionnaire,
                                                           type=1)
         args["single_choice_questions"] = single_choice_questions
-        args["multi_choice_question"] = multi_choice_questions
+        args["multi_choice_questions"] = multi_choice_questions
         args["text_questions"] = text_questions
-        args["file_question"] = file_questions
-
+        args["file_questions"] = file_questions
+        logger.debug(u"找到到问卷为id＝{0}, 其创建时间是{1}".format(questionnaire.id, questionnaire.created_at))
+    else:
+        logger.debug(u"没有找到该活动对应到问卷，活动id为{0}".format(activity.id))
     return render(request,
                   choose_template_by_device(request,
                                             "Activity/create-action-2.html",
@@ -573,6 +596,7 @@ def edit_activity_2(request, action_id):
 
 
 @login_required()
+@profile_active_required
 def save_an_activity(request, action_id):
     activity = get_object_or_404(Activity, id=action_id)
     if not activity.host == request.user:
@@ -656,6 +680,7 @@ def save_an_activity(request, action_id):
 
 @require_POST
 @login_required()
+@profile_active_required
 def del_an_activity(request, action_id):
     try:
         act = Activity.objects.get(id=action_id)
@@ -674,6 +699,7 @@ def del_an_activity(request, action_id):
 
 @require_POST
 @login_required()
+@profile_active_required
 def copy_an_activity(request, action_id):
     """
     Note:
@@ -709,6 +735,7 @@ def copy_an_activity(request, action_id):
 
 @require_GET
 @login_required()
+@profile_active_required
 def get_share_link(request, action_id):
     activity = get_object_or_404(Activity, id=action_id, is_active=True)
     share = Share.objects.get_or_create(user=request.user,
@@ -718,6 +745,7 @@ def get_share_link(request, action_id):
 
 
 @login_required()
+@profile_active_required
 def visit_from_share(request, action_id):
     """We create a share record here, and redirect the visitor to the detail page"""
     if "code" not in request.GET:
@@ -731,7 +759,9 @@ def visit_from_share(request, action_id):
 
 def like_an_activity(request):
     if not request.user.is_authenticated():
-	return JsonResponse({'success': True, 'data': {'url': '/login?next=%s' % request.META["HTTP_REFERER"]}})
+        return JsonResponse({'success': True, 'data': {'url': '/login?next=%s' % request.META["HTTP_REFERER"]}})
+    elif not request.user.profile.is_active:
+        return JsonResponse({'success': True, 'data': {'url': '/login?next=%s' % request.META["HTTP_REFERER"]}})
     action_id = request.POST.get("id", "")
     try:
         action_id = int(action_id)

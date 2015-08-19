@@ -1,365 +1,97 @@
-2015-07-24 16:21:02,127 [DEBUG] Activity.views: 报名出错，试图报名自己的活动，对应活动为|测试报名|(id:120), 当前用户为|Woody Huang|(huangyan14)
-2015-07-24 16:37:20,068 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
-2015-07-24 16:42:04,637 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
-2015-07-24 23:17:14,622 [DEBUG] Activity.views: 报名出错，试图报名自己的活动，对应活动为|aa 巴巴爸爸|(id:119), 当前用户为|源|(yuanlihao)
-2015-07-25 00:15:01,063 [DEBUG] Activity.views: 报名出错，试图报名自己的活动，对应活动为|活动142|(id:142), 当前用户为|源|(yuanlihao)
-2015-07-25 00:16:11,717 [DEBUG] Activity.views: 报名出错，试图报名自己的活动，对应活动为|啊啊哈哈70|(id:71), 当前用户为|源|(yuanlihao)
-2015-07-25 09:04:39,826 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=|q=
-2015-07-25 09:04:44,245 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=|q=
-2015-07-25 09:04:47,033 [DEBUG] findRice.views: 搜索参数为: hot=3|type=|loc=|q=
-2015-07-25 09:04:51,625 [DEBUG] findRice.views: 搜索参数为: hot=3|type=0|loc=|q=
-2015-07-25 09:05:00,587 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
-2015-07-25 09:05:01,810 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
-2015-07-25 09:06:18,444 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|海淀|q=
-2015-07-25 09:15:49,218 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|海淀|q=
-2015-07-25 10:41:23,413 [DEBUG] findRice.views: 搜索参数为: hot=1|type=|loc=|q=
-2015-07-25 12:16:47,874 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=|q=
-2015-07-25 12:18:00,690 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=|q=
-2015-07-25 12:18:03,645 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=|q=
-2015-07-25 12:19:53,228 [DEBUG] findRice.views: 搜索参数为: hot=1|type=|loc=|q=
-2015-07-25 12:19:56,348 [DEBUG] findRice.views: 搜索参数为: hot=1|type=|loc=|q=
-2015-07-25 12:20:02,693 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=|q=
-2015-07-25 12:20:06,284 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=|q=
-2015-07-25 12:20:11,931 [DEBUG] findRice.views: 搜索参数为: hot=0|type=1|loc=|q=
-2015-07-25 12:20:13,594 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=|q=
-2015-07-25 12:21:18,972 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=|q=
-2015-07-25 12:23:02,550 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=东城|q=
-2015-07-25 12:26:01,028 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=东城|q=
-2015-07-25 12:26:04,161 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=东城|q=
-2015-07-25 12:26:11,271 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=东城|q=
-2015-07-25 12:26:14,519 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=东城|q=
-2015-07-25 12:26:44,445 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=东城|q=
-2015-07-25 12:26:46,890 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=%E5%8C%97%E4%BA%AC%E5%B8%82%7C%E8%A5%BF%E5%9F%8E|q=
-2015-07-25 12:27:03,825 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=%E5%8C%97%E4%BA%AC%E5%B8%82%7C%E8%A5%BF%E5%9F%8E|q=
-2015-07-25 12:27:06,185 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=北京市|东城|q=
-2015-07-25 12:28:01,271 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=河东区|q=
-2015-07-25 12:31:57,352 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=上海市|全部地区|q=
-2015-07-25 12:32:01,823 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=河北省|石家庄市|q=
-2015-07-25 12:34:18,472 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=河北省|石家庄市|q=
-2015-07-25 12:36:14,382 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=|q=哈哈
-2015-07-25 12:36:58,073 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=东城|q=
-2015-07-25 12:37:27,500 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=上海市|黄浦区|q=
-2015-07-25 12:38:26,246 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
-2015-07-25 12:38:29,179 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
-2015-07-25 12:45:39,093 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=上海市|黄浦区|q=
-2015-07-25 12:45:42,281 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=天津市|河东区|q=
-2015-07-25 12:47:34,635 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=东城|q=
-2015-07-25 12:48:46,408 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=天津市|河东区|q=
-2015-07-25 12:48:49,899 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=天津市|南开区|q=
-2015-07-25 12:48:54,503 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=山西省|长治市|q=
-2015-07-25 12:49:41,869 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
-2015-07-25 12:49:48,979 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=上海市|全部地区|q=
-2015-07-25 12:49:52,128 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|东城|q=
-2015-07-25 12:49:59,073 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
-2015-07-25 12:51:10,750 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|石景山|q=
-2015-07-25 12:52:02,293 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|石景山|q=
-2015-07-25 12:52:06,871 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=全部地区|全部地区|q=
-2015-07-25 13:04:09,764 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=全部地区|全部地区|q=
-2015-07-25 14:02:20,604 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=全部地区|q=
-2015-07-25 14:02:29,106 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=上海市|黄浦区|q=
-2015-07-25 21:23:45,745 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
-2015-07-25 21:23:45,811 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
-2015-07-25 21:40:49,706 [DEBUG] Activity.views: 报名出错，试图报名自己的活动，对应活动为|这是找米网的第一个活动|(id:1), 当前用户为|黄延|(huangyan14)
-2015-07-25 21:42:29,983 [DEBUG] Activity.views: 报名出错，试图报名自己的活动，对应活动为|找米活动活动|(id:2), 当前用户为|龚子仪|(scalegong)
-2015-07-25 21:48:19,177 [DEBUG] Activity.views: 报名出错，试图报名自己的活动，对应活动为|找米活动活动|(id:2), 当前用户为|龚子仪|(scalegong)
-2015-07-25 21:56:09,606 [DEBUG] Activity.views: 报名出错，试图报名自己的活动，对应活动为|访谈|(id:3), 当前用户为|六六|(18618459220)
-2015-07-25 21:57:27,157 [DEBUG] Activity.views: 报名出错，试图报名自己的活动，对应活动为|林肯公园演唱会|(id:4), 当前用户为|Lucky7|(luckyboy)
-2015-07-25 22:06:53,571 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=重庆市|全部地区|q=
-2015-07-25 22:06:57,757 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
-2015-07-25 22:07:19,385 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=|q=汽车
-2015-07-25 22:10:56,818 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=|q=林肯公园
-2015-07-25 22:11:09,639 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=|q=约
-2015-07-25 22:13:46,775 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=全部地区|全部地区|q=约
-2015-07-26 09:08:41,216 [DEBUG] Activity.views: 试图报名活动，对应活动为|劳斯莱斯赛道试驾|(id:9), 当前用户为|黄延|(huangyan14)
-2015-07-26 09:09:38,248 [DEBUG] Activity.views: 试图报名活动，对应活动为|找米活动活动|(id:2), 当前用户为|黄延|(huangyan14)
-2015-07-26 09:09:39,681 [DEBUG] Activity.views: 试图报名活动，对应活动为|找米活动活动|(id:2), 当前用户为|黄延|(huangyan14)
-2015-07-26 09:16:18,581 [DEBUG] Activity.views: 试图报名活动，对应活动为|找米活动活动|(id:2), 当前用户为|黄延|(huangyan14)
-2015-07-26 09:16:18,593 [INFO] Activity.views: 创建答案失败，发生了Validation错误，提交的json格式为：[{u'type': u'radio', u'result': 1}, {u'type': u'checkbox', u'result': [1]}]
-2015-07-26 09:19:15,650 [DEBUG] Activity.views: 试图报名活动，对应活动为|找米活动活动|(id:2), 当前用户为|黄延|(huangyan14)
-2015-07-26 09:19:15,662 [INFO] Activity.views: 创建答案失败，发生了Validation错误，提交的json格式为：[{u'type': u'radio', u'result': 1}, {u'type': u'checkbox', u'result': [2]}]
-2015-07-26 09:21:53,210 [DEBUG] Activity.views: 试图报名活动，对应活动为|找米活动活动|(id:2), 当前用户为|黄延|(huangyan14)
-2015-07-26 09:21:53,222 [WARNING] Activity.views: 创建答案失败，发生了Validation错误，提交的json格式为：[{u'type': u'radio', u'result': 1}, {u'type': u'checkbox', u'result': [2]}]
-2015-07-26 09:23:44,101 [DEBUG] Activity.views: 试图报名活动，对应活动为|找米活动活动|(id:2), 当前用户为|黄延|(huangyan14)
-2015-07-26 09:23:44,114 [DEBUG] Activity.views: 创建答案失败，发生了Validation错误，提交的json格式为：[{u'type': u'radio', u'result': 2}, {u'type': u'checkbox', u'result': [2]}]
-2015-07-26 09:23:46,100 [DEBUG] Activity.views: 试图报名活动，对应活动为|找米活动活动|(id:2), 当前用户为|黄延|(huangyan14)
-2015-07-26 09:23:46,112 [DEBUG] Activity.views: 创建答案失败，发生了Validation错误，提交的json格式为：[{u'type': u'radio', u'result': 2}, {u'type': u'checkbox', u'result': [2]}]
-2015-07-26 09:23:50,338 [DEBUG] Activity.views: 试图报名活动，对应活动为|找米活动活动|(id:2), 当前用户为|黄延|(huangyan14)
-2015-07-26 09:23:50,349 [DEBUG] Activity.views: 创建答案失败，发生了Validation错误，提交的json格式为：[{u'type': u'radio', u'result': 2}, {u'type': u'checkbox', u'result': [2]}]
-2015-07-26 09:45:15,041 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_choicequestion" ADD COLUMN "created_at" timestamp with time zone DEFAULT %s NOT NULL; (params [datetime.datetime(2015, 7, 26, 1, 44, 50, 127970, tzinfo=<UTC>)])
-2015-07-26 09:45:15,154 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_choicequestion" ALTER COLUMN "created_at" DROP DEFAULT; (params [])
-2015-07-26 09:45:15,225 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_nonchoicequestion" ADD COLUMN "created_at" timestamp with time zone DEFAULT %s NOT NULL; (params [datetime.datetime(2015, 7, 26, 1, 45, 6, 606635, tzinfo=<UTC>)])
-2015-07-26 09:45:15,243 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_nonchoicequestion" ALTER COLUMN "created_at" DROP DEFAULT; (params [])
-2015-07-26 10:21:14,933 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|东城|q=
-2015-07-26 10:21:19,036 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=全部地区|全部地区|q=
-2015-07-26 10:21:24,552 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
-2015-07-26 10:21:36,113 [DEBUG] Activity.views: 试图报名活动，对应活动为|林肯公园演唱会|(id:4), 当前用户为|黄延|(huangyan14)
-2015-07-26 10:22:29,384 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=全部地区|全部地区|q=
-2015-07-26 10:29:13,301 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=全部地区|全部地区|q=
-2015-07-26 10:40:57,450 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|海淀|q=
-2015-07-26 10:41:01,557 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|海淀|q=
-2015-07-26 11:14:57,190 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
-2015-07-26 11:15:40,527 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
-2015-07-26 11:16:10,788 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
-2015-07-26 11:17:20,934 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
-2015-07-26 11:27:37,878 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
-2015-07-26 11:33:42,766 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|海淀|q=
-2015-07-26 11:33:43,625 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|海淀|q=
-2015-07-26 11:34:01,654 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|海淀|q=
-2015-07-26 11:51:16,263 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试活动|(id:18), 当前用户为|Lucky7|(luckyboy)
-2015-07-26 11:51:41,514 [DEBUG] Activity.views: 试图报名活动，对应活动为|这是找米网的第一个活动|(id:1), 当前用户为|Lucky7|(luckyboy)
-2015-07-26 12:13:34,272 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试活动|(id:18), 当前用户为|吕博|(mpsleep803)
-2015-07-26 12:14:11,984 [DEBUG] Activity.views: 试图报名活动，对应活动为|丹妮莉丝·塔格里安|(id:17), 当前用户为|吕博|(mpsleep803)
-2015-07-26 12:25:14,321 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|石景山|q=
-2015-07-26 12:25:19,229 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|海淀|q=
-2015-07-26 12:32:07,167 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
-2015-07-26 12:32:20,813 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
-2015-07-26 12:41:23,190 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=全部地区|全部地区|q=
-2015-07-26 12:41:49,400 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=|q=
-2015-07-26 13:06:38,834 [DEBUG] findRice.views: 搜索参数为: hot=2|type=|loc=|q=
-2015-07-26 13:06:40,958 [DEBUG] findRice.views: 搜索参数为: hot=1|type=|loc=|q=
-2015-07-26 13:07:54,719 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=全部地区|全部地区|q=
-2015-07-26 13:08:00,270 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|全部地区|q=
-2015-07-26 13:08:08,396 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=北京市|全部地区|q=
-2015-07-26 13:08:13,206 [DEBUG] findRice.views: 搜索参数为: hot=|type=-1|loc=北京市|全部地区|q=
-2015-07-26 13:08:15,694 [DEBUG] findRice.views: 搜索参数为: hot=|type=-1|loc=北京市|全部地区|q=
-2015-07-26 13:08:17,395 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=北京市|全部地区|q=
-2015-07-26 13:08:21,784 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=北京市|全部地区|q=
-2015-07-26 13:08:24,962 [DEBUG] findRice.views: 搜索参数为: hot=0|type=1|loc=北京市|全部地区|q=
-2015-07-26 13:11:15,646 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=|q=
-2015-07-26 13:12:14,164 [DEBUG] findRice.views: 搜索参数为: hot=1|type=|loc=|q=
-2015-07-26 13:12:20,002 [DEBUG] findRice.views: 搜索参数为: hot=1|type=|loc=|q=
-2015-07-26 13:13:22,253 [DEBUG] findRice.views: 搜索参数为: hot=1|type=1|loc=|q=
-2015-07-26 13:13:23,731 [DEBUG] findRice.views: 搜索参数为: hot=1|type=1|loc=|q=
-2015-07-26 13:13:27,412 [DEBUG] findRice.views: 搜索参数为: hot=1|type=1|loc=|q=
-2015-07-26 13:13:28,900 [DEBUG] findRice.views: 搜索参数为: hot=1|type=1|loc=|q=
-2015-07-26 13:13:33,304 [DEBUG] findRice.views: 搜索参数为: hot=1|type=1|loc=|q=
-2015-07-26 13:13:34,075 [DEBUG] findRice.views: 搜索参数为: hot=1|type=1|loc=|q=
-2015-07-26 13:13:42,731 [DEBUG] findRice.views: 搜索参数为: hot=1|type=|loc=|q=
-2015-07-26 13:13:43,975 [DEBUG] findRice.views: 搜索参数为: hot=1|type=|loc=|q=
-2015-07-26 13:13:47,701 [DEBUG] findRice.views: 搜索参数为: hot=1|type=1|loc=|q=
-2015-07-26 13:13:47,703 [DEBUG] findRice.views: 搜索参数为: hot=1|type=|loc=|q=
-2015-07-26 13:13:48,486 [DEBUG] findRice.views: 搜索参数为: hot=1|type=|loc=|q=
-2015-07-27 09:57:05,750 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activitytype__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "type_name" varchar(20) NOT NULL, "description" varchar(100) NOT NULL, "created_at" datetime NOT NULL, "modified_at" datetime NOT NULL, "display_order" integer NOT NULL); (params None)
-2015-07-27 09:57:05,752 [DEBUG] django.db.backends.schema: INSERT INTO "Activity_activitytype__new" ("description", "created_at", "type_name", "modified_at", "id", "display_order") SELECT "description", "created_at", "type_name", "modified_at", "id", "display_order" FROM "Activity_activitytype"; (params [])
-2015-07-27 09:57:05,752 [DEBUG] django.db.backends.schema: DROP TABLE "Activity_activitytype"; (params [])
-2015-07-27 09:57:05,752 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitytype__new" RENAME TO "Activity_activitytype"; (params [])
-2015-07-27 09:57:05,911 [DEBUG] django.db.backends.schema: CREATE TABLE "Questionnaire_choicequestion__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "question" varchar(200) NOT NULL, "required" bool NOT NULL, "order_in_list" integer NOT NULL, "multi_choice" bool NOT NULL, "questionnaire_id" integer NOT NULL REFERENCES "Questionnaire_questionnaire" ("id"), "created_at" datetime NOT NULL); (params None)
-2015-07-27 09:57:05,912 [DEBUG] django.db.backends.schema: INSERT INTO "Questionnaire_choicequestion__new" ("questionnaire_id", "order_in_list", "created_at", "required", "question", "multi_choice", "id") SELECT "questionnaire_id", "order_in_list", '2015-07-26 01:44:50.127970', "required", "question", "multi_choice", "id" FROM "Questionnaire_choicequestion"; (params [])
-2015-07-27 09:57:05,912 [DEBUG] django.db.backends.schema: DROP TABLE "Questionnaire_choicequestion"; (params [])
-2015-07-27 09:57:05,912 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_choicequestion__new" RENAME TO "Questionnaire_choicequestion"; (params [])
-2015-07-27 09:57:05,912 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_choicequestion_a5301291" ON "Questionnaire_choicequestion" ("questionnaire_id"); (params [])
-2015-07-27 09:57:05,969 [DEBUG] django.db.backends.schema: CREATE TABLE "Questionnaire_nonchoicequestion__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "question" varchar(200) NOT NULL, "required" bool NOT NULL, "order_in_list" integer NOT NULL, "type" smallint NOT NULL, "questionnaire_id" integer NOT NULL REFERENCES "Questionnaire_questionnaire" ("id"), "created_at" datetime NOT NULL); (params None)
-2015-07-27 09:57:05,969 [DEBUG] django.db.backends.schema: INSERT INTO "Questionnaire_nonchoicequestion__new" ("questionnaire_id", "order_in_list", "created_at", "required", "question", "type", "id") SELECT "questionnaire_id", "order_in_list", '2015-07-26 01:45:06.606635', "required", "question", "type", "id" FROM "Questionnaire_nonchoicequestion"; (params [])
-2015-07-27 09:57:05,969 [DEBUG] django.db.backends.schema: DROP TABLE "Questionnaire_nonchoicequestion"; (params [])
-2015-07-27 09:57:05,970 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_nonchoicequestion__new" RENAME TO "Questionnaire_nonchoicequestion"; (params [])
-2015-07-27 09:57:05,970 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_nonchoicequestion_a5301291" ON "Questionnaire_nonchoicequestion" ("questionnaire_id"); (params [])
-2015-07-27 13:37:55,189 [DEBUG] django.db.backends.schema: CREATE TABLE "Notification_activitynotification__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "description" varchar(255) NOT NULL, "read" bool NOT NULL, "created_at" datetime NOT NULL, "notification_center_id" integer NOT NULL REFERENCES "Notification_notificationcenter" ("id"), "related_activity_id" integer NOT NULL REFERENCES "Activity_activity" ("id"), "related_user_id" integer NULL REFERENCES "auth_user" ("id"), "notification_type" varchar(20) NOT NULL); (params None)
-2015-07-27 13:37:55,193 [DEBUG] django.db.backends.schema: INSERT INTO "Notification_activitynotification__new" ("notification_center_id", "description", "read", "created_at", "related_user_id", "notification_type", "id", "related_activity_id") SELECT "notification_center_id", "description", "read", "created_at", "related_user_id", "notification_type", "id", "related_activity_id" FROM "Notification_activitynotification"; (params [])
-2015-07-27 13:37:55,195 [DEBUG] django.db.backends.schema: DROP TABLE "Notification_activitynotification"; (params [])
-2015-07-27 13:37:55,196 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_activitynotification__new" RENAME TO "Notification_activitynotification"; (params [])
-2015-07-27 13:37:55,197 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_activitynotification_0658b044" ON "Notification_activitynotification" ("notification_center_id"); (params [])
-2015-07-27 13:37:55,198 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_activitynotification_82e8d780" ON "Notification_activitynotification" ("related_activity_id"); (params [])
-2015-07-27 13:37:55,198 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_activitynotification_78df12e4" ON "Notification_activitynotification" ("related_user_id"); (params [])
-2015-07-27 13:37:55,302 [DEBUG] django.db.backends.schema: CREATE TABLE "Welfare_welfaregift__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "address" varchar(255) NOT NULL, "coin_cost" integer NOT NULL); (params None)
-2015-07-27 13:37:55,303 [DEBUG] django.db.backends.schema: INSERT INTO "Welfare_welfaregift__new" ("coin_cost", "id", "address") SELECT 0, "id", "address" FROM "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,303 [DEBUG] django.db.backends.schema: DROP TABLE "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,304 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift__new" RENAME TO "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,359 [DEBUG] django.db.backends.schema: CREATE TABLE "Welfare_welfaregift__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "address" varchar(255) NOT NULL, "coin_cost" integer NOT NULL, "created_at" datetime NOT NULL); (params None)
-2015-07-27 13:37:55,359 [DEBUG] django.db.backends.schema: INSERT INTO "Welfare_welfaregift__new" ("created_at", "coin_cost", "id", "address") SELECT NULL, "coin_cost", "id", "address" FROM "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,360 [DEBUG] django.db.backends.schema: DROP TABLE "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,360 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift__new" RENAME TO "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,411 [DEBUG] django.db.backends.schema: CREATE TABLE "Welfare_welfaregift__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "address" varchar(255) NOT NULL, "coin_cost" integer NOT NULL, "created_at" datetime NOT NULL, "getted" bool NOT NULL); (params None)
-2015-07-27 13:37:55,411 [DEBUG] django.db.backends.schema: INSERT INTO "Welfare_welfaregift__new" ("created_at", "coin_cost", "id", "getted", "address") SELECT "created_at", "coin_cost", "id", 0, "address" FROM "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,411 [DEBUG] django.db.backends.schema: DROP TABLE "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,411 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift__new" RENAME TO "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,462 [DEBUG] django.db.backends.schema: CREATE TABLE "Welfare_welfaregift__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "address" varchar(255) NOT NULL, "coin_cost" integer NOT NULL, "created_at" datetime NOT NULL, "getted" bool NOT NULL, "rmb" integer NOT NULL); (params None)
-2015-07-27 13:37:55,462 [DEBUG] django.db.backends.schema: INSERT INTO "Welfare_welfaregift__new" ("coin_cost", "getted", "created_at", "rmb", "address", "id") SELECT "coin_cost", "getted", "created_at", 0, "address", "id" FROM "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,462 [DEBUG] django.db.backends.schema: DROP TABLE "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,463 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift__new" RENAME TO "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,515 [DEBUG] django.db.backends.schema: CREATE TABLE "Welfare_welfaregift__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "address" varchar(255) NOT NULL, "coin_cost" integer NOT NULL, "created_at" datetime NOT NULL, "getted" bool NOT NULL, "rmb" integer NOT NULL, "target_id" integer NOT NULL REFERENCES "auth_user" ("id")); (params None)
-2015-07-27 13:37:55,515 [DEBUG] django.db.backends.schema: INSERT INTO "Welfare_welfaregift__new" ("coin_cost", "getted", "created_at", "target_id", "rmb", "address", "id") SELECT "coin_cost", "getted", "created_at", NULL, "rmb", "address", "id" FROM "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,515 [DEBUG] django.db.backends.schema: DROP TABLE "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,516 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift__new" RENAME TO "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,516 [DEBUG] django.db.backends.schema: CREATE INDEX "Welfare_welfaregift_55e2df16" ON "Welfare_welfaregift" ("target_id"); (params [])
-2015-07-27 13:37:55,566 [DEBUG] django.db.backends.schema: CREATE TABLE "Welfare_welfaregift__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "address" varchar(255) NOT NULL, "coin_cost" integer NOT NULL, "created_at" datetime NOT NULL, "getted" bool NOT NULL, "rmb" integer NOT NULL, "target_id" integer NOT NULL REFERENCES "auth_user" ("id"), "zfb_account" varchar(50) NOT NULL); (params None)
-2015-07-27 13:37:55,567 [DEBUG] django.db.backends.schema: INSERT INTO "Welfare_welfaregift__new" ("coin_cost", "getted", "created_at", "target_id", "rmb", "address", "zfb_account", "id") SELECT "coin_cost", "getted", "created_at", "target_id", "rmb", "address", '', "id" FROM "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,567 [DEBUG] django.db.backends.schema: DROP TABLE "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,567 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift__new" RENAME TO "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,567 [DEBUG] django.db.backends.schema: CREATE INDEX "Welfare_welfaregift_55e2df16" ON "Welfare_welfaregift" ("target_id"); (params [])
-2015-07-27 13:37:55,623 [DEBUG] django.db.backends.schema: CREATE TABLE "Welfare_welfaregift__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "coin_cost" integer NOT NULL, "created_at" datetime NOT NULL, "getted" bool NOT NULL, "rmb" integer NOT NULL, "target_id" integer NOT NULL REFERENCES "auth_user" ("id"), "zfb_account" varchar(50) NOT NULL, "address" varchar(255) NULL); (params None)
-2015-07-27 13:37:55,624 [DEBUG] django.db.backends.schema: INSERT INTO "Welfare_welfaregift__new" ("coin_cost", "getted", "created_at", "target_id", "rmb", "address", "zfb_account", "id") SELECT "coin_cost", "getted", "created_at", "target_id", "rmb", "address", "zfb_account", "id" FROM "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,624 [DEBUG] django.db.backends.schema: DROP TABLE "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,624 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift__new" RENAME TO "Welfare_welfaregift"; (params [])
-2015-07-27 13:37:55,624 [DEBUG] django.db.backends.schema: CREATE INDEX "Welfare_welfaregift_55e2df16" ON "Welfare_welfaregift" ("target_id"); (params [])
-2015-07-27 13:57:42,484 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:168), 当前用户为|test1|(test1)
-2015-07-27 14:06:19,229 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|test1(username: test1)|，对应的活动是|测试(id: 168)|
-2015-07-27 14:14:36,058 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|test1(username: test1)|，对应的活动是|测试(id: 168)|
-2015-07-27 14:22:46,623 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|测试账户2(username: test2)|，对应的活动是|测试(id: 168)|
-2015-07-27 14:24:01,578 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|test1(username: test1)|，对应的活动是|测试(id: 168)|
-2015-07-27 14:24:29,990 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:168), 当前用户为|test1|(test1)
-2015-07-27 14:38:38,097 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|测试账户2(username: test2)|，对应的活动是|测试(id: 166)|
-2015-07-27 14:38:51,411 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:166), 当前用户为|测试账户2|(test2)
-2015-07-27 14:45:24,523 [DEBUG] Profile.views: 用户|test2(id: 58)|完成了活动|测试(id: 166)|，但是没有找到相应分享链接
-2015-07-27 14:57:52,703 [DEBUG] Profile.views: 用户|test2(id: 58)|完成了活动|测试(id: 166)|，但是没有找到相应分享链接
-2015-07-27 15:22:56,920 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|测试账户2(username: test2)|，对应的活动是|测试(id: 167)|
-2015-07-27 15:23:13,296 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:167), 当前用户为|测试账户2|(test2)
-2015-07-27 15:31:42,241 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|test1(username: test1)|，对应的活动是|测试(id: 161)|
-2015-07-27 15:32:50,595 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:161), 当前用户为|test1|(test1)
-2015-07-27 15:32:50,600 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: test1|报名活动|id: 161|
-2015-07-27 15:33:43,760 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:161), 当前用户为|test1|(test1)
-2015-07-27 15:33:43,766 [DEBUG] Activity.views: 申请与分享记录成功绑定, 本次报名为用户|username: test1|报名活动|id: 161|
-2015-07-27 15:34:27,451 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|测试账户2(username: test2)|，对应的活动是|测试(id: 163)|
-2015-07-27 15:34:33,727 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:163), 当前用户为|测试账户2|(test2)
-2015-07-27 15:34:33,734 [DEBUG] Activity.views: 申请与分享记录成功绑定, 本次报名为用户|username: test2|报名活动|id: 163|
-2015-07-27 15:36:54,936 [DEBUG] Profile.views: 用户|test2(id: 58)|完成了活动|测试(id: 163)|，但是没有找到相应分享链接
-2015-07-27 15:42:41,528 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|测试账户2(username: test2)|，对应的活动是|测试(id: 161)|
-2015-07-27 15:42:47,834 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:161), 当前用户为|测试账户2|(test2)
-2015-07-27 15:44:49,374 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:161), 当前用户为|测试账户2|(test2)
-2015-07-27 15:45:11,086 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:161), 当前用户为|测试账户2|(test2)
-2015-07-27 15:46:17,123 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:161), 当前用户为|测试账户2|(test2)
-2015-07-27 15:46:34,869 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:161), 当前用户为|测试账户2|(test2)
-2015-07-27 15:48:03,345 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:161), 当前用户为|测试账户2|(test2)
-2015-07-27 15:48:45,612 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|test1(username: test1)|，对应的活动是|测试(id: 160)|
-2015-07-27 15:48:54,172 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:160), 当前用户为|test1|(test1)
-2015-07-27 15:48:54,179 [DEBUG] Activity.views: 申请与分享记录成功绑定, 本次报名为用户|username: test1|报名活动|id: 160|
-2015-07-27 17:38:41,860 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:168), 当前用户为|test1|(test1)
-2015-07-27 17:38:41,867 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: test1|报名活动|id: 168|
-2015-07-27 17:39:25,158 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|测试账户2(username: test2)|，对应的活动是|测试(id: 159)|
-2015-07-27 18:07:54,208 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:159), 当前用户为|测试账户2|(test2)
-2015-07-27 18:07:54,216 [DEBUG] Activity.views: 申请与分享记录成功绑定, 本次报名为用户|username: test2|报名活动|id: 159|
-2015-07-27 18:20:02,559 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|测试账户2(username: test2)|，对应的活动是|来报名吧(id: 170)|
-2015-07-27 18:20:15,614 [DEBUG] Activity.views: 试图报名活动，对应活动为|来报名吧|(id:170), 当前用户为|测试账户2|(test2)
-2015-07-27 18:20:15,627 [DEBUG] Activity.views: 申请与分享记录成功绑定, 本次报名为用户|username: test2|报名活动|id: 170|
-2015-07-27 19:09:44,962 [DEBUG] Profile.views: 用户|黄延(id: 59)|注册第二步失败，错误信息为: <bound method ErrorDict.as_data of {'code': [u'\u9a8c\u8bc1\u7801\u4e0d\u5339\u914d'], 'phoneNum': [u'\u8be5\u624b\u673a\u5df2\u6ce8\u518c']}>
-2015-07-27 19:10:16,526 [DEBUG] Profile.views: 注册用户第一步失败，错误信息为: <bound method ErrorDict.as_data of {'username': [u'\u8be5\u7528\u6237\u540d\u5df2\u5b58\u5728']}>
-2015-07-27 19:15:40,028 [DEBUG] Profile.views: 注册用户第一步失败，错误信息为: <bound method ErrorDict.as_data of {'username': [u'\u8be5\u7528\u6237\u540d\u5df2\u5b58\u5728']}>
-2015-07-27 19:16:30,617 [DEBUG] Profile.views: 注册用户第一步失败，错误信息为: <bound method ErrorDict.as_data of {'username': [u'\u8be5\u7528\u6237\u540d\u5df2\u5b58\u5728']}>
-2015-07-27 19:31:04,422 [DEBUG] root: User条目被复用: huangyan
-2015-07-27 19:31:23,775 [DEBUG] Profile.views: 注册用户第一步失败，错误信息为: <bound method ErrorDict.as_data of {'username': [u'\u8be5\u7528\u6237\u540d\u5df2\u88ab\u6ce8\u518c']}>
-2015-07-27 21:02:54,419 [DEBUG] root: User条目被复用: huangyan
-2015-07-27 22:16:33,254 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试活动图片上传|(id:180), 当前用户为|test1|(test1)
-2015-07-27 22:16:33,260 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: test1|报名活动|id: 180|
-2015-07-29 23:40:32,195 [DEBUG] django.db.backends.schema: CREATE TABLE "Welfare_welfaregift__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "address" varchar(255) NULL, "coin_cost" integer NOT NULL, "created_at" datetime NOT NULL, "getted" bool NOT NULL, "rmb" integer NOT NULL, "target_id" integer NOT NULL REFERENCES "auth_user" ("id"), "zfb_account" varchar(50) NOT NULL, "getted_date" datetime NULL); (params None)
-2015-07-29 23:40:32,196 [DEBUG] django.db.backends.schema: INSERT INTO "Welfare_welfaregift__new" ("coin_cost", "getted", "getted_date", "created_at", "target_id", "rmb", "address", "zfb_account", "id") SELECT "coin_cost", "getted", NULL, "created_at", "target_id", "rmb", "address", "zfb_account", "id" FROM "Welfare_welfaregift"; (params [])
-2015-07-29 23:40:32,197 [DEBUG] django.db.backends.schema: DROP TABLE "Welfare_welfaregift"; (params [])
-2015-07-29 23:40:32,197 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift__new" RENAME TO "Welfare_welfaregift"; (params [])
-2015-07-29 23:40:32,198 [DEBUG] django.db.backends.schema: CREATE INDEX "Welfare_welfaregift_55e2df16" ON "Welfare_welfaregift" ("target_id"); (params [])
-2015-07-29 23:40:32,256 [DEBUG] django.db.backends.schema: CREATE TABLE "Welfare_welfaregift__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "address" varchar(255) NULL, "coin_cost" integer NOT NULL, "getted" bool NOT NULL, "rmb" integer NOT NULL, "target_id" integer NOT NULL REFERENCES "auth_user" ("id"), "zfb_account" varchar(50) NOT NULL, "getted_date" datetime NULL, "created_at" datetime NOT NULL); (params None)
-2015-07-29 23:40:32,257 [DEBUG] django.db.backends.schema: INSERT INTO "Welfare_welfaregift__new" ("coin_cost", "getted", "getted_date", "created_at", "target_id", "rmb", "address", "zfb_account", "id") SELECT "coin_cost", "getted", "getted_date", "created_at", "target_id", "rmb", "address", "zfb_account", "id" FROM "Welfare_welfaregift"; (params [])
-2015-07-29 23:40:32,257 [DEBUG] django.db.backends.schema: DROP TABLE "Welfare_welfaregift"; (params [])
-2015-07-29 23:40:32,257 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift__new" RENAME TO "Welfare_welfaregift"; (params [])
-2015-07-29 23:40:32,258 [DEBUG] django.db.backends.schema: CREATE INDEX "Welfare_welfaregift_55e2df16" ON "Welfare_welfaregift" ("target_id"); (params [])
-2015-07-29 23:40:32,311 [DEBUG] django.db.backends.schema: CREATE TABLE "Welfare_welfaregift__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "address" varchar(255) NULL, "coin_cost" integer NOT NULL, "created_at" datetime NOT NULL, "getted" bool NOT NULL, "rmb" integer NOT NULL, "zfb_account" varchar(50) NOT NULL, "getted_date" datetime NULL, "target_id" integer NOT NULL REFERENCES "auth_user" ("id")); (params None)
-2015-07-29 23:40:32,312 [DEBUG] django.db.backends.schema: INSERT INTO "Welfare_welfaregift__new" ("coin_cost", "getted", "getted_date", "created_at", "target_id", "rmb", "address", "zfb_account", "id") SELECT "coin_cost", "getted", "getted_date", "created_at", "target_id", "rmb", "address", "zfb_account", "id" FROM "Welfare_welfaregift"; (params [])
-2015-07-29 23:40:32,312 [DEBUG] django.db.backends.schema: DROP TABLE "Welfare_welfaregift"; (params [])
-2015-07-29 23:40:32,312 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift__new" RENAME TO "Welfare_welfaregift"; (params [])
-2015-07-29 23:40:32,312 [DEBUG] django.db.backends.schema: CREATE INDEX "Welfare_welfaregift_55e2df16" ON "Welfare_welfaregift" ("target_id"); (params [])
-2015-07-29 23:48:07,356 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|源(id: yuanlihao)|，兑换的米币为12, 米币余额为100
-2015-07-29 23:48:07,945 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|源(id: yuanlihao)|，兑换的米币为12, 米币余额为100
-2015-07-29 23:48:08,694 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|源(id: yuanlihao)|，兑换的米币为12, 米币余额为100
-2015-07-29 23:48:09,754 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|源(id: yuanlihao)|，兑换的米币为12, 米币余额为100
-2015-07-29 23:48:24,343 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为130, 米币余额为-30
-2015-07-29 23:49:26,943 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为120, 米币余额为-20
-2015-07-29 23:50:25,474 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|源(id: yuanlihao)|，兑换的米币为120, 米币余额为100
-2015-07-29 23:51:16,032 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|源(id: yuanlihao)|，兑换的米币为120, 米币余额为100
-2015-07-29 23:51:33,586 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|源(id: yuanlihao)|，兑换的米币为120, 米币余额为100
-2015-07-29 23:52:06,866 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|源(id: yuanlihao)|，兑换的米币为120, 米币余额为100
-2015-07-29 23:52:17,077 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为100, 米币余额为0
-2015-07-29 23:54:20,107 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-29 23:54:27,855 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-29 23:54:30,241 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-29 23:54:32,902 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-29 23:57:02,513 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-29 23:57:16,295 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-29 23:58:19,523 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-29 23:58:24,250 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-29 23:58:25,062 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-29 23:59:10,262 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-29 23:59:56,894 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:00:15,952 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:03:23,106 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|源(id: yuanlihao)|，兑换的米币为11, 米币余额为0
-2015-07-30 00:03:32,253 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:03:33,246 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:03:47,740 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:03:47,750 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:03:47,762 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:04:06,522 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:04:07,531 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:04:07,538 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:04:10,923 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:06:28,893 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:06:32,548 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:06:32,555 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:07:46,730 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:07:49,709 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:07:49,713 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:09:30,461 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:09:33,784 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 00:09:36,778 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|源(id: yuanlihao)|，兑换的米币为0, 米币余额为0
-2015-07-30 10:28:04,790 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activity__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "is_active" bool NOT NULL, "is_published" bool NOT NULL, "accept_apply" bool NOT NULL, "name" varchar(200) NOT NULL, "host_name" varchar(50) NOT NULL, "location" varchar(200) NOT NULL, "province" varchar(20) NOT NULL, "city" varchar(100) NOT NULL, "description" text NOT NULL, "start_time" datetime NOT NULL, "end_time" datetime NOT NULL, "last_length" integer NOT NULL, "reward" integer NOT NULL, "reward_for_share" integer NOT NULL, "reward_for_share_and_finished_percentage" real NOT NULL, "max_attend" integer NOT NULL, "min_attend" integer NOT NULL, "poster" varchar(100) NOT NULL, "recommended" bool NOT NULL, "recommended_level" integer NOT NULL, "time_limited" bool NOT NULL, "num_limited" bool NOT NULL, "identified" bool NOT NULL, "act_status" integer NOT NULL, "manually_start_time" datetime NULL, "manually_end_time" datetime NULL, "viewed_times" bigint NOT NULL, "activity_type_id" integer NULL REFERENCES "Activity_activitytype" ("id"), "backup_id" integer NULL REFERENCES "Activity_activity" ("id"), "host_id" integer NOT NULL REFERENCES "auth_user" ("id"), "reward_share_limit" integer NOT NULL); (params None)
-2015-07-30 10:28:04,792 [DEBUG] django.db.backends.schema: INSERT INTO "Activity_activity__new" ("updated_at", "manually_start_time", "manually_end_time", "id", "city", "viewed_times", "recommended", "last_length", "location", "num_limited", "reward_share_limit", "host_name", "province", "backup_id", "description", "poster", "start_time", "is_active", "min_attend", "reward_for_share", "act_status", "host_id", "name", "activity_type_id", "reward", "time_limited", "accept_apply", "reward_for_share_and_finished_percentage", "created_at", "recommended_level", "identified", "end_time", "max_attend", "is_published") SELECT "updated_at", "manually_start_time", "manually_end_time", "id", "city", "viewed_times", "recommended", "last_length", "location", "num_limited", 500, "host_name", "province", "backup_id", "description", "poster", "start_time", "is_active", "min_attend", "reward_for_share", "act_status", "host_id", "name", "activity_type_id", "reward", "time_limited", "accept_apply", "reward_for_share_and_finished_percentage", "created_at", "recommended_level", "identified", "end_time", "max_attend", "is_published" FROM "Activity_activity"; (params [])
-2015-07-30 10:28:04,794 [DEBUG] django.db.backends.schema: DROP TABLE "Activity_activity"; (params [])
-2015-07-30 10:28:04,795 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity__new" RENAME TO "Activity_activity"; (params [])
-2015-07-30 10:28:04,795 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_b6159b48" ON "Activity_activity" ("activity_type_id"); (params [])
-2015-07-30 10:28:04,796 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_8a277038" ON "Activity_activity" ("backup_id"); (params [])
-2015-07-30 10:28:04,796 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_8396f175" ON "Activity_activity" ("host_id"); (params [])
-2015-07-30 10:28:04,838 [DEBUG] django.db.backends.schema: CREATE TABLE "Promotion_share__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "total_reward" integer NOT NULL, "created_at" datetime NOT NULL, "is_active" bool NOT NULL, "share_code" varchar(100) NULL, "activity_id" integer NOT NULL REFERENCES "Activity_activity" ("id"), "user_id" integer NULL REFERENCES "auth_user" ("id"), UNIQUE ("user_id", "activity_id")); (params None)
-2015-07-30 10:28:04,838 [DEBUG] django.db.backends.schema: INSERT INTO "Promotion_share__new" ("activity_id", "user_id", "share_code", "created_at", "is_active", "total_reward", "id") SELECT "activity_id", "user_id", "share_code", "created_at", "is_active", "total_reward", "id" FROM "Promotion_share"; (params [])
-2015-07-30 10:28:04,839 [DEBUG] django.db.backends.schema: DROP TABLE "Promotion_share"; (params [])
-2015-07-30 10:28:04,840 [DEBUG] django.db.backends.schema: ALTER TABLE "Promotion_share__new" RENAME TO "Promotion_share"; (params [])
-2015-07-30 10:28:04,840 [DEBUG] django.db.backends.schema: CREATE INDEX "Promotion_share_f8a3193a" ON "Promotion_share" ("activity_id"); (params [])
-2015-07-30 10:28:04,841 [DEBUG] django.db.backends.schema: CREATE INDEX "Promotion_share_e8701ad4" ON "Promotion_share" ("user_id"); (params [])
-2015-07-30 23:27:35,155 [DEBUG] Activity.views: 创建活动失败，失败信息为: <bound method ErrorDict.as_data of {'reward': [u'This field is required.']}>
-2015-07-30 23:32:05,211 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|测试账户2(username: test2)|，对应的活动是|测试活动1(id: 184)|
-2015-07-30 23:32:07,346 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试活动1|(id:184), 当前用户为|测试账户2|(test2)
-2015-07-30 23:32:07,357 [DEBUG] Activity.views: 申请与分享记录成功绑定, 本次报名为用户|username: test2|报名活动|id: 184|
-2015-07-30 23:34:43,716 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试活动1|(id:184), 当前用户为|test1|(test1)
-2015-07-30 23:34:43,717 [DEBUG] Activity.views: 报名出错，试图报名自己的活动，对应活动为|测试活动1|(id:184), 当前用户为|test1|(test1)
-2015-07-31 19:53:25,117 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u5973', 'age': u'34\u5c81', 'name': u'\u6e902', 'portrait': '/media/avatars/2015/7/7/8715976d-c84d-4782-bd8c-85ab6b4b27b1.png'}
-2015-07-31 19:56:02,528 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'26\u5c81', 'name': u'\u6e903', 'portrait': '/media/avatars/2015/7/7/8715976d-c84d-4782-bd8c-85ab6b4b27b1.png'}
-2015-07-31 19:56:26,321 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'26\u5c81', 'name': u'\u6e903', 'portrait': '/media/avatars/2015/7/7/8a604bbd-9cd0-4125-a0aa-c080f556a1fe.png'}
-2015-07-31 20:00:41,265 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'26\u5c81', 'name': u'\u6e903', 'portrait': '/media/avatars/2015/7/7/8a604bbd-9cd0-4125-a0aa-c080f556a1fe.png'}
-2015-07-31 20:00:45,113 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u5973', 'age': u'26\u5c81', 'name': u'\u6e903', 'portrait': '/media/avatars/2015/7/7/8a604bbd-9cd0-4125-a0aa-c080f556a1fe.png'}
-2015-07-31 20:01:07,310 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'25\u5c81', 'name': u'\u6e90', 'portrait': '/media/avatars/2015/7/7/1fa45374-65f0-4e14-bf44-58711b85f8fe.png'}
-2015-07-31 20:02:11,926 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u5973', 'age': u'25\u5c81', 'name': u'\u6e90', 'portrait': '/media/avatars/2015/7/7/1fa45374-65f0-4e14-bf44-58711b85f8fe.png'}
-2015-07-31 20:02:25,018 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u5973', 'age': u'25\u5c81', 'name': u'\u6e90', 'portrait': '/media/avatars/2015/7/7/1fa45374-65f0-4e14-bf44-58711b85f8fe.png'}
-2015-07-31 20:05:32,010 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'26\u5c81', 'name': u'\u8881', 'portrait': '/media/avatars/2015/7/7/ec5c6387-04a4-413b-af16-476a5d01801f.png'}
-2015-07-31 20:05:55,675 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|袁(id: yuanlihao)|，兑换的米币为1, 米币余额为0
-2015-07-31 20:06:40,123 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|袁(id: yuanlihao)|，兑换的米币为1, 米币余额为0
-2015-07-31 20:09:58,110 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|袁(id: yuanlihao)|，兑换的米币为1, 米币余额为0
-2015-07-31 20:10:06,869 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|袁(id: yuanlihao)|，兑换的米币为1, 米币余额为0
-2015-07-31 20:12:20,090 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|袁(id: yuanlihao)|，兑换的米币为1, 米币余额为999
-2015-07-31 20:12:35,214 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|袁(id: yuanlihao)|，兑换的米币为9990, 米币余额为999
-2015-07-31 20:12:44,366 [DEBUG] Profile.views: 兑换米币成功，对应的用户为|袁(id: yuanlihao)|，兑换的米币为99, 米币余额为900
-2015-07-31 20:47:01,855 [DEBUG] Activity.views: 创建活动失败，失败信息为: <bound method ErrorDict.as_data of {'start_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u8fc7\u53bb\u5f00\u59cb'], 'end_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u5f00\u59cb\u4e4b\u524d\u7ed3\u675f']}>
-2015-07-31 20:51:06,193 [DEBUG] Activity.views: 创建活动失败，失败信息为: <bound method ErrorDict.as_data of {'start_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u8fc7\u53bb\u5f00\u59cb'], 'end_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u5f00\u59cb\u4e4b\u524d\u7ed3\u675f']}>
-2015-07-31 20:51:58,659 [DEBUG] Activity.views: 创建活动失败，失败信息为: <bound method ErrorDict.as_data of {'start_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u8fc7\u53bb\u5f00\u59cb'], 'end_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u5f00\u59cb\u4e4b\u524d\u7ed3\u675f']}>
-2015-07-31 20:52:25,496 [DEBUG] Activity.views: 创建活动失败，失败信息为: <bound method ErrorDict.as_data of {'start_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u8fc7\u53bb\u5f00\u59cb'], 'end_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u5f00\u59cb\u4e4b\u524d\u7ed3\u675f']}>
-2015-07-31 20:52:28,490 [DEBUG] Activity.views: 创建活动失败，失败信息为: <bound method ErrorDict.as_data of {'start_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u8fc7\u53bb\u5f00\u59cb'], 'end_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u5f00\u59cb\u4e4b\u524d\u7ed3\u675f']}>
-2015-07-31 20:55:00,040 [DEBUG] Activity.views: 创建活动失败，失败信息为: <bound method ErrorDict.as_data of {'start_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u8fc7\u53bb\u5f00\u59cb'], 'end_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u5f00\u59cb\u4e4b\u524d\u7ed3\u675f']}>
-2015-07-31 21:00:28,885 [DEBUG] Activity.views: 创建活动失败，失败信息为: <bound method ErrorDict.as_data of {'start_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u8fc7\u53bb\u5f00\u59cb']}>
-2015-07-31 21:01:54,662 [DEBUG] Activity.views: 创建活动失败，失败信息为: <bound method ErrorDict.as_data of {'start_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u8fc7\u53bb\u5f00\u59cb']}>
-2015-07-31 21:02:01,663 [DEBUG] Activity.views: 创建活动失败，失败信息为: <bound method ErrorDict.as_data of {'start_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u8fc7\u53bb\u5f00\u59cb']}>
-2015-07-31 22:20:47,147 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|Woody Huang(username: huangyan14)|，对应的活动是|测试活动(id: 188)|
-2015-07-31 22:20:52,138 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试活动|(id:188), 当前用户为|Woody Huang|(huangyan14)
-2015-07-31 22:24:04,853 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activity__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "is_active" bool NOT NULL, "is_published" bool NOT NULL, "accept_apply" bool NOT NULL, "name" varchar(200) NOT NULL, "host_name" varchar(50) NOT NULL, "location" varchar(200) NOT NULL, "province" varchar(20) NOT NULL, "city" varchar(100) NOT NULL, "description" text NOT NULL, "start_time" datetime NOT NULL, "end_time" datetime NOT NULL, "last_length" integer NOT NULL, "reward" integer NOT NULL, "reward_for_share_and_finished_percentage" real NOT NULL, "max_attend" integer NOT NULL, "min_attend" integer NOT NULL, "poster" varchar(100) NOT NULL, "recommended" bool NOT NULL, "recommended_level" integer NOT NULL, "time_limited" bool NOT NULL, "num_limited" bool NOT NULL, "identified" bool NOT NULL, "act_status" integer NOT NULL, "manually_start_time" datetime NULL, "manually_end_time" datetime NULL, "viewed_times" bigint NOT NULL, "activity_type_id" integer NULL REFERENCES "Activity_activitytype" ("id"), "backup_id" integer NULL REFERENCES "Activity_activity" ("id"), "host_id" integer NOT NULL REFERENCES "auth_user" ("id"), "reward_share_limit" integer NOT NULL, "reward_for_share" integer NOT NULL); (params None)
-2015-07-31 22:24:04,855 [DEBUG] django.db.backends.schema: INSERT INTO "Activity_activity__new" ("updated_at", "manually_start_time", "manually_end_time", "id", "city", "viewed_times", "recommended", "last_length", "location", "num_limited", "reward_share_limit", "host_name", "province", "backup_id", "description", "poster", "start_time", "is_active", "min_attend", "reward_for_share", "act_status", "host_id", "name", "activity_type_id", "reward", "time_limited", "accept_apply", "reward_for_share_and_finished_percentage", "created_at", "recommended_level", "identified", "end_time", "max_attend", "is_published") SELECT "updated_at", "manually_start_time", "manually_end_time", "id", "city", "viewed_times", "recommended", "last_length", "location", "num_limited", "reward_share_limit", "host_name", "province", "backup_id", "description", "poster", "start_time", "is_active", "min_attend", "reward_for_share", "act_status", "host_id", "name", "activity_type_id", "reward", "time_limited", "accept_apply", "reward_for_share_and_finished_percentage", "created_at", "recommended_level", "identified", "end_time", "max_attend", "is_published" FROM "Activity_activity"; (params [])
-2015-07-31 22:24:04,856 [DEBUG] django.db.backends.schema: DROP TABLE "Activity_activity"; (params [])
-2015-07-31 22:24:04,856 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity__new" RENAME TO "Activity_activity"; (params [])
-2015-07-31 22:24:04,856 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_b6159b48" ON "Activity_activity" ("activity_type_id"); (params [])
-2015-07-31 22:24:04,857 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_8a277038" ON "Activity_activity" ("backup_id"); (params [])
-2015-07-31 22:24:04,857 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_8396f175" ON "Activity_activity" ("host_id"); (params [])
-2015-07-31 22:24:04,893 [DEBUG] django.db.backends.schema: CREATE TABLE "Notification_activitynotification__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "description" varchar(255) NOT NULL, "read" bool NOT NULL, "created_at" datetime NOT NULL, "notification_type" varchar(20) NOT NULL, "notification_center_id" integer NOT NULL REFERENCES "Notification_notificationcenter" ("id"), "related_activity_id" integer NOT NULL REFERENCES "Activity_activity" ("id"), "related_user_id" integer NULL REFERENCES "auth_user" ("id"), "reserved" varchar(20) NOT NULL); (params None)
-2015-07-31 22:24:04,893 [DEBUG] django.db.backends.schema: INSERT INTO "Notification_activitynotification__new" ("notification_center_id", "reserved", "description", "read", "created_at", "related_user_id", "notification_type", "id", "related_activity_id") SELECT "notification_center_id", '', "description", "read", "created_at", "related_user_id", "notification_type", "id", "related_activity_id" FROM "Notification_activitynotification"; (params [])
-2015-07-31 22:24:04,894 [DEBUG] django.db.backends.schema: DROP TABLE "Notification_activitynotification"; (params [])
-2015-07-31 22:24:04,894 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_activitynotification__new" RENAME TO "Notification_activitynotification"; (params [])
-2015-07-31 22:24:04,894 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_activitynotification_0658b044" ON "Notification_activitynotification" ("notification_center_id"); (params [])
-2015-07-31 22:24:04,895 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_activitynotification_82e8d780" ON "Notification_activitynotification" ("related_activity_id"); (params [])
-2015-07-31 22:24:04,895 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_activitynotification_78df12e4" ON "Notification_activitynotification" ("related_user_id"); (params [])
-2015-08-02 12:05:42,081 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activity__new" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "is_active" bool NOT NULL, "is_published" bool NOT NULL, "accept_apply" bool NOT NULL, "name" varchar(200) NOT NULL, "host_name" varchar(50) NOT NULL, "location" varchar(200) NOT NULL, "province" varchar(20) NOT NULL, "city" varchar(100) NOT NULL, "description" text NOT NULL, "start_time" datetime NOT NULL, "end_time" datetime NOT NULL, "last_length" integer NOT NULL, "reward" integer NOT NULL, "reward_for_share" integer NOT NULL, "reward_for_share_and_finished_percentage" real NOT NULL, "max_attend" integer NOT NULL, "min_attend" integer NOT NULL, "poster" varchar(100) NOT NULL, "recommended" bool NOT NULL, "recommended_level" integer NOT NULL, "time_limited" bool NOT NULL, "num_limited" bool NOT NULL, "identified" bool NOT NULL, "act_status" integer NOT NULL, "manually_start_time" datetime NULL, "manually_end_time" datetime NULL, "viewed_times" bigint NOT NULL, "activity_type_id" integer NULL REFERENCES "Activity_activitytype" ("id"), "backup_id" integer NULL REFERENCES "Activity_activity" ("id"), "host_id" integer NOT NULL REFERENCES "auth_user" ("id"), "reward_share_limit" integer NOT NULL, "poster_zipped" varchar(100) NULL); (params None)
-2015-08-02 12:05:42,083 [DEBUG] django.db.backends.schema: INSERT INTO "Activity_activity__new" ("updated_at", "manually_start_time", "manually_end_time", "id", "city", "viewed_times", "recommended", "last_length", "location", "poster_zipped", "num_limited", "reward_share_limit", "host_name", "province", "backup_id", "description", "poster", "start_time", "is_active", "min_attend", "reward_for_share", "act_status", "host_id", "name", "activity_type_id", "reward", "time_limited", "accept_apply", "reward_for_share_and_finished_percentage", "created_at", "recommended_level", "identified", "end_time", "max_attend", "is_published") SELECT "updated_at", "manually_start_time", "manually_end_time", "id", "city", "viewed_times", "recommended", "last_length", "location", NULL, "num_limited", "reward_share_limit", "host_name", "province", "backup_id", "description", "poster", "start_time", "is_active", "min_attend", "reward_for_share", "act_status", "host_id", "name", "activity_type_id", "reward", "time_limited", "accept_apply", "reward_for_share_and_finished_percentage", "created_at", "recommended_level", "identified", "end_time", "max_attend", "is_published" FROM "Activity_activity"; (params [])
-2015-08-02 12:05:42,090 [DEBUG] django.db.backends.schema: DROP TABLE "Activity_activity"; (params [])
-2015-08-02 12:05:42,091 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity__new" RENAME TO "Activity_activity"; (params [])
-2015-08-02 12:05:42,091 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_b6159b48" ON "Activity_activity" ("activity_type_id"); (params [])
-2015-08-02 12:05:42,092 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_8a277038" ON "Activity_activity" ("backup_id"); (params [])
-2015-08-02 12:05:42,092 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_8396f175" ON "Activity_activity" ("host_id"); (params [])
+2015-08-16 22:23:28,305 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2013 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'platform': u'Erlang/OTP', u'version': u'3.2.4'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2015-08-16 22:23:28,306 [DEBUG] amqp: Open OK!
+2015-08-16 22:23:28,307 [DEBUG] amqp: using channel_id: 1
+2015-08-16 22:23:28,308 [DEBUG] amqp: Channel open
+2015-08-16 22:23:28,418 [DEBUG] Activity.views: 找到到问卷为id＝22, 其创建时间是2015-08-16 14:11:39.350591+00:00
+2015-08-16 22:32:57,458 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2013 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'platform': u'Erlang/OTP', u'version': u'3.2.4'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2015-08-16 22:32:57,460 [DEBUG] amqp: Open OK!
+2015-08-16 22:32:57,460 [DEBUG] amqp: using channel_id: 1
+2015-08-16 22:32:57,461 [DEBUG] amqp: Channel open
+2015-08-16 22:32:57,564 [DEBUG] Activity.views: 找到到问卷为id＝22, 其创建时间是2015-08-16 14:11:39.350591+00:00
+2015-08-16 22:32:59,778 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[]
+2015-08-16 22:40:20,493 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2013 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'platform': u'Erlang/OTP', u'version': u'3.2.4'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2015-08-16 22:40:20,495 [DEBUG] amqp: Open OK!
+2015-08-16 22:40:20,495 [DEBUG] amqp: using channel_id: 1
+2015-08-16 22:40:20,496 [DEBUG] amqp: Channel open
+2015-08-16 22:40:20,608 [DEBUG] Activity.views: 找到到问卷为id＝22, 其创建时间是2015-08-16 14:11:39.350591+00:00
+2015-08-16 22:46:24,117 [DEBUG] Activity.forms: 上传的持续时间参数为1d1h0m, 计算得到的持续时间为1500m
+2015-08-16 22:46:24,166 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2013 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'platform': u'Erlang/OTP', u'version': u'3.2.4'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2015-08-16 22:46:24,167 [DEBUG] amqp: Open OK!
+2015-08-16 22:46:24,168 [DEBUG] amqp: using channel_id: 1
+2015-08-16 22:46:24,169 [DEBUG] amqp: Channel open
+2015-08-16 22:46:24,571 [DEBUG] Activity.views: 找到到问卷为id＝22, 其创建时间是2015-08-16 14:11:39.350591+00:00
+2015-08-16 22:46:27,739 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[]
+2015-08-16 22:55:40,410 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2013 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'platform': u'Erlang/OTP', u'version': u'3.2.4'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2015-08-16 22:55:40,414 [DEBUG] amqp: Open OK!
+2015-08-16 22:55:40,414 [DEBUG] amqp: using channel_id: 1
+2015-08-16 22:55:40,415 [DEBUG] amqp: Channel open
+2015-08-16 22:55:42,222 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2013 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'platform': u'Erlang/OTP', u'version': u'3.2.4'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2015-08-16 22:55:42,224 [DEBUG] amqp: Open OK!
+2015-08-16 22:55:42,224 [DEBUG] amqp: using channel_id: 1
+2015-08-16 22:55:42,225 [DEBUG] amqp: Channel open
+2015-08-16 22:57:50,147 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2013 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'platform': u'Erlang/OTP', u'version': u'3.2.4'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2015-08-16 22:57:50,151 [DEBUG] amqp: Open OK!
+2015-08-16 22:57:50,151 [DEBUG] amqp: using channel_id: 1
+2015-08-16 22:57:50,152 [DEBUG] amqp: Channel open
+2015-08-17 02:58:10,999 [DEBUG] Activity.views: The share code is: f59aa864fb20c4c5f98c39692eaf3ba5
+2015-08-17 03:10:41,165 [DEBUG] Activity.views: The share code is: 36b12e05a4576bedb81e1bc19a3127cd
+2015-08-17 04:58:02,583 [DEBUG] Activity.views: The share code is: 68784223a11065aa14302f8e5a636628
+2015-08-17 07:44:38,670 [DEBUG] Activity.views: Code not found
+2015-08-17 08:53:49,153 [DEBUG] Activity.views: Code not found
+2015-08-17 08:55:22,887 [DEBUG] Activity.views: Code not found
+2015-08-17 08:56:12,933 [DEBUG] Activity.views: Code not found
+2015-08-17 09:00:45,700 [DEBUG] Activity.views: Code not found
+2015-08-17 09:03:24,569 [DEBUG] Activity.views: The share code is: be33fbb213dcc4400a9fd6820be2425d
+2015-08-17 09:04:25,085 [DEBUG] Activity.views: Code not found
+2015-08-17 09:05:36,899 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|东城|q=
+2015-08-17 09:05:44,451 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
+2015-08-17 09:05:52,740 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
+2015-08-17 09:08:01,626 [DEBUG] Activity.views: The share code is: 36b12e05a4576bedb81e1bc19a3127cd
+2015-08-17 09:08:43,238 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2013 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'platform': u'Erlang/OTP', u'version': u'3.2.4'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2015-08-17 09:08:43,239 [DEBUG] amqp: Open OK!
+2015-08-17 09:08:43,239 [DEBUG] amqp: using channel_id: 1
+2015-08-17 09:08:43,240 [DEBUG] amqp: Channel open
+2015-08-17 09:08:47,226 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2013 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'platform': u'Erlang/OTP', u'version': u'3.2.4'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2015-08-17 09:08:47,227 [DEBUG] amqp: Open OK!
+2015-08-17 09:08:47,227 [DEBUG] amqp: using channel_id: 1
+2015-08-17 09:08:47,229 [DEBUG] amqp: Channel open
+2015-08-17 09:18:28,218 [DEBUG] Activity.views: 创建活动失败，失败信息为: <bound method ErrorDict.as_data of {'start_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u8fc7\u53bb\u5f00\u59cb']}>
+2015-08-17 09:18:30,810 [DEBUG] Activity.views: 创建活动失败，失败信息为: <bound method ErrorDict.as_data of {'start_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u8fc7\u53bb\u5f00\u59cb']}>
+2015-08-17 09:18:56,644 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h30m, 计算得到的持续时间为90m
+2015-08-17 09:20:42,588 [DEBUG] Activity.forms: 上传的持续时间参数为0d0h10m, 计算得到的持续时间为10m
+2015-08-17 09:22:57,328 [DEBUG] Activity.forms: 上传的持续时间参数为0d0h30m, 计算得到的持续时间为30m
+2015-08-17 09:26:09,962 [DEBUG] Activity.forms: 上传的持续时间参数为0d0h30m, 计算得到的持续时间为30m
+2015-08-17 09:26:10,037 [DEBUG] Activity.views: 找到到问卷为id＝27, 其创建时间是2015-08-17 01:23:00.648846+00:00
+2015-08-17 09:26:11,531 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[]
+2015-08-17 09:45:22,612 [DEBUG] Activity.forms: 上传的持续时间参数为2d1h0m, 计算得到的持续时间为2940m
+2015-08-17 09:47:23,802 [DEBUG] Activity.views: The share code is: 3a400c480e1e935ad07f61c42525538b
+2015-08-17 09:47:34,175 [DEBUG] Activity.views: The share code is: baaa449e205fc6249fe54b6c560c476d
+2015-08-17 09:48:56,505 [DEBUG] Activity.forms: 上传的持续时间参数为0d0h30m, 计算得到的持续时间为30m
+2015-08-17 09:49:32,633 [DEBUG] Activity.views: The share code is: baaa449e205fc6249fe54b6c560c476d
+2015-08-17 09:50:09,848 [DEBUG] Activity.views: The share code is: baaa449e205fc6249fe54b6c560c476d
+2015-08-17 09:50:39,287 [DEBUG] Activity.forms: 上传的持续时间参数为3d0h20m, 计算得到的持续时间为4340m
+2015-08-17 09:55:10,474 [DEBUG] Activity.views: The share code is: 3a400c480e1e935ad07f61c42525538b
+2015-08-17 09:55:14,286 [DEBUG] Activity.forms: 上传的持续时间参数为0d0h30m, 计算得到的持续时间为30m
+2015-08-17 09:55:39,625 [DEBUG] Activity.views: The share code is: baaa449e205fc6249fe54b6c560c476d
+2015-08-17 18:59:13,932 [DEBUG] Activity.views: The share code is: f59aa864fb20c4c5f98c39692eaf3ba5
+2015-08-17 19:00:05,136 [DEBUG] Activity.views: The share code is: 9a908dfb39327ceeb5ec82f5ce4ab64f
+2015-08-17 19:01:14,305 [DEBUG] Activity.views: The share code is: 681017e05861a7c44a09d8e0a7637a7f
+2015-08-17 19:02:19,553 [DEBUG] Activity.views: The share code is: baaa449e205fc6249fe54b6c560c476d
+2015-08-17 19:03:38,136 [DEBUG] Activity.views: The share code is: be33fbb213dcc4400a9fd6820be2425d
+2015-08-17 19:48:32,424 [DEBUG] Activity.views: The share code is: 68784223a11065aa14302f8e5a636628
+2015-08-17 21:43:14,958 [DEBUG] root: 创建用户条目，用户名为huangyan123，密码为huang9040601
+2015-08-17 21:44:36,936 [DEBUG] Profile.views: 注册第二步，从操作用户名为huangyan123，session中存储的密码是huang9040601
+2015-08-17 21:47:59,229 [DEBUG] Activity.views: Code not found
+2015-08-17 22:55:15,763 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang', 'portrait': '/media/avatars_zipped/2015/8/12/616440da12a44a69bd5738b4b8547480.jpg'}
+2015-08-17 22:56:04,058 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars_zipped/2015/8/12/73482d3a82de4f1e95ecb7548c17ce86.jpg'}
+2015-08-17 22:59:01,055 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars_zipped/2015/8/12/85cf044982e14415b7ec8f14ab6d72c8.jpg'}
+2015-08-17 22:59:14,629 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars_zipped/2015/8/12/e137ec424ddc44b6bff99b89ebf95617.jpg'}
+2015-08-17 23:00:08,772 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars_zipped/2015/8/12/715a591b01c64d8a8ea2f2e3d026cbf1.jpg'}
+2015-08-17 23:00:23,276 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars_zipped/2015/8/12/97d26e82767948888790d865c9643c42.jpg'}
+2015-08-17 23:01:25,709 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars_zipped/2015/8/12/d4ba3df305614051a2d8d7af3e65fae3.jpg'}
+2015-08-17 23:09:00,036 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars_zipped/2015/8/12/2b0b0d4f6c084f00b1cf093b3e246fa1.jpg'}
+2015-08-17 23:11:03,824 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars_zipped/2015/8/12/e55b784873414097a0f80d9938cc01fb.jpg'}
+2015-08-17 23:13:11,659 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars/2015/8/12/f74b935a0d184959beb5ea1c3ae59fae.png'}
+2015-08-17 23:13:26,851 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars/2015/8/12/92f3bb0aa575467a813fdbbb5fa4b1ab.png'}
+2015-08-17 23:13:45,670 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars/2015/8/12/d18f100c03a2411f92b2a8be19f03bc6.png'}
+2015-08-17 23:33:55,088 [DEBUG] Profile.views: 兑换米币失败，对应的用户为|Woody Huang2(id: lena)|，兑换的米币为1, 米币余额为0

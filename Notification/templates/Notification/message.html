@@ -9,16 +9,18 @@
     <script type="text/javascript" src="//zhao-mi.net/build/message.js"></script>
 </head>
 <body>
-<div id="content">
-    <div id="header">
+<div id="header">
+<div id="header-c">
         <a href="/" id="logo">找米</a>
         <a id="personal-info" class="action" href="/mine/start">
-            <img src="{{ user.profile.avatar.url }}" alt="我的个人信息">
+            <img src="{{ user.profile.avatar_url }}" alt="我的个人信息">
         </a>
         <div id="msg" class="action"><a href="/user/msg" class="z-btn">消息</a></div>
         <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
+</div>
+<div id="content">
     <div id="action-bg">
         <span class="msg-txt">消息</span>
         <img src="//zhao-mi.net/assets/imgs/detail-banner.png">

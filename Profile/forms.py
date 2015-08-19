@@ -10,6 +10,7 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
 from .models import UserProfile
 from .models import VerifyCode
+from .tasks import create_zipped_avatar
 
 
 class UserRegisterFormStep1(forms.ModelForm):
@@ -20,7 +21,7 @@ class UserRegisterFormStep1(forms.ModelForm):
         widgets = {
             "username": forms.TextInput(attrs={
                 "id": "username",
-                "placeholder": u"请输入邮箱/用户名"
+                "placeholder": u"请输入用户名"
             })
         }
         error_messages = {
@@ -32,7 +33,8 @@ class UserRegisterFormStep1(forms.ModelForm):
     error_messages = {
         'password_mismatch': "两次输入的密码不匹配",
         'username_too_short': "用户名太短，长度至少在8位",
-        'password_too_short': "密码太短，密码的长度至少为8位"
+        'password_too_short': "密码太短，密码的长度至少为4位",
+        'username_already_exist': "该用户名已存在"
         }
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
         "id": "pwd",
@@ -47,20 +49,18 @@ class UserRegisterFormStep1(forms.ModelForm):
 
     def clean_password1(self):
         password1 = self.cleaned_data["password1"]
-        if len(password1) < 8:
+        if len(password1) < 4:
             raise forms.ValidationError(self.error_messages["password_too_short"],
                                         code="password_too_short")
         return password1
 
-    def clean_username(self):
-        username = self.cleaned_data.get("username")
-        username = username.strip()
-        if len(username) < 8:
-            raise forms.ValidationError(
-                self.error_messages["username_too_short"],
-                code="username_too_short"
-            )
-        return username
+    def clean_password2(self):
+        password2 = self.cleaned_data['password2']
+        password1 = self.cleaned_data['password1']
+        if not password1 == password2:
+            raise forms.ValidationError(self.error_messages['password_mismatch'],
+                                        code='password_mismatch')
+        return password2
 
     def clean(self):
         try:
@@ -83,7 +83,11 @@ class UserRegisterFormStep1(forms.ModelForm):
             user.set_password(self.cleaned_data["password1"])
             logging.debug(u"User条目被复用: %s" % self.cleaned_data['username'])
         except ObjectDoesNotExist:
+            logging.debug(u"创建用户条目，用户名为%s，密码为%s" % (
+                self.cleaned_data['username'], self.cleaned_data['password1']))
             user = super(UserRegisterFormStep1, self).save(commit=False)
+            # Note: 要手动设置密码
+            user.set_password(self.cleaned_data['password1'])
         user.is_active = False
         if commit:
             user.save()
@@ -107,7 +111,9 @@ class UserRegisterFormStep2(forms.ModelForm):
         profile = super(UserRegisterFormStep2, self).save(commit=False)
         profile.is_active = True
         profile.user.is_active = True
-        profile.save()
+        if commit:
+            profile.user.save()
+            create_zipped_avatar.delay(profile)
         return profile
 
     def clean_phoneNum(self):
@@ -197,7 +203,7 @@ class PasswordChangeForm(forms.Form):
         'password_mismatch': "两次输入的密码不匹配",
         'user_does_not_exist': "对应用户不存在",
         "code_mismatch": "验证码不匹配",
-        "password_too_short": "密码太短，密码的长度至少在8位",
+        "password_too_short": "密码太短，密码的长度至少在6位",
     }
 
     def __init__(self, *args, **kwargs):
@@ -217,7 +223,7 @@ class PasswordChangeForm(forms.Form):
 
     def clean_password1(self):
         password1 = self.cleaned_data.get("password1")
-        if len(password1) < 8:
+        if len(password1) < 6:
             raise forms.ValidationError(
                 self.error_messages['password_too_short'],
                 code='password_too_short'

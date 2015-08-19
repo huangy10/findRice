@@ -21,12 +21,13 @@
 
     <div id="container">
         <p class="title-txt">验证手机/补充信息</p>
-        <form id="register" action="/register" method="post"  autocomplete="off" enctype="multipart/form-data">
+        <form id="register" action="{% if social %}/social/profile{% else %}/register{% endif %}" method="post"  autocomplete="off" enctype="multipart/form-data">
             {% csrf_token %}
             <div id="portrait-c">
                 <img src="//zhao-mi.net/assets/imgs/portrait.png"/>
                 <label for="{{ form.avatar.id_for_label }}"></label>
                 {{ form.avatar }}
+		<span>头像上传成功</span>
             </div>
             <div id="mobile-wrapper" class="fn-clr">
                 <div id="mobile-c">
@@ -57,7 +58,7 @@
             </div>
             <div id="login-btn-c" class="fn-clr">
                 <button type="submit" class="z-btn register-btn">注册</button>
-                <a class="statement" href="/statement">找米免责声明</a>
+                <a class="statement" href="/statement" target="_blank">找米免责声明</a>
             </div>
         </form>
         

@@ -9,8 +9,6 @@ def share_link(context, activity):
     user = context.get("user", None)
     if user and not user.is_authenticated():
         user = None
-    if activity.host == user:
-        user = None
     try:
         share = Share.objects.get_or_create(activity=activity, user=user)[0]
         return share.get_share_link()

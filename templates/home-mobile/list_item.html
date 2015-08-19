@@ -1,8 +1,9 @@
 {% load duration_filter %}
+{% load sharelink %}
 {% for act in activities %}
-    <a href="/action/{{ act.id }}/detail" class="activity-list-item zui-flex">
+    <a href="{% share_link act %}" class="activity-list-item zui-flex">
         <div class="zui-flex zui-flex-fixed thumbnail">
-            <img src="{{ act.poster.url }}" alt=""/>
+            <img src="{{ act.poster_url }}" alt=""/>
         </div>
         <div class="zui-cell">
             <div class="list-item-desc">

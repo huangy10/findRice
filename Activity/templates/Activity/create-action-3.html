@@ -39,12 +39,11 @@
         <a class="z-btn" href="/action/{{ act_id }}/detail" target="_blank">查看</a>
     </div>
 </div>
-
-<div id="content">
-    <div id="header">
+<div id="header">
+    <div id="header-c">
         <a href="/" id="logo">找米</a>
         <a id="personal-info" class="action" href="/mine/start">
-            <img src="{{ user.profile.avatar.url }}" alt="我的个人信息">
+            <img src="{{ user.profile.avatar_url }}" alt="我的个人信息">
         </a>
         <div id="msg" class="action">
             <a href="/user/msg" class="z-btn">消息</a>
@@ -55,16 +54,19 @@
         <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
+</div>
+<div id="content">
+
     <div id="action-bg">
         <img src="{% static "assets/imgs/detail-banner.png" %}">
         <div id="progress" class="z-process">
-          <ul class="z-steps">
-            <li class="z-node z-first-finish"><div class="z-process-label">活动基本信息</div></li>
-            <li class="z-bar z-bar-finish"><div class="z-far"></div></li>
-            <li class="z-node z-current"><div class="z-process-label">活动报名条件</div></li>
-            <li class="z-bar z-bar-finish"><div class="z-far"></div></li>
-            <li class="z-node z-last-finish"><div class="z-process-label">发布</div></li>
-          </ul>
+            <ul class="z-steps">
+                <li class="z-node z-first-finish"><div class="z-process-label">活动基本信息</div></li>
+                <li class="z-bar z-bar-finish"><div class="z-far"></div></li>
+                <li class="z-node z-current"><div class="z-process-label">活动报名条件</div></li>
+                <li class="z-bar z-bar-finish"><div class="z-far"></div></li>
+                <li class="z-node z-last-finish"><div class="z-process-label">发布</div></li>
+            </ul>
         </div>
     </div>
     <div id="action-container">
@@ -84,7 +86,7 @@
         <p id="action-host"><span>主办方：{{ act.host.profile.name }}</span><span>类型：{{ act.activity_type.type_name }}</span></p>
         <div id="action-info">
             <p>
-            {{ act.description|linebreaks }}
+                {{ act.description|linebreaks }}
             </p>
         </div>
 
@@ -95,60 +97,60 @@
             <p class="extra fn-overflow">{{ act.last_length|duration }}</p>
         </div>
         <div id="action-pic">
-            <img src="{{ act.poster.url }}">
+            <img src="{{ act.poster_url }}">
         </div>
         <div id="action-criteria">
             <h2>报名条件</h2>
             <div id="action-questions">
-            {% for q in single_choice_questions %}
-                <div class="action-item fn-clr">
-                    <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
-                    <div class="action-answers show">
-                        <ul>
-                            {% for c in q.choices.all %}
-                                <li><span class="z-radio"></span>{{ c.description }}</li>
-                            {% endfor %}
-                        </ul>
+                {% for q in single_choice_questions %}
+                    <div class="action-item fn-clr">
+                        <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
+                        <div class="action-answers show">
+                            <ul>
+                                {% for c in q.choices.all %}
+                                    <li><span class="z-radio"></span>{{ c.description }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
-            {% for q in multi_choice_questions %}
-                <div class="action-item fn-clr">
-                    <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
-                    <div class="action-answers show">
-                        <ul>
-                            {% for c in q.choices.all %}
-                                <li><span class="z-radio"></span>{{ c.description }}</li>
-                            {% endfor %}
-                        </ul>
+                {% endfor %}
+                {% for q in multi_choice_questions %}
+                    <div class="action-item fn-clr">
+                        <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
+                        <div class="action-answers show">
+                            <ul>
+                                {% for c in q.choices.all %}
+                                    <li><span class="z-radio"></span>{{ c.description }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
-            {% for q in text_questions %}
-                <div class="action-item fn-clr">
-                    <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
-                    <textarea></textarea>
-                </div>
-            {% endfor %}
-            {% for q in file_questions %}
-                <div class="action-item fn-clr">
-                    <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
-                    <input type="file"/>
-                </div>
-            {% endfor %}
+                {% endfor %}
+                {% for q in text_questions %}
+                    <div class="action-item fn-clr">
+                        <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
+                        <textarea></textarea>
+                    </div>
+                {% endfor %}
+                {% for q in file_questions %}
+                    <div class="action-item fn-clr">
+                        <h3>{{ q.order_in_list }}、{{ q.question }}</h3>
+                        <input type="file"/>
+                    </div>
+                {% endfor %}
             </div>
         </div>
         <div id="action-publish" class="fn-clr">
             <form id="create-action-final" method="post" action="/action/{{ act_id }}/publish">
                 {% csrf_token %}
                 {% if show_publish %}
-                <a id="publish" class="z-btn publish">发布</a>
+                    <a id="publish" class="z-btn publish">发布</a>
                 {% endif %}
                 <a id="save" class="z-btn save" data-action="/action/{{ act_id }}/save">保存</a>
-                <a class="statement" href="/statement">找米免责声明</a>
+                <a class="statement" href="/statement" target="_blank">找米免责声明</a>
             </form>
         </div>
     </div>
 </div>
-</body>    
+</body>
 </html>

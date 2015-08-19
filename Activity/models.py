@@ -9,10 +9,22 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError, ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.urlresolvers import reverse
 
+from .tasks import create_zipped_poster
 # Create your models here.
 
 
-DEFAULT_POSTER_PATH = "defaultPosters/default.jpg"
+def get_activity_poster_path(act, filename):
+    ext = filename.split('.')[-1]
+    filename = ("%s.%s" % (uuid.uuid4(), ext)).replace("-", "")
+    time = timezone.now()
+    return "posters/%s/%s/%s/%s" % (time.year, time.month, time.day, filename)
+
+
+def get_activity_poster_path_zipped(act, filename):
+    ext = filename.split('.')[-1]
+    filename = ("%s.%s" % (uuid.uuid4(), ext)).replace("-", "")
+    time = timezone.now()
+    return "posters_zipped/%s/%s/%s/%s" % (time.year, time.month, time.day, filename)
 
 
 class ActivityTypeManager(models.Manager):
@@ -29,8 +41,12 @@ class ActivityType(models.Model):
     description = models.CharField(max_length=100)  # 类型描述应该精简
     display_order = models.IntegerField(default=0, editable=False)  # 显示排序的按照这个值进行排序，如果出现相同的值，其属性可能会不稳定
 
+    default_poster = models.ImageField(default=settings.DEFAULT_POSTER_PATH,
+                                       verbose_name='默认海报',
+                                       upload_to=get_activity_poster_path)
+
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    modified_at = models.DateTimeField(auto_now=True, editable=False)
+    modified_at = models.DateTimeField(auto_now=True, editable=False, )
 
     objects = ActivityTypeManager()
 
@@ -43,13 +59,6 @@ class ActivityType(models.Model):
         ordering = ["display_order"]
 
 
-def get_activity_poster_path(act, filename):
-    ext = filename.split('.')[-1]
-    filename = ("%s.%s" % (uuid.uuid4(), ext)).replace("-", "")
-    time = act.created_at
-    return "posters/%s/%s/%s/%s" % (time.year, time.month, time.day, filename)
-
-
 class Activity(models.Model):
     """This class is an abstract of specific activity"""
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
@@ -58,7 +67,7 @@ class Activity(models.Model):
     is_published = models.BooleanField(default=False)
     accept_apply = models.BooleanField(default=True)
 
-    activity_type = models.ForeignKey(ActivityType, null=True)
+    activity_type = models.ForeignKey(ActivityType, verbose_name='活动类型')
 
     name = models.CharField(max_length=200, verbose_name="活动名称")
     host = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="主办方")
@@ -94,7 +103,7 @@ class Activity(models.Model):
 
     reward = models.IntegerField(verbose_name="奖励金额")
     # 分享这个活动所得到的奖励， 这个一个属性被废弃，但是暂时未删除，这个属性主要涉及到Promotion应用中对分享的处理
-    reward_for_share = models.IntegerField(default=0)
+    reward_for_share = models.IntegerField(default=5)
     # 其他用户经由分享链接完成活动时分享人获得的奖励比例
     reward_for_share_and_finished_percentage = models.FloatField(default=0.1)
     # This property is the maximum share reward one user can get.
@@ -109,18 +118,21 @@ class Activity(models.Model):
     max_attend = models.IntegerField(verbose_name="允许报名的最大人数", default=10)
     min_attend = models.IntegerField(verbose_name="最少需要的人数", default=0)
 
-    poster = models.ImageField(upload_to=get_activity_poster_path, verbose_name="海报",
-                               default=DEFAULT_POSTER_PATH)
-    poster_zipped = models.ImageField(upload_to=get_activity_poster_path,
+    poster = models.ImageField(upload_to=get_activity_poster_path, verbose_name="海报", null=True, blank=True)
+    poster_zipped = models.ImageField(upload_to=get_activity_poster_path_zipped,
                                       verbose_name='压缩海报', null=True, blank=True)
 
     @property
-    def poster_zipped_first(self):
+    def poster_url(self):
         # 尝试取出压缩图片，如果压缩图片不存在，则取出取出原图
         if self.poster_zipped:
-            return self.poster_zipped
+            return self.poster_zipped.url
+        elif self.poster:
+            # 如果原图为空，则取出
+            create_zipped_poster.delay(self)
+            return self.poster.url
         else:
-            return self.poster
+            return self.activity_type.default_poster.url
 
     recommended = models.BooleanField(default=False, verbose_name="热门推荐")
     recommended_level = models.IntegerField(default=0, verbose_name="推荐等级")          # 推荐等级，此值越高优先级越高，用于排序
@@ -175,7 +187,7 @@ class Activity(models.Model):
                                                  status="approved").count()
 
     def get_absolute_url(self):
-        return reverse("detail", args=[str(self.id),])
+        return reverse("detail", args=[str(self.id), ])
 
     def get_backup(self):
         if self.backup is None:
@@ -186,6 +198,11 @@ class Activity(models.Model):
             self.backup = tmp
             self.save()
         return self.backup
+
+    def save(self, *args, **kwargs):
+        if self.poster is None:
+            self.poster = self.activity_type.default_poster
+        super(Activity, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ["-created_at"]

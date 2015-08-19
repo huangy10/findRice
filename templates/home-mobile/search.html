@@ -15,16 +15,27 @@
             <div class="logo item">找米</div>
         </div>
         <div class="nav">
-            <a href="/" class="nav-item active">
+            <a href="/" class="nav-item">
                 <i class="zui-icon icon-search"></i>
             </a>
-
             <a href="/action/new/create/1" class="nav-item">
                 <i class="zui-icon icon-plus"></i>
             </a>
-            <a href="/login" class="nav-item btn-login">
-                <span>登录</span>
-            </a>
+            {% if user %}
+                <a href="/user/msg" class="nav-item">
+                {% if user.notification_center.unread_notifications_count %}
+                    <span class="number">{{ user.notification_center.unread_notifications_count }}</span>
+                {% endif %}
+                    <i class="zui-icon icon-email"></i>
+                </a>
+                <a href="/mine/start" class="nav-item user">
+                    <img src="{{ user.profile.avatar_url }}" alt=""/>
+                </a>
+            {% else %}
+                <a href="/login" class="nav-item btn-login">
+                    <span>登录</span>
+                </a>
+            {% endif %}
         </div>
 
     </div>

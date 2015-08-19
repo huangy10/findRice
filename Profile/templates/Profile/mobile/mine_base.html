@@ -1,5 +1,6 @@
 {% load duration_filter %}
 {% load check_act_num %}
+{% load sharelink %}
 <!doctype html>
 <html>
 <head>
@@ -31,8 +32,8 @@
                     {% endif %}
                     <i class="zui-icon icon-email"></i>
                 </a>
-                <a href="/logout" class="nav-item user active">
-                    <img src="{{ user.profile.avatar.url }}" alt=""/>
+                <a href="/logout" class="nav-item user">
+                    <img src="{{ user.profile.avatar_url }}" alt=""/>
                 </a>
             </div>
         </div>
@@ -58,10 +59,10 @@
     <div class="main activity-lists">
         {% block content_list %}
             {% for act in activities %}
-                <div class="activity-list-item" data-id="{{ act.id }}">
+                <div class="activity-list-item" data-id="{{ act.id }}" data-link="{% share_link act %}">
                     <div class="zui-flex list-item">
                         <div class="zui-flex zui-flex-fixed thumbnail">
-                            <img src="{{ act.poster.url }}" alt=""/>
+                            <img src="{{ act.poster_url }}" alt=""/>
                         </div>
                         <div class="zui-cell">
                             <div class="list-item-desc">

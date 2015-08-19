@@ -14,13 +14,13 @@
     <div class="header">
         <a href="/" class="zhaomi logo logo-white">找米</a> <a href="/" class="cancel-login"><i class="zui-icon icon-close"></i>取消登陆</a>
     </div>
-    <div class="login-title zui-align-center">登陆</div>
+    <div class="login-title zui-align-center">登录</div>
     <div class="access-box">
         <form action="/login" method="post" id="login-form">
             {% csrf_token %}
             <div class="input-wrapper zui-flex">
                 <div class="zui-flex-fixed icon"><i class="zui-icon icon-user"></i></div>
-                <div class="zui-cell"><input type="text" maxlength="25"  id="username" name="username" class="zui-cell" placeholder="请输入邮箱/用户名"/></div>
+                <div class="zui-cell"><input type="text" maxlength="25"  id="username" name="username" class="zui-cell" placeholder="请输入手机号/用户名"/></div>
             </div>
             <div class="input-wrapper zui-flex">
                 <div class="zui-flex-fixed icon"><i class="zui-icon icon-pwd"></i></div>
@@ -31,7 +31,7 @@
             <div class="zui-align-right bottom-text">
                 <a class="reset-pwd" href="/resetpwd">忘记密码</a>
                 <a type="submit" class="zui-btn register-btn" href="/register/basic">注册</a>
-                <button type="submit" class="zui-btn zui-btn-action login-btn">登陆</button>
+                <button type="submit" class="zui-btn zui-btn-action login-btn">登录</button>
             </div>
 
             <div id="login-splitline" class="fn-clr">
@@ -42,9 +42,10 @@
                 <span id="or-txt">或</span>
                 <p>通过社交账号直接登录</p>
                 <div id="socials">
-                    <a href="" id="wechat"><i class="zui-icon icon-wechat"></i></a>
-                    <a href="" id="qq"><i class="zui-icon icon-qq"></i></a>
-                    <a href="" id="sina" class="last"><i class="zui-icon icon-sina"></i></a>
+                    <a href="{% url "social:begin" backend='weixin' %}?next=/social/profile" id="wechat"><i class="zui-icon icon-wechat"></i></a>
+                    <a href="{% url "social:begin" backend='qq' %}?next=/social/profile" id="qq"><i class="zui-icon icon-qq"></i></a>
+
+                    <a href="{% url "social:begin" backend='weixbo' %}?next=/social/profile" id="sina" class="last"><i class="zui-icon icon-sina"></i></a>
                 </div>
             </div>
         </form>

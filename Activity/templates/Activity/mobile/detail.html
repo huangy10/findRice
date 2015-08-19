@@ -36,7 +36,7 @@
                 <i class="zui-icon icon-email"></i>
             </a>
             <a href="/mine/start" class="nav-item user">
-                <img src="{{ user.profile.avatar.url }}" alt=""/>
+                <img src="{{ user.profile.avatar_url }}" alt=""/>
             </a>
 
         {% else %}
@@ -48,9 +48,9 @@
     <div class="banner" data-id="{{ act.id }}">
         {% load_like act user %}
         {% if like %}
-            <i class="zui-icon icon-like like"></i>
+            <div class="like icon-unlike"><i class="zui-icon icon-unlike"></i></div>
         {% else %}
-            <i class="zui-icon icon-unlike like"></i>
+            <div class="like icon-like"><i class="zui-icon icon-like"></i></div>
         {% endif %}
         <img src="//zhao-mi.net/m/modules/detail/img/banner.jpg" alt=""/>
     </div>
@@ -96,12 +96,12 @@
                     <div class="content">
                         {% for q in single_choice_questions %}
                             <div class="item" data-type="radio">
-                                <div class="question-tt">{{ q.question }}</div>
+                                <div class="question-tt">{{ forloop.counter }}){{ q.question }}</div>
                                 <div class="question-result">
                                     {%  for c in q.choices.all %}
                                         <div class="result-item">
                                             <div class="zui-radio">
-                                                <input type="radio" name="x2" value="{{ forloop.counter }}"  datatype="" nullmsg="此项不能为空"   />
+                                                <input type="radio" name="{{ q.order_in_list }}" value="{{ forloop.counter }}"  datatype="" nullmsg="此项不能为空"   />
                                                 <span class="zui-icon-radio"></span>
                                             </div>
                                             <label>{{ c.description }}</label>
@@ -123,7 +123,7 @@
                     <div class="content">
                         {% for q in multi_choice_questions %}
                             <div class="item" data-type="checkbox">
-                                <div class="question-tt">{{ q.question }}</div>
+                                <div class="question-tt">{{ forloop.counter }}){{ q.question }}</div>
                                 <div class="question-result">
                                     {% for c in q.choices.all %}
                                         <div class="result-item">
@@ -153,7 +153,7 @@
                     <div class="content">
                         {% for q in text_questions %}
                             <div class="item" data-type="question">
-                                <div class="question-tt">{{ q.question }}</div>
+                                <div class="question-tt">{{ forloop.counter }}){{ q.question }}</div>
                                 <div class="question-result">
                                     <textarea name="" cols="30" rows="10"
                                               datatype="s5-16"
@@ -176,7 +176,7 @@
                     <div class="content">
                         {% for q in file_questions %}
                             <div class="item" data-type="upload">
-                                <div class="question-tt">{{ q.question }}</div>
+                                <div class="question-tt">{{ forloop.counter }}){{ q.question }}</div>
                                 <div class="question-result">
                                     <div class="upload">
                                         <input type="file" name="upload-file-{{ forloop.counter0 }}" id="" datatype="*" nullmsg="请选择一张图片"  />

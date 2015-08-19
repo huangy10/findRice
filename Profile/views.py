@@ -24,13 +24,14 @@ from .forms import PasswordChangeForm, ProfileChangeForm
 from Activity.models import Activity, ApplicationThrough
 from .models import RiceTeamContribution, UserProfile
 from .models import VerifyCode
-from .utils import send_sms, from_size_check_required
+from .utils import send_sms, from_size_check_required, profile_active_required
 from Notification.signals import send_notification
 from Promotion.models import ShareRecord
 from Welfare.models import WelfareGift
 from findRice.utils import choose_template_by_device
 
 from social.backends.utils import load_backends
+from .tasks import create_zipped_avatar
 # Create your views here.
 
 logger = logging.getLogger(__name__)
@@ -44,10 +45,14 @@ def user_login(request):
         user = auth.authenticate(username=username, password=pwd)
         if user is not None and user.profile.is_active:
             auth.login(request, user)
+            if 'next' in request.session:
+                next_url = request.session.pop('next')
+            else:
+                next_url = '/'
             success_info = {
                 "success": True,
                 "data": {
-                    "url": request.session.get("next", "/")
+                    "url": next_url
                 }
             }
             return HttpResponse(json.dumps(success_info), content_type="application/json")
@@ -56,14 +61,15 @@ def user_login(request):
             error_info = {
                 "success": False
             }
-            if not auth.get_user_model().objects.filter(username=username).exists():
-                error_info["data"] = {
-                    "username": "该用户名不存在"
-                }
+            data = {}
+            if (not auth.get_user_model().objects.filter(username=username).exists())\
+                    and (not UserProfile.objects.filter(phoneNum=username).exists()):
+                data['username'] = '该用户名不存在'
             else:
-                error_info["data"] = {
-                    "pwd": "密码错误"
-                }
+                data['pwd'] = '密码错误'
+            if data == {}:
+                data['unknown'] = '未知错误'
+            error_info['data'] = data
             return HttpResponse(json.dumps(error_info), content_type="application/json")
 
     request.session["next"] = request.GET.get("next", "/")
@@ -95,7 +101,7 @@ def register_step_1(request):
             #                              password=pwd)
             # auth.login(request, new_user)
             request.session["register_username"] = user.username
-            request.session["password"] = request.POST.get("password1", "")
+            request.session["password"] = request.POST["password1"]
 
             success_info = {
                 "success": True,
@@ -140,10 +146,13 @@ def register_step_1(request):
 
 @require_http_methods(["GET", "POST"])
 def register_step_2(request):
-    user = get_object_or_404(get_user_model(),
-                             username=request.session.get("register_username", ""),
-                             is_active=False,
-                             profile__is_active=False)
+    try:
+        user = get_object_or_404(get_user_model(),
+                                 username=request.session.get("register_username", ""),
+                                 is_active=False,
+                                 profile__is_active=False)
+    except Http404:
+        return HttpResponseRedirect('/')
     # if not user.is_authenticated() or user.profile.is_active:
     #     return HttpResponseRedirect("/register/basic")
     form = UserRegisterFormStep2()
@@ -155,16 +164,24 @@ def register_step_2(request):
             if 'code' in request.session:
                 try:
                     promote_profile = UserProfile.objects.get(promotion_code=request.session['code'])
-                    promote_profile.coin += 5
-                    promote_profile.save()
+                    contrib = RiceTeamContribution.objects.create(team=promote_profile.user.rice_team,
+                                                                  user=user)
+                    request.session.pop('code')
                 except ObjectDoesNotExist:
                     return JsonResponse({'success': False, 'data': {'code': 'invalid share code'}})
+            logger.debug(
+                u"注册第二步，从操作用户名为%s，session中存储的密码是%s" % (user.username, request.session['password']))
             auth_user = auth.authenticate(username=user.username, password=request.session["password"])
             auth.login(request, auth_user)
+            #
+            if 'next' in request.session:
+                next_url = request.session.pop('next')
+            else:
+                next_url = '/'
             success_info = {
                 "success": True,
                 "data": {
-                    "url": "/"
+                    "url": next_url
                 }
             }
             return HttpResponse(json.dumps(success_info), "application/json")
@@ -193,8 +210,56 @@ def register_step_2(request):
                   args)
 
 
+@login_required()
+def register_addon_for_social(request):
+    user = request.user
+    if user.profile.is_active:
+        return HttpResponseRedirect(request.session.get('next', '/'))
+
+    form = UserRegisterFormStep2()
+    if request.method == "POST":
+        form = UserRegisterFormStep2(request.POST, request.FILES, instance=user.profile, initial={})
+        if form.is_valid():
+            form.save()
+            if 'next' in request.session:
+                next_url = request.session.pop('next')
+            else:
+                next_url = '/'
+            success_info = {
+                "success": True,
+                "data": {
+                    "url": next_url
+                }
+            }
+            return HttpResponse(json.dumps(success_info), "application/json")
+        else:
+            errors = form.errors
+            logger.debug(u"用户|%s(id: %s)|注册第二步失败，错误信息为: %s" % (user.profile.name, user.id, errors.as_data))
+            error_info = {"success": False}
+            data = {}
+            if "code" in errors:
+                data["verifycode"] = errors["code"][0]
+            if "phoneNum" in errors:
+                data["mobile"] = errors["phoneNum"][0]
+            if data == {}:
+                data["unknown"] = "未知错误，请联系管理员"
+            error_info["data"] = data
+            return HttpResponse(json.dumps(error_info), content_type="application/json")
+
+    args = {}
+    args.update(csrf(request))
+    args['form'] = form
+    args['social'] = True
+    return render(request,
+                  choose_template_by_device(request,
+                                            "Profile/register-addon.html",
+                                            "Profile/mobile/register-addon.html"),
+                  args)
+
+
 @require_POST
 @login_required()
+@profile_active_required
 def user_modify(request):
     profile = request.user.profile
     if "name" in request.POST:
@@ -207,12 +272,14 @@ def user_modify(request):
     #     profile.phoneNum = request.POST["mobile"]
     if "portrait" in request.FILES:
         profile.avatar = request.FILES["portrait"]
+        profile.avatar_zipped = None
     profile.save()
+    create_zipped_avatar.delay(profile, force=True)
     data = {
         "name": profile.name,
         "gender": profile.get_gender_display(),
         "age": str(profile.age) + u'岁',
-        "portrait": profile.avatar.url
+        "portrait": profile.avatar_url
     }
     logger.debug(u'用户信息修改成功，修改值为%s' % data)
     return JsonResponse({
@@ -264,6 +331,7 @@ def reset_password(request):
 
 
 @login_required()
+@profile_active_required
 def user_profile_modify(request):
     if request.method == "POST":
         form = ProfileChangeForm(request.POST, request.FILES, instance=request.user.profile)
@@ -292,6 +360,7 @@ def user_profile_modify(request):
 
 @require_GET
 @login_required()
+@profile_active_required
 @from_size_check_required
 def mine_start(request, start, size):
     """我发布的活动"""
@@ -313,6 +382,7 @@ def mine_start(request, start, size):
 
 @require_GET
 @login_required()
+@profile_active_required
 @from_size_check_required
 def mine_apply(request, start, size):
     """我申请的活动"""
@@ -338,6 +408,7 @@ def mine_apply(request, start, size):
 
 @require_GET
 @login_required()
+@profile_active_required
 @from_size_check_required
 def mine_group(request, start, size):
     """我的米团"""
@@ -354,6 +425,7 @@ def mine_group(request, start, size):
 
 @require_GET
 @login_required()
+@profile_active_required
 @from_size_check_required
 def mine_like(request, start, size):
     """我关注的活动"""
@@ -404,6 +476,7 @@ def send_verify_code(request):
 
 
 @login_required()
+@profile_active_required
 def manage_an_activity(request):
     if request.method == "POST":
         optype = request.POST.get("optype", "")
@@ -525,9 +598,14 @@ def manage_an_activity(request):
         pass
 
 
-@login_required()
+@profile_active_required
 def mine_info(request):
     user = request.user
+    if not user.is_authenticated() or ('code' in request.GET and request.GET['code'] != user.profile.promotion_code
+                                       and not user.is_authenticated()):
+        # We always attach the promotion code after the user info url
+        #  so read the promotion code from GET
+        return HttpResponseRedirect('/register/basic?code=' + request.GET['code'])
     args = {"user": user}
     args.update(csrf(request))
     return render(request, "Profile/mobile/mine.html", args)
@@ -535,6 +613,7 @@ def mine_info(request):
 
 @require_POST
 @login_required()
+@profile_active_required
 def exchange_for_rmb(request):
     """This view is responsible for managing the rice coin exchange"""
     coin = int(request.POST['num'])                # 需要兑换的米币数量

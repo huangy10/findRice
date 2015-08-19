@@ -31,11 +31,11 @@ def index_list(request, start, size):
         recent_issue = HomepageIssue.objects.all()[0]
         banners = HomepagePoster.objects.filter(issue=recent_issue,
                                                 poster_type=0)
-	try:
-       	    footer = HomepagePoster.objects.filter(issue=recent_issue,
+        try:
+            footer = HomepagePoster.objects.filter(issue=recent_issue,
                                                    poster_type=1).first()
         except IndexError:
-	    footer = None
+            footer = None
     else:
         banners = None
         footer = None
@@ -201,7 +201,10 @@ def search_list(request, start, size):
 
 
 def search_page(request):
-    return render(request, "home-mobile/search.html", {})
+    args = {}
+    if request.user.is_authenticated():
+        args['user'] = request.user
+    return render(request, "home-mobile/search.html", args)
 
 
 def statement(request):

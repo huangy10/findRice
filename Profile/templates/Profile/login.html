@@ -21,17 +21,17 @@
     </div>
 
     <div id="container">
-        <p class="title-txt">登陆</p>
+        <p class="title-txt">登录</p>
         <form id="login-form" action="/login" method="post" autocomplete="off">
             {% csrf_token %}
             <div id="username-c">
-                <input id="username" name="username" placeholder="请输入邮箱/用户名"></input>
+                <input id="username" name="username" placeholder="请输入手机号码/用户名"></input>
             </div>
             <div id="pwd-c">
                 <input id="pwd" name="pwd" type="password" placeholder="请输入密码"></input>
             </div>
             <div id="login-btn-c" class="fn-clr">
-                <button type="submit" class="z-btn login-btn">登陆</button>
+                <button type="submit" class="z-btn login-btn">登录</button>
                 <a class="z-btn register-btn" href="/register/basic">注册</a>
                 <a class="reset-pwd" href="/resetpwd">忘记密码</a>
             </div>
@@ -43,9 +43,9 @@
                 <span id="or-txt">或</span>
                 <p>通过社交账号直接登录</p>
                 <div id="socials">
-                    <a id="wechat" href="{% url "social:begin" backend='weixin' %}"></a>
-                    <a id="qq" href="{% url "social:begin" backend='qq' %}"></a>
-                    <a id="sina" href="{% url "social:begin" backend='weibo' %}" class="last"></a>
+                    <a id="wechat" href="{% url "social:begin" backend='weixin' %}?next=/social/profile"></a>
+                    <a id="qq" href="{% url "social:begin" backend='qq' %}?next=/social/profile"></a>
+                    <a id="sina" href="{% url "social:begin" backend='weibo' %}?next=social/profile" class="last"></a>
                 </div>
             </div>
         </form>

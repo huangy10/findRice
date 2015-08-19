@@ -16,11 +16,11 @@
     <script type="text/javascript" src="//zhao-mi.net/build/create-criteria.js"></script>
 </head>
 <body>
-<div id="content">
-    <div id="header">
+<div id="header">
+    <div id="header-c">
         <a href="/" id="logo">找米</a>
         <a id="personal-info" class="action" href="/mine/start">
-            <img src="{{ user.profile.avatar.url }}" alt="我的个人信息">
+            <img src="{{ user.profile.avatar_url }}" alt="我的个人信息">
         </a>
         <div id="msg" class="action">
             <a href="/user/msg" class="z-btn">消息</a>
@@ -31,16 +31,19 @@
         <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
+</div>
+<div id="content">
+
     <div id="action-bg">
         <img src="{% static "assets/imgs/detail-banner.png" %}">
         <div id="progress" class="z-process">
-          <ul class="z-steps">
-            <li class="z-node z-first-finish"><div class="z-process-label">活动基本信息</div></li>
-            <li class="z-bar z-bar-finish"><div class="z-far"></div></li>
-            <li class="z-node z-current"><div class="z-process-label">活动报名条件</div></li>
-            <li class="z-bar z-bar-wait"><div class="z-far"></div></li>
-            <li class="z-node z-last-wait"><div class="z-process-label">发布</div></li>
-          </ul>
+            <ul class="z-steps">
+                <li class="z-node z-first-finish"><div class="z-process-label">活动基本信息</div></li>
+                <li class="z-bar z-bar-finish"><div class="z-far"></div></li>
+                <li class="z-node z-current"><div class="z-process-label">活动报名条件</div></li>
+                <li class="z-bar z-bar-wait"><div class="z-far"></div></li>
+                <li class="z-node z-last-wait"><div class="z-process-label">发布</div></li>
+            </ul>
         </div>
     </div>
     <div id="criteria-operation">
@@ -62,86 +65,86 @@
     <div id="action-container">
         <p class="tips">找米已为您获取的信息：用户头像、昵称、手机号，不需要在问卷中设置</p>
         {% if edit %}
-        <form id="create-action-second" action="/action/{{ activity.id }}/edit/2" method="post">
+            <form id="create-action-second" action="/action/{{ activity.id }}/edit/2" method="post">
         {% else %}
-        <form id="create-action-second" action="/action/{{ activity.id }}/create/2" method="post">
+            <form id="create-action-second" action="/action/{{ activity.id }}/create/2" method="post">
         {% endif %}
-            {% csrf_token %}
-            <div id="action-criteria" class="criteria-c">
-                <div id="action-questions">
-                    {% for q in single_choice_questions %}
-                        <div class="action-item" data-type="radio">
-                            <div class="criteria-q fn-clr">
-                                <span class="criteria-seqno">{{ q.order_in_list }}、</span>
-                                <input class="criteria-q-input" value="{{ q.question }}"></input>
-                                <span class="criteria-del"></span>
-                            </div>
-                            <div class="action-answers">
-                                <ul class="fn-clr">
-                                    {% for c in q.choices.all %}
-                                        <li>
+        {% csrf_token %}
+        <div id="action-criteria" class="criteria-c">
+            <div id="action-questions">
+                {% for q in single_choice_questions %}
+                    <div class="action-item" data-type="radio">
+                        <div class="criteria-q fn-clr">
+                            <span class="criteria-seqno">{{ q.order_in_list }}、</span>
+                            <input class="criteria-q-input" value="{{ q.question }}"></input>
+                            <span class="criteria-del"></span>
+                        </div>
+                        <div class="action-answers">
+                            <ul class="fn-clr">
+                                {% for c in q.choices.all %}
+                                    <li>
                                         <span class="z-radio"></span>
                                         <input class="criteria-a-input" value="{{ c.description }}"></input>
                                         <span class="criteria-del"></span>
-                                        </li>
-                                    {% endfor %}
-                                    <li>
-                                        <span class="criteria-add"></span>
                                     </li>
-                                </ul>
-                            </div>
+                                {% endfor %}
+                                <li>
+                                    <span class="criteria-add"></span>
+                                </li>
+                            </ul>
                         </div>
-                    {% endfor %}
-                    {% for q in multi_choice_question %}
-                        <div class="action-item" data-type="checkbox">
-                            <div class="criteria-q fn-clr">
-                                <span class="criteria-seqno">{{ q.order_in_list }}、</span>
-                                <input class="criteria-q-input" value="{{ q.question }}"/></input>
-                                <span class="criteira-del"></span>
-                            </div>
-                            <div class="action-answers">
-                                <ul class="fn-clr">
-                                    {% for c in q.choices.all %}
-                                        <li>
+                    </div>
+                {% endfor %}
+                {% for q in multi_choice_questions %}
+                    <div class="action-item" data-type="checkbox">
+                        <div class="criteria-q fn-clr">
+                            <span class="criteria-seqno">{{ q.order_in_list }}、</span>
+                            <input class="criteria-q-input" value="{{ q.question }}"/></input>
+                            <span class="criteira-del"></span>
+                        </div>
+                        <div class="action-answers">
+                            <ul class="fn-clr">
+                                {% for c in q.choices.all %}
+                                    <li>
                                         <span class="z-checkbox"></span>
                                         <input class="criteria-a-input" value="{{ c.description }}"></input>
                                         <span class="criteria-del"></span>
-                                        </li>
-                                    {% endfor %}
-                                    <li>
-                                        <span class="criteria-add"></span>
                                     </li>
-                                </ul>
-                            </div>
+                                {% endfor %}
+                                <li>
+                                    <span class="criteria-add"></span>
+                                </li>
+                            </ul>
                         </div>
-                    {% endfor %}
-                    {% for q in text_questions %}
-                        <div class="action-item fn-clr" data-type="question">
-                            <div class="criteria-q fn-clr">
-                                <span class="criteria-seqno">{{ q.order_in_list }}、</span>
-                                <input class="criteria-q-input" placeholder="{{ q.question }}"></input>
-                                <span class="criteria-del"></span>
-                            </div>
-                            <textarea></textarea>
-                        </div>
-                    {% endfor %}
-                    {% for q in file_questions %}
+                    </div>
+                {% endfor %}
+                {% for q in text_questions %}
+                    <div class="action-item fn-clr" data-type="question">
                         <div class="criteria-q fn-clr">
-                                <span class="criteria-seqno">{{ q.order_in_list }}、</span>
-                                <input class="criteria-q-input" placeholder="{{ q.question }}"></input>
-                                <span class="criteria-del"></span>
-                            </div>
-                            <input type="file"/>
-                    {% endfor %}
-                </div>
+                            <span class="criteria-seqno">{{ q.order_in_list }}、</span>
+                            <input class="criteria-q-input" placeholder="{{ q.question }}"></input>
+                            <span class="criteria-del"></span>
+                        </div>
+                        <textarea></textarea>
+                    </div>
+                {% endfor %}
+                {% for q in file_questions %}
+                    <div class="criteria-q fn-clr">
+                        <span class="criteria-seqno">{{ q.order_in_list }}、</span>
+                        <input class="criteria-q-input" placeholder="{{ q.question }}"></input>
+                        <span class="criteria-del"></span>
+                    </div>
+                    <input type="file"/>
+                {% endfor %}
             </div>
-            <div id="action-criteria-btns">
-                <button class="z-btn next" type="submit">下一步</button>
-                <a class="z-btn prev" href="/action/{{ activity.id }}/create/1">上一步</a>
-            </div>
+        </div>
+        <div id="action-criteria-btns">
+            <button class="z-btn next" type="submit">下一步</button>
+            <a class="z-btn prev" href="/action/{{ activity.id }}/create/1">上一步</a>
+        </div>
         </form>
     </div>
 </div>
 
-</body>    
+</body>
 </html>

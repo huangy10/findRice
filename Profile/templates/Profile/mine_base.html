@@ -16,12 +16,15 @@
     <script type="text/javascript" src="//zhao-mi.net/build/mine.js"></script>
 </head>
 <body>
-<div id="content">
-    <div id="header">
+<div id="header">
+    <div id="header-c">
         <a href="/" id="logo">找米</a>
-        <div id="personal-info" class="action">
-            <a href="/logout" class="logout" title="登出"></a>
-        </div>
+        <a id="personal-info" class="action" href="/mine/start">
+            <img src="{{ user.profile.avatar_url }}" alt="我的个人信息">
+        </a>
+{#        <div id="personal-info" class="action">#}
+{#            <a href="/logout" class="logout" title="登出"></a>#}
+{#        </div>#}
         <div id="msg" class="action">
             <a href="/user/msg" class="z-btn">消息</a>
             {% if user.notification_center.unread_notifications_count %}
@@ -31,9 +34,11 @@
         <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
+</div>
+<div id="content">
     <div id="mine-bg">
         <div id="personal-info-origin">
-            <span class="portrait" id="portrait-origin"><img src="{{ user.profile.avatar.url }}"></span>
+            <span class="portrait" id="portrait-origin"><img src="{{ user.profile.avatar_url }}"></span>
             <div class="info-items">
                 <div class="main-items">
                     <span class="name fn-overflow" id="name">{{ user.profile.name }}</span>
@@ -41,6 +46,7 @@
                     <button class="z-btn exchange">兑换米币</button>
                     <button class="z-btn recommend" data-link="{{ user.profile.get_promotion_link }}">推广</button>
                     <span class="edit"></span>
+                    <a href="/logout" class="logout">退出登录</a>
                 </div>
                 <div class="sub-items">
                     <span class="mobile" id="mobile">{{ user.profile.phoneNum }}</span>
@@ -53,18 +59,18 @@
             <form action="/user/modify" id="personal-info-form" enctype="multipart/form-data" method="post">
                 {% csrf_token %}
                 <div id="portrait-c">
-                    <img src="{{ user.profile.avatar.url }}"/>
+                    <img src="{{ user.profile.avatar_url }}"/>
                     <label for="portrait"></label>
                     <input id="portrait" name="portrait" type="file" class="fn-hide"></input>
                 </div>
                 <div class="info-items">
                     <div class="main-items">
                         <input id="info-name" name="name" type="text" value="{{ user.profile.name }}"/>
+                        <button class="z-btn save-info">保存</button>
                     </div>
                     <div class="sub-items">
                         <input id="info-gender" name="gender" type="text" value="{{ user.profile.get_gender_display }}"/>
                         <input id="info-bday" name="bday" type="date" value="{{ user.profile.birthDate|datefilter }}"/>
-                        <button class="z-btn save-info">保存</button>
                     </div>
                 </div>
             </form>
@@ -73,79 +79,80 @@
         <img src="{% static "assets/imgs/detail-banner.png" %}">
     </div>
     <div id="mine-container" {% if act %}data-action="{{ act.id }}"{% endif %}>
-    {% block menu_bar %}
-        <div id="mine-type" class="fn-clr">
-            {% block categories %}
-            <a class="mine-create selected">我发起的活动</a>
-            <a class="mine-apply" href="/mine/apply">我报名的活动</a>
-            <a class="mine-like" href="/mine/like">我关注的活动</a>
-            <a class="mine-group" href="/mine/group">我的米团</a>
-            {% endblock %}
-            <span class="hotline">找米客服联系电话：400-22236678</span>
-        </div>
-    {% endblock %}
+        {% block menu_bar %}
+            <div id="mine-type" class="fn-clr">
+                {% block categories %}
+                    <a class="mine-create selected">我发起的活动</a>
+                    <a class="mine-apply" href="/mine/apply">我报名的活动</a>
+                    <a class="mine-like" href="/mine/like">我关注的活动</a>
+                    <a class="mine-group" href="/mine/group">我的米团</a>
+                {% endblock %}
+                <span class="hotline">找米客服联系电话：400-22236678</span>
+            </div>
+        {% endblock %}
         {% block content_list %}
-        <div id="list">
-            <ul class="fn-clr">
-                {% for act in activities %}
-                    <li class="{% cycle "action-card" "action-card" "action-card last" %}" data-link="{% share_link act %}" data-id="{{ act.id }}">
-                        <div class="pic">
-                            <img src="{{ act.poster.url }}">
-                        </div>
-                        <div class="brief-info">
-                            <div class="brief-important">
-                                <span class="title">{{ act.name }}</span>
-                                <span class="price">&yen;{{ act.reward }}</span>
-                                {% if act.recommended %}
+            <div id="list">
+                <ul class="fn-clr">
+                    {% for act in activities %}
+                        <li class="{% cycle "action-card" "action-card" "action-card last" %}" data-link="{% share_link act %}" data-id="{{ act.id }}">
+                            <div class="pic">
+                                <img src="{{ act.poster_url }}">
+                            </div>
+                            <div class="brief-info">
+                                <div class="brief-important">
+                                    <span class="title">{{ act.name }}</span>
+                                    <span class="price">&yen;{{ act.reward }}</span>
+                                    {% if act.recommended %}
                                     <span class="hot-tag">热门推荐</span>
                                 {% endif %}
+                                </div>
+                                <p class="host">主办方：{{ act.host_name }}</p>
+
+                                <div class="criteria">
+                                    {%for line in act.description|two_line %}
+                                        <p class="fn-overflow" title="{{ line }}">{{ line }}</p>
+                                    {% endfor %}
+                                </div>
                             </div>
-                            <p class="host">主办方：{{ act.host_name }}</p>
-                            <div class="criteria">
-                                {%for line in act.description|two_line %}
-                                    <p class="fn-overflow" title="{{ line }}">{{ line }}</p>
-                                {% endfor %}
+                            <div class="items">
+                                <p class="location fn-overflow" title="{{ act.loc_description }}">{{ act.loc_description }}</p>
+                                <p class="num fn-overflow">{{ act.get_applying_num }}/{{ act.max_attend }} 人</p>
+                                <p class="time fn-overflow">{{ act.get_duration_description }}</p>
+                                <p class="extra fn-overflow">{{ act.last_length|duration }}</p>
                             </div>
-                        </div>
-                        <div class="items">
-                            <p class="location fn-overflow" title="{{ act.loc_description }}">{{ act.loc_description }}</p>
-                            <p class="num fn-overflow">{{ act.get_applying_num }}/{{ act.max_attend }} 人</p>
-                            <p class="time fn-overflow">{{ act.get_duration_description }}</p>
-                            <p class="extra fn-overflow">{{ act.last_length|duration }}</p>
-                        </div>
-                        <div class="operation">
-                            {% block operation %}
-                            <div class="main">
-                            {% if act.is_published %}
-                                {% if act.status == 0 %}
-                                    <button class="z-btn green">报名中</button>
-                                    <a href="">取消申请</a>
-                                {% elif act.status == 1 %}
-                                    <button class="z-btn starting">已经开始</button>
-                                {% else %}
-                                    <button class="z-btn red no-shift">已经结束</button>
-                                {% endif %}
-                            {% else %}
-                                <button class="z-btn red">尚未发布</button>
-                                <a href="">点击发布</a>
-                            {% endif %}
-                            </div>
-                            <div class="sub fn-clr">
-                                <span class="edit" data-action="/action/{{ act.id }}/edit/1" title="编辑活动"></span>
-                                <span class="duplicate" data-action="/action/{{ act.id }}/duplicate" title="复制活动"></span>
-                                <span class="delete" data-action="/action/{{ act.id }}/delete" title="删除活动"></span>
-                                <span class="b-share" data-action="/action/{{ act.id }}/sharelink" data-link="{% share_link act %}" title="分享活动"></span>
-                                {% block check_applicant %}
+                            <div class="operation">
+                                {% block operation %}
+                                    <div class="main">
+                                        {% if act.is_published %}
+                                            {% if act.status == 0 %}
+                                                <button class="z-btn green">报名中</button>
+                                                <a href="">取消申请</a>
+                                            {% elif act.status == 1 %}
+                                                <button class="z-btn starting">已经开始</button>
+                                            {% else %}
+                                                <button class="z-btn red no-shift">已经结束</button>
+                                            {% endif %}
+                                        {% else %}
+                                            <button class="z-btn red">尚未发布</button>
+                                            <a href="">点击发布</a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="sub fn-clr">
+                                        <span class="edit" data-action="/action/{{ act.id }}/edit/1" title="编辑活动"></span>
+                                        <span class="duplicate" data-action="/action/{{ act.id }}/duplicate" title="复制活动"></span>
+                                        <span class="delete" data-action="/action/{{ act.id }}/delete" title="删除活动"></span>
+                                        <span class="b-share" data-action="/action/{{ act.id }}/sharelink" data-link="{% share_link act %}" title="分享活动"></span>
+                                        {% block check_applicant %}
+                                        {% endblock %}
+                                    </div>
                                 {% endblock %}
                             </div>
-                            {% endblock %}
-                        </div>
 
-                        {% block share %}{% endblock %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+                            {% block share %}{% endblock %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         {% endblock %}
     </div>
 </div>

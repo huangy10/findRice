@@ -30,8 +30,8 @@
 </head>
 <body>
 {% csrf_token %}
-<div id="content">
-    <div id="header">
+<div id="header">
+    <div id="header-c">
         <a href="/" id="logo">找米</a>
         <div id="area">
             <em>
@@ -41,7 +41,7 @@
                     地区选择
                 {% endif %}
             </em>
-	    <i></i>
+            <i></i>
             <div id="area-droplist">
                 <select class="prov"></select><span>省</span>
                 <select class="city" disabled="disabled"></select><span class="city-txt">市/区</span>
@@ -50,7 +50,7 @@
         </div>
         {% if user %}
             <a id="personal-info" class="action" href="/mine/start">
-                <img src="{{ user.profile.avatar.url }}" alt="我的个人信息">
+                <img src="{{ user.profile.avatar_url }}" alt="我的个人信息">
             </a>
             <div id="msg" class="action">
                 <a href="/user/msg" class="z-btn">消息</a>
@@ -64,21 +64,25 @@
         <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
-    <div id="banner">
-        <ul>
-            {% for banner in homepage_posters %}
-                <li>
-                    <a href="{{ banner.related_activity.get_absolute_url }}">
-                        {% if forloop.first %}
-                            <img src="{{ banner.poster.url }}">
-                        {% else %}
-                            <img data-src="{{ banner.poster.url }}">
-                        {% endif %}
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
+</div>
+<div id="content">
+    {% if homepage_posters %}
+        <div id="banner">
+            <ul>
+                {% for banner in homepage_posters %}
+                    <li>
+                        <a href="{{ banner.related_activity.get_absolute_url }}">
+                            {% if forloop.first %}
+                                <img src="{{ banner.poster.url }}">
+                            {% else %}
+                                <img data-src="{{ banner.poster.url }}">
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
     <div id="filter">
         <div id="hot-wrapper">
             <span id="hot">找米热门</span>
@@ -103,9 +107,6 @@
                             {{ type.type_name }}
                         </li>
                     {% endfor %}
-                    <li class="{% cycle rows %} {% if param.type == -1 %}selected{% endif %}" data-type="-1">
-                        其他
-                    </li>
                 </ul>
             </div>
         </div>
@@ -113,19 +114,22 @@
     <div id="list" class="list">
         <ul class="fn-clr">
             {% for act in activities %}
-                <li class="{% cycle "action-card" "action-card" "action-card last"%}" data-detail="/action/{{ act.id }}/detail" data-link="{% share_link act %}" data-id="{{ act.id }}">
+                <li class="{% cycle "action-card" "action-card" "action-card" "action-card last"%}" data-detail="/action/{{ act.id }}/detail" data-link="{% share_link act %}" data-id="{{ act.id }}">
                     <div class="pic">
-                        <img src="{{ act.poster.url }}">
+                        <img src="{{ act.poster_url }}">
                     </div>
                     <div class="brief-info">
                         <div class="brief-important">
                             <span class="title">{{ act.name }}</span>
                             <span class="price">&yen;{{ act.reward }}</span>
+
+                        </div>
+                        <div class="host">
+                            <span class="host-c">主办方：{{ act.host_name }}</span>
                             {% if act.recommended %}
                                 <span class="hot-tag">热门推荐</span>
                             {% endif %}
                         </div>
-                        <p class="host">主办方：{{ act.host_name }}</p>
                         <div class="criteria">
                             {%for line in act.description|two_line %}
                                 <p class="fn-overflow" title="{{ line }}">{{ line }}</p>
@@ -146,11 +150,13 @@
             {% endfor %}
         </ul>
     </div>
-    <div id="commercial">
-        <a href="{{ footer.related_activity.get_absolute_url }}">
-            <img src="{{ footer.poster.url }}">
-        </a>
-    </div>
+    {% if footer %}
+        <div id="commercial">
+            <a href="{{ footer.related_activity.get_absolute_url }}">
+                <img src="{{ footer.poster.url }}">
+            </a>
+        </div>
+    {% endif %}
 </div>
 </body>
 </html>

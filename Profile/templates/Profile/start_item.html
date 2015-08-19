@@ -26,7 +26,7 @@
         <span class="duplicate" data-action="/action/{{ act.id }}/duplicate" title="复制活动"></span>
         <span class="delete" data-action="/action/{{ act.id }}/delete" title="删除活动"></span>
         <span class="b-share" data-action="/action/{{ act.id }}/sharelink" data-link="{% share_link act %}" title="分享活动"></span>
-        <a class="z-btn view" href="/action/{{ act.id }}/applicant">查看报名表单</a>
+        <span class="z-btn view" data-action="/action/{{ act.id }}/applicant">查看报名表单</span>
     </div>
 {% endblock %}
 

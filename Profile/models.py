@@ -14,16 +14,22 @@ from django.dispatch import receiver
 from Activity.models import Activity
 from Promotion.models import ShareRecord
 from Promotion.signals import share_record_signal
+from .tasks import create_zipped_avatar
 # Create your models here.
-
-DEFAULT_PROFILE = "default_avatars/default_avatar.png"
 
 
 def get_avatar_path(act, filename):
     ext = filename.split('.')[-1]
-    filename = "%s.%s" % (uuid.uuid4(), ext)
+    filename = ("%s.%s" % (uuid.uuid4(), ext)).replace('-', '')
     time = act.created_at
     return "avatars/%s/%s/%s/%s" % (time.year, time.month, time.day, filename)
+
+
+def get_avatar_path_zipped(act, filename):
+    ext = filename.split('.')[-1]
+    filename = ("%s.%s" % (uuid.uuid4(), ext)).replace('-', '')
+    time = act.created_at
+    return "avatars_zipped/%s/%s/%s/%s" % (time.year, time.month, time.day, filename)
 
 
 class UserProfile(models.Model):
@@ -44,8 +50,27 @@ class UserProfile(models.Model):
         ('f', '女'),
         ('u', '未知'),
     ), verbose_name="性别", max_length=2)
-    avatar = models.ImageField(upload_to=get_avatar_path, default=DEFAULT_PROFILE,
-                               verbose_name="头像")
+    avatar = models.ImageField(upload_to=get_avatar_path,
+                               verbose_name="头像", null=True, blank=True)
+    avatar_social = models.CharField(max_length=100, null=True, blank=True, verbose_name='社交平台头像URL')
+    avatar_zipped = models.ImageField(upload_to=get_avatar_path_zipped, null=True, blank=True, editable=False)
+
+    @property
+    def avatar_url(self):
+        if self.avatar_social and not self.avatar.name:
+            return self.avatar_social
+        else:
+            if self.avatar_zipped:
+                return self.avatar_zipped.url
+            # 如果发现当前的profile没有生成压缩版的图像的话，那么开启一个异步线程生成压缩的图像，但是暂时返回原图
+            # 这一步是为了兼容在引入压缩功能之前的图片
+            # 实际进行压缩图片的生成是在创建和修改时
+            elif self.avatar:
+                create_zipped_avatar.delay(self)
+                return self.avatar.url
+            else:
+                return '\media' + settings.DEFAULT_PROFILE
+
     identified = models.BooleanField(default=False, verbose_name="是否认证")
     identified_date = models.DateField(verbose_name="认证日期", null=True, editable=False)
 
@@ -68,7 +93,7 @@ class UserProfile(models.Model):
             self.identified_date = timezone.now()
         if self.promotion_code is None:
             raw_code = self.user.username + str(self.created_at) + "disturbing string"
-            md5 = hashlib.md5(raw_code.encode())
+            md5 = hashlib.md5(raw_code.encode('utf-8'))
             self.promotion_code = md5.hexdigest()
         super(UserProfile, self).save(*args, **kwargs)
 

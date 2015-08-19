@@ -1,9 +1,14 @@
 # coding=utf-8
+import copy
+import logging
+
 from django import forms
 from django.utils import timezone
 
 from .models import Activity, ActivityType
+from .tasks import create_zipped_poster
 
+logger = logging.getLogger(__name__)
 
 class ActivityCreationForm(forms.ModelForm):
 
@@ -28,6 +33,10 @@ class ActivityCreationForm(forms.ModelForm):
         "id": "action-type",
         "name": "action-type"
     }))
+    poster = forms.ImageField(widget=forms.FileInput(attrs={
+        "id": "poster",
+        "name": "poster"
+    }), required=False)
 
     def __init__(self, user=None, *args, **kwargs):
         super(ActivityCreationForm, self).__init__(*args, **kwargs)
@@ -77,22 +86,31 @@ class ActivityCreationForm(forms.ModelForm):
 
     def save(self, commit=True):
         obj = super(ActivityCreationForm, self).save(commit=False)
+        # add the additional data to the act obj
         obj.last_length = self.cleaned_data["day"]*24*60 + self.cleaned_data["hour"]*60 + self.cleaned_data["minute"]
+        logger.debug(u'上传的持续时间参数为{0}d{1}h{2}m, 计算得到的持续时间为{3}m'.format(
+            self.cleaned_data['day'],
+            self.cleaned_data['hour'],
+            self.cleaned_data['minute'],
+            obj.last_length
+        ))
         type_no = int(self.cleaned_data.get("activity_type"))
-        if type_no == -1:
-            obj.activity_type = None
-        else:
-            obj.activity_type = ActivityType.objects.all()[type_no]
+        obj.activity_type = ActivityType.objects.all()[type_no]
+        if self.cleaned_data['poster'] is not None or not self.is_bound:
+            obj.poster = self.cleaned_data['poster']
         obj.is_active = False   # 创建的表格在问卷生成以后才会有效
         obj.host = self.user
         if commit:
             obj.save()
+            # copy a new instance of the act object
+            if obj.poster:
+                create_zipped_poster.delay(copy.deepcopy(obj), force=True)
         return obj
 
     class Meta:
         model = Activity
         fields = ("name", "host_name", "location", "description",
-                  "start_time", "end_time", "poster", "max_attend", "reward", "city", "province")
+                  "start_time", "end_time", "max_attend", "reward", "city", "province")
         widgets = {
             "name": forms.TextInput(attrs={
                 "id": "name",
@@ -137,8 +155,4 @@ class ActivityCreationForm(forms.ModelForm):
                 "id": "desc",
                 "class": ""
             }),
-            "poster": forms.FileInput(attrs={
-                "id": "poster",
-                "name": "poster"
-            })
         }

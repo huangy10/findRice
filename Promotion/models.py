@@ -1,5 +1,6 @@
 # coding=utf-8
 import hashlib
+import logging
 
 from django.db import models
 from django.conf import settings
@@ -9,6 +10,9 @@ from Activity.models import Activity, ApplicationThrough
 from .signals import share_record_signal
 from findRice.utils import field_is_active_validator
 # Create your models here.
+
+
+logger = logging.getLogger(__name__)
 
 
 class Share(models.Model):
@@ -36,7 +40,7 @@ class Share(models.Model):
                     raw_code = u"anonymous user " + str(self.activity.id) +"disturbing string"
                 else:
                     raw_code = self.user.username+str(self.activity.id)+"disturbing string"
-                md5 = hashlib.md5(raw_code.encode())
+                md5 = hashlib.md5(raw_code.encode('utf-8'))
                 return md5.hexdigest()
             self.share_code = get_share_code()
         super(Share, self).save(*args, **kwargs)
@@ -56,6 +60,9 @@ class ShareRecordManager(models.Manager):
             return obj
 
         def get_actual_reward():
+	    if obj.share.user == obj.share.activity.host:
+		logger.debug(u'分享自己创建的活动，不结算米币，发起分享的用户是%s' % obj.share.user.username)
+                return
             cur_share_reward = obj.share.total_reward          # 取出当前奖励
             cur_share_reward += obj.share.activity.reward_for_share    # 计算增加奖励
             cur_share_reward = min(cur_share_reward, obj.share.total_reward_max)   # 上限截断
@@ -83,6 +90,9 @@ class ShareRecordManager(models.Manager):
             return obj, created
 
         def get_actual_reward():
+	    if obj.share.user == obj.share.activity.host:
+		logger.debug(u'分享自己创建的活动，不结算米币，发起分享的用户是%s' % obj.share.user.username)
+                return
             cur_share_reward = obj.share.total_reward          # 取出当前奖励
             cur_share_reward += obj.share.activity.reward_for_share    # 计算增加奖励
             cur_share_reward = min(cur_share_reward, obj.share.total_reward_max)   # 上限截断
@@ -116,6 +126,11 @@ class ShareRecord(models.Model):
         if self.finished and self.share.user is not None:
 
             def get_actual_reward():
+		if self.share.user == self.share.activity.host:
+		    self.actual_reward_for_finish = 0
+                    self.actual_reward_for_share = 0
+		    logger.debug(u'分享自己创建的活动，不结算米币，发起分享的用户是%s' % self.share.user.username)
+                    return
                 cur_share_reward = self.share.total_reward          # 取出当前奖励
                 cur_share_reward += self.share.activity.reward * \
                     self.share.activity.reward_for_share_and_finished_percentage    # 计算增加奖励

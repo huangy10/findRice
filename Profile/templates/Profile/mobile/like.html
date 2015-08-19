@@ -5,19 +5,19 @@
 
 {% block categories %}
     <div class="tab-item">
-        <a href="/mine/start" class="tab-item-a">我发起的活动</a>
+        <a href="/mine/start" class="tab-item-a">已发布</a>
     </div>
     <div class="tab-item">
-        <a href="/mine/apply" class="tab-item-a">我报名的活动</a>
+        <a href="/mine/apply" class="tab-item-a">已报名</a>
     </div>
     <div class="tab-item active">
-        <a href="/mine/like" class="tab-item-a">我关注的活动</a>
+        <a href="/mine/like" class="tab-item-a">已关注</a>
     </div>
     <div class="tab-item ">
-        <a href="/mine/group" class="tab-item-a">我的米团</a>
+        <a href="/mine/group" class="tab-item-a">米团</a>
     </div>
     <div class="tab-item">
-        <a href="/mine/info" class="tab-item-a">我的信息</a>
+        <a href="/mine/info?code={{ user.profile.promotion_code }}" class="tab-item-a">信息</a>
     </div>
 {% endblock %}
 
