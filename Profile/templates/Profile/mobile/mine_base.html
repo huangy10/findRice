@@ -8,6 +8,7 @@
     <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="format-detection" content="telephone=no">
     <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/m/build/mine.js"></script>
 </head>
@@ -32,7 +33,7 @@
                     {% endif %}
                     <i class="zui-icon icon-email"></i>
                 </a>
-                <a href="/logout" class="nav-item user">
+                <a href="/mine/start" class="nav-item user">
                     <img src="{{ user.profile.avatar_url }}" alt=""/>
                 </a>
             </div>
@@ -61,7 +62,7 @@
             {% for act in activities %}
                 <div class="activity-list-item {% if act.status == 2 %}finished{% endif %}" data-id="{{ act.id }}" data-link="{% share_link act %}">
                     <div class="zui-flex list-item">
-                        <div class="zui-flex zui-flex-fixed thumbnail">
+                        <div class="zui-cell zui-flex-fixed thumbnail">
                             <img src="{{ act.poster_url }}" alt=""/>
                         </div>
                         <div class="zui-cell">
@@ -72,7 +73,7 @@
                                         <div class="address"><i class="zui-icon icon-address"></i>{{ act.loc_description }}</div>
                                     </div>
                                     <div class="zui-cell zui-flex-fixed">
-                                        <div class="number"><i class="zui-icon icon-number"></i> {{ act.get_applying_num }}/{{ act.max_attend }}</div>
+                                        <div class="count"><i class="zui-icon icon-number"></i> {{ act.get_applying_num }}/{{ act.max_attend }}</div>
                                     </div>
                                 </div>
                                 <div class="item zui-flex">
@@ -80,7 +81,7 @@
                                         <div class="date"><i class="zui-icon icon-date"></i>{{ act.get_duration_description }}     </div>
                                     </div>
                                     <div class="zui-cell zui-flex-fixed">
-                                        <div class="distance"><i class="zui-icon icon-distance"></i>{{ act.last_length|duration }}</div>
+                                        <div class="duration"><i class="zui-icon icon-distance"></i>{{ act.last_length|duration }}</div>
                                     </div>
                                 </div>
                                 <div class="item m-tag">
@@ -88,7 +89,7 @@
                                         {% if act.is_recommended %}
                                         <span class="hot">热门推荐</span>
                                         {% endif %}
-                                        <span class="price">￥{{ act.reward }}</span>
+                                        <span class="price">{{ act.reward_description }}</span>
                                     </div>
                                 </div>
                             </div>

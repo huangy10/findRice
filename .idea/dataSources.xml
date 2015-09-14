@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2422328718">
-    <data-source source="LOCAL" name="Django default" uuid="eb076b49-1dc2-4e2d-801e-4722a7e55963">
-      <driver-ref>sqlite.xerial</driver-ref>
+  <component name="DataSourceManagerImpl" format="xml" hash="2776756811">
+    <data-source source="LOCAL" name="PostgreSQL - find_rice_db@localhost" uuid="a13791ef-6727-45ef-9990-5e9ec5e50ad6">
+      <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1/find_rice_db</jdbc-url>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/find_rice_db</jdbc-url>
       <libraries />
     </data-source>
   </component>

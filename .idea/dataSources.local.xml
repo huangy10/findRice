@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="Django default" uuid="eb076b49-1dc2-4e2d-801e-4722a7e55963" />
+    <data-source name="PostgreSQL - find_rice_db@localhost" uuid="a13791ef-6727-45ef-9990-5e9ec5e50ad6">
+      <secret-storage>memory</secret-storage>
+      <user-name>find_rice2</user-name>
+      <schema-pattern>find_rice_db.*</schema-pattern>
+      <default-schemas>find_rice_db.*</default-schemas>
+    </data-source>
   </component>
 </project>

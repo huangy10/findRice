@@ -13,6 +13,7 @@
     <div id="group-info">
         <span id="my-group">我的团队<em>{{ user.rice_team.total_members }}</em>人</span>
         <span id="group-mibi">团队米币<em>{{ user.rice_team.team_coin }}</em></span>
+        <span>我推广的注册<em>{{ user.rice_team.promoted_registration }}</em>人</span>
     </div>
     <div id="tbl">
 	{% if contributions %}

@@ -8,6 +8,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError, ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.urlresolvers import reverse
+from django.utils.functional import cached_property
 
 from .tasks import create_zipped_poster
 # Create your models here.
@@ -85,6 +86,13 @@ class Activity(models.Model):
 
     description = models.TextField(verbose_name="活动简介")
 
+    @property
+    def get_description(self):
+        if self.reward_gift:
+            return u"{0}\n礼品详情：{1}".format(self.description, self.reward_gift_detail)
+        else:
+            return self.description
+
     start_time = models.DateTimeField(verbose_name="开始时间")
     end_time = models.DateTimeField(verbose_name="结束时间")
     last_length = models.IntegerField(verbose_name="持续时间(min)")
@@ -110,10 +118,27 @@ class Activity(models.Model):
     # The administrator can change it. However, the new value won't affect the share records which are created before
     # the change
     reward_share_limit = models.IntegerField(default=500, verbose_name='分享奖励上限')
+    # 是否包含礼品奖励
+    reward_gift = models.BooleanField(default=False, verbose_name="礼品")
+    reward_gift_detail = models.TextField(default="", verbose_name="礼品详情")
 
     @property
     def share_reward(self):
         return int(self.reward * self.reward_for_share_and_finished_percentage)
+
+    @property
+    def reward_description(self):
+        """ 创建供模板使用的活动详情描述
+        """
+        if self.reward_gift and self.reward > 0:
+            return u"￥"+str(self.reward)+u"+礼品"
+        elif self.reward > 0 and not self.reward_gift:
+            return u"￥"+str(self.reward)
+        elif self.reward == 0 and self.reward_gift:
+            return u"礼品"
+        else:
+            return u'￥0'
+
 
     max_attend = models.IntegerField(verbose_name="允许报名的最大人数", default=10)
     min_attend = models.IntegerField(verbose_name="最少需要的人数", default=0)
@@ -180,7 +205,7 @@ class Activity(models.Model):
 
     def get_duration_description(self):
         tz = timezone.get_current_timezone()
-        return tz.normalize(self.start_time).strftime("%y/%m/%d %H:%M")+" - "+tz.normalize(self.end_time).strftime("%y/%m/%d")
+        return tz.normalize(self.start_time).strftime("%y/%m/%d %H:%M")+" - "+tz.normalize(self.end_time).strftime("%y/%m/%d %H:%M")
 
     def get_applying_num(self):
         return ApplicationThrough.objects.filter(activity=self,

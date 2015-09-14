@@ -5,6 +5,7 @@
     <title>个人中心</title>
     <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="format-detection" content="telephone=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
     <link href="//zhao-mi.net/m/lib/mobiscroll/css/mobiscroll.css" rel="stylesheet" type="text/css">
@@ -54,7 +55,7 @@
                 <a href="/mine/group" class="tab-item-a">米团</a>
             </div>
             <div class="tab-item active">
-                <a href="/mine/info?code={{ user.profile.promotion_code }}" class="tab-item-a">信息</a>
+                <a href="/mine/info?code={{ user.profile.promotion_code }}" class="tab-item-a">我</a>
             </div>
         </div>
     </div>
@@ -69,7 +70,7 @@
                             <img src="{{ user.profile.avatar_url }}" alt="" class=""/>
                             <label for="upload-image" class="upload-image">
                                 <i class="zui-icon icon-photo"></i>
-                                <input type="file" name="portrait" id="upload-image" />
+                                <input accept="image/*" type="file" name="portrait" id="upload-image" />
                             </label>
                         </div>
                         <div class="btn-edit ">
@@ -134,8 +135,9 @@
         </div>
     </div>
     <div class="bottom">
+        <a href="" target="_blank" class="verified-action zui-btn">申请认证用户</a><br />
         <a href="/logout" class="zui-btn logout">退出登录</a>
-        <p class="hint">找米客服联系电话：400-22236678</p>
+        <p class="hint">找米客服联系电话：156-0106-6684</p>
     </div>
 </div>
 

@@ -17,6 +17,7 @@
     <script type="text/javascript" src="//zhao-mi.net/lib/jqueryui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/jquery-qrcode/jquery.qrcode.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/placeholder/jquery.placeholder.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/build/detail.js"></script>
 </head>
 <body>
@@ -36,7 +37,7 @@
         {% else %}
             <div id="reg" class="action"><a class="z-btn" href="/register/basic">注册/登陆</a></div>
         {% endif %}
-        <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
+        <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">创建活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
 </div>
@@ -44,20 +45,17 @@
     <div id="detail-bg">
         <img src= "//zhao-mi.net/assets/imgs/detail-banner.png">
     </div>
-    <div id="detail-container" data-link="{% share_link act %}">
+    <div id="detail-container" data-link="{% share_link act %}" {% if act.status == 2 %}class="finished"{% endif %}>
         <form id="apply-form" action="/action/{{ act.id }}/apply" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="hidden" value="{{ share_code }}" name="share_code">
             <div id="detail-important" class="fn-clr">
-                <div class="detail-name-w">
+                <div class="detail-name-w {% if act.reward_gift %}with-present{% endif %}">
                     <span class="detail-name">{{ act.name }}</span>
-                    {% if act.recommended %}
-                        <span class="detail-hot">热门推荐</span>
-                    {% endif %}
-                    <span class="detail-price">&yen;{{ act.reward }}</span>
+                    <span class="detail-price">{{ act.reward_description }}</span>
                 </div>
                 <div class="detail-oper">
-		    {% load_like act user %}
+                    {% load_like act user %}
                     {% if like %}
                         <span class="like selected" data-id="{{ act.id }}"></span>
                     {% else %}
@@ -66,9 +64,16 @@
                     <span class="share"></span>
                 </div>
             </div>
-            <p id="detail-host"><span>主办方：{{ act.host.profile.name }}</span><span>类型：{{ act.activity_type.type_name }}</span></p>
+            <p id="detail-host">
+                <span>主办方：{{ act.host.profile.name }}</span>
+                <span>类型：{{ act.activity_type.type_name }}</span>
+                {% if act.recommended and act.status != 2 %}
+                    <span class="detail-hot">热门推荐</span>
+                {% endif %}
+                {% if act.status == 2 %}<span class="detail-finished">已结束</span>{% endif %}
+            </p>
             <div id="detail-info">
-                {% for line in act.description|seperate_to_p %}
+                {% for line in act.get_description|seperate_to_p %}
                     <p>{{ line }}</p>
                 {% endfor %}
             </div>
@@ -126,10 +131,10 @@
             </div>
             <div id="detail-apply" class="fn-clr">
                 <button class="z-btn apply">报名</button>
-                <button class="z-btn share-bonus" type="button">分享获{{ act.share_reward }}米币</button>
+                <button class="z-btn share-bonus" type="button">我要分享</button>
             </div>
-            <p class="hint">条件不达标？试试推广赚米币！</p>
-            <p class="hint">此活动负责人为发起者，与找米平台无关</p>
+            <p class="hint">分享带来的参加者完成本活动，您可获得<em>{{ act.share_reward }}</em>米币/每人。</p>
+            <p class="hint">本活动由主办方发起，并由主办方负责组织、安排、结算。找米有权对用户违法行为进行监督处罚。</p>
         </form>
     </div>
 </div>

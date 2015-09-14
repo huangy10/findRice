@@ -40,4 +40,4 @@ def notification_center(request):
 @profile_active_required
 def unread_messages(request):
     center = request.user.notification_center
-    return JsonResponse({"success": True, "data": {"unread": center.unread_notifications_count}})
+    return JsonResponse({"success": True, "data": {"unread": center.unread_notifications_count}}, content_type='text/html')

@@ -110,3 +110,237 @@
 2015-08-19 23:10:11,080 [DEBUG] Activity.views: 找到到问卷为id＝1, 其创建时间是2015-08-12 12:07:04.715957+00:00
 2015-08-19 23:10:18,487 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:1), 当前用户为|Woody Huang2|(lena)
 2015-08-19 23:10:18,505 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: lena|报名活动|id: 1|
+2015-08-19 23:50:43,244 [DEBUG] Activity.views: The share code is: c4cacc2923c5869ff4a8ccb74791d5af
+2015-08-19 23:59:21,576 [DEBUG] Notification.models: 消息发送，内容为：您报名的 <a href='/mine/apply' target='_blank'>8.19测试活动二</a>，申请通过
+2015-08-20 00:00:32,326 [DEBUG] Activity.views: Code not found
+2015-08-20 00:00:49,712 [DEBUG] Notification.models: 消息发送，内容为：您报名的 <a href='/mine/apply' target='_blank'>8.19测试活动二</a>，申请被 龚子仪 拒绝
+2015-08-20 00:01:00,306 [DEBUG] Notification.models: 消息发送，内容为：您报名的 <a href='/mine/apply' target='_blank'>8.19测试活动二</a>，申请通过
+2015-08-20 00:06:00,489 [DEBUG] amqp: Start from server, version: 0.9, properties: {u'information': u'Licensed under the MPL.  See http://www.rabbitmq.com/', u'product': u'RabbitMQ', u'copyright': u'Copyright (C) 2007-2013 GoPivotal, Inc.', u'capabilities': {u'exchange_exchange_bindings': True, u'connection.blocked': True, u'authentication_failure_close': True, u'basic.nack': True, u'consumer_priorities': True, u'consumer_cancel_notify': True, u'publisher_confirms': True}, u'platform': u'Erlang/OTP', u'version': u'3.2.4'}, mechanisms: [u'AMQPLAIN', u'PLAIN'], locales: [u'en_US']
+2015-08-20 00:06:00,491 [DEBUG] amqp: Open OK!
+2015-08-20 00:06:00,491 [DEBUG] amqp: using channel_id: 1
+2015-08-20 00:06:00,492 [DEBUG] amqp: Channel open
+2015-08-20 00:06:00,497 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody', 'portrait': '/media/avatars/2015/8/18/a555f896971e4688b21cda9d9d55d0fc.jpg'}
+2015-08-20 00:15:32,560 [DEBUG] Activity.views: The share code is: afc5bfcb343622938f4b7ad7f2c07f89
+2015-08-20 00:15:49,630 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=|q=
+2015-08-20 00:15:52,391 [DEBUG] Activity.views: Code not found
+2015-08-20 00:16:08,324 [DEBUG] Activity.views: The share code is: afc5bfcb343622938f4b7ad7f2c07f89
+2015-08-20 08:27:35,496 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京市|东城|q=
+2015-08-20 10:33:45,725 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
+2015-08-20 10:33:49,257 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
+2015-08-20 10:34:15,611 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
+2015-08-20 10:37:39,268 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
+2015-08-20 10:37:40,069 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
+2015-08-20 10:37:56,796 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
+2015-08-20 10:37:58,966 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
+2015-08-20 10:55:08,947 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
+2015-08-20 10:55:13,549 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|全部地区|q=
+2015-08-20 11:00:29,320 [DEBUG] Activity.views: The share code is: 07b9a455896697a6df501196e453f4f1
+2015-08-20 11:00:43,464 [DEBUG] Activity.views: Code not found
+2015-08-20 18:01:04,140 [DEBUG] Activity.views: The share code is: afc5bfcb343622938f4b7ad7f2c07f89
+2015-08-20 18:01:11,755 [DEBUG] Activity.views: The share code is: afc5bfcb343622938f4b7ad7f2c07f89
+2015-08-20 18:02:30,859 [DEBUG] Activity.views: Code not found
+2015-08-20 18:02:51,142 [DEBUG] Activity.views: The share code is: afc5bfcb343622938f4b7ad7f2c07f89
+2015-08-20 18:03:23,928 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|东城|q=
+2015-08-20 18:04:08,140 [DEBUG] Activity.views: The share code is: 8acdfd9f7d7f3d5880fd1eaf29227095
+2015-08-20 18:14:29,221 [DEBUG] Activity.views: The share code is: afc5bfcb343622938f4b7ad7f2c07f89
+2015-08-20 18:16:01,013 [DEBUG] Activity.views: Code not found
+2015-08-20 18:16:53,544 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=北京|东城|q=
+2015-08-20 19:30:38,813 [DEBUG] Activity.views: Code not found
+2015-08-20 19:31:04,034 [DEBUG] Activity.views: Code not found
+2015-08-20 19:31:46,313 [DEBUG] Activity.views: Code not found
+2015-08-20 19:32:24,717 [DEBUG] Activity.views: The share code is: 07b9a455896697a6df501196e453f4f1
+2015-08-20 19:33:06,187 [DEBUG] Activity.views: The share code is: 29e647169dee260c8f86b730912a584e
+2015-08-20 19:33:52,368 [DEBUG] Activity.views: The share code is: afc5bfcb343622938f4b7ad7f2c07f89
+2015-08-20 19:57:17,106 [DEBUG] Activity.views: Code not found
+2015-08-20 19:57:34,542 [DEBUG] Profile.views: 注册用户第一步失败，错误信息为: <bound method ErrorDict.as_data of {'username': [u'\u8be5\u7528\u6237\u540d\u5df2\u88ab\u6ce8\u518c']}>
+2015-08-20 22:23:24,379 [DEBUG] findRice.views: 搜索参数为: hot=4|type=|loc=|q=
+2015-08-20 22:23:55,479 [DEBUG] Activity.forms: 上传的持续时间参数为1d0h40m, 计算得到的持续时间为1480m
+2015-08-20 22:24:34,515 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=|q=
+2015-08-20 22:24:35,945 [DEBUG] findRice.views: 搜索参数为: hot=4|type=|loc=|q=
+2015-08-20 22:24:56,953 [DEBUG] findRice.views: 搜索参数为: hot=4|type=|loc=|q=
+2015-08-20 22:24:59,416 [DEBUG] findRice.views: 搜索参数为: hot=0|type=|loc=|q=
+2015-08-20 22:25:01,444 [DEBUG] findRice.views: 搜索参数为: hot=4|type=|loc=|q=
+2015-08-20 22:29:30,872 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=全部地区|全部地区|q=
+2015-08-20 23:38:59,069 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars/2015/8/12/d39c9ef59cf64138aafabcd3fa258a76.png'}
+2015-08-20 23:39:48,345 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'23\u5c81', 'name': u'Woody Huang2', 'portrait': '/media/avatars/2015/8/12/851771a213f24168824ec89c7f36ed44.png'}
+2015-08-22 00:23:55,811 [DEBUG] Activity.views: The share code is: f59aa864fb20c4c5f98c39692eaf3ba5
+2015-08-22 00:25:05,752 [DEBUG] root: 创建用户条目，用户名为scalegong，密码为huang9040601
+2015-08-22 00:26:22,890 [DEBUG] Profile.views: 用户|test(id: 3)|注册第二步失败，错误信息为: <bound method ErrorDict.as_data of {'code': [u'\u9a8c\u8bc1\u7801\u4e0d\u5339\u914d']}>
+2015-08-22 00:26:33,727 [DEBUG] Profile.views: 注册第二步，从操作用户名为scalegong，session中存储的密码是huang9040601
+2015-08-22 00:26:35,721 [DEBUG] Activity.views: The share code is: 6129c587abb9f81c3d2a82d9f863bf7f
+2015-08-22 00:28:42,077 [DEBUG] Activity.views: The share code is: f59aa864fb20c4c5f98c39692eaf3ba5
+2015-08-22 00:28:52,307 [DEBUG] Activity.views: The share code is: b4602f39b0576560a1795c599b2f8fd3
+2015-08-22 00:28:52,332 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|test(username: scalegong)|，对应的活动是|测试(id: 3)|
+2015-08-22 00:30:25,873 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:3), 当前用户为|test|(scalegong)
+2015-08-22 00:30:25,896 [DEBUG] Activity.views: 申请与分享记录成功绑定, 本次报名为用户|username: scalegong|报名活动|id: 3|,code为b4602f39b0576560a1795c599b2f8fd3
+2015-08-24 20:31:47,124 [DEBUG] root: 创建用户条目，用户名为yuanlihao2，密码为11111111
+2015-08-24 20:36:08,255 [DEBUG] root: 创建用户条目，用户名为yuanlihao3，密码为12121212
+2015-08-24 20:41:07,523 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=|q=
+2015-08-24 20:41:10,140 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=|q=
+2015-08-24 20:52:08,975 [DEBUG] Profile.views: 注册用户第一步失败，错误信息为: <bound method ErrorDict.as_data of {'password1': [u'\u5bc6\u7801\u592a\u77ed\uff0c\u5bc6\u7801\u7684\u957f\u5ea6\u81f3\u5c11\u4e3a4\u4f4d']}>
+2015-08-24 20:52:23,685 [DEBUG] Profile.views: 注册用户第一步失败，错误信息为: <bound method ErrorDict.as_data of {'password1': [u'\u5bc6\u7801\u592a\u77ed\uff0c\u5bc6\u7801\u7684\u957f\u5ea6\u81f3\u5c11\u4e3a4\u4f4d']}>
+2015-08-24 20:55:38,222 [DEBUG] root: 创建用户条目，用户名为yaun，密码为1111
+2015-08-24 20:55:52,300 [DEBUG] Profile.views: 注册用户第一步失败，错误信息为: <bound method ErrorDict.as_data of {'password1': [u'\u5bc6\u7801\u592a\u77ed\uff0c\u5bc6\u7801\u7684\u957f\u5ea6\u81f3\u5c11\u4e3a4\u4f4d']}>
+2015-08-24 20:58:29,805 [DEBUG] Activity.views: The share code is: f59aa864fb20c4c5f98c39692eaf3ba5
+2015-08-24 21:15:35,274 [DEBUG] Activity.views: The share code is: f59aa864fb20c4c5f98c39692eaf3ba5
+2015-08-24 21:15:41,539 [DEBUG] Activity.views: The share code is: f59aa864fb20c4c5f98c39692eaf3ba5
+2015-08-24 21:15:49,380 [DEBUG] Activity.views: The share code is: f59aa864fb20c4c5f98c39692eaf3ba5
+2015-08-24 21:16:13,496 [DEBUG] Activity.views: The share code is: f59aa864fb20c4c5f98c39692eaf3ba5
+2015-08-24 21:28:25,166 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
+2015-08-24 21:28:45,779 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
+2015-08-24 21:29:12,459 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
+2015-08-24 21:29:23,719 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
+2015-08-24 21:29:52,428 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
+2015-08-24 21:30:59,694 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=|q=
+2015-08-24 21:31:02,984 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
+2015-08-24 21:31:02,987 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=|q=
+2015-08-24 21:31:16,531 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=|q=
+2015-08-24 21:31:28,904 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
+2015-08-24 21:31:28,907 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=|q=
+2015-08-24 21:31:38,618 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
+2015-08-24 21:31:42,322 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
+2015-08-24 21:35:40,143 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=|q=
+2015-08-24 21:35:42,541 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
+2015-08-24 21:35:48,438 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=|q=
+2015-08-24 21:35:50,648 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
+2015-08-24 21:35:53,869 [DEBUG] findRice.views: 搜索参数为: hot=4|type=0|loc=|q=
+2015-08-24 21:35:57,149 [DEBUG] findRice.views: 搜索参数为: hot=4|type=0|loc=|q=
+2015-08-24 21:36:17,600 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
+2015-08-24 21:40:56,649 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
+2015-08-24 21:41:08,085 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=|q=
+2015-08-24 21:42:04,085 [DEBUG] findRice.views: 搜索参数为: hot=|type=0|loc=|q=
+2015-08-31 20:08:23,518 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:3), 当前用户为|Woody Huang2|(lena)
+2015-08-31 20:10:25,705 [DEBUG] Activity.forms: 上传的持续时间参数为21d12h15m, 计算得到的持续时间为30975m
+2015-08-31 20:39:07,645 [DEBUG] Activity.views: 创建活动失败，失败信息为: <bound method ErrorDict.as_data of {'start_time': [u'\u6d3b\u52a8\u4e0d\u80fd\u5728\u8fc7\u53bb\u5f00\u59cb']}>
+2015-08-31 20:39:19,720 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-08-31 20:50:29,391 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "poster" DROP NOT NULL; (params [])
+2015-08-31 20:50:29,462 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_riceteamcontribution" ADD COLUMN "registration_promoted" boolean DEFAULT %s NOT NULL; (params [False])
+2015-08-31 20:50:29,484 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_riceteamcontribution" ALTER COLUMN "registration_promoted" DROP DEFAULT; (params [])
+2015-08-31 20:50:29,521 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_userprofile" ALTER COLUMN "avatar" DROP NOT NULL; (params [])
+2015-08-31 21:18:09,122 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD COLUMN "reward_gift" boolean DEFAULT %s NOT NULL; (params [False])
+2015-08-31 21:18:09,135 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "reward_gift" DROP DEFAULT; (params [])
+2015-09-03 20:20:22,138 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-03 20:22:51,510 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-03 20:33:37,645 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试|(id:9), 当前用户为|Woody Huang2|(lena)
+2015-09-03 20:33:37,659 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: lena|报名活动|id: 9|,code:99ded8538cec9b2bde48f1a1ce0f1cd7
+2015-09-03 20:39:25,917 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-03 21:15:11,566 [DEBUG] Activity.views: The share code is: 253ffedc3b0919d17dff2822af6c6730
+2015-09-03 21:15:36,275 [DEBUG] root: 创建用户条目，用户名为yuanlihao，密码为11111111
+2015-09-03 21:16:59,198 [DEBUG] Profile.views: 注册第二步，从操作用户名为yuanlihao，session中存储的密码是11111111
+2015-09-03 21:24:09,244 [DEBUG] root: 创建用户条目，用户名为yuan，密码为11111111
+2015-09-03 21:24:37,336 [DEBUG] Profile.views: 注册第二步，从操作用户名为yuan，session中存储的密码是11111111
+2015-09-03 21:28:22,358 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.3测试活动|(id:10), 当前用户为|Woody Huang2|(lena)
+2015-09-03 21:28:22,366 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: lena|报名活动|id: 10|,code:fdc810a860fdc06935f86eb944050d2d
+2015-09-03 21:44:13,747 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.3测试活动|(id:10), 当前用户为|Woody Huang2|(lena)
+2015-09-03 21:44:13,755 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: lena|报名活动|id: 10|,code:fdc810a860fdc06935f86eb944050d2d
+2015-09-03 21:58:17,730 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD COLUMN "reward_gift_detail" text DEFAULT %s NOT NULL; (params [''])
+2015-09-03 21:58:17,771 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "reward_gift_detail" DROP DEFAULT; (params [])
+2015-09-03 22:17:35,827 [DEBUG] Activity.forms: 上传的持续时间参数为0d0h55m, 计算得到的持续时间为55m
+2015-09-03 22:32:17,599 [DEBUG] Activity.views: 试图报名活动，对应活动为|阿达|(id:11), 当前用户为|Woody Huang2|(lena)
+2015-09-03 22:32:17,614 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: lena|报名活动|id: 11|,code:a718eeccbd8b59164f023fc6b0e4d4d3
+2015-09-03 22:42:01,446 [DEBUG] Activity.forms: 上传的持续时间参数为0d0h55m, 计算得到的持续时间为55m
+2015-09-03 22:42:01,703 [DEBUG] Activity.views: 找到到问卷为id＝6, 其创建时间是2015-09-03 14:17:43.304780+00:00
+2015-09-03 22:42:04,100 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[]
+2015-09-03 22:47:01,016 [DEBUG] Activity.views: 试图报名活动，对应活动为|阿达|(id:11), 当前用户为|Woody Huang2|(lena)
+2015-09-03 22:47:01,030 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: lena|报名活动|id: 11|,code:a718eeccbd8b59164f023fc6b0e4d4d3
+2015-09-03 22:54:06,817 [DEBUG] Activity.views: 试图报名活动，对应活动为|阿达|(id:11), 当前用户为|Woody Huang2|(lena)
+2015-09-05 21:17:36,020 [DEBUG] root: 创建用户条目，用户名为yuanlihao，密码为11111111
+2015-09-05 21:26:03,962 [DEBUG] Profile.views: 注册用户第一步失败，错误信息为: <bound method ErrorDict.as_data of {'username': [u'\u8be5\u7528\u6237\u540d\u5df2\u88ab\u6ce8\u518c']}>
+2015-09-05 21:26:49,095 [DEBUG] root: 创建用户条目，用户名为yuanlihao，密码为11111111
+2015-09-05 21:35:58,911 [DEBUG] root: 创建用户条目，用户名为yuan，密码为11111111
+2015-09-05 21:36:32,379 [DEBUG] Profile.views: 注册第二步，从操作用户名为yuan，session中存储的密码是11111111
+2015-09-05 21:36:59,301 [DEBUG] Activity.views: The share code is: 8897f29560195bacea6fbbd1713586fc
+2015-09-05 21:37:02,377 [DEBUG] Activity.views: The share code is: d3bd0f987826d17b8df221e784b31763
+2015-09-05 21:37:04,260 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.3测试活动|(id:10), 当前用户为|阿萨德飞|(yuan)
+2015-09-05 21:37:04,268 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 10|,code:d3bd0f987826d17b8df221e784b31763
+2015-09-05 21:38:31,073 [DEBUG] Activity.views: The share code is: 8897f29560195bacea6fbbd1713586fc
+2015-09-05 21:40:13,744 [DEBUG] Activity.views: The share code is: d3bd0f987826d17b8df221e784b31763
+2015-09-05 21:45:16,290 [DEBUG] Activity.views: The share code is: d3bd0f987826d17b8df221e784b31763
+2015-09-05 21:46:14,888 [DEBUG] Activity.views: The share code is: d3bd0f987826d17b8df221e784b31763
+2015-09-05 21:47:38,862 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-05 21:48:05,223 [DEBUG] Activity.views: 试图报名活动，对应活动为|9,5高一低保|(id:13), 当前用户为|阿萨德飞|(yuan)
+2015-09-05 21:48:05,230 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 13|,code:75bd1f945afb9c87029583373ea093ed
+2015-09-05 21:50:30,557 [DEBUG] Activity.views: The share code is: a718eeccbd8b59164f023fc6b0e4d4d3
+2015-09-05 21:50:30,580 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|阿萨德飞(username: yuan)|，对应的活动是|阿达(id: 11)|
+2015-09-05 21:52:43,477 [DEBUG] Activity.views: The share code is: fdc810a860fdc06935f86eb944050d2d
+2015-09-05 21:53:20,965 [DEBUG] Activity.views: The share code is: a718eeccbd8b59164f023fc6b0e4d4d3
+2015-09-05 22:03:24,782 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-05 22:07:37,417 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.5活动|(id:14), 当前用户为|阿萨德飞|(yuan)
+2015-09-05 22:07:37,425 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 14|,code:7d08e483d5b26780f9e4c7a513dffa56
+2015-09-05 22:09:54,624 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.5活动|(id:14), 当前用户为|阿萨德飞|(yuan)
+2015-09-05 22:09:54,630 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 14|,code:None
+2015-09-05 23:15:55,840 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-05 23:20:44,919 [DEBUG] Activity.views: The share code is: d5d29a9ca822faf52547a820068d6a1a
+2015-09-05 23:20:53,797 [DEBUG] Activity.views: The share code is: d5d29a9ca822faf52547a820068d6a1a
+2015-09-05 23:21:56,101 [DEBUG] Activity.views: 试图报名活动，对应活动为|adsaf|(id:15), 当前用户为|阿萨德飞|(yuan)
+2015-09-05 23:21:56,109 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 15|,code:7e8bf985f319435045d6ce0322cf7317
+2015-09-06 22:00:36,574 [DEBUG] Activity.views: The share code is: b2024ead38c80e8d7f15867e65c1b4ca
+2015-09-06 22:06:11,945 [DEBUG] root: 创建用户条目，用户名为yuan，密码为11111111
+2015-09-06 22:06:46,423 [DEBUG] Profile.views: 注册第二步，从操作用户名为yuan，session中存储的密码是11111111
+2015-09-06 22:06:59,922 [DEBUG] Activity.views: The share code is: d3bd0f987826d17b8df221e784b31763
+2015-09-06 22:07:03,477 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.3测试活动|(id:10), 当前用户为|阿打算|(yuan)
+2015-09-06 22:07:03,486 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 10|,code:d3bd0f987826d17b8df221e784b31763
+2015-09-06 22:08:48,711 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-06 22:11:56,641 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.6测试活动|(id:16), 当前用户为|阿打算|(yuan)
+2015-09-06 22:11:56,650 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 16|,code:9b48ac6d25c374662031803fe62584ee
+2015-09-06 22:12:51,867 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-06 22:20:17,862 [DEBUG] Activity.views: The share code is: b2024ead38c80e8d7f15867e65c1b4ca
+2015-09-06 22:20:17,872 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|阿打算(username: yuan)|，对应的活动是|阿达(id: 11)|
+2015-09-06 22:20:55,103 [DEBUG] Activity.views: The share code is: b2024ead38c80e8d7f15867e65c1b4ca
+2015-09-06 22:20:56,743 [DEBUG] Activity.views: The share code is: b2024ead38c80e8d7f15867e65c1b4ca
+2015-09-06 22:22:25,450 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.6测试活动|(id:16), 当前用户为|阿打算|(yuan)
+2015-09-06 22:22:25,458 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 16|,code:9b48ac6d25c374662031803fe62584ee
+2015-09-06 22:24:55,877 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.6测试活动|(id:16), 当前用户为|阿打算|(yuan)
+2015-09-06 22:24:55,885 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 16|,code:9b48ac6d25c374662031803fe62584ee
+2015-09-06 22:27:23,190 [DEBUG] Activity.views: The share code is: 5f7db9f690527dcc1601cba81f8988f9
+2015-09-06 22:38:39,212 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-06 22:38:39,402 [DEBUG] Activity.views: 没有找到该活动对应到问卷，活动id为16
+2015-09-06 22:42:23,183 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-06 22:42:23,527 [DEBUG] Activity.views: 没有找到该活动对应到问卷，活动id为16
+2015-09-06 22:46:09,454 [DEBUG] Activity.views: 没有找到该活动对应到问卷，活动id为16
+2015-09-06 22:47:17,484 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-06 22:47:17,805 [DEBUG] Activity.views: 没有找到该活动对应到问卷，活动id为16
+2015-09-06 22:49:40,763 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-06 22:49:41,088 [DEBUG] Activity.views: 没有找到该活动对应到问卷，活动id为16
+2015-09-12 14:58:09,738 [DEBUG] root: 创建用户条目，用户名为yuanlihao，密码为11111111
+2015-09-12 15:03:19,063 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.6测试活动|(id:16), 当前用户为|阿打算|(yuan)
+2015-09-12 15:03:19,077 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 16|,code:9b48ac6d25c374662031803fe62584ee
+2015-09-12 15:09:23,805 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.3测试活动|(id:10), 当前用户为|Woody Huang2|(lena)
+2015-09-12 15:09:23,813 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: lena|报名活动|id: 10|,code:fdc810a860fdc06935f86eb944050d2d
+2015-09-12 15:10:01,280 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.3测试活动|(id:10), 当前用户为|Woody Huang2|(lena)
+2015-09-12 15:10:37,341 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.3测试活动|(id:10), 当前用户为|Woody Huang2|(lena)
+2015-09-12 15:10:58,183 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.3测试活动|(id:10), 当前用户为|Woody Huang2|(lena)
+2015-09-12 15:10:58,191 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: lena|报名活动|id: 10|,code:fdc810a860fdc06935f86eb944050d2d
+2015-09-12 15:13:41,119 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.6测试活动|(id:16), 当前用户为|阿打算|(yuan)
+2015-09-12 15:14:03,092 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.6测试活动|(id:16), 当前用户为|阿打算|(yuan)
+2015-09-12 15:14:40,747 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.3测试活动|(id:10), 当前用户为|Woody Huang2|(lena)
+2015-09-12 15:14:40,753 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: lena|报名活动|id: 10|,code:fdc810a860fdc06935f86eb944050d2d
+2015-09-12 15:15:07,903 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.3测试活动|(id:10), 当前用户为|Woody Huang2|(lena)
+2015-09-12 15:15:32,320 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.3测试活动|(id:10), 当前用户为|Woody Huang2|(lena)
+2015-09-12 15:15:32,327 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: lena|报名活动|id: 10|,code:fdc810a860fdc06935f86eb944050d2d
+2015-09-12 15:16:48,670 [DEBUG] Activity.views: The share code is: d3bd0f987826d17b8df221e784b31763
+2015-09-12 15:16:51,921 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.3测试活动|(id:10), 当前用户为|阿打算|(yuan)
+2015-09-12 15:16:51,928 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 10|,code:d3bd0f987826d17b8df221e784b31763
+2015-09-12 15:17:10,978 [DEBUG] Activity.views: The share code is: d3bd0f987826d17b8df221e784b31763
+2015-09-12 15:17:13,423 [DEBUG] Activity.views: 试图报名活动，对应活动为|9.3测试活动|(id:10), 当前用户为|阿打算|(yuan)
+2015-09-12 15:17:13,430 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 10|,code:d3bd0f987826d17b8df221e784b31763
+2015-09-13 14:53:40,015 [DEBUG] Activity.views: The share code is: 8897f29560195bacea6fbbd1713586fc
+2015-09-13 14:58:38,290 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-13 15:19:15,046 [DEBUG] Activity.forms: 上传的持续时间参数为6d7h15m, 计算得到的持续时间为9075m
+2015-09-13 15:37:01,671 [DEBUG] root: 创建用户条目，用户名为yuanl，密码为11111111
+2015-09-13 15:38:42,073 [DEBUG] Profile.views: 注册第二步，从操作用户名为yuanl，session中存储的密码是11111111
+2015-09-13 15:40:35,300 [DEBUG] root: 创建用户条目，用户名为yuan，密码为11111111
+2015-09-13 15:41:20,609 [DEBUG] Profile.views: 注册第二步，从操作用户名为yuan，session中存储的密码是11111111
+2015-09-13 15:49:36,918 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=|q=阿萨
+2015-09-13 15:50:00,371 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=|q=阿萨
+2015-09-13 15:50:26,177 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=|q=阿萨
+2015-09-13 15:50:39,806 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=|q=阿萨
+2015-09-13 15:52:07,942 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=|q=阿萨
+2015-09-13 15:52:54,930 [DEBUG] Activity.forms: 上传的持续时间参数为6d22h55m, 计算得到的持续时间为10015m
+2015-09-13 15:56:06,140 [DEBUG] Activity.views: 试图报名活动，对应活动为|test from ie8|(id:21), 当前用户为|sdfsdf|(yuan)
+2015-09-13 15:56:06,167 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 21|,code:4786c5372ce65b65168178f8ba1f5435
+2015-09-13 15:58:56,303 [DEBUG] Activity.views: 试图报名活动，对应活动为|test from ie8|(id:21), 当前用户为|sdfsdf|(yuan)
+2015-09-13 16:04:23,186 [DEBUG] Profile.views: 用户信息修改成功，修改值为{'gender': u'\u7537', 'age': u'24\u5c81', 'name': u'sdfsdf', 'portrait': '/media/default_avatars/default_avatar.png'}
+2015-09-13 16:22:03,497 [DEBUG] root: 创建用户条目，用户名为yuanl，密码为11111111
+2015-09-13 16:25:11,186 [DEBUG] Activity.views: 试图报名活动，对应活动为|test from ie8|(id:21), 当前用户为|sdfsdf|(yuan)
+2015-09-13 16:25:11,204 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 21|,code:4786c5372ce65b65168178f8ba1f5435

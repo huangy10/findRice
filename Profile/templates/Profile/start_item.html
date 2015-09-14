@@ -12,7 +12,7 @@
                     <a class="apply-resume" href="javascript:;">恢复报名</a>
                 {% endif %}
             {% elif act.status == 1 %}
-                <button class="z-btn starting">已经开始</button>
+                <button class="z-btn starting no-shift">已经开始</button>
             {% else %}
                 <button class="z-btn red no-shift">已经结束</button>
             {% endif %}
@@ -26,7 +26,7 @@
         <span class="duplicate" data-action="/action/{{ act.id }}/duplicate" title="复制活动"></span>
         <span class="delete" data-action="/action/{{ act.id }}/delete" title="删除活动"></span>
         <span class="b-share" data-action="/action/{{ act.id }}/sharelink" data-link="{% share_link act %}" title="分享活动"></span>
-        <span class="z-btn view" data-action="/action/{{ act.id }}/applicant">查看报名表单</span>
+        <span class="z-btn view" data-action="/action/{{ act.id }}/applicant">报名表单</span>
     </div>
 {% endblock %}
 

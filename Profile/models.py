@@ -69,7 +69,8 @@ class UserProfile(models.Model):
                 create_zipped_avatar.delay(self)
                 return self.avatar.url
             else:
-                return '\media' + settings.DEFAULT_PROFILE
+
+                return '/media/' + settings.DEFAULT_PROFILE
 
     identified = models.BooleanField(default=False, verbose_name="是否认证")
     identified_date = models.DateField(verbose_name="认证日期", null=True, editable=False)
@@ -151,6 +152,10 @@ class RiceTeam(models.Model):
     def total_members(self):
         return RiceTeamContribution.objects.filter(team=self).count()
 
+    @cached_property
+    def promoted_registration(self):
+        return RiceTeamContribution.objects.filter(team=self, registration_promoted=True).count()
+
     class Meta:
         verbose_name = "米团"
         verbose_name_plural = "米团"
@@ -161,6 +166,7 @@ class RiceTeamContribution(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     contributed_coin = models.IntegerField(default=0)
+    registration_promoted = models.BooleanField(default=False)      # 是否由本团长推广注册
 
     class Meta:
         verbose_name_plural = "米团贡献"

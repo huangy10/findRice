@@ -114,6 +114,7 @@ class ActivityNotification(Notification):
         ("activity_applied", "有人报名"),
         ("activity_finished", "完成活动"),
         ("activity_deleted", "活动删除"),
+        ("cancel_apply", '取消申请'),
     ), max_length=20, verbose_name="消息类型")
 
     def clean(self):
@@ -156,6 +157,8 @@ class ActivityNotification(Notification):
         elif self.notification_type == 'activity_deleted':
             self.description = u"您报名的 {0} 活动，已被发起者 {1} 删除".format(
                 self.related_activity.name, self.related_activity.host.profile.name)
+        elif self.notification_type == 'cancel_apply':
+            self.description = u"{0} 已取消申请活动 {1}".format(self.related_user, self.related_activity.name)
 
     def __str__(self):
         return self.description.encode("utf-8")

@@ -8,6 +8,7 @@
     <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="format-detection" content="telephone=no">
     <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/m/build/detail.js"></script>
@@ -18,32 +19,29 @@
         <div class="zui-cell logo-warp">
             <a href="/" class="logo item">找米</a>
         </div>
-        <div class="zui-cell zui-flex-fixed">
-            <a class="zui-btn btn-search" href="/searchpage">
+        <div class="nav">
+            <a class="nav-item" href="/searchpage">
                 <i class="zui-icon icon-search"></i>
             </a>
-        </div>
-        <div class="zui-cell zui-flex-fixed">
-            <a class="zui-btn zui-btn-pic btn-publish" href="/action/new/create/1">
+            <a class="nav-item" href="/action/new/create/1">
                 <i class="zui-icon icon-plus"></i>
             </a>
+            {% if user %}
+                <a href="/user/msg" class="nav-item nav-item-msg">
+                    {% if user.notification_center.unread_notifications_count %}
+                        <span class="number">{{ user.notification_center.unread_notifications_count }}</span>
+                    {% endif %}
+                    <i class="zui-icon icon-email"></i>
+                </a>
+                <a href="/mine/start" class="nav-item user">
+                    <img src="{{ user.profile.avatar_url }}" alt=""/>
+                </a>
+            {% else %}
+                <a class="nav-item btn-login" href='/login'>
+                    <span>登录</span>
+                </a>
+            {% endif %}
         </div>
-        {% if user %}
-            <a href="/user/msg" class="nav-item nav-item-msg">
-                {% if user.notification_center.unread_notifications_count %}
-                    <span class="number">{{ user.notification_center.unread_notifications_count }}</span>
-                {% endif %}
-                <i class="zui-icon icon-email"></i>
-            </a>
-            <a href="/mine/start" class="nav-item user">
-                <img src="{{ user.profile.avatar_url }}" alt=""/>
-            </a>
-
-        {% else %}
-            <div class="zui-cell zui-flex-fixed">
-                <a class="zui-btn btn-login" href='/login'>登录</a>
-            </div>
-        {% endif %}
     </div>
     <div class="banner" data-id="{{ act.id }}">
         {% load_like act user %}
@@ -54,49 +52,60 @@
         {% endif %}
         <img src="//zhao-mi.net/m/modules/detail/img/banner.jpg" alt=""/>
     </div>
-    <div class="main">
+    <div class="main {% if act.status == 2 %}finished{% endif %}" >
         <div class="detail">
-            <div class="title">{{ act.name }}
-                <div class="m-tag">
-                    {% if act.is_recommended %}
-                        <span class="hot">热门推荐</span>
-                    {% endif %}
-                    <span class="price">￥{{ act.reward }}</span>
+            <div class="title zui-flex">
+                <div class="zui-cell">
+                    {{ act.name }}
                 </div>
+                <span class="price">{{ act.reward_description }}</span>
             </div>
             <div class="title-desc">
-                <span>主办方：{{ act.host.profile.name }}</span>
-                <span>类型：{{ act.activity_type.type_name }}</span>
-            </div>
-            <div class="content">
-                {% for line in act.description|seperate_to_p %}
-                    <p>{{ line }}</p><br>
-                {% endfor %}
+                {#            <span>主办方：{{ act.host.profile.name }}</span>#}
+                {#            <span>类型：{{ act.activity_type.type_name }}</span>#}
+                <i class="zui-icon icon-medal"></i>主办方：{{ act.host.profile.name }} 类型：{{ act.activity_type.type_name }}
+                <div class="m-tag">
+                    {% if act.is_recommended and act.status != 2%}
+                        <span class="hot">热门推荐</span>
+                    {% endif %}
+                    {% if act.status == 2 %}
+                        <span class="finished">已结束</span>
+                    {% endif %}
+                </div>
             </div>
 
-            <div class="concact-msg">
-                <div class="address"><i class="zui-icon icon-address"></i>{{ act.loc_description }}</div>
-                <div class="date"><i class="zui-icon icon-date"></i>{{ act.get_duration_description }}     </div>
-                <div class="distance"><i class="zui-icon icon-distance"></i>{{ act.last_length|duration }}</div>
-                <div class="number"><i class="zui-icon icon-number"></i> {{ act.get_applying_num }}/{{ act.max_attend }}</div>
+            <div class="img-w">
+                <img src="{{ act.poster_url }}" width="100%" alt="">
+            </div>
+            <div class="content">
+                {% for line in act.get_description|seperate_to_p %}
+                    <p>{{ line }}</p>
+                {% endfor %}
             </div>
         </div>
-        <form id="formCondition" action="/action/{{ act.id }}/apply" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="hidden" value="{{ share_code }}" name="share_code">
-            {% if questionnaire %}
+        <div class="concact-msg">
+            <div class="address"><i class="zui-icon icon-address"></i>{{ act.loc_description }}</div>
+            <div class="date"><i class="zui-icon icon-date"></i>{{ act.get_duration_description }}     </div>
+            <div class="distance"><i class="zui-icon icon-distance"></i>{{ act.last_length|duration }}</div>
+            <div class="number"><i class="zui-icon icon-number"></i> {{ act.get_applying_num }}/{{ act.max_attend }}</div>
+        </div>
+    </div>
+    <form id="formCondition" action="/action/{{ act.id }}/apply" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" value="{{ share_code }}" name="share_code">
+        {% if questionnaire %}
             <div class="condition">
                 <div class="title">报名条件</div>
                 <div class="question question-radio">
                     {% if single_choice_questions %}
-                    <div class="question-type">
-                        1. 单选题
-                    </div>
+                        <div class="question-type">
+                            单选题
+                        </div>
                     {% endif %}
                     <div class="content">
                         {% for q in single_choice_questions %}
                             <div class="item" data-type="radio">
-                                <div class="question-tt">{{ forloop.counter }}){{ q.question }}</div>
+                                <div class="question-tt">{{ forloop.counter }}) {{ q.question }}</div>
                                 <div class="question-result">
                                     {%  for c in q.choices.all %}
                                         <div class="result-item">
@@ -116,14 +125,14 @@
                 </div>
                 <div class="question question-checkbox">
                     {% if multi_choice_questions %}
-                    <div class="question-type">
-                        2. 多选题
-                    </div>
+                        <div class="question-type">
+                            多选题
+                        </div>
                     {% endif %}
                     <div class="content">
                         {% for q in multi_choice_questions %}
                             <div class="item" data-type="checkbox">
-                                <div class="question-tt">{{ forloop.counter }}){{ q.question }}</div>
+                                <div class="question-tt">{{ forloop.counter }}) {{ q.question }}</div>
                                 <div class="question-result">
                                     {% for c in q.choices.all %}
                                         <div class="result-item">
@@ -146,14 +155,14 @@
 
                 <div class="question question-textarea">
                     {% if text_questions %}
-                    <div class="question-type">
-                        3. 问答题
-                    </div>
+                        <div class="question-type">
+                            问答题
+                        </div>
                     {% endif %}
                     <div class="content">
                         {% for q in text_questions %}
                             <div class="item" data-type="question">
-                                <div class="question-tt">{{ forloop.counter }}){{ q.question }}</div>
+                                <div class="question-tt">{{ forloop.counter }}) {{ q.question }}</div>
                                 <div class="question-result">
                                     <textarea name="" cols="30" rows="10"
                                               datatype="s5-16"
@@ -169,17 +178,17 @@
 
                 <div class="question question-textarea">
                     {% if file_questions %}
-                    <div class="question-type">
-                        4. 图片
-                    </div>
+                        <div class="question-type">
+                            图片
+                        </div>
                     {% endif %}
                     <div class="content">
                         {% for q in file_questions %}
                             <div class="item" data-type="upload">
-                                <div class="question-tt">{{ forloop.counter }}){{ q.question }}</div>
+                                <div class="question-tt">{{ forloop.counter }}) {{ q.question }}</div>
                                 <div class="question-result">
                                     <div class="upload">
-                                        <input type="file" name="upload-file-{{ forloop.counter0 }}" id="" datatype="*" nullmsg="请选择一张图片"  />
+                                        <input accept="image/*" type="file" name="upload-file-{{ forloop.counter0 }}" id="" datatype="*" nullmsg="请选择一张图片"  />
                                     </div>
                                 </div>
                                 <div class="Validform_checktip"></div>
@@ -190,13 +199,13 @@
 
 
             </div>
-            {% endif %}
-            <div class="bottom">
-                <button type="submit" class="zui-btn zui-btn-action btn-submit" ><i></i>报名</button>
-            </div>
-        </form>
+        {% endif %}
+        <div class="bottom">
+            <button type="submit" class="zui-btn zui-btn-action btn-submit" ><i></i>报名</button>
+        </div>
+    </form>
 
-    </div>
+</div>
 </div>
 
 

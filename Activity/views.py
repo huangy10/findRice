@@ -83,6 +83,21 @@ def check_activity_detail(request, action_id):
         user = None
     like = False
     share = None
+
+    if 'code' in request.GET and user is not None:
+        # Check if this code is related to the user
+        share_code = request.GET.get('code')
+        if Share.objects.filter(share_code=share_code, user=user).exists():
+            # 如果分享CODE是由当前用户产生的，尝试获取pre_code，如果pre_code不存在的话，仍然保留原值
+            share_code = request.GET.get('pre_code', share_code)
+        else:
+            # 如果当期CODE来自其他人，redirect以更新code，但是将现在的code以pre_code参数保留
+            share = Share.objects.get_or_create(activity=activity, user=user)[0]
+            return HttpResponseRedirect('/action/{0}?code={1}&pre_code={2}'.format(
+                action_id, share.share_code, share_code))
+    else:
+        share_code = request.GET.get('code', None)
+
     if activity.host != request.user:
         # 增加浏览记录
         activity.viewed_times += 1
@@ -91,22 +106,22 @@ def check_activity_detail(request, action_id):
         if request.user.is_authenticated():
             user = request.user
             like = ActivityLikeThrough.objects.filter(activity=activity, user=user).exists()
-	if 'code' in request.GET:
-	    logger.debug(u'The share code is: %s' % request.GET['code'])
-	else:
-	    logger.debug(u'Code not found')
-        if "code" in request.GET and request.user.is_authenticated() and \
-                not ApplicationThrough.objects.filter(activity=activity, user=request.user).exists():
-            share_code = request.GET.get("code", "")
-            share = get_object_or_404(Share, share_code=share_code, activity=activity)
-            obj, created = ShareRecord.objects.get_or_create(share=share, target_user=request.user)
-            if created:
-                logger.debug(u'分享记录创建，点进来的用户是|%s(username: %s)|，对应的活动是|%s(id: %s)|' % (
-                    request.user.profile.name, request.user.username, activity.name, activity.id))
-        elif request.user.is_authenticated():
-            share = Share.objects.get_or_create(activity=activity, user=request.user)
-        else:
-            share = Share.objects.get_or_create(activity=activity, user=None)
+    if share_code:
+        logger.debug(u'The share code is: %s' % share_code)
+    else:
+        logger.debug(u'Code not found')
+
+    if share_code and user\
+            and not ApplicationThrough.objects.filter(activity=activity, user=request.user).exists():
+        share = get_object_or_404(Share, share_code=share_code, activity=activity)
+        obj, created = ShareRecord.objects.get_or_create(share=share, target_user=request.user)
+        if created:
+            logger.debug(u'分享记录创建，点进来的用户是|%s(username: %s)|，对应的活动是|%s(id: %s)|' % (
+                request.user.profile.name, request.user.username, activity.name, activity.id))
+    elif request.user.is_authenticated():
+        share = Share.objects.get_or_create(activity=activity, user=request.user)
+    else:
+        share = Share.objects.get_or_create(activity=activity, user=None)
     if Questionnaire.objects.filter(activity=activity, is_active=True).exists():
         questionnaire = Questionnaire.objects.filter(activity=activity, is_active=True)[0]
         single_choice_questions = ChoiceQuestion.objects.filter(questionnaire=questionnaire,
@@ -130,7 +145,7 @@ def check_activity_detail(request, action_id):
             "like": like,
             "share": share,
             "questionnaire": q_if,
-            "share_code": request.GET.get('code', None)
+            "share_code": share_code
         }
         args.update(csrf(request))
         return render(request,
@@ -144,7 +159,7 @@ def check_activity_detail(request, action_id):
             "user": user,
             "like": like,
             "share": share,
-            "share_code": request.GET.get('code', None)
+            "share_code": share_code
         }
         args.update(csrf(request))
         return render(request,
@@ -157,7 +172,11 @@ def check_activity_detail(request, action_id):
 @require_POST
 def apply_an_activity(request, action_id):
     if not request.user.is_authenticated():
-        return JsonResponse({'success': True, 'data': {'url': '/login?next=/action/%s' % action_id}})
+        next_url = '/login?next=/action/%s' % action_id
+        if 'share_code' in request.POST:
+            next_url += "?code=%s" % request.POST.get("share_code")
+        return JsonResponse({'success': True, 'data': {'url': '/login?next=/action/%s' % action_id}}
+                            , content_type='text/html')
     activity = get_object_or_404(Activity, id=action_id)
     logger.debug(u"试图报名活动，对应活动为|{0:s}|(id:{1:d}), 当前用户为|{2:s}|({3:s})"
                  .format(activity.name, activity.id, request.user.profile.name, request.user.username))
@@ -190,16 +209,19 @@ def apply_an_activity(request, action_id):
         if 'share_code' in request.POST:
             share_code = request.POST.get('share_code', '')
             try:
+                print 'code='+share_code, 'id='+action_id
                 share = Share.objects.get(share_code=share_code, activity=activity)
+                print request.user.username
                 share_record = ShareRecord.objects.get(share=share, target_user=request.user)
+                print 'b'
                 share_record.application = application[0]
                 share_record.save()
-                logger.debug(u"申请与分享记录成功绑定, 本次报名为用户|username: %s|报名活动|id: %s|" %
-                             (request.user.username, activity.id))
+                logger.debug(u"申请与分享记录成功绑定, 本次报名为用户|username: %s|报名活动|id: %s|,code为%s" %
+                             (request.user.username, activity.id, share_code))
             except ObjectDoesNotExist:
                 # Just drop the share code if it is invalid
-                logger.debug(u"申请与分享记录绑定失败, 本次报名为用户|username: %s|报名活动|id: %s|" %
-                             (request.user.username, activity.id))
+                logger.debug(u"申请与分享记录绑定失败, 本次报名为用户|username: %s|报名活动|id: %s|,code:%s" %
+                             (request.user.username, activity.id, share_code))
         send_notification.send(sender=get_user_model(),
                                notification_type="activity_notification",
                                notification_center=activity.host.notification_center,
@@ -211,9 +233,9 @@ def apply_an_activity(request, action_id):
             "data": {
                 "url": "/mine/apply"
             }
-        })
+        }, content_type='text/html')
     else:
-        return JsonResponse({"success": False, "data": {"id": application[2]}})
+        return JsonResponse({"success": False, "data": {"id": application[2]}}, content_type='text/html')
 
 
 @login_required()
@@ -227,12 +249,18 @@ def unapply_an_activity(request, action_id):
     applicant.is_active = False
     applicant.status = "applying"
     applicant.save()
+    send_notification.send(sender=get_user_model(),
+                           notification_type="activity_notification",
+                           notification_center=activity.host.notification_center,
+                           activity=activity,
+                           user=request.user,
+                           activity_notification_type="cancel_apply")
     return JsonResponse({
         "success": True,
         "data": {
             "url": "/mine/apply"
         }
-    })
+    }, content_type='text/html')
 
 
 @require_POST
@@ -241,10 +269,10 @@ def unapply_an_activity(request, action_id):
 def stop_accepting_apply(request, action_id):
     activity = get_object_or_404(Activity, id=action_id)
     if not activity.host == request.user:
-        return JsonResponse({"success": False, "data": {}})
+        return JsonResponse({"success": False, "data": {}}, content_type='text/html')
     activity.accept_apply = False
     activity.save()
-    return JsonResponse({"success": True, "data": {}})
+    return JsonResponse({"success": True, "data": {}}, content_type='text/html')
 
 
 @require_POST
@@ -253,10 +281,10 @@ def stop_accepting_apply(request, action_id):
 def restart_accepting_apply(request, action_id):
     activity = get_object_or_404(Activity, id=action_id)
     if not activity.host == request.user:
-        return JsonResponse({"success": False, "data": {}})
+        return JsonResponse({"success": False, "data": {}}, content_type='text/html')
     activity.accept_apply = True
     activity.save()
-    return JsonResponse({"success": True, "data": {}})
+    return JsonResponse({"success": True, "data": {}}, content_type='text/html')
 
 
 @login_required()
@@ -275,7 +303,7 @@ def create_new_activity_1(request):
                 "data": {
                     "url": "/action/%s/create/2" % act.id
                 }
-            })
+            }, content_type='text/html')
             response.set_cookie("activity_creation_info", get_activity_session_representation(act),
                                 max_age=1800)
             return response
@@ -292,7 +320,7 @@ def create_new_activity_1(request):
             return JsonResponse({
                 "success": False,
                 "data": data
-            })
+            }, content_type='text/html')
 
     args = {}
     args.update(csrf(request))
@@ -335,7 +363,7 @@ def edit_new_activity_1(request, action_id):
                 "data": {
                     "url": "/action/%s/create/2" % act.id
                 }
-            })
+            }, content_type='text/html')
             return response
         else:
             data = {}
@@ -350,7 +378,7 @@ def edit_new_activity_1(request, action_id):
             return JsonResponse({
                 "success": False,
                 "data": data
-            })
+            }, content_type='text/html')
 
     form = ActivityCreationForm(instance=activity)
     args = {}
@@ -396,7 +424,7 @@ def create_new_activity_2(request, action_id):
                 "data": {
                     "url": "/action/%s/publish" % activity.id
                 }
-            })
+            }, content_type='text/html')
         except ValidationError, error:
             error_info = error.message
             logger.debug(u"创建活动第二步失败,该活动由|%s(id: %s)|创建，错误信息为: %s" % (
@@ -406,7 +434,7 @@ def create_new_activity_2(request, action_id):
                 "data": {
                     "unknown": "未知错误"
                 }
-            })
+            }, content_type='text/html')
 
     args = {}
     args.update(csrf(request))
@@ -441,7 +469,7 @@ def publish_an_activity(request, action_id):
             "data": {
                 "url": share.get_share_link()
             }
-        })
+        }, content_type='text/html')
 
     if Questionnaire.objects.filter(activity=activity, is_active=True).exists():
         questionnaire = Questionnaire.objects.filter(activity=activity, is_active=True)[0]
@@ -504,7 +532,7 @@ def edit_activity_1(request, action_id):
                 "data": {
                     "url": "/action/%s/edit/2" % activity.id
                 }
-            })
+            }, content_type='text/html')
             return response
         else:
             data = {}
@@ -518,7 +546,7 @@ def edit_activity_1(request, action_id):
             return JsonResponse({
                 "success": False,
                 "data": data
-            })
+            }, content_type='text/html')
 
     args = {}
     args.update(csrf(request))
@@ -556,7 +584,7 @@ def edit_activity_2(request, action_id):
                 "data": {
                     "url": "/action/%s/save" % activity.id
                 }
-            })
+            }, content_type='text/html')
         except ValidationError, error:
             error_info = error.message
             return JsonResponse({
@@ -564,7 +592,7 @@ def edit_activity_2(request, action_id):
                 "data": {
                     "unknown": "未知错误"
                 }
-            })
+            }, content_type='text/html')
 
     args = {}
     args.update(csrf(request))
@@ -614,14 +642,12 @@ def save_an_activity(request, action_id):
                 "data": {
                     "url": "/mine/start"
                 }
-            })
+            }, content_type='text/html')
 
         if Questionnaire.objects.filter(activity=activity, is_active=False, id=q_id).exists():
             questionnaire = Questionnaire.objects.filter(activity=activity, is_active=False, id=q_id)[0]
             questionnaire.is_active = True
             questionnaire.save()
-        print "exchange: ",
-        print activity.id, activity.backup.id
         backup = activity.backup
         tmp = backup.id
         backup.id = activity.id
@@ -630,15 +656,13 @@ def save_an_activity(request, action_id):
         activity.is_active = False
         backup.save()
         activity.save()
-        print "done: ",
-        print activity.id, backup.id
 
         return JsonResponse({
             "success": True,
             "data": {
                 "url": "/mine/start"
             }
-        })
+        }, content_type='text/html')
 
     if Questionnaire.objects.filter(activity=activity, is_active=False, id=q_id).exists():
         questionnaire = Questionnaire.objects.filter(activity=activity, is_active=False)[0]
@@ -715,7 +739,7 @@ def copy_an_activity(request, action_id):
             "data": {
                 "id": "没有找到指定的活动"
             }
-        })
+        }, content_type='text/html')
     q = None
     if Questionnaire.objects.filter(activity=act, is_active=True).exists():
         q = Questionnaire.objects.filter(activity=act, is_active=True)[0]
@@ -732,7 +756,7 @@ def copy_an_activity(request, action_id):
         "data": {
             "url": "/action/%s/edit/1" % act.id
         }
-    })
+    }, content_type='text/html')
 
 
 @require_GET
@@ -761,9 +785,11 @@ def visit_from_share(request, action_id):
 
 def like_an_activity(request):
     if not request.user.is_authenticated():
-        return JsonResponse({'success': True, 'data': {'url': '/login?next=%s' % request.META["HTTP_REFERER"]}})
+        return JsonResponse({'success': True, 'data': {'url': '/login?next=%s' % request.META["HTTP_REFERER"]}},
+                            content_type='text/html')
     elif not request.user.profile.is_active:
-        return JsonResponse({'success': True, 'data': {'url': '/login?next=%s' % request.META["HTTP_REFERER"]}})
+        return JsonResponse({'success': True, 'data': {'url': '/login?next=%s' % request.META["HTTP_REFERER"]}},
+                            content_type='text/html')
     action_id = request.POST.get("id", "")
     try:
         action_id = int(action_id)
@@ -775,7 +801,7 @@ def like_an_activity(request):
                 "id": "指定的活动不存在"
             }
         }
-        return HttpResponse(simplejson.dumps(error_info), content_type="application/json")
+        return HttpResponse(simplejson.dumps(error_info))
 
     like, created = ActivityLikeThrough.objects.get_or_create(user=request.user,
                                                               activity=act)
@@ -783,5 +809,5 @@ def like_an_activity(request):
         like.is_active = not like.is_active
     like.save()
 
-    return HttpResponse(simplejson.dumps({"success": True, "data": {}}), content_type="application/json")
+    return HttpResponse(simplejson.dumps({"success": True, "data": {}}))
 

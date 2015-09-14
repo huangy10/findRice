@@ -4,6 +4,7 @@
     <title>我的米团</title>
     <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="format-detection" content="telephone=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/m/build/mine.js"></script>
@@ -48,14 +49,17 @@
                 <a href="/mine/group" class="tab-item-a">米团</a>
             </div>
             <div class="tab-item">
-                <a href="/mine/info?code={{ user.profile.promotion_code }}" class="tab-item-a">信息</a>
+                <a href="/mine/info?code={{ user.profile.promotion_code }}" class="tab-item-a">我</a>
             </div>
         </div>
     </div>
 
     <div class="mine">
         <div class="mine-header">
-            <i class="zui-icon icon-number"></i><span>我的团队 <em>{{ user.rice_team.total_members }}</em> 人</span> <span>团队米币 <em>{{ user.rice_team.team_coin }}</em></span>
+            <i class="zui-icon icon-number"></i>
+            <span>我的团队 <em>{{ user.rice_team.total_members }}</em> 人</span>
+            <span>团队米币 <em>{{ user.rice_team.team_coin }}</em></span>
+            <span>我推广的注册 <em>{{ user.rice_team.promoted_registration }}</em>人</span>
         </div>
         <div class="mine-content">
 	    {% if contributions %}

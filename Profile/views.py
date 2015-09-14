@@ -55,7 +55,7 @@ def user_login(request):
                     "url": next_url
                 }
             }
-            return HttpResponse(json.dumps(success_info), content_type="application/json")
+            return HttpResponse(json.dumps(success_info))
             # return HttpResponseRedirect(request.GET.get("next", "/"))
         else:
             error_info = {
@@ -70,7 +70,7 @@ def user_login(request):
             if data == {}:
                 data['unknown'] = '未知错误'
             error_info['data'] = data
-            return HttpResponse(json.dumps(error_info), content_type="application/json")
+            return HttpResponse(json.dumps(error_info))
 
     request.session["next"] = request.GET.get("next", "/")
     args = {}
@@ -109,7 +109,7 @@ def register_step_1(request):
                     "url": "/register"
                 }
             }
-            return HttpResponse(json.dumps(success_info), content_type="application/json")
+            return HttpResponse(json.dumps(success_info))
         else:
             error_info = {
                 "success": False
@@ -126,7 +126,7 @@ def register_step_1(request):
             if data == {}:
                 data["unknown"] = "未知错误，请联系管理员"
             error_info["data"] = data
-            return HttpResponse(json.dumps(error_info), content_type="application/json")
+            return HttpResponse(json.dumps(error_info))
 
     if 'code' in request.GET:
         # if Share code if founded in the GET parameters, then save it to the session
@@ -165,10 +165,12 @@ def register_step_2(request):
                 try:
                     promote_profile = UserProfile.objects.get(promotion_code=request.session['code'])
                     contrib = RiceTeamContribution.objects.create(team=promote_profile.user.rice_team,
-                                                                  user=user)
+                                                                  user=user,
+                                                                  registration_promoted=True)
                     request.session.pop('code')
                 except ObjectDoesNotExist:
-                    return JsonResponse({'success': False, 'data': {'code': 'invalid share code'}})
+                    return JsonResponse({'success': False, 'data': {'code': 'invalid share code'}},
+                                        content_type='text/html')
             logger.debug(
                 u"注册第二步，从操作用户名为%s，session中存储的密码是%s" % (user.username, request.session['password']))
             auth_user = auth.authenticate(username=user.username, password=request.session["password"])
@@ -184,7 +186,7 @@ def register_step_2(request):
                     "url": next_url
                 }
             }
-            return HttpResponse(json.dumps(success_info), "application/json")
+            return HttpResponse(json.dumps(success_info))
         else:
             errors = form.errors
             logger.debug(u"用户|%s(id: %s)|注册第二步失败，错误信息为: %s" % (user.profile.name, user.id, errors.as_data))
@@ -197,7 +199,7 @@ def register_step_2(request):
             if data == {}:
                 data["unknown"] = "未知错误，请联系管理员"
             error_info["data"] = data
-            return HttpResponse(json.dumps(error_info), content_type="application/json")
+            return HttpResponse(json.dumps(error_info))
 
     args = {}
     args.update(csrf(request))
@@ -231,7 +233,7 @@ def register_addon_for_social(request):
                     "url": next_url
                 }
             }
-            return HttpResponse(json.dumps(success_info), "application/json")
+            return HttpResponse(json.dumps(success_info))
         else:
             errors = form.errors
             logger.debug(u"用户|%s(id: %s)|注册第二步失败，错误信息为: %s" % (user.profile.name, user.id, errors.as_data))
@@ -244,7 +246,7 @@ def register_addon_for_social(request):
             if data == {}:
                 data["unknown"] = "未知错误，请联系管理员"
             error_info["data"] = data
-            return HttpResponse(json.dumps(error_info), content_type="application/json")
+            return HttpResponse(json.dumps(error_info))
 
     args = {}
     args.update(csrf(request))
@@ -285,7 +287,7 @@ def user_modify(request):
     return JsonResponse({
         "success": True,
         "data": data
-    })
+    }, content_type='text/html')
 
 
 @require_http_methods(["GET", "POST"])
@@ -305,7 +307,7 @@ def reset_password(request):
                     "url": "/"
                 }
             }
-            return HttpResponse(json.dumps(success_info), content_type="application/json")
+            return HttpResponse(json.dumps(success_info))
         else:
             error_info = {"success": False}
             data = {}
@@ -321,7 +323,7 @@ def reset_password(request):
             if data == {}:
                 data["unknown"] = "未知错误，请联系管理员"
             error_info["data"] = data
-            return HttpResponse(json.dumps(error_info), content_type="application/json")
+            return HttpResponse(json.dumps(error_info))
 
     args = {}
     args.update(csrf(request))
@@ -461,7 +463,7 @@ def send_verify_code(request):
             VerifyCode.objects.filter(phoneNum=phone).update(is_active=False)
             record = VerifyCode.objects.create(phoneNum=phone, code=code)
         else:
-            return JsonResponse({'success': False, 'data': {}})
+            return JsonResponse({'success': False, 'data': {}}, content_type='text/html')
     else:
         record = VerifyCode.objects.create(phoneNum=phone, code=code)
 
@@ -471,8 +473,8 @@ def send_verify_code(request):
     if status_code != 0:
         record.is_active = False
         record.save()
-        return JsonResponse({'success': False, 'data': {}})
-    return JsonResponse({'success': True})
+        return JsonResponse({'success': False, 'data': {}}, content_type='text/html')
+    return JsonResponse({'success': True}, content_type='text/html')
 
 
 @login_required()
@@ -488,12 +490,12 @@ def manage_an_activity(request):
         target_id = request.GET.get("target", "")
     activity = get_object_or_404(Activity, id=int(action_id))
     if not activity.host == request.user:
-        return JsonResponse({"success": False, "data": {"error": "Permission Denied"}})
+        return JsonResponse({"success": False, "data": {"error": "Permission Denied"}}, content_type='text/html')
     elif not activity.is_active:
-        return JsonResponse({"success": False, "data": {"error": "该活动不存在"}})
+        return JsonResponse({"success": False, "data": {"error": "该活动不存在"}}, content_type='text/html')
     if optype == "approve":
         if ApplicationThrough.objects.filter(activity=activity, is_active=True, status="approved").count() >= activity.max_attend:
-            return JsonResponse({"success": True, "data": {"error": "该活动已报满"}})
+            return JsonResponse({"success": True, "data": {"error": "该活动已报满"}}, content_type='text/html')
         target = get_object_or_404(get_user_model(), id=target_id)
         applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
         applicant.status = "approved"
@@ -505,16 +507,16 @@ def manage_an_activity(request):
                                activity=activity,
                                user=target,
                                activity_notification_type="apply_approved")
-        return JsonResponse({"success": True, "data": {}})
+        return JsonResponse({"success": True, "data": {}}, content_type='text/html')
     elif optype == "approve_cancel":
         target = get_object_or_404(get_user_model(), id=target_id)
         applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
         if not applicant.status == "approved":
-            return JsonResponse({"success": False, "data": {}})
+            return JsonResponse({"success": False, "data": {}}, content_type='text/html')
         applicant.status = "applying"
         applicant.save()
         # I'm not sure about which kind of notification should be sent here
-        return JsonResponse({"success": True, "data": {}})
+        return JsonResponse({"success": True, "data": {}}, content_type='text/html')
     elif optype == "deny":
         target = get_object_or_404(get_user_model(), id=target_id)
         applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
@@ -528,20 +530,20 @@ def manage_an_activity(request):
                                activity=activity,
                                user=target,
                                activity_notification_type="apply_rejected")
-        return JsonResponse({"success": True, "data": {}})
+        return JsonResponse({"success": True, "data": {}}, content_type='text/html')
     elif optype == "deny_cancel":
         target = get_object_or_404(get_user_model(), id=target_id)
         applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
         if not applicant.status == "denied":
-            return JsonResponse({"success": False, "data": {}})
+            return JsonResponse({"success": False, "data": {}}, content_type='text/html')
         applicant.status = "applying"
         applicant.save()
-        return JsonResponse({"success": True, "data": {}})
+        return JsonResponse({"success": True, "data": {}}, content_type='text/html')
     elif optype == "finish":
         target = get_object_or_404(get_user_model(), id=target_id)
         applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
         if not (applicant.status == "approved" and activity.status == 2):
-            return JsonResponse({"success": False, "data": {}})
+            return JsonResponse({"success": False, "data": {}}, content_type='text/html')
         applicant.status = "finished"
         applicant.save()
         # Send Notification to the target user
@@ -567,9 +569,9 @@ def manage_an_activity(request):
         except ObjectDoesNotExist:
             logger.debug(u"用户|%s(id: %s)|完成了活动|%s(id: %s)|，但是没有找到相应分享链接" % (
                 target.username, target.id, activity.name, activity.id))
-        return JsonResponse({"success": True, "data": {}})
+        return JsonResponse({"success": True, "data": {}}, content_type='text/html')
     elif optype == "finish_cancel":
-        return JsonResponse({"success": False, "data": {}})
+        return JsonResponse({"success": False, "data": {}}, content_type='text/html')
     elif optype == "detail":
         pass
     elif optype == "excel":
@@ -624,11 +626,11 @@ def exchange_for_rmb(request):
     if coin > request.user.profile.coin:
         logger.debug(u"兑换米币失败，对应的用户为|%s(id: %s)|，兑换的米币为%s, 米币余额为%s" %
                      (request.user.profile.name, request.user.username, rmb, request.user.profile.coin))
-        return JsonResponse({'success': False, 'data': {'coin': u'米币不足'}})
+        return JsonResponse({'success': False, 'data': {'coin': u'米币不足'}}, content_type='text/html')
     else:
         WelfareGift.objects.create(target=request.user, zfb_account=zfb_accout, rmb=rmb)
         profile.coin -= rmb
         profile.save()
         logger.debug(u"兑换米币成功，对应的用户为|%s(id: %s)|，兑换的米币为%s, 米币余额为%s" %
                      (request.user.profile.name, request.user.username, rmb, request.user.profile.coin))
-        return JsonResponse({'success': True, 'data': {'coin': profile.coin}})
+        return JsonResponse({'success': True, 'data': {'coin': profile.coin}}, content_type='text/html')

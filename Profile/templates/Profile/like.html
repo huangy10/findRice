@@ -18,12 +18,12 @@
             <button class="z-btn green">报名中</button>
             <a href="javascript:;" class="unapply">取消申请</a>
         {% elif act.status == 1 %}
-            <button class="z-btn starting">已经开始</button>
+            <button class="z-btn starting no-shift">已经开始</button>
         {% else %}
             <button class="z-btn red no-shift">已经结束</button>
         {% endif %}
     {% else %}
-        <button class="z-btn notapplyed">未报名</button>
+        <button class="z-btn notapplyed no-shift">未报名</button>
     {% endif %}
     </div>
 {% endblock %}

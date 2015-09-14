@@ -13,6 +13,7 @@
     <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/cityselect/jquery.cityselect.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/placeholder/jquery.placeholder.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/build/create-criteria.js"></script>
 </head>
 <body>
@@ -28,14 +29,14 @@
                 <span>{{ user.notification_center.unread_notifications_count }}</span>
             {% endif %}
         </div>
-        <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
+        <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">创建活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
 </div>
 <div id="content">
 
     <div id="action-bg">
-        <img src="{% static "assets/imgs/detail-banner.png" %}">
+        <img src="//zhao-mi.net/assets/imgs/detail-banner.png">
         <div id="progress" class="z-process">
             <ul class="z-steps">
                 <li class="z-node z-first-finish"><div class="z-process-label">活动基本信息</div></li>
@@ -63,7 +64,8 @@
         </ul>
     </div>
     <div id="action-container">
-        <p class="tips">找米已为您获取的信息：用户头像、昵称、手机号，不需要在问卷中设置</p>
+        <p class="tips">找米为实名活动平台，用户报名时自动填入参加者姓名与联系方式，主办方无需写入条件中</p>
+        <p class="tips"><--请在左侧加入问卷问题</p>
         {% if edit %}
             <form id="create-action-second" action="/action/{{ activity.id }}/edit/2" method="post">
         {% else %}

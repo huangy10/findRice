@@ -55,6 +55,8 @@ class UserRegisterFormStep1(forms.ModelForm):
         return password1
 
     def clean_password2(self):
+        if 'password1' not in self.cleaned_data:
+            return ''
         password2 = self.cleaned_data['password2']
         password1 = self.cleaned_data['password1']
         if not password1 == password2:
@@ -163,7 +165,7 @@ class UserRegisterFormStep2(forms.ModelForm):
                 "class": "form-control bday-i",
                 "size": "16",
                 "value": "",
-                "readonly placeholder": u"请选择您的出生日期",
+                "readonly placeholder": u"请选择出生日期",
             }),
             "gender": forms.HiddenInput(attrs={
                 "id": "gender",

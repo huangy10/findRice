@@ -9,7 +9,7 @@ from Activity.utils import active_required
 from Activity.models import Activity, ApplicationThrough
 from .signals import share_record_signal
 from findRice.utils import field_is_active_validator
-# Create your models here.
+# Create your modexls here.
 
 
 logger = logging.getLogger(__name__)
@@ -143,6 +143,8 @@ class ShareRecord(models.Model):
         if self.finished and self.share.user is not None:
             share_record_signal.send(sender=ShareRecord, share_record=self)
             self.is_active = False
+            super(ShareRecord, self).save(*args, **kwargs)
+
 
     class Meta:
         verbose_name = "分享"

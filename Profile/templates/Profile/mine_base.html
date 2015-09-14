@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="//zhao-mi.net/lib/jqueryui/jquery-ui.css"/>
     <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/placeholder/jquery.placeholder.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/jquery-qrcode/jquery.qrcode.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/jqueryui/jquery-ui.min.js"></script>
@@ -31,27 +32,28 @@
                 <span>{{ user.notification_center.unread_notifications_count }}</span>
             {% endif %}
         </div>
-        <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
-        <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
+        <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">创建活动</a></div>
+        <div id="search" class="action"><input placeholder="在此输入搜索"></div>
     </div>
 </div>
 <div id="content">
     <div id="mine-bg">
         <div id="personal-info-origin">
-            <span class="portrait" id="portrait-origin"><img src="{{ user.profile.avatar_url }}"></span>
+            <span class="portrait"><img src="{{ user.profile.avatar_url }}"/></span>
             <div class="info-items">
                 <div class="main-items">
-                    <span class="name fn-overflow" id="name">{{ user.profile.name }}</span>
+                    <span class="name">{{ user.profile.name }}</span>
                     <span class="numMibi">{{ user.profile.coin }}米币</span>
                     <button class="z-btn exchange">兑换米币</button>
-                    <button class="z-btn recommend" data-link="{{ user.profile.get_promotion_link }}">推广</button>
-                    <span class="edit"></span>
-                    <a href="/logout" class="logout">退出登录</a>
+                    <button class="z-btn recommend" data-link="{{ user.profile.get_promotion_link }}">推广注册</button>
+                    <a href="" target="_blank" class="z-btn verified-action">申请认证用户</a>
                 </div>
                 <div class="sub-items">
-                    <span class="mobile" id="mobile">{{ user.profile.phoneNum }}</span>
-                    <span class="gender" id="gender">{{ user.profile.get_gender_display }}</span>
-                    <span class="age" id="age">{{ user.profile.age }}岁</span>
+                    <span class="mobile">{{ user.profile.phoneNum }}</span>
+                    <span class="gender">{{ user.profile.get_gender_display }}</span>
+                    <span class="age">{{ user.profile.age }}岁</span>
+                    <span class="edit">修改</span>
+                    <a href="/logout" class="logout">退出登录</a>
                 </div>
             </div>
         </div>
@@ -61,7 +63,7 @@
                 <div id="portrait-c">
                     <img src="{{ user.profile.avatar_url }}"/>
                     <label for="portrait"></label>
-                    <input id="portrait" name="portrait" type="file" class="fn-hide"></input>
+                    <input id="portrait" name="portrait" type="file" class="fn-hide">
                 </div>
                 <div class="info-items">
                     <div class="main-items">
@@ -76,7 +78,7 @@
             </form>
         </div>
         {# <img src="//zhao-mi.net/assets/imgs/detail-banner.png"> #}
-        <img src="{% static "assets/imgs/detail-banner.png" %}">
+        <img src="//zhao-mi.net/assets/imgs/detail-banner.png">
     </div>
     <div id="mine-container" {% if act %}data-action="{{ act.id }}"{% endif %}>
         {% block menu_bar %}
@@ -87,7 +89,7 @@
                     <a class="mine-like" href="/mine/like">我关注的活动</a>
                     <a class="mine-group" href="/mine/group">我的米团</a>
                 {% endblock %}
-                <span class="hotline">找米客服联系电话：400-22236678</span>
+                <span class="hotline">找米客服联系电话：156-0106-6684</span>
             </div>
         {% endblock %}
         {% block content_list %}
@@ -99,17 +101,20 @@
                                 <img src="{{ act.poster_url }}">
                             </div>
                             <div class="brief-info">
-                                <div class="brief-important">
+                                <div class="brief-important {% if act.reward_gift %}with-present{% endif %}">
                                     <span class="title">{{ act.name }}</span>
-                                    <span class="price">&yen;{{ act.reward }}</span>
-                                    {% if act.recommended %}
-                                    <span class="hot-tag">热门推荐</span>
-                                {% endif %}
+                                    <span class="price">{{ act.reward_description }}</span>
                                 </div>
-                                <p class="host">主办方：{{ act.host_name }}</p>
+                                <div class="host">
+                                    <span class="host-c">主办方：{{ act.host_name }}</span>
+                                    {% if act.recommended %}
+                                        <span class="hot-tag">热门推荐</span>
+                                    {% endif %}
+
+                                </div>
 
                                 <div class="criteria">
-                                    {%for line in act.description|two_line %}
+                                    {%for line in act.get_description|two_line %}
                                         <p class="fn-overflow" title="{{ line }}">{{ line }}</p>
                                     {% endfor %}
                                 </div>
@@ -152,9 +157,12 @@
                         </li>
                     {% endfor %}
                 </ul>
+
             </div>
         {% endblock %}
+        {% block excel %}{% endblock %}
     </div>
+
 </div>
 </body>
 </html>

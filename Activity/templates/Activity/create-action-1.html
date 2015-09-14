@@ -13,6 +13,7 @@
     <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/cityselect/jquery.cityselect.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/placeholder/jquery.placeholder.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/moment/moment.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/build/create-basic.js"></script>
 </head>
@@ -29,13 +30,13 @@
                 <span class="number">{{ user.notification_center.unread_notifications_count }}</span>
             {% endif %}
         </div>
-        <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
+        <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">创建活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
 </div>
 <div id="content">
     <div id="action-bg">
-        <img src="{% static "assets/imgs/detail-banner.png" %}">
+        <img src="//zhao-mi.net/assets/imgs/detail-banner.png">
         {% block step_indicator %}
             <div id="progress" class="z-process">
                 <ul class="z-steps">
@@ -71,7 +72,7 @@
                     {% if user.identified %}
                         <span class="verified"></span>
                     {% else %}
-                        <button class="z-btn verifiedmember">申请成为认证用户</button>
+                        <a class="z-btn verifiedmember" href="" target="_blank">申请认证用户</a>
                     {% endif %}
                 {% endif %}
             </div>
@@ -89,12 +90,10 @@
             <div id="datatime-c" class="fn-clr">
                 <div id="form_datetime_start" class="input-group date form_datetime">
                     {{ form.start_time }}
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                 </div>
                 <div id="form_datetime_end" class="input-group date form_datetime">
                     {{ form.end_time }}
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                 </div>
             </div>
@@ -105,8 +104,15 @@
             {{ form.minute }}分钟
             <p class="title title-img count">活动人数</p>
             {{ form.max_attend }}
-            <p class="title title-img money">奖励金额</p>
+            <p class="title title-img money fn-clr">
+                <span class="txt">奖励金额</span>
+                <span class="present">礼品</span>
+                <span class="cb {% if dact.reward_gift %}checked{% endif %}"></span>
+            </p>
             {{ form.reward }}
+            {% if act.reward_gift %}
+                <div class="presendWrapper"><input id="id_present" name="present" class="content" value="{{ act.reward_gift_detail }}"></div>
+            {% endif %}
         </div>
         <div id="extra">
             <p class="title">活动简介</p>
@@ -127,7 +133,7 @@
             </div>
             <p class="title">活动海报</p>
             <label id="poster-t" for="poster" class="z-btn">请选择活动海报</label>
-            <span id="poster-hint">仅支持png/jpg图片</span>
+            <span id="poster-hint">仅支持png/jpg图片，找米也将为你提供默认海报</span>
             {{ form.poster }}
         </div>
         <div id="btns" class="fn-clr">
@@ -137,10 +143,10 @@
         {% endblock %}
     </div>
 </div>
-<link rel="stylesheet" type="text/css" href="{% static "lib/bootstrap/css/bootstrap.min.css" %}">
-<link rel="stylesheet" type="text/css" href="{% static "lib/datepicker/bootstrap-datetimepicker.min.css" %}">
-<script type="text/javascript" src="{% static "lib/bootstrap/js/bootstrap.min.js" %}"></script>
-<script type="text/javascript" src="{% static "lib/datepicker/bootstrap-datetimepicker.min.js" %}"></script>
-<script type="text/javascript" src="{% static "lib/datepicker/bootstrap-datetimepicker.zh-CN.js" %}"></script>
+<link rel="stylesheet" type="text/css" href="//zhao-mi.net/lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="//zhao-mi.net/lib/datepicker/bootstrap-datetimepicker.min.css">
+<script type="text/javascript" src="//zhao-mi.net/lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//zhao-mi.net/lib/datepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="//zhao-mi.net/lib/datepicker/bootstrap-datetimepicker.zh-CN.js"></script>
 </body>
 </html>

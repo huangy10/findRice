@@ -2,7 +2,7 @@
 {% load sharelink %}
 {% for act in activities %}
     <a href="{% share_link act %}" class="activity-list-item zui-flex {% if act.status == 2 %}finished{% endif %}">
-        <div class="zui-flex zui-flex-fixed thumbnail">
+        <div class="zui-cell zui-flex-fixed thumbnail">
             <img src="{{ act.poster_url }}" alt=""/>
         </div>
         <div class="zui-cell">
@@ -13,7 +13,7 @@
                         <div class="address"><i class="zui-icon icon-address"></i>{{ act.loc_description }}</div>
                     </div>
                     <div class="zui-cell zui-flex-fixed">
-                        <div class="number"><i class="zui-icon icon-number"></i> {{ act.get_applying_num }}/{{ act.max_attend }}</div>
+                        <div class="count"><i class="zui-icon icon-number"></i> {{ act.get_applying_num }}/{{ act.max_attend }}</div>
                     </div>
                 </div>
                 <div class="item zui-flex">
@@ -21,7 +21,7 @@
                         <div class="date"><i class="zui-icon icon-date"></i>{{ act.get_duration_description }}     </div>
                     </div>
                     <div class="zui-cell zui-flex-fixed">
-                        <div class="distance"><i class="zui-icon icon-distance"></i>{{ act.last_length|duration }}</div>
+                        <div class="duration"><i class="zui-icon icon-distance"></i>{{ act.last_length|duration }}</div>
                     </div>
                 </div>
                 <div class="item m-tag">
@@ -29,7 +29,7 @@
                         {% if act.is_recommended %}
                             <span class="hot">热门推荐</span>
                         {% endif %}
-                        <span class="price">￥{{ act.reward }}</span>
+                        <span class="price">{{ act.reward_description }}</span>
                     </div>
                 </div>
             </div>

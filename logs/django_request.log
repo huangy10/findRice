@@ -24578,3 +24578,683 @@ LINE 1: ...ption", "Notification_systemnotification"."read", "Notificat...
 
 2015-08-19 22:20:34,337 [WARNING] django.request: Not Found: /favicon.ico
 2015-08-19 23:20:36,734 [WARNING] django.request: Not Found: /action/1/applicant
+2015-08-19 23:47:00,624 [WARNING] django.request: Not Found: /phpMyAdmin/scripts/setup.php
+2015-08-19 23:47:00,865 [WARNING] django.request: Not Found: /pma/scripts/setup.php
+2015-08-19 23:47:01,118 [WARNING] django.request: Not Found: /myadmin/scripts/setup.php
+2015-08-19 23:57:30,673 [WARNING] django.request: Not Found: /lib/es5/es5-shim.map
+2015-08-20 00:00:14,957 [WARNING] django.request: Not Found: /lib/es5/es5-shim.map
+2015-08-20 00:01:18,899 [WARNING] django.request: Not Found: /lib/es5/es5-shim.map
+2015-08-20 00:01:20,859 [WARNING] django.request: Not Found: /lib/es5/es5-shim.map
+2015-08-20 00:01:28,384 [WARNING] django.request: Not Found: /lib/es5/es5-shim.map
+2015-08-20 00:06:42,003 [WARNING] django.request: Not Found: /lib/es5/es5-shim.map
+2015-08-20 00:09:41,796 [WARNING] django.request: Not Found: /lib/es5/es5-shim.map
+2015-08-20 00:09:50,187 [WARNING] django.request: Not Found: /lib/es5/es5-shim.map
+2015-08-20 00:10:23,192 [WARNING] django.request: Not Found: /lib/es5/es5-shim.map
+2015-08-20 00:11:38,868 [WARNING] django.request: Not Found: /lib/es5/es5-shim.map
+2015-08-20 00:14:34,443 [WARNING] django.request: Not Found: /favicon.ico
+2015-08-20 00:16:19,570 [WARNING] django.request: Not Found: /login/weixbo/
+2015-08-20 01:40:47,727 [WARNING] django.request: Not Found: /redirect.php
+2015-08-20 04:02:33,001 [WARNING] django.request: Not Found: /web-console/ServerInfo.jsp
+2015-08-20 04:28:46,706 [WARNING] django.request: Not Found: /admin/config.php
+2015-08-20 05:26:55,368 [WARNING] django.request: Not Found: /robots.txt
+2015-08-20 07:11:34,711 [WARNING] django.request: Not Found: /wm/weixin
+2015-08-20 07:11:34,821 [WARNING] django.request: Not Found: /wxclub/interface/callback.do
+2015-08-20 07:13:39,009 [WARNING] django.request: Not Found: /wm/weixin
+2015-08-20 07:13:39,059 [WARNING] django.request: Not Found: /wxclub/interface/callback.do
+2015-08-20 07:13:43,403 [WARNING] django.request: Not Found: /wm/weixin
+2015-08-20 07:13:43,462 [WARNING] django.request: Not Found: /wxclub/interface/callback.do
+2015-08-20 08:04:50,728 [WARNING] django.request: Not Found: /nowherereally
+2015-08-20 08:23:59,257 [WARNING] django.request: Not Found: /favicon.ico
+2015-08-20 10:33:45,764 [ERROR] django.request: Internal Server Error: /search
+Traceback (most recent call last):
+  File "/home/findRice/ENV/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/findRice/findRice/Profile/utils.py", line 52, in wrapper
+    *args, **kwargs)
+  File "/home/findRice/findRice/findRice/views.py", line 148, in search_list
+    act = filter_loc(act)
+  File "/home/findRice/findRice/findRice/views.py", line 140, in filter_loc
+    print city, prov
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-3: ordinal not in range(128)
+2015-08-20 10:33:46,184 [WARNING] django.request: Not Found: /favicon.ico
+2015-08-20 10:33:49,292 [ERROR] django.request: Internal Server Error: /search
+Traceback (most recent call last):
+  File "/home/findRice/ENV/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/findRice/findRice/Profile/utils.py", line 52, in wrapper
+    *args, **kwargs)
+  File "/home/findRice/findRice/findRice/views.py", line 148, in search_list
+    act = filter_loc(act)
+  File "/home/findRice/findRice/findRice/views.py", line 140, in filter_loc
+    print city, prov
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-3: ordinal not in range(128)
+2015-08-20 10:34:15,645 [ERROR] django.request: Internal Server Error: /search
+Traceback (most recent call last):
+  File "/home/findRice/ENV/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/findRice/findRice/Profile/utils.py", line 52, in wrapper
+    *args, **kwargs)
+  File "/home/findRice/findRice/findRice/views.py", line 148, in search_list
+    act = filter_loc(act)
+  File "/home/findRice/findRice/findRice/views.py", line 140, in filter_loc
+    print city, prov
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-3: ordinal not in range(128)
+2015-08-20 10:34:17,513 [WARNING] django.request: Not Found: /favicon.ico
+2015-08-20 12:07:05,511 [WARNING] django.request: Not Found: /action/2
+2015-08-20 12:49:30,081 [WARNING] django.request: Not Found: /wm/weixin
+2015-08-20 12:49:30,685 [WARNING] django.request: Not Found: /wxclub/interface/callback.do
+2015-08-20 12:49:33,836 [WARNING] django.request: Not Found: /wm/weixin
+2015-08-20 12:49:34,391 [WARNING] django.request: Not Found: /wxclub/interface/callback.do
+2015-08-20 12:49:38,533 [WARNING] django.request: Not Found: /wm/weixin
+2015-08-20 12:49:38,947 [WARNING] django.request: Not Found: /wxclub/interface/callback.do
+2015-08-20 12:49:43,181 [WARNING] django.request: Not Found: /wm/weixin
+2015-08-20 12:49:43,803 [WARNING] django.request: Not Found: /wxclub/interface/callback.do
+2015-08-20 12:49:57,225 [WARNING] django.request: Not Found: /wm/weixin
+2015-08-20 12:51:02,115 [WARNING] django.request: Not Found: /wm/weixin
+2015-08-20 12:51:05,156 [WARNING] django.request: Not Found: /wm/weixin
+2015-08-20 12:51:05,656 [WARNING] django.request: Not Found: /wxclub/interface/callback.do
+2015-08-20 14:23:45,790 [WARNING] django.request: Not Found: /PSIA/Custom/SelfExt/userCheck
+2015-08-20 14:23:52,254 [WARNING] django.request: Not Found: /cgi/maker/ptcmd.cgi
+2015-08-20 14:24:15,214 [WARNING] django.request: Not Found: /cgi-bin/rtpd.cgi
+2015-08-20 14:24:44,192 [WARNING] django.request: Not Found: /LIVE_VIEW.asp
+2015-08-20 15:08:16,299 [WARNING] django.request: Not Found: /action/1/detail
+2015-08-20 18:35:45,863 [WARNING] django.request: Not Found: /zhao-mi.net/m/build/list.js
+2015-08-20 18:35:45,867 [WARNING] django.request: Not Found: /zhao-mi.net/m/lib/jquery/jquery.min.js
+2015-08-20 18:42:21,037 [WARNING] django.request: Not Found: /zhao-mi.net/lib/jquery-form/jquery.form.js
+2015-08-20 18:42:21,041 [WARNING] django.request: Not Found: /zhao-mi.net/m/build/detail.js
+2015-08-20 18:42:21,041 [WARNING] django.request: Not Found: /zhao-mi.net/m/lib/jquery/jquery.min.js
+2015-08-20 18:54:47,866 [WARNING] django.request: Not Found: /robots.txt
+2015-08-20 19:45:03,159 [WARNING] django.request: Not Found: /manager/html
+2015-08-20 19:45:21,835 [WARNING] django.request: Not Found: /rom-0
+2015-08-20 21:53:08,561 [WARNING] django.request: Not Found: /robots.txt
+2015-08-20 23:23:14,349 [WARNING] django.request: Not Found: /http:/www.taobao.com/
+2015-08-21 23:30:04,532 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-08-21 23:30:04,569 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-08-21 23:30:05,295 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-08-21 23:30:05,332 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-08-22 00:26:33,950 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-22 00:26:35,858 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-22 00:26:55,303 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-22 00:26:55,439 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-22 00:28:49,559 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-22 00:28:52,479 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-22 00:30:26,081 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-22 00:30:26,231 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-22 00:49:33,031 [WARNING] django.request: Not Found: /muieblackcat
+2015-08-22 00:49:34,204 [WARNING] django.request: Not Found: //phpMyAdmin/scripts/setup.php
+2015-08-22 00:49:35,363 [WARNING] django.request: Not Found: //phpmyadmin/scripts/setup.php
+2015-08-22 00:49:36,507 [WARNING] django.request: Not Found: //pma/scripts/setup.php
+2015-08-22 00:49:37,677 [WARNING] django.request: Not Found: //myadmin/scripts/setup.php
+2015-08-22 00:49:38,853 [WARNING] django.request: Not Found: //MyAdmin/scripts/setup.php
+2015-08-22 01:03:42,136 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-08-22 01:03:42,147 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-08-22 01:03:42,223 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-08-22 01:03:42,233 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-08-24 20:28:54,627 [WARNING] django.request: Not Found: /favicon.png
+2015-08-24 20:28:59,153 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:29:24,580 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:32:10,686 [ERROR] django.request: Internal Server Error: /sendcode
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 469, in send_verify_code
+    response_status = send_sms(settings.SMS_KEY, code, phone)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 26, in send_sms
+    params = urllib.urlencode({'apikey': apikey, 'text': text, 'mobile': mobile})
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/urllib.py", line 1338, in urlencode
+    v = quote_plus(str(v))
+UnicodeEncodeError: 'ascii' codec can't encode character u'\xb7' in position 0: ordinal not in range(128)
+2015-08-24 20:34:12,350 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-08-24 20:34:12,359 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-08-24 20:34:25,640 [ERROR] django.request: Internal Server Error: /register/basic
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 96, in register_step_1
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 392, in full_clean
+    self._clean_fields()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 410, in _clean_fields
+    value = getattr(self, 'clean_%s' % name)()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 59, in clean_password2
+    password1 = self.cleaned_data['password1']
+KeyError: 'password1'
+2015-08-24 20:37:15,502 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:40:57,460 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:40:58,000 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:40:58,285 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:40:58,381 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:41:01,186 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:41:01,685 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:41:19,551 [ERROR] django.request: Internal Server Error: /register/basic
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 96, in register_step_1
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 393, in full_clean
+    self._clean_form()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 417, in _clean_form
+    cleaned_data = self.clean()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 59, in clean
+    password1 = self.cleaned_data['password1']
+KeyError: 'password1'
+2015-08-24 20:44:16,972 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:45:30,564 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:45:51,405 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:46:17,169 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:46:42,135 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:48:06,071 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:48:27,862 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:49:23,646 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:49:37,790 [WARNING] django.request: Not Found: /mediadefault_avatars/default_avatar.png
+2015-08-24 20:50:15,858 [ERROR] django.request: Internal Server Error: /register/basic
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 96, in register_step_1
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 393, in full_clean
+    self._clean_form()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 417, in _clean_form
+    cleaned_data = self.clean()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 60, in clean
+    password1 = self.cleaned_data['password1']
+KeyError: 'password1'
+2015-08-24 20:51:43,727 [ERROR] django.request: Internal Server Error: /register/basic
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 96, in register_step_1
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 393, in full_clean
+    self._clean_form()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/forms/forms.py", line 417, in _clean_form
+    cleaned_data = self.clean()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 69, in clean
+    password1 = self.cleaned_data['password1']
+KeyError: 'password1'
+2015-08-24 21:31:21,214 [WARNING] django.request: Not Found: /assets/imgs/detail-banner.png
+2015-08-31 20:18:54,585 [ERROR] django.request: Internal Server Error: /action/4/delete
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 65, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 696, in del_an_activity
+    send_del_notification_to_candidate.delay(act)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/task.py", line 453, in delay
+    return self.apply_async(args, kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/task.py", line 559, in apply_async
+    **dict(self._get_exec_options(), **options)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/base.py", line 353, in send_task
+    reply_to=reply_to or self.oid, **options
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/amqp.py", line 305, in publish_task
+    **kwargs
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/messaging.py", line 172, in publish
+    routing_key, mandatory, immediate, exchange, declare)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 457, in _ensured
+    interval_max)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 369, in ensure_connection
+    interval_start, interval_step, interval_max, callback)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/utils/__init__.py", line 243, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 237, in connect
+    return self.connection
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 741, in connection
+    self._connection = self._establish_connection()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 696, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/transport/pyamqp.py", line 116, in establish_connection
+    conn = self.Connection(**opts)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/connection.py", line 165, in __init__
+    self.transport = self.Transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/connection.py", line 186, in Transport
+    return create_transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/transport.py", line 299, in create_transport
+    return TCPTransport(host, connect_timeout)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/transport.py", line 95, in __init__
+    raise socket.error(last_err)
+error: [Errno 61] Connection refused
+2015-08-31 20:20:06,196 [ERROR] django.request: Internal Server Error: /action/5/delete
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 65, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 696, in del_an_activity
+    send_del_notification_to_candidate.delay(act)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/task.py", line 453, in delay
+    return self.apply_async(args, kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/task.py", line 559, in apply_async
+    **dict(self._get_exec_options(), **options)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/base.py", line 353, in send_task
+    reply_to=reply_to or self.oid, **options
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/amqp.py", line 305, in publish_task
+    **kwargs
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/messaging.py", line 172, in publish
+    routing_key, mandatory, immediate, exchange, declare)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 457, in _ensured
+    interval_max)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 369, in ensure_connection
+    interval_start, interval_step, interval_max, callback)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/utils/__init__.py", line 243, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 237, in connect
+    return self.connection
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 741, in connection
+    self._connection = self._establish_connection()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 696, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/transport/pyamqp.py", line 116, in establish_connection
+    conn = self.Connection(**opts)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/connection.py", line 165, in __init__
+    self.transport = self.Transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/connection.py", line 186, in Transport
+    return create_transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/transport.py", line 299, in create_transport
+    return TCPTransport(host, connect_timeout)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/transport.py", line 95, in __init__
+    raise socket.error(last_err)
+error: [Errno 61] Connection refused
+2015-08-31 21:29:58,672 [ERROR] django.request: Internal Server Error: /mine/start
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 65, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 52, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 382, in mine_start
+    return render(request, choose_template_by_device(request, "Profile/start.html", "Profile/mobile/start.html"), args)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/loader.py", line 99, in render_to_string
+    return template.render(context, request)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/backends/django.py", line 74, in render
+    return self.template.render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 209, in render
+    return self._render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 201, in _render
+    return self.nodelist.render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 903, in render
+    bit = self.render_node(node, context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/debug.py", line 79, in render_node
+    return node.render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/loader_tags.py", line 135, in render
+    return compiled_parent._render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 201, in _render
+    return self.nodelist.render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 903, in render
+    bit = self.render_node(node, context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/debug.py", line 79, in render_node
+    return node.render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/debug.py", line 89, in render
+    output = self.filter_expression.resolve(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 674, in resolve
+    new_obj = func(obj, *arg_vals)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/templatetags/duration_filter.py", line 37, in datefilter
+    return tz.normalize(date).strftime("%Y-%m-%d")
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/pytz/tzinfo.py", line 234, in normalize
+    if dt.tzinfo is None:
+AttributeError: 'datetime.date' object has no attribute 'tzinfo'
+2015-08-31 21:29:59,259 [WARNING] django.request: Not Found: /favicon.ico
+2015-08-31 21:39:54,217 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-08-31 21:39:54,282 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-08-31 21:39:58,926 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-08-31 21:39:58,960 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-09-03 19:49:39,925 [WARNING] django.request: Not Found: /favicon.ico
+2015-09-03 20:20:53,151 [WARNING] django.request: Not Found: /action/68
+2015-09-03 20:46:47,675 [ERROR] django.request: Internal Server Error: /action/10/publish
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 65, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 488, in publish_an_activity
+    args)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/loader.py", line 98, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/loader.py", line 35, in get_template
+    return engine.get_template(template_name, dirs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/backends/django.py", line 30, in get_template
+    return Template(self.engine.get_template(template_name, dirs))
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/engine.py", line 167, in get_template
+    template, origin = self.find_template(template_name, dirs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/engine.py", line 141, in find_template
+    source, display_name = loader(name, dirs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/loaders/base.py", line 13, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/loaders/base.py", line 23, in load_template
+    template = Template(source, origin, template_name, self.engine)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 190, in __init__
+    self.nodelist = engine.compile_string(template_string, origin)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/engine.py", line 261, in compile_string
+    return parser.parse()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 341, in parse
+    compiled_result = compile_func(self, token)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 1094, in generic_tag_compiler
+    defaults, takes_context, name)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 1074, in parse_bits
+    name)
+TemplateSyntaxError: 'share_link' received too many positional arguments
+2015-09-03 21:20:42,520 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-09-03 21:20:42,528 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-09-03 21:20:43,925 [WARNING] django.request: Not Found: /favicon.ico
+2015-09-03 21:41:18,537 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/10/apply
+2015-09-03 21:43:02,136 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/10/apply
+2015-09-03 21:44:03,448 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/10/apply
+2015-09-03 22:17:43,543 [ERROR] django.request: Internal Server Error: /action/11/publish
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 65, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 476, in publish_an_activity
+    args)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/loader.py", line 99, in render_to_string
+    return template.render(context, request)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/backends/django.py", line 74, in render
+    return self.template.render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 209, in render
+    return self._render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 201, in _render
+    return self.nodelist.render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 903, in render
+    bit = self.render_node(node, context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/debug.py", line 79, in render_node
+    return node.render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/debug.py", line 89, in render
+    output = self.filter_expression.resolve(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 647, in resolve
+    obj = self.var.resolve(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 787, in resolve
+    value = self._resolve_lookup(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 825, in _resolve_lookup
+    current = getattr(current, bit)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/utils/functional.py", line 60, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/models.py", line 92, in get_description
+    return "{0}\n{1}".format(self.description, self.reward_gift_detail)
+UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-1: ordinal not in range(128)
+2015-09-03 22:56:25,683 [WARNING] django.request: Not Found: /http:/www.baidu.com/
+2015-09-05 21:16:10,211 [WARNING] django.request: Not Found: /favicon.ico
+2015-09-05 21:16:19,333 [WARNING] django.request: Not Found: /favicon.ico
+2015-09-05 21:21:16,317 [ERROR] django.request: Internal Server Error: /register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 162, in register_step_2
+    form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 118, in save
+    create_zipped_avatar.delay(profile)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/task.py", line 453, in delay
+    return self.apply_async(args, kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/task.py", line 559, in apply_async
+    **dict(self._get_exec_options(), **options)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/base.py", line 353, in send_task
+    reply_to=reply_to or self.oid, **options
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/amqp.py", line 305, in publish_task
+    **kwargs
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/messaging.py", line 172, in publish
+    routing_key, mandatory, immediate, exchange, declare)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 457, in _ensured
+    interval_max)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 369, in ensure_connection
+    interval_start, interval_step, interval_max, callback)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/utils/__init__.py", line 243, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 237, in connect
+    return self.connection
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 741, in connection
+    self._connection = self._establish_connection()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 696, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/transport/pyamqp.py", line 116, in establish_connection
+    conn = self.Connection(**opts)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/connection.py", line 165, in __init__
+    self.transport = self.Transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/connection.py", line 186, in Transport
+    return create_transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/transport.py", line 299, in create_transport
+    return TCPTransport(host, connect_timeout)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/transport.py", line 95, in __init__
+    raise socket.error(last_err)
+error: [Errno 61] Connection refused
+2015-09-05 21:26:27,408 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /register/basic
+2015-09-05 21:26:32,843 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /register/basic
+2015-09-05 21:27:10,315 [ERROR] django.request: Internal Server Error: /register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 162, in register_step_2
+    form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 118, in save
+    create_zipped_avatar.delay(profile)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/task.py", line 453, in delay
+    return self.apply_async(args, kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/task.py", line 559, in apply_async
+    **dict(self._get_exec_options(), **options)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/base.py", line 353, in send_task
+    reply_to=reply_to or self.oid, **options
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/celery/app/amqp.py", line 305, in publish_task
+    **kwargs
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/messaging.py", line 172, in publish
+    routing_key, mandatory, immediate, exchange, declare)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 457, in _ensured
+    interval_max)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 369, in ensure_connection
+    interval_start, interval_step, interval_max, callback)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/utils/__init__.py", line 243, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 237, in connect
+    return self.connection
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 741, in connection
+    self._connection = self._establish_connection()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/connection.py", line 696, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/kombu/transport/pyamqp.py", line 116, in establish_connection
+    conn = self.Connection(**opts)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/connection.py", line 165, in __init__
+    self.transport = self.Transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/connection.py", line 186, in Transport
+    return create_transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/transport.py", line 299, in create_transport
+    return TCPTransport(host, connect_timeout)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/amqp/transport.py", line 95, in __init__
+    raise socket.error(last_err)
+error: [Errno 61] Connection refused
+2015-09-06 21:55:06,580 [WARNING] django.request: Not Found: /favicon.ico
+2015-09-06 22:11:26,827 [WARNING] django.request: Not Found: /action/16/undefined
+2015-09-06 22:11:27,164 [WARNING] django.request: Not Found: /favicon.ico
+2015-09-06 23:04:05,274 [WARNING] django.request: Not Found: /manager/html
+2015-09-06 23:33:50,611 [WARNING] django.request: Not Found: /http:/www.baidu.com/
+2015-09-07 16:35:44,722 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/1phpmyadmin/
+2015-09-07 16:35:45,292 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/4phpmyadmin/
+2015-09-07 16:35:45,863 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/MyAdmin/
+2015-09-07 16:35:46,434 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/PMA/
+2015-09-07 16:35:47,002 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/PMA2011/
+2015-09-07 16:35:47,575 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/PMA2012/
+2015-09-07 16:35:48,142 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/PMA2013/
+2015-09-07 16:35:48,709 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/PMA2014/
+2015-09-07 16:35:49,279 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/PMA2015/
+2015-09-07 16:35:49,846 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/admin/
+2015-09-07 16:35:50,417 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/admin/db/
+2015-09-07 16:35:50,987 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/admin/pMA/
+2015-09-07 16:35:51,557 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/admin/phpMyAdmin/
+2015-09-07 16:35:52,130 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/admin/phpmyadmin/
+2015-09-07 16:35:52,705 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/admin/sqladmin/
+2015-09-07 16:35:53,274 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/admin/sysadmin/
+2015-09-07 16:35:53,842 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/admin/web/
+2015-09-07 16:35:54,409 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/administrator/PMA/
+2015-09-07 16:35:54,980 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/administrator/admin/
+2015-09-07 16:35:55,546 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/administrator/db/
+2015-09-07 16:35:56,113 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/administrator/phpMyAdmin/
+2015-09-07 16:35:56,687 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/administrator/phpmyadmin/
+2015-09-07 16:35:57,260 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/administrator/pma/
+2015-09-07 16:35:57,833 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/administrator/web/
+2015-09-07 16:35:58,401 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/database/
+2015-09-07 16:35:58,966 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/db/
+2015-09-07 16:35:59,532 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/db/db-admin/
+2015-09-07 16:36:00,103 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/db/dbadmin/
+2015-09-07 16:36:00,676 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/db/dbweb/
+2015-09-07 16:36:01,249 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/db/myadmin/
+2015-09-07 16:36:01,818 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/db/phpMyAdmin-3/
+2015-09-07 16:36:02,389 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/db/phpMyAdmin/
+2015-09-07 16:36:02,955 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/db/phpMyAdmin3/
+2015-09-07 16:36:03,524 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/db/phpmyadmin/
+2015-09-07 16:36:04,097 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/db/phpmyadmin3/
+2015-09-07 16:36:04,670 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/db/webadmin/
+2015-09-07 16:36:05,237 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/db/webdb/
+2015-09-07 16:36:05,808 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/db/websql/
+2015-09-07 16:36:06,374 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/dbadmin/
+2015-09-07 16:36:06,941 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/myadmin/
+2015-09-07 16:36:07,507 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/myadminphp/
+2015-09-07 16:36:08,073 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/mysql-admin/
+2015-09-07 16:36:08,640 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/mysql/
+2015-09-07 16:36:09,212 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/mysql/admin/
+2015-09-07 16:36:09,782 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/mysql/db/
+2015-09-07 16:36:10,352 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/mysql/dbadmin/
+2015-09-07 16:36:10,920 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/mysql/mysqlmanager/
+2015-09-07 16:36:11,488 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/mysql/pMA/
+2015-09-07 16:36:12,055 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/mysql/pma/
+2015-09-07 16:36:12,622 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/mysql/sqlmanager/
+2015-09-07 16:36:13,188 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/mysql/web/
+2015-09-07 16:36:13,757 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/mysqladmin/
+2015-09-07 16:36:14,332 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/mysqlmanager/
+2015-09-07 16:36:14,906 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/php-my-admin/
+2015-09-07 16:36:15,474 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/php-myadmin/
+2015-09-07 16:36:16,046 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpMyAdmin-2/
+2015-09-07 16:36:16,617 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpMyAdmin-3/
+2015-09-07 16:36:17,188 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpMyAdmin-4/
+2015-09-07 16:36:17,755 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpMyAdmin/
+2015-09-07 16:36:18,326 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpMyAdmin2/
+2015-09-07 16:36:18,898 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpMyAdmin3/
+2015-09-07 16:36:19,470 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpMyAdmin4/
+2015-09-07 16:36:20,042 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpMyadmin/
+2015-09-07 16:36:20,613 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpmanager/
+2015-09-07 16:36:21,181 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpmy-admin/
+2015-09-07 16:36:21,749 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpmy/
+2015-09-07 16:36:22,325 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpmyAdmin/
+2015-09-07 16:36:22,900 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpmyadmin/
+2015-09-07 16:36:23,469 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpmyadmin1/
+2015-09-07 16:36:24,042 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpmyadmin2/
+2015-09-07 16:36:24,611 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpmyadmin3/
+2015-09-07 16:36:25,180 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phpmyadmin4/
+2015-09-07 16:36:25,747 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/phppma/
+2015-09-07 16:36:26,320 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/pma/
+2015-09-07 16:36:26,887 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/pma2011/
+2015-09-07 16:36:27,453 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/pma2012/
+2015-09-07 16:36:28,023 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/pma2013/
+2015-09-07 16:36:28,592 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/pma2014/
+2015-09-07 16:36:29,163 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/pma2015/
+2015-09-07 16:36:29,732 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/program/
+2015-09-07 16:36:30,303 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/shopdb/
+2015-09-07 16:36:30,877 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/myadmin/
+2015-09-07 16:36:31,451 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/php-myadmin/
+2015-09-07 16:36:32,016 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/phpMyAdmin/
+2015-09-07 16:36:32,589 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/phpMyAdmin2/
+2015-09-07 16:36:33,159 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/phpMyAdmin3/
+2015-09-07 16:36:33,724 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/phpMyAdmin4/
+2015-09-07 16:36:34,291 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/phpmanager/
+2015-09-07 16:36:34,863 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/phpmy-admin/
+2015-09-07 16:36:35,431 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/phpmyadmin2/
+2015-09-07 16:36:35,997 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/phpmyadmin3/
+2015-09-07 16:36:36,564 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/phpmyadmin4/
+2015-09-07 16:36:37,133 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/sql-admin/
+2015-09-07 16:36:37,701 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/sql/
+2015-09-07 16:36:38,272 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/sqladmin/
+2015-09-07 16:36:38,839 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/sqlweb/
+2015-09-07 16:36:39,410 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/webadmin/
+2015-09-07 16:36:39,979 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/webdb/
+2015-09-07 16:36:40,549 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sql/websql/
+2015-09-07 16:36:41,116 [WARNING] django.request: Not Found: /http:/166.111.67.111:80/sqlmanager/
+2015-09-12 14:56:59,902 [WARNING] django.request: Not Found: /favicon.ico
+2015-09-12 14:57:42,022 [WARNING] django.request: Not Found: /favicon.ico
+2015-09-12 14:58:36,334 [WARNING] django.request: Not Found: /favicon.ico
+2015-09-12 14:58:47,811 [WARNING] django.request: Not Found: /favicon.ico
+2015-09-12 15:18:05,330 [WARNING] django.request: Method Not Allowed (GET): /action/10/apply
+2015-09-12 15:18:19,197 [WARNING] django.request: Method Not Allowed (GET): /action/10/apply
+2015-09-12 20:39:41,521 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-09-12 20:39:41,541 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-09-12 20:40:47,123 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-09-12 20:40:47,131 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-09-13 15:10:57,014 [WARNING] django.request: Not Found: /163mx02.mxmail.netease.com:25
+2015-09-13 15:27:32,377 [WARNING] django.request: Not Found: /favicon.ico
+2015-09-13 15:56:06,420 [ERROR] django.request: Internal Server Error: /mine/apply
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/urlresolvers.py", line 368, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/urlresolvers.py", line 368, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/urlresolvers.py", line 240, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/urlresolvers.py", line 247, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/utils/lru_cache.py", line 101, in wrapper
+    result = user_function(*args, **kwds)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/urlresolvers.py", line 106, in get_callable
+    mod = import_module(mod_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 546
+    return JsonResponse({"success": False, "data": {}}, content_type='text/html', content_type='text/html')
+SyntaxError: keyword argument repeated
+2015-09-13 15:57:32,956 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/new/create/1
+2015-09-13 16:04:53,373 [WARNING] django.request: Not Found: /favicon.png

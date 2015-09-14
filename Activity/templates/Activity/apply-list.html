@@ -49,12 +49,15 @@
                             {% endif %}
                         </div>
                     {% endfor %}
-                {% endif %}
+
                 </div>
+                {% endif %}
             </div>
         </div>
         {% endfor %}
     </div>
+{% endblock %}
+{% block excel %}
     <div id="apply-extra">
         <a class="export" href="/mine/manage?action={{ act.id }}&optype=excel">导出成excel</a>
     </div>

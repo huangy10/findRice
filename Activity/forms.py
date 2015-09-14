@@ -20,13 +20,13 @@ class ActivityCreationForm(forms.ModelForm):
         "end_time_error": u"活动不能在开始之前结束",
         "last_length_error": u'持续时间太长'
     }
-    day = forms.IntegerField(widget=forms.NumberInput(attrs={
+    day = forms.CharField(widget=forms.NumberInput(attrs={
         "class": "content time"
     }), required=False, initial=0)
-    hour = forms.IntegerField(widget=forms.NumberInput(attrs={
+    hour = forms.CharField(widget=forms.NumberInput(attrs={
         "class": "content time"
     }), required=False, initial=0)
-    minute = forms.IntegerField(widget=forms.NumberInput(attrs={
+    minute = forms.CharField(widget=forms.NumberInput(attrs={
         "class": "content time"
     }), required=False, initial=0)
     activity_type = forms.CharField(max_length=10, widget=forms.HiddenInput(attrs={
@@ -37,31 +37,16 @@ class ActivityCreationForm(forms.ModelForm):
         "id": "poster",
         "name": "poster"
     }), required=False)
+    present = forms.CharField(required=False)
+
+    reward = forms.IntegerField(widget=forms.NumberInput(attrs={
+        "class": "content",
+        "placeholder": u"请输入奖励金额"
+    }), required=False, initial=0)
 
     def __init__(self, user=None, *args, **kwargs):
         super(ActivityCreationForm, self).__init__(*args, **kwargs)
         self.user = user
-
-    def clean_day(self):
-        day = self.cleaned_data.get("day")
-        if not isinstance(day, int):
-            raise forms.ValidationError(self.error_messages["should_be_int"],
-                                        code="should_be_int")
-        return day
-
-    def clean_hour(self):
-        hour = self.cleaned_data.get("hour")
-        if not isinstance(hour, int):
-            raise forms.ValidationError(self.error_messages["should_be_int"],
-                                        code="should_be_int")
-        return hour
-
-    def clean_minute(self):
-        minute = self.cleaned_data.get("minute")
-        if not isinstance(minute, int):
-            raise forms.ValidationError(self.error_messages["should_be_int"],
-                                        code="should_be_int")
-        return minute
 
     def clean_activity_type(self):
         activity_type = self.cleaned_data.get("activity_type")
@@ -87,7 +72,7 @@ class ActivityCreationForm(forms.ModelForm):
     def save(self, commit=True):
         obj = super(ActivityCreationForm, self).save(commit=False)
         # add the additional data to the act obj
-        obj.last_length = self.cleaned_data["day"]*24*60 + self.cleaned_data["hour"]*60 + self.cleaned_data["minute"]
+        obj.last_length = int(self.cleaned_data["day"])*24*60 + int(self.cleaned_data["hour"])*60 + int(self.cleaned_data["minute"])
         logger.debug(u'上传的持续时间参数为{0}d{1}h{2}m, 计算得到的持续时间为{3}m'.format(
             self.cleaned_data['day'],
             self.cleaned_data['hour'],
@@ -98,6 +83,19 @@ class ActivityCreationForm(forms.ModelForm):
         obj.activity_type = ActivityType.objects.all()[type_no]
         if self.cleaned_data['poster'] is not None or not self.is_bound:
             obj.poster = self.cleaned_data['poster']
+
+        # reward system
+        if self.cleaned_data['present']:
+            obj.reward_gift = True
+            obj.reward_gift_detail = self.cleaned_data['present']
+        else:
+            obj.reward_gift = False
+
+        if self.cleaned_data['reward']:
+            obj.reward = self.cleaned_data['reward']
+        else:
+            obj.reward = 0
+
         obj.is_active = False   # 创建的表格在问卷生成以后才会有效
         obj.host = self.user
         if commit:
@@ -110,11 +108,12 @@ class ActivityCreationForm(forms.ModelForm):
     class Meta:
         model = Activity
         fields = ("name", "host_name", "location", "description",
-                  "start_time", "end_time", "max_attend", "reward", "city", "province")
+                  "start_time", "end_time", "max_attend", "city", "province")
         widgets = {
             "name": forms.TextInput(attrs={
                 "id": "name",
                 "class": "content",
+                "placeholder": u"请输入活动名称"
             }),
             "host_name": forms.TextInput(attrs={
                 "id": "host",
@@ -126,7 +125,7 @@ class ActivityCreationForm(forms.ModelForm):
             "location": forms.TextInput(attrs={
                 "id": "detail-addr",
                 "class": "content",
-                "place_holder": u"请输入活动地点"
+                "placeholder": u"请输入活动地点"
             }),
             "start_time": forms.TextInput(attrs={
                 "id": "startdate",
@@ -147,12 +146,9 @@ class ActivityCreationForm(forms.ModelForm):
             "max_attend": forms.NumberInput(attrs={
                 "class": "content",
             }),
-            "reward": forms.NumberInput(attrs={
-                "class": "content",
-                "placeholder": u"请输入奖励金额"
-            }),
             "description": forms.Textarea(attrs={
                 "id": "desc",
-                "class": ""
+                "class": "",
+                "placeholder": u"请输入活动简介"
             }),
         }

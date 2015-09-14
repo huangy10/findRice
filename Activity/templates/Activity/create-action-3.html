@@ -1,4 +1,5 @@
 {% load duration_filter %}
+{% load sharelink %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
@@ -11,34 +12,11 @@
     <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/jqueryui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/placeholder/jquery.placeholder.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery-qrcode/jquery.qrcode.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/build/create.js"></script>
-    {# <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script> #}
-    {# <script type="text/javascript" src="{% static "lib/jquery-form/jquery.form.js" %}"></script> #}
-    {# <script type="text/javascript" src="{% static "lib/jqueryui/jquery-ui.min.js" %}"></script> #}
-    {# <script type="text/javascript" src="{% static "build/create.js" %}"></script> #}
 </head>
 <body>
-<div id="save-dialog" class="tip-dialog">
-    <div class="save-icon-w">
-        <span class="save-icon"></span>
-    </div>
-    <p class="save-txt">保存成功</p>
-    <p class="save-tips">您可以在页面右上方“我的”中查看并管理已发布的活动</p>
-    <div class="btns">
-        <a class="z-btn" href="/action/{{ act_id }}/detail" target="_blank">查看</a>
-    </div>
-</div>
-
-<div id="publish-dialog" class="tip-dialog">
-    <div class="save-icon-w">
-        <span class="save-icon"></span>
-    </div>
-    <p class="save-txt">发布成功</p>
-    <p class="save-tips">您可以在页面右上方“我的”中查看并管理已发布的活动</p>
-    <div class="btns">
-        <a class="z-btn" href="/action/{{ act_id }}/detail" target="_blank">查看</a>
-    </div>
-</div>
 <div id="header">
     <div id="header-c">
         <a href="/" id="logo">找米</a>
@@ -51,14 +29,14 @@
                 <span>{{ user.notification_center.unread_notifications_count }}</span>
             {% endif %}
         </div>
-        <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">发布活动</a></div>
+        <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">创建活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
     </div>
 </div>
 <div id="content">
 
     <div id="action-bg">
-        <img src="{% static "assets/imgs/detail-banner.png" %}">
+        <img src="//zhao-mi.net/assets/imgs/detail-banner.png">
         <div id="progress" class="z-process">
             <ul class="z-steps">
                 <li class="z-node z-first-finish"><div class="z-process-label">活动基本信息</div></li>
@@ -69,25 +47,22 @@
             </ul>
         </div>
     </div>
-    <div id="action-container">
+    <div id="action-container" data-verified="{% if user.profile.identified %}yes{% else %}no{% endif %}" data-verifiedaction=""
+            data-link="{% share_link act %}">
         <div id="action-important" class="fn-clr">
-            <div class="action-name-w">
+            <div class="action-name-w {% if act.reward_gift %}with-present{% endif %}">
                 <span class="action-name">{{ act.name }}</span>
                 {% if act.recommended %}
                     <span class="action-hot">热门推荐</span>
                 {% endif %}
-                <span class="action-price">&yen;{{ act.reward }}</span>
-            </div>
-            <div class="action-oper">
-                <span class="like"></span>
-                <span class="share"></span>
+                <span class="action-price">{{ act.reward_description }}</span>
             </div>
         </div>
         <p id="action-host"><span>主办方：{{ act.host.profile.name }}</span><span>类型：{{ act.activity_type.type_name }}</span></p>
         <div id="action-info">
-            <p>
-                {{ act.description|linebreaks }}
-            </p>
+            {% for line in act.get_description|seperate_to_p %}
+                <p>{{ line }}</p>
+            {% endfor %}
         </div>
 
         <div id="action-items">

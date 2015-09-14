@@ -11,12 +11,13 @@ def duration(minutes):
     h = int(minutes / 60)
     d = int(h/24)
     h -= d*24
+    description = ""
+    if d > 0:
+        description += "%s天" % d
     if h > 0:
-        description = "%sd%sh" % (d, h)
-    elif d > 0:
-        description = "%sh%sm" % (h, m)
-    else:
-        description = "%sm" % m
+        description += "%s小时" % h
+    if m > 0:
+        description += "%s分钟" % m
     return description
 
 

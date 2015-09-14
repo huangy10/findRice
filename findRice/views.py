@@ -59,6 +59,7 @@ def index_list(request, start, size):
 
 @from_size_check_required
 def search_list(request, start, size):
+    print "duangd"
     hot = request.GET.get("hot", "")
     stype = request.GET.get("type", "")
     q = request.GET.get("q", "")
@@ -137,7 +138,6 @@ def search_list(request, start, size):
                 if prov == u"全部地区":
                     return activity
                 if city == u"全部地区":
-                    print city, prov
                     activity = queryset.filter(province=prov, is_active=True, is_published=True)
                 else:
                     activity = queryset.filter(city=city, province=prov, is_active=True, is_published=True)
@@ -152,7 +152,9 @@ def search_list(request, start, size):
 
     if "callback" in request.GET:
         act_data = act[start: start+size]
-        data = render_to_string(choose_template_by_device(request, "list.html", "home-mobile/list.html"), {"activities": act_data})
+        data = render_to_string(choose_template_by_device(request, "list.html", "home-mobile/list.html"),
+                                {"activities": act_data,
+                                 'user': request.user})
         data = {"html": data, "size": len(act_data)}
         return HttpResponse(request.GET.get("callback", "")+'('+json.dumps(data)+')', content_type="text/javascript")
 

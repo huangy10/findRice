@@ -21,7 +21,7 @@
             <button class="z-btn passed">已通过</button>
             <a href="javascript:;" class="unapply">取消申请</a>
         {% elif applicant.status == "denied" %}
-            <button class="z-btn rejected">已谢绝</button>
+            <button class="z-btn rejected no-shift">已谢绝</button>
         {% elif applicant.status == "finished" %}
             <button class="z-btn green no-shift">已完成</button>
         {% endif %}

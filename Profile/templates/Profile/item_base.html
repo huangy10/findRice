@@ -6,16 +6,16 @@
             <img src="{{ act.poster_url }}">
         </div>
         <div class="brief-info">
-            <div class="brief-important">
+            <div class="brief-important {% if act.reward_gift %}with-present{% endif %}">
                 <span class="title">{{ act.name }}</span>
-                <span class="price">&yen;{{ act.reward }}</span>
+                <span class="price">{{ act.reward_description }}</span>
                 {% if act.recommended %}
                     <span class="hot-tag">热门推荐</span>
                 {% endif %}
             </div>
             <p class="host">主办方：{{ act.host_name }}</p>
             <div class="criteria">
-                {%for line in act.description|two_line %}
+                {%for line in act.get_description|two_line %}
                     <p class="fn-overflow" title="{{ line }}">{{ line }}</p>
                 {% endfor %}
             </div>
