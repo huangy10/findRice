@@ -1,4 +1,5 @@
 {% load duration_filter %}
+{% load identification_act %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,7 +88,7 @@
 {#                        <span class="zui-input-text" id="hostName">{{ user.profile.name }}</span>#}
                     </div>
                     <div class="zui-align-right">
-                        <a class="zui-btn" href="" target="_blank">申请认证用户</a><i class="zui-icon icon-medal"></i>
+                        <a class="zui-btn" href="{% identification_act_url %}" target="_blank">申请认证用户</a><i class="zui-icon icon-medal"></i>
                     </div>
                 </li>
 

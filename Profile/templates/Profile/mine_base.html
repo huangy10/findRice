@@ -1,6 +1,7 @@
 {% load static %}
 {% load duration_filter %}
 {% load sharelink %}
+{% load identification_act %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +47,7 @@
                     <span class="numMibi">{{ user.profile.coin }}米币</span>
                     <button class="z-btn exchange">兑换米币</button>
                     <button class="z-btn recommend" data-link="{{ user.profile.get_promotion_link }}">推广注册</button>
-                    <a href="" target="_blank" class="z-btn verified-action">申请认证用户</a>
+                    <a href="{% identification_act_url %}" target="_blank" class="z-btn verified-action">申请认证用户</a>
                 </div>
                 <div class="sub-items">
                     <span class="mobile">{{ user.profile.phoneNum }}</span>

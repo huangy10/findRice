@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 @from_size_check_required
 def index_list(request, start, size):
     if "callback" in request.GET:
-        activities = Activity.objects.filter(is_active=True, is_published=True)\
+        activities = Activity.objects.filter(is_active=True, is_published=True, host__identified=True)\
             .order_by("recommended_level", "-created_at")[start: start+size]
         data = render_to_string(choose_template_by_device(request,
                                                           "list_item.html",
@@ -39,7 +39,7 @@ def index_list(request, start, size):
     else:
         banners = None
         footer = None
-    activities = Activity.objects.filter(is_active=True, is_published=True)\
+    activities = Activity.objects.filter(is_active=True, is_published=True, host__identified=True)\
         .order_by("recommended_level", "-created_at")[start: start+size]
     act_types = ActivityType.objects.all()
 
@@ -59,7 +59,6 @@ def index_list(request, start, size):
 
 @from_size_check_required
 def search_list(request, start, size):
-    print "duangd"
     hot = request.GET.get("hot", "")
     stype = request.GET.get("type", "")
     q = request.GET.get("q", "")
@@ -77,15 +76,16 @@ def search_list(request, start, size):
             queryset = activity
         if hot == "0":
             activity = queryset.filter(recommended=True,
-                                       is_active=True, is_published=True).order_by("-recommended_level", '-created_at')
+                                       is_active=True, is_published=True,
+                                       host__identified=True).order_by("-recommended_level", '-created_at')
         elif hot == "1":
-            activity = queryset.filter(time_limited=True, is_active=True, is_published=True)
+            activity = queryset.filter(time_limited=True, is_active=True, is_published=True, host__identified=True)
         elif hot == "2":
-            activity = queryset.filter(num_limited=True, is_active=True, is_published=True)
+            activity = queryset.filter(num_limited=True, is_active=True, is_published=True, host__identified=True)
         elif hot == "3":
-            activity = queryset.filter(is_active=True, is_published=True)
+            activity = queryset.filter(is_active=True, is_published=True, host__identified=True)
         else:
-            activity = queryset.filter(is_active=True, is_published=True)
+            activity = queryset.filter(is_active=True, is_published=True, host__identified=True)
         return activity
 
     act = filter_hot(act)

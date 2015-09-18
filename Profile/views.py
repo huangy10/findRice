@@ -507,6 +507,13 @@ def manage_an_activity(request):
                                activity=activity,
                                user=target,
                                activity_notification_type="apply_approved")
+        # 检查这个活动是否是用于认证的用户，如果是的话，令申请者成为认证用户
+        identification_act = Activity.objects.identification_act
+        if activity.id == identification_act.id:
+            target.profile.identified = True
+            target.profile.identified_date = timezone.now()
+            target.profile.save()
+
         return JsonResponse({"success": True, "data": {}}, content_type='text/html')
     elif optype == "approve_cancel":
         target = get_object_or_404(get_user_model(), id=target_id)
@@ -515,6 +522,11 @@ def manage_an_activity(request):
             return JsonResponse({"success": False, "data": {}}, content_type='text/html')
         applicant.status = "applying"
         applicant.save()
+        # 检查这个活动是否是用于认证的用户，如果是的话，则剥夺该用户的认证资格
+        identification_act = Activity.objects.identification_act
+        if activity.id == identification_act.id:
+            target.profile.identified = False
+            target.profile.save()
         # I'm not sure about which kind of notification should be sent here
         return JsonResponse({"success": True, "data": {}}, content_type='text/html')
     elif optype == "deny":
@@ -569,6 +581,7 @@ def manage_an_activity(request):
         except ObjectDoesNotExist:
             logger.debug(u"用户|%s(id: %s)|完成了活动|%s(id: %s)|，但是没有找到相应分享链接" % (
                 target.username, target.id, activity.name, activity.id))
+
         return JsonResponse({"success": True, "data": {}}, content_type='text/html')
     elif optype == "finish_cancel":
         return JsonResponse({"success": False, "data": {}}, content_type='text/html')

@@ -1,5 +1,6 @@
 {% load duration_filter %}
 {% load sharelink %}
+{% load identification_act %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,7 +112,7 @@
             </form>
         </div>
         <div class="zui-align-right ">
-            <a href="" class="zui-btn" target="_blank">申请认证用户</a>
+            <a href="{% identification_act_url %}" class="zui-btn" target="_blank">申请认证用户</a>
         </div>
     </div>
 </div>

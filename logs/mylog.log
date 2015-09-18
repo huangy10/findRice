@@ -374,3 +374,5 @@
 2015-09-16 22:03:47,687 [DEBUG] Activity.views: The share code is: 5a719a860418e3e49bfc0d41bdf730b6
 2015-09-16 22:08:04,508 [DEBUG] Activity.views: The share code is: 5a719a860418e3e49bfc0d41bdf730b6
 2015-09-16 22:08:07,488 [DEBUG] Activity.views: The share code is: 1a2d349dabf9605c9c13b6dda5c5a85d
+2015-09-18 16:30:42,782 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitytype" ADD COLUMN "default_poster_mobile" varchar(100) DEFAULT %s NOT NULL; (params [u'defaultPosters/default.jpg'])
+2015-09-18 16:30:42,814 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitytype" ALTER COLUMN "default_poster_mobile" DROP DEFAULT; (params [])

@@ -28,14 +28,6 @@ def get_activity_poster_path_zipped(act, filename):
     return "posters_zipped/%s/%s/%s/%s" % (time.year, time.month, time.day, filename)
 
 
-class ActivityTypeManager(models.Manager):
-
-    def create(self, **kwargs):
-        num = ActivityType.objects.all().count()
-        kwargs.update({"display_order": num})
-        return super(ActivityTypeManager, self).create(**kwargs)
-
-
 class ActivityType(models.Model):
     """为了活动类型的可扩展性，这里将活动类型设定为一个类，由后台设置"""
     type_name = models.CharField(max_length=20)
@@ -45,19 +37,40 @@ class ActivityType(models.Model):
     default_poster = models.ImageField(default=settings.DEFAULT_POSTER_PATH,
                                        verbose_name='默认海报',
                                        upload_to=get_activity_poster_path)
+    default_poster_mobile = models.ImageField(default=settings.DEFAULT_POSTER_PATH,
+                                              verbose_name='默认海报(mobile)',
+                                              upload_to=get_activity_poster_path)
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     modified_at = models.DateTimeField(auto_now=True, editable=False, )
 
-    objects = ActivityTypeManager()
-
     def __str__(self):
         return self.type_name.encode("utf-8")
+
+    def save(self, *args, **kwargs):
+        if self.type_name == u'其他':
+            self.display_order = 1
+        else:
+            self.display_order = 0
+
+        super(ActivityType, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "活动类型"
         verbose_name_plural = "活动类型"
         ordering = ["display_order"]
+
+
+class ActivityManager(models.Manager):
+
+    @property
+    def identification_act(self):
+        """申请成为认证用户的特殊活动
+        """
+        act = Activity.objects.filter(
+            host__is_staff=True, host__is_superuser=True, is_active=True
+        ).order_by('-created_at').first()
+        return act
 
 
 class Activity(models.Model):
@@ -77,6 +90,8 @@ class Activity(models.Model):
     location = models.CharField(max_length=200, verbose_name="活动地点")
     province = models.CharField(max_length=20, verbose_name="省份")
     city = models.CharField(max_length=100, verbose_name="城市")
+
+    objects = ActivityManager()
 
     @property
     def loc_description(self):
@@ -169,7 +184,7 @@ class Activity(models.Model):
             create_share_thumbnail.delay(self)
             return self.poster.url
         else:
-            return self.activity_type.default_poster.url
+            return self.activity_type.default_poster_mobile.url
 
     recommended = models.BooleanField(default=False, verbose_name="热门推荐")
     recommended_level = models.IntegerField(default=0, verbose_name="推荐等级")          # 推荐等级，此值越高优先级越高，用于排序

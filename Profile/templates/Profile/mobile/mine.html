@@ -1,4 +1,5 @@
 {% load duration_filter %}
+{% load identification_act %}
 <!doctype html>
 <html>
 <head>
@@ -135,7 +136,7 @@
         </div>
     </div>
     <div class="bottom">
-        <a href="" target="_blank" class="verified-action zui-btn">申请认证用户</a><br />
+        <a href="{% identification_act_url %}" target="_blank" class="verified-action zui-btn">申请认证用户</a><br />
         <a href="/logout" class="zui-btn logout">退出登录</a>
         <p class="hint">找米客服联系电话：156-0106-6684</p>
     </div>
