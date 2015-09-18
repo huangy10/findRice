@@ -12,6 +12,10 @@
     <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/m/build/detail.js"></script>
+
+    <div id='wx_pic' style='margin:0 auto;display:none;'>
+        <img src='/assets/imgs/300_300.png'/>
+    </div>
 </head>
 <body>
 <div class="wrapper" id="pageDetail">
@@ -37,7 +41,7 @@
                     <img src="{{ user.profile.avatar_url }}" alt=""/>
                 </a>
             {% else %}
-                <a class="nav-item btn-login" href='/login'>
+                <a class="nav-item btn-login" href='/login{% if share_code %}?next=/action/{{ act.id }}?code={{ share_code }}{% endif %}'>
                     <span>登录</span>
                 </a>
             {% endif %}
@@ -75,7 +79,7 @@
             </div>
 
             <div class="img-w">
-                <img src="{{ act.poster_url }}" width="100%" alt="">
+                <img src="{{ act.poster_thumbnail_url }}" width="100%" alt="">
             </div>
             <div class="content">
                 {% for line in act.get_description|seperate_to_p %}

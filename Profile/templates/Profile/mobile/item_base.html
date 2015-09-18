@@ -4,7 +4,7 @@
     <div class="activity-list-item {% if act.status == 2 %}finished{% endif %}" data-id="{{ act.id }}" data-link="{% share_link act %}">
         <div class="zui-flex list-item">
             <div class="zui-cell zui-flex-fixed thumbnail">
-                <img src="{{ act.poster_url }}" alt=""/>
+                <img src="{{ act.poster_thumbnail_url }}" alt=""/>
             </div>
             <div class="zui-cell">
                 <div class="list-item-desc">

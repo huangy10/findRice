@@ -107,7 +107,7 @@
             <p class="title title-img money fn-clr">
                 <span class="txt">奖励金额</span>
                 <span class="present">礼品</span>
-                <span class="cb {% if dact.reward_gift %}checked{% endif %}"></span>
+                <span class="cb{% if act.reward_gift %} checked{% endif %}"></span>
             </p>
             {{ form.reward }}
             {% if act.reward_gift %}

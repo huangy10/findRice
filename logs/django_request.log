@@ -25258,3 +25258,108 @@ Traceback (most recent call last):
 SyntaxError: keyword argument repeated
 2015-09-13 15:57:32,956 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/new/create/1
 2015-09-13 16:04:53,373 [WARNING] django.request: Not Found: /favicon.png
+2015-09-16 21:42:05,005 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 52, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/findRice/views.py", line 57, in index_list
+    return render(request, choose_template_by_device(request, "list.html", "home-mobile/list.html"), args)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/loader.py", line 99, in render_to_string
+    return template.render(context, request)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/backends/django.py", line 74, in render
+    return self.template.render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 209, in render
+    return self._render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 201, in _render
+    return self.nodelist.render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 903, in render
+    bit = self.render_node(node, context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/debug.py", line 79, in render_node
+    return node.render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/defaulttags.py", line 162, in render
+    len_values = len(values)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/models/query.py", line 144, in __len__
+    self._fetch_all()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/models/query.py", line 965, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/models/query.py", line 238, in iterator
+    results = compiler.execute_sql()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 837, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+ProgrammingError: column Activity_activity.poster_thumbnail does not exist
+LINE 1: ...y"."poster", "Activity_activity"."poster_zipped", "Activity_...
+                                                             ^
+
+2015-09-16 21:42:05,180 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 52, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/findRice/views.py", line 57, in index_list
+    return render(request, choose_template_by_device(request, "list.html", "home-mobile/list.html"), args)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/loader.py", line 99, in render_to_string
+    return template.render(context, request)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/backends/django.py", line 74, in render
+    return self.template.render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 209, in render
+    return self._render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 201, in _render
+    return self.nodelist.render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/base.py", line 903, in render
+    bit = self.render_node(node, context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/debug.py", line 79, in render_node
+    return node.render(context)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/template/defaulttags.py", line 162, in render
+    len_values = len(values)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/models/query.py", line 144, in __len__
+    self._fetch_all()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/models/query.py", line 965, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/models/query.py", line 238, in iterator
+    results = compiler.execute_sql()
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 837, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+ProgrammingError: column Activity_activity.poster_thumbnail does not exist
+LINE 1: ...y"."poster", "Activity_activity"."poster_zipped", "Activity_...
+                                                             ^
+
+2015-09-16 21:42:05,641 [WARNING] django.request: Not Found: /favicon.ico
+2015-09-16 22:00:49,055 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:00:49,577 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:02:03,845 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:02:04,177 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:02:13,710 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:02:13,902 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:03:08,196 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:03:08,381 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:03:45,362 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:03:45,551 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:03:47,841 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:03:48,053 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:08:04,690 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:08:04,888 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:08:07,637 [WARNING] django.request: Not Found: /assets/imgs/300_300.png
+2015-09-16 22:08:07,839 [WARNING] django.request: Not Found: /assets/imgs/300_300.png

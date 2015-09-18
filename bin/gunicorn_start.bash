@@ -27,6 +27,6 @@ exec gunicorn ${DJANGO_WSGI_MODULE}:application \
 --bind=unix:$SOCKFILE \
 --log-level=debug \
 --log-file=-
-
-echo "Starting celery service"
-celery -A findRice worker --without-mingle
+#
+#echo "Starting celery service"
+#celery -A findRice worker --without-mingle

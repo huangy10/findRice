@@ -10,7 +10,7 @@ from django.core.exceptions import ValidationError, ObjectDoesNotExist, Multiple
 from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 
-from .tasks import create_zipped_poster
+from .tasks import create_zipped_poster, create_share_thumbnail
 # Create your models here.
 
 
@@ -111,7 +111,7 @@ class Activity(models.Model):
 
     reward = models.IntegerField(verbose_name="奖励金额")
     # 分享这个活动所得到的奖励， 这个一个属性被废弃，但是暂时未删除，这个属性主要涉及到Promotion应用中对分享的处理
-    reward_for_share = models.IntegerField(default=5)
+    reward_for_share = models.IntegerField(default=0)
     # 其他用户经由分享链接完成活动时分享人获得的奖励比例
     reward_for_share_and_finished_percentage = models.FloatField(default=0.1)
     # This property is the maximum share reward one user can get.
@@ -146,6 +146,8 @@ class Activity(models.Model):
     poster = models.ImageField(upload_to=get_activity_poster_path, verbose_name="海报", null=True, blank=True)
     poster_zipped = models.ImageField(upload_to=get_activity_poster_path_zipped,
                                       verbose_name='压缩海报', null=True, blank=True)
+    poster_thumbnail = models.ImageField(upload_to=get_activity_poster_path_zipped,
+                                         verbose_name='海报缩略图', null=True, blank=True)
 
     @property
     def poster_url(self):
@@ -155,6 +157,16 @@ class Activity(models.Model):
         elif self.poster:
             # 如果原图为空，则取出
             create_zipped_poster.delay(self)
+            return self.poster.url
+        else:
+            return self.activity_type.default_poster.url
+
+    @property
+    def poster_thumbnail_url(self):
+        if self.poster_thumbnail:
+            return self.poster_thumbnail.url
+        elif self.poster:
+            create_share_thumbnail.delay(self)
             return self.poster.url
         else:
             return self.activity_type.default_poster.url

@@ -117,13 +117,13 @@ def get_reward_from_share_record(sender, **kwargs):
                                                                   user=share_record.target_user)[0]
         contribution.contributed_coin += share_record.actual_reward_for_finish
         contribution.save()
-    else:
-        user.profile.coin += share_record.actual_reward_for_share
-        user.rice_team.team_coin += share_record.actual_reward_for_share
-        contribution = RiceTeamContribution.objects.get_or_create(team=user.rice_team,
-                                                                  user=share_record.target_user)[0]
-        contribution.contributed_coin += share_record.actual_reward_for_share
-        contribution.save()
+    # else:
+    #     user.profile.coin += share_record.actual_reward_for_share
+    #     user.rice_team.team_coin += share_record.actual_reward_for_share
+    #     contribution = RiceTeamContribution.objects.get_or_create(team=user.rice_team,
+    #                                                               user=share_record.target_user)[0]
+    #     contribution.contributed_coin += share_record.actual_reward_for_share
+    #     contribution.save()
     user.profile.save()
     user.rice_team.save()
 

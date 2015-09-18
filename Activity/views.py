@@ -175,7 +175,7 @@ def apply_an_activity(request, action_id):
         next_url = '/login?next=/action/%s' % action_id
         if 'share_code' in request.POST:
             next_url += "?code=%s" % request.POST.get("share_code")
-        return JsonResponse({'success': True, 'data': {'url': '/login?next=/action/%s' % action_id}}
+        return JsonResponse({'success': True, 'data': {'url': next_url}}
                             , content_type='text/html')
     activity = get_object_or_404(Activity, id=action_id)
     logger.debug(u"试图报名活动，对应活动为|{0:s}|(id:{1:d}), 当前用户为|{2:s}|({3:s})"
@@ -209,11 +209,8 @@ def apply_an_activity(request, action_id):
         if 'share_code' in request.POST:
             share_code = request.POST.get('share_code', '')
             try:
-                print 'code='+share_code, 'id='+action_id
                 share = Share.objects.get(share_code=share_code, activity=activity)
-                print request.user.username
                 share_record = ShareRecord.objects.get(share=share, target_user=request.user)
-                print 'b'
                 share_record.application = application[0]
                 share_record.save()
                 logger.debug(u"申请与分享记录成功绑定, 本次报名为用户|username: %s|报名活动|id: %s|,code为%s" %
@@ -380,7 +377,11 @@ def edit_new_activity_1(request, action_id):
                 "data": data
             }, content_type='text/html')
 
-    form = ActivityCreationForm(instance=activity)
+    form = ActivityCreationForm(instance=activity, initial={"activity_type": activity.activity_type.display_order,
+                                                            "hour": activity.hour,
+                                                            "day": activity.day,
+                                                            "minute": activity.minute,
+                                                            "reward": activity.reward})
     args = {}
     args.update(csrf(request))
     args["form"] = form
@@ -521,7 +522,8 @@ def edit_activity_1(request, action_id):
                                 initial={"activity_type": activity.activity_type.display_order,
                                          "hour": activity.hour,
                                          "day": activity.day,
-                                         "minute": activity.minute})
+                                         "minute": activity.minute,
+                                         "reward": activity.reward})
     if request.method == "POST":
         form = ActivityCreationForm(request.user, request.POST, request.FILES,
                                     instance=activity.get_backup())

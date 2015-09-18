@@ -30,7 +30,7 @@
             {% endif %}
         </div>
         <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">创建活动</a></div>
-        <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
+        <div id="search" class="action"><input placeholder="在此输入搜索"></div>
     </div>
 </div>
 <div id="content">
@@ -78,7 +78,7 @@
                     <div class="action-item" data-type="radio">
                         <div class="criteria-q fn-clr">
                             <span class="criteria-seqno">{{ q.order_in_list }}、</span>
-                            <input class="criteria-q-input" value="{{ q.question }}"></input>
+                            <input class="criteria-q-input" value="{{ q.question }}">
                             <span class="criteria-del"></span>
                         </div>
                         <div class="action-answers">
@@ -86,7 +86,7 @@
                                 {% for c in q.choices.all %}
                                     <li>
                                         <span class="z-radio"></span>
-                                        <input class="criteria-a-input" value="{{ c.description }}"></input>
+                                        <input class="criteria-a-input" value="{{ c.description }}">
                                         <span class="criteria-del"></span>
                                     </li>
                                 {% endfor %}
@@ -109,7 +109,7 @@
                                 {% for c in q.choices.all %}
                                     <li>
                                         <span class="z-checkbox"></span>
-                                        <input class="criteria-a-input" value="{{ c.description }}"></input>
+                                        <input class="criteria-a-input" value="{{ c.description }}">
                                         <span class="criteria-del"></span>
                                     </li>
                                 {% endfor %}
@@ -124,19 +124,21 @@
                     <div class="action-item fn-clr" data-type="question">
                         <div class="criteria-q fn-clr">
                             <span class="criteria-seqno">{{ q.order_in_list }}、</span>
-                            <input class="criteria-q-input" placeholder="{{ q.question }}"></input>
+                            <input class="criteria-q-input" value="{{ q.question }}">
                             <span class="criteria-del"></span>
                         </div>
                         <textarea></textarea>
                     </div>
                 {% endfor %}
                 {% for q in file_questions %}
-                    <div class="criteria-q fn-clr">
-                        <span class="criteria-seqno">{{ q.order_in_list }}、</span>
-                        <input class="criteria-q-input" placeholder="{{ q.question }}"></input>
-                        <span class="criteria-del"></span>
+                    <div class="action-item" data-type="upload">
+                        <div class="criteria-q fn-clr">
+                            <span class="criteria-seqno">{{ q.order_in_list }}、</span>
+                            <input class="criteria-q-input" value="{{ q.question }}">
+                            <span class="criteria-del"></span>
+                        </div>
+                        <input type="file"/>
                     </div>
-                    <input type="file"/>
                 {% endfor %}
             </div>
         </div>

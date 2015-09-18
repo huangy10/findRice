@@ -344,3 +344,33 @@
 2015-09-13 16:22:03,497 [DEBUG] root: 创建用户条目，用户名为yuanl，密码为11111111
 2015-09-13 16:25:11,186 [DEBUG] Activity.views: 试图报名活动，对应活动为|test from ie8|(id:21), 当前用户为|sdfsdf|(yuan)
 2015-09-13 16:25:11,204 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 21|,code:4786c5372ce65b65168178f8ba1f5435
+2015-09-14 20:47:44,635 [DEBUG] root: 创建用户条目，用户名为huangyan14，密码为huang9040601
+2015-09-16 21:42:37,932 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD COLUMN "poster_thumbnail" varchar(100) NULL; (params [])
+2015-09-16 21:42:37,941 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "poster_thumbnail" DROP DEFAULT; (params [])
+2015-09-16 21:42:37,960 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "reward_for_share" SET DEFAULT %s; (params [0])
+2015-09-16 21:42:37,965 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "reward_for_share" DROP DEFAULT; (params [])
+2015-09-16 21:43:07,791 [DEBUG] Activity.views: The share code is: cf0bd2597e203af4b4e68139d9342af3
+2015-09-16 21:44:17,476 [DEBUG] Activity.views: The share code is: 4786c5372ce65b65168178f8ba1f5435
+2015-09-16 21:44:23,809 [DEBUG] Activity.views: The share code is: 033f84933a557a52fbf11250b8427325
+2015-09-16 21:44:27,005 [DEBUG] Activity.views: The share code is: 8897f29560195bacea6fbbd1713586fc
+2015-09-16 21:44:29,757 [DEBUG] Activity.views: The share code is: d3bd0f987826d17b8df221e784b31763
+2015-09-16 21:44:40,170 [DEBUG] Activity.views: The share code is: 430a1ca2e9484d834c2d213955a47a04
+2015-09-16 21:46:41,011 [DEBUG] Activity.forms: 上传的持续时间参数为6d22h55m, 计算得到的持续时间为10015m
+2015-09-16 21:46:41,339 [DEBUG] Activity.views: 找到到问卷为id＝8, 其创建时间是2015-09-13 07:55:48.420053+00:00
+2015-09-16 21:46:56,405 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[{"q":"aa","type":"radio","a":["a","b","c","d"]},{"q":"要上传文件","type":"upload"}]
+2015-09-16 21:47:05,014 [DEBUG] Activity.views: The share code is: 4786c5372ce65b65168178f8ba1f5435
+2015-09-16 21:47:31,844 [DEBUG] Activity.forms: 上传的持续时间参数为6d22h55m, 计算得到的持续时间为10015m
+2015-09-16 21:47:32,164 [DEBUG] Activity.views: 找到到问卷为id＝9, 其创建时间是2015-09-16 13:46:56.406103+00:00
+2015-09-16 21:53:33,911 [DEBUG] Activity.views: 找到到问卷为id＝9, 其创建时间是2015-09-16 13:46:56.406103+00:00
+2015-09-16 21:53:40,944 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[{"q":"aa","type":"radio","a":["a","b","c","d"]},{"q":"要上传文件2","type":"upload"}]
+2015-09-16 21:53:52,958 [DEBUG] Activity.views: The share code is: 4786c5372ce65b65168178f8ba1f5435
+2015-09-16 21:55:16,127 [DEBUG] Activity.forms: 上传的持续时间参数为2d0h0m, 计算得到的持续时间为2880m
+2015-09-16 22:00:46,214 [DEBUG] Activity.views: The share code is: 5a719a860418e3e49bfc0d41bdf730b6
+2015-09-16 22:00:48,863 [DEBUG] Activity.views: The share code is: 5a719a860418e3e49bfc0d41bdf730b6
+2015-09-16 22:02:03,634 [DEBUG] Activity.views: The share code is: 5a719a860418e3e49bfc0d41bdf730b6
+2015-09-16 22:02:13,535 [DEBUG] Activity.views: The share code is: 5a719a860418e3e49bfc0d41bdf730b6
+2015-09-16 22:03:08,019 [DEBUG] Activity.views: The share code is: 5a719a860418e3e49bfc0d41bdf730b6
+2015-09-16 22:03:45,185 [DEBUG] Activity.views: The share code is: 5a719a860418e3e49bfc0d41bdf730b6
+2015-09-16 22:03:47,687 [DEBUG] Activity.views: The share code is: 5a719a860418e3e49bfc0d41bdf730b6
+2015-09-16 22:08:04,508 [DEBUG] Activity.views: The share code is: 5a719a860418e3e49bfc0d41bdf730b6
+2015-09-16 22:08:07,488 [DEBUG] Activity.views: The share code is: 1a2d349dabf9605c9c13b6dda5c5a85d
