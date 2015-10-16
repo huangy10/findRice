@@ -36,21 +36,18 @@
             <div id="login-btn-c" class="fn-clr">
                 <button type="submit" class="z-btn register-btn">注册</button>
             </div>
-            <div id="login-splitline" class="fn-clr">
-                <span id="left-bottom"></span>
-                <span id="right-bottom"></span>
-            </div>
-            <div id="login-others">
-                <span id="or-txt">或</span>
-                <p>通过社交账号直接登录</p>
-                <div id="socials">
-                    <a href="{% url "social:begin" backend='weixin' %}?next=/social/profile" id="wechat"></a>
-                    <a href="{% url "social:begin" backend='qq' %}?next=/social/profile" id="qq"><i class="zui-icon icon-qq"></i></a>
-                    <a href="{% url "social:begin" backend='weibo' %}?next=/social/profile" id="sina" class="last"></a>
-{#                    <a id="wechat"></a>#}
-{#                    <span id="qq"></span>#}
-{#                    <span id="sina" class="last"></span>#}
-                </div>
+{#            <div id="login-splitline" class="fn-clr">#}
+{#                <span id="left-bottom"></span>#}
+{#                <span id="right-bottom"></span>#}
+{#            </div>#}
+{#            <div id="login-others">#}
+{#                <span id="or-txt">或</span>#}
+{#                <p>通过社交账号直接登录</p>#}
+{#                <div id="socials">#}
+{#                    <a href="{% url "social:begin" backend='weixin' %}?next=/social/profile" id="wechat"></a>#}
+{#                    <a href="{% url "social:begin" backend='qq' %}?next=/social/profile" id="qq"><i class="zui-icon icon-qq"></i></a>#}
+{#                    <a href="{% url "social:begin" backend='weibo' %}?next=/social/profile" id="sina" class="last"></a>#}
+{#                </div>#}
             </div>
         </form>
         

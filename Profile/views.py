@@ -5,6 +5,8 @@ import simplejson
 import json
 import excel_response
 import logging
+import urlparse
+from datetime import datetime
 
 from django.utils import timezone
 from django.conf import settings
@@ -26,7 +28,7 @@ from .models import RiceTeamContribution, UserProfile
 from .models import VerifyCode
 from .utils import send_sms, from_size_check_required, profile_active_required
 from Notification.signals import send_notification
-from Promotion.models import ShareRecord
+from Promotion.models import ShareRecord, Share
 from Welfare.models import WelfareGift
 from findRice.utils import choose_template_by_device
 
@@ -75,7 +77,7 @@ def user_login(request):
     request.session["next"] = request.GET.get("next", "/")
     args = {}
     args.update(csrf(request))
-
+    args['next'] = request.GET.get("next", None)
     available_backends = load_backends(settings.AUTHENTICATION_BACKENDS)
     args["available_ends"] = available_backends
 
@@ -122,7 +124,7 @@ def register_step_1(request):
             if "password2" in errors:
                 data["pwd-confirm"] = errors["password2"][0]
             if "username" in errors:
-                data["username"] = errors["username"][0]
+                data["username"] = ""
             if data == {}:
                 data["unknown"] = "未知错误，请联系管理员"
             error_info["data"] = data
@@ -131,6 +133,12 @@ def register_step_1(request):
     if 'code' in request.GET:
         # if Share code if founded in the GET parameters, then save it to the session
         request.session['code'] = request.GET['code']
+    elif 'next' in request.GET:
+        next_url = request.GET.get('next')
+        params = urlparse.parse_qs(urlparse.urlparse(next_url).query)
+        if 'code' in params:
+            request.session['code'] = params.get('code')[0]
+            print '从get参数中发现了next连接，从中提取到的code为{0}'.format(request.session['code'])
 
     args = {}
     args.update(csrf(request))
@@ -164,13 +172,24 @@ def register_step_2(request):
             if 'code' in request.session:
                 try:
                     promote_profile = UserProfile.objects.get(promotion_code=request.session['code'])
-                    contrib = RiceTeamContribution.objects.create(team=promote_profile.user.rice_team,
-                                                                  user=user,
-                                                                  registration_promoted=True)
+                    RiceTeamContribution.objects.create(team=promote_profile.user.rice_team,
+                                                        user=user,
+                                                        registration_promoted=True)
                     request.session.pop('code')
+
                 except ObjectDoesNotExist:
-                    return JsonResponse({'success': False, 'data': {'code': 'invalid share code'}},
-                                        content_type='text/html')
+                    try:
+                        print u"注册第二步，发现有效的分享code: {0}".format(request.session['code'])
+                        share = get_object_or_404(Share, share_code=request.session['code'])
+                        RiceTeamContribution.objects.create(team=share.user.rice_team,
+                                                            user=user,
+                                                            registration_promoted=True)
+                        print u"注册第二步，发现有效的分享code: {0}".format(request.session['code'])
+                        request.session.pop('code')
+                    except Http404:
+                        return JsonResponse({'success': False, 'data': {'code': 'invalid share code'}},
+                                            content_type='text/html')
+
             logger.debug(
                 u"注册第二步，从操作用户名为%s，session中存储的密码是%s" % (user.username, request.session['password']))
             auth_user = auth.authenticate(username=user.username, password=request.session["password"])
@@ -415,8 +434,11 @@ def mine_apply(request, start, size):
 def mine_group(request, start, size):
     """我的米团"""
     user = request.user
+    # 注意，这里先去掉分页，直接返回所有的米团成员
+    # contributions = RiceTeamContribution.objects.filter(team=user.rice_team,
+    #                                                     user__profile__is_active=True)[start:start+size]
     contributions = RiceTeamContribution.objects.filter(team=user.rice_team,
-                                                        user__profile__is_active=True)[start:start+size]
+                                                        user__profile__is_active=True)
     args = {
         "user": user,
         "contributions": contributions
@@ -598,10 +620,10 @@ def manage_an_activity(request):
                 row_user_profile = app.user.profile
                 row_data = [row_user_profile.name,
                             row_user_profile.get_gender_display(),
-                            row_user_profile.birthDate,
-                            row_user_profile.age,
+                            row_user_profile.birthDate.strftime("%Y-%m-%d"),
+                            str(row_user_profile.age),
                             row_user_profile.phoneNum,
-                            timezone.make_naive(timezone.localtime(app.apply_at)),
+                            timezone.make_naive(timezone.localtime(app.apply_at)).strftime("%Y-%m-%d %H-%M-%S"),
                             app.get_status_display()]
                 return row_data
 

@@ -1,6 +1,7 @@
 # coding=utf-8
 import datetime
 import logging
+import re
 
 from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone
@@ -17,18 +18,6 @@ class UserRegisterFormStep1(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
-        fields = ("username", )
-        widgets = {
-            "username": forms.TextInput(attrs={
-                "id": "username",
-                "placeholder": u"请输入用户名"
-            })
-        }
-        error_messages = {
-            "username": {
-                "unique": "该用户名已存在"
-            }
-        }
 
     error_messages = {
         'password_mismatch': "两次输入的密码不匹配",
@@ -36,6 +25,10 @@ class UserRegisterFormStep1(forms.ModelForm):
         'password_too_short': "密码太短，密码的长度至少为4位",
         'username_already_exist': "该用户名已存在"
         }
+    username = forms.CharField(widget=forms.TextInput(attrs={
+            "id": "username",
+            "placeholder": u"请输入用户名"
+    }))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
         "id": "pwd",
         "name": "pwd",
@@ -65,8 +58,12 @@ class UserRegisterFormStep1(forms.ModelForm):
         return password2
 
     def clean(self):
+        username = self.cleaned_data['username']
+        fmt_checked_username = re.match('[\d\w_]*', username).group()
+        if not fmt_checked_username == username:
+            self.add_error('username', u'用户名请使用字母，数字或者下划线')
         try:
-            user = get_user_model().objects.get(username=self.cleaned_data['username'],
+            user = get_user_model().objects.get(username=username,
                                                 is_active=True,
                                                 profile__is_active=True)
             if user:

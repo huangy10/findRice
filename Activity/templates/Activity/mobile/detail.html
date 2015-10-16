@@ -14,7 +14,7 @@
     <script type="text/javascript" src="//zhao-mi.net/m/build/detail.js"></script>
 
     <div id='wx_pic' style='margin:0 auto;display:none;'>
-        <img src='/assets/imgs/300_300.png'/>
+        <img src='//zhao-mi.net/assets/imgs/300_300.png'/>
     </div>
 </head>
 <body>
@@ -79,7 +79,7 @@
             </div>
 
             <div class="img-w">
-                <img src="{{ act.poster_thumbnail_url }}" width="100%" alt="">
+                <img src="{{ act.poster_url }}" width="100%" alt="">
             </div>
             <div class="content">
                 {% for line in act.get_description|seperate_to_p %}
@@ -168,7 +168,7 @@
                             <div class="item" data-type="question">
                                 <div class="question-tt">{{ forloop.counter }}) {{ q.question }}</div>
                                 <div class="question-result">
-                                    <textarea name="" cols="30" rows="10"
+                                    <textarea name="" cols="30" rows="3"
                                               datatype="s5-16"
                                               nullmsg="请输入您的学历信息"
                                               errormsg="请输入最少10个,最多160个字符！"

@@ -26,29 +26,29 @@
         <form id="login-form" action="/login" method="post" autocomplete="off">
             {% csrf_token %}
             <div id="username-c">
-                <input id="username" name="username" placeholder="请输入手机号码/用户名"></input>
+                <input id="username" name="username" placeholder="请输入手机号码/用户名">
             </div>
             <div id="pwd-c">
-                <input id="pwd" name="pwd" type="password" placeholder="请输入密码"></input>
+                <input id="pwd" name="pwd" type="password" placeholder="请输入密码">
             </div>
             <div id="login-btn-c" class="fn-clr">
                 <button type="submit" class="z-btn login-btn">登录</button>
-                <a class="z-btn register-btn" href="/register/basic">注册</a>
+                <a class="z-btn register-btn" href="/register/basic{% if next %}?next={{ next }}{% endif %}">注册</a>
                 <a class="reset-pwd" href="/resetpwd">忘记密码</a>
             </div>
-            <div id="login-splitline" class="fn-clr">
-                <span id="left-bottom"></span>
-                <span id="right-bottom"></span>
-            </div>
-            <div id="login-others">
-                <span id="or-txt">或</span>
-                <p>通过社交账号直接登录</p>
-                <div id="socials">
-                    <a id="wechat" href="{% url "social:begin" backend='weixin' %}?next=/social/profile"></a>
-                    <a id="qq" href="{% url "social:begin" backend='qq' %}?next=/social/profile"></a>
-                    <a id="sina" href="{% url "social:begin" backend='weibo' %}?next=social/profile" class="last"></a>
-                </div>
-            </div>
+{#            <div id="login-splitline" class="fn-clr">#}
+{#                <span id="left-bottom"></span>#}
+{#                <span id="right-bottom"></span>#}
+{#            </div>#}
+{#            <div id="login-others">#}
+{#                <span id="or-txt">或</span>#}
+{#                <p>通过社交账号直接登录</p>#}
+{#                <div id="socials">#}
+{#                    <a id="wechat" href="{% url "social:begin" backend='weixin' %}?next=/social/profile"></a>#}
+{#                    <a id="qq" href="{% url "social:begin" backend='qq' %}?next=/social/profile"></a>#}
+{#                    <a id="sina" href="{% url "social:begin" backend='weibo' %}?next=social/profile" class="last"></a>#}
+{#                </div>#}
+{#            </div>#}
         </form>
         
     </div>

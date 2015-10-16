@@ -376,3 +376,334 @@
 2015-09-16 22:08:07,488 [DEBUG] Activity.views: The share code is: 1a2d349dabf9605c9c13b6dda5c5a85d
 2015-09-18 16:30:42,782 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitytype" ADD COLUMN "default_poster_mobile" varchar(100) DEFAULT %s NOT NULL; (params [u'defaultPosters/default.jpg'])
 2015-09-18 16:30:42,814 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitytype" ALTER COLUMN "default_poster_mobile" DROP DEFAULT; (params [])
+2015-09-19 10:48:55,941 [DEBUG] Activity.forms: 上传的持续时间参数为10000d0h0m, 计算得到的持续时间为14400000m
+2015-09-19 10:51:01,271 [DEBUG] Activity.views: The share code is: c60d442dfc6f1309620b0d605da9db39
+2015-09-19 10:51:50,263 [DEBUG] Activity.views: Code not found
+2015-09-19 10:52:43,738 [DEBUG] Activity.views: 试图报名活动，对应活动为|找米企业用户认证程序|(id:1), 当前用户为|Zhaomi Admin|(lena)
+2015-09-19 10:52:43,762 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: lena|报名活动|id: 1|,code:None
+2015-09-19 10:53:32,827 [DEBUG] Activity.views: Code not found
+2015-09-19 11:20:53,822 [DEBUG] Activity.views: The share code is: c60d442dfc6f1309620b0d605da9db39
+2015-09-20 21:02:55,270 [DEBUG] root: 创建用户条目，用户名为yuan，密码为11111111
+2015-09-20 21:08:34,870 [DEBUG] Profile.views: 注册第二步，从操作用户名为yuan，session中存储的密码是11111111
+2015-09-20 21:09:21,294 [DEBUG] Activity.forms: 上传的持续时间参数为10d0h15m, 计算得到的持续时间为14415m
+2015-09-20 21:09:36,214 [DEBUG] Activity.views: The share code is: e9e510b990215415f773ee9751d0a4c0
+2015-09-20 21:11:07,993 [DEBUG] Activity.views: The share code is: e9e510b990215415f773ee9751d0a4c0
+2015-09-20 21:11:10,351 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试活动|(id:2), 当前用户为|啊哈哈|(yuan)
+2015-09-20 21:11:10,372 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 2|,code:e9e510b990215415f773ee9751d0a4c0
+2015-09-20 21:12:53,141 [DEBUG] Activity.forms: 上传的持续时间参数为4d19h55m, 计算得到的持续时间为6955m
+2015-09-20 21:13:17,203 [DEBUG] Activity.views: The share code is: 1ba74696e9a689d3fb1545390cfd9945
+2015-09-20 21:13:45,480 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试活动二|(id:3), 当前用户为|啊哈哈|(yuan)
+2015-09-20 21:13:45,578 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 3|,code:1ba74696e9a689d3fb1545390cfd9945
+2015-09-20 21:20:26,082 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-20 21:25:16,436 [DEBUG] Activity.views: The share code is: e80c39566ba587f6845d8f0a9edf2a7a
+2015-09-20 21:25:30,971 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试活动from手机|(id:4), 当前用户为|啊哈哈|(yuan)
+2015-09-20 21:25:30,979 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: yuan|报名活动|id: 4|,code:e80c39566ba587f6845d8f0a9edf2a7a
+2015-09-20 21:49:37,160 [DEBUG] Activity.views: Code not found
+2015-09-20 21:54:31,187 [DEBUG] Activity.forms: 上传的持续时间参数为10d0h15m, 计算得到的持续时间为14415m
+2015-09-20 21:54:31,911 [DEBUG] Activity.views: 找到到问卷为id＝2, 其创建时间是2015-09-20 13:09:24.153970+00:00
+2015-09-20 21:54:42,140 [DEBUG] Activity.views: The share code is: e9e510b990215415f773ee9751d0a4c0
+2015-09-20 21:58:13,192 [DEBUG] Activity.views: The share code is: e9e510b990215415f773ee9751d0a4c0
+2015-09-20 21:58:33,794 [DEBUG] Activity.views: Code not found
+2015-09-20 22:00:10,808 [DEBUG] Activity.forms: 上传的持续时间参数为1d0h15m, 计算得到的持续时间为1455m
+2015-09-20 22:00:11,183 [DEBUG] Activity.views: 找到到问卷为id＝2, 其创建时间是2015-09-20 13:09:24.153970+00:00
+2015-09-20 22:05:24,151 [DEBUG] Activity.forms: 上传的持续时间参数为61d0h0m, 计算得到的持续时间为87840m
+2015-09-20 22:08:43,979 [DEBUG] Profile.views: 用户|yuan(id: 2)|完成了活动|测试活动(id: 2)|，但是没有找到相应分享链接
+2015-09-20 22:11:59,459 [DEBUG] Profile.views: 用户|yuan(id: 2)|完成了活动|测试活动二(id: 3)|，但是没有找到相应分享链接
+2015-09-26 12:37:19,598 [DEBUG] django.db.backends.schema: CREATE TABLE "django_migrations" ("id" serial NOT NULL PRIMARY KEY, "app" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "applied" timestamp with time zone NOT NULL); (params None)
+2015-09-26 12:37:23,442 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" serial NOT NULL PRIMARY KEY, "name" varchar(100) NOT NULL, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+2015-09-26 12:37:23,451 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" ADD CONSTRAINT "django_content_type_app_label_45f3b1d93ec8c61c_uniq" UNIQUE ("app_label", "model"); (params [])
+2015-09-26 12:37:23,460 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_permission" ("id" serial NOT NULL PRIMARY KEY, "name" varchar(50) NOT NULL, "content_type_id" integer NOT NULL, "codename" varchar(100) NOT NULL, UNIQUE ("content_type_id", "codename")); (params None)
+2015-09-26 12:37:23,468 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_group" ("id" serial NOT NULL PRIMARY KEY, "name" varchar(80) NOT NULL UNIQUE); (params None)
+2015-09-26 12:37:23,471 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_group_permissions" ("id" serial NOT NULL PRIMARY KEY, "group_id" integer NOT NULL, "permission_id" integer NOT NULL, UNIQUE ("group_id", "permission_id")); (params None)
+2015-09-26 12:37:23,483 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" serial NOT NULL PRIMARY KEY, "password" varchar(128) NOT NULL, "last_login" timestamp with time zone NOT NULL, "is_superuser" boolean NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(75) NOT NULL, "is_staff" boolean NOT NULL, "is_active" boolean NOT NULL, "date_joined" timestamp with time zone NOT NULL); (params None)
+2015-09-26 12:37:23,487 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user_groups" ("id" serial NOT NULL PRIMARY KEY, "user_id" integer NOT NULL, "group_id" integer NOT NULL, UNIQUE ("user_id", "group_id")); (params None)
+2015-09-26 12:37:23,490 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user_user_permissions" ("id" serial NOT NULL PRIMARY KEY, "user_id" integer NOT NULL, "permission_id" integer NOT NULL, UNIQUE ("user_id", "permission_id")); (params None)
+2015-09-26 12:37:23,493 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_permission" ADD CONSTRAINT "auth_content_type_id_508cf46651277a81_fk_django_content_type_id" FOREIGN KEY ("content_type_id") REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,499 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_permission_417f1b1c" ON "auth_permission" ("content_type_id"); (params [])
+2015-09-26 12:37:23,500 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_group_name_253ae2a6331666e8_like" ON "auth_group" ("name" varchar_pattern_ops); (params [])
+2015-09-26 12:37:23,501 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_group_permissions" ADD CONSTRAINT "auth_group_permissio_group_id_689710a9a73b7457_fk_auth_group_id" FOREIGN KEY ("group_id") REFERENCES "auth_group" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,502 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_group_permissions" ADD CONSTRAINT "auth_group_permission_id_1f49ccbbdc69d2fc_fk_auth_permission_id" FOREIGN KEY ("permission_id") REFERENCES "auth_permission" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,503 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_group_permissions_0e939a4f" ON "auth_group_permissions" ("group_id"); (params [])
+2015-09-26 12:37:23,504 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_group_permissions_8373b171" ON "auth_group_permissions" ("permission_id"); (params [])
+2015-09-26 12:37:23,505 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_username_51b3b110094b8aae_like" ON "auth_user" ("username" varchar_pattern_ops); (params [])
+2015-09-26 12:37:23,506 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user_groups" ADD CONSTRAINT "auth_user_groups_user_id_4b5ed4ffdb8fd9b0_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,507 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user_groups" ADD CONSTRAINT "auth_user_groups_group_id_33ac548dcf5f8e37_fk_auth_group_id" FOREIGN KEY ("group_id") REFERENCES "auth_group" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,508 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_groups_e8701ad4" ON "auth_user_groups" ("user_id"); (params [])
+2015-09-26 12:37:23,509 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_groups_0e939a4f" ON "auth_user_groups" ("group_id"); (params [])
+2015-09-26 12:37:23,510 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user_user_permissions" ADD CONSTRAINT "auth_user_user_permiss_user_id_7f0938558328534a_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,511 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user_user_permissions" ADD CONSTRAINT "auth_user__permission_id_384b62483d7071f0_fk_auth_permission_id" FOREIGN KEY ("permission_id") REFERENCES "auth_permission" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,512 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_user_permissions_e8701ad4" ON "auth_user_user_permissions" ("user_id"); (params [])
+2015-09-26 12:37:23,513 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_user_permissions_8373b171" ON "auth_user_user_permissions" ("permission_id"); (params [])
+2015-09-26 12:37:23,525 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activity" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp with time zone NOT NULL, "updated_at" timestamp with time zone NOT NULL, "is_active" boolean NOT NULL, "is_published" boolean NOT NULL, "accept_apply" boolean NOT NULL, "name" varchar(200) NOT NULL, "host_name" varchar(50) NOT NULL, "location" varchar(200) NOT NULL, "province" varchar(20) NOT NULL, "city" varchar(100) NOT NULL, "description" text NOT NULL, "start_time" timestamp with time zone NOT NULL, "end_time" timestamp with time zone NOT NULL, "last_length" integer NOT NULL, "reward" integer NOT NULL, "reward_for_share" integer NOT NULL, "reward_for_share_and_finished_percentage" double precision NOT NULL, "max_attend" integer NOT NULL, "min_attend" integer NOT NULL, "poster" varchar(100) NOT NULL, "recommended" boolean NOT NULL, "recommended_level" integer NOT NULL, "time_limited" boolean NOT NULL, "num_limited" boolean NOT NULL, "identified" boolean NOT NULL, "act_status" integer NOT NULL, "manually_start_time" timestamp with time zone NULL, "manually_end_time" timestamp with time zone NULL, "viewed_times" bigint NOT NULL); (params None)
+2015-09-26 12:37:23,544 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activitylikethrough" ("id" serial NOT NULL PRIMARY KEY, "is_active" boolean NOT NULL, "like_at" timestamp with time zone NOT NULL, "activity_id" integer NOT NULL, "user_id" integer NOT NULL); (params None)
+2015-09-26 12:37:23,552 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activitytype" ("id" serial NOT NULL PRIMARY KEY, "type_name" varchar(20) NOT NULL, "description" varchar(100) NOT NULL, "display_order" integer NOT NULL, "created_at" timestamp with time zone NOT NULL, "modified_at" timestamp with time zone NOT NULL); (params None)
+2015-09-26 12:37:23,571 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_activityvisitrecord" ("id" serial NOT NULL PRIMARY KEY, "visit_date" timestamp with time zone NOT NULL, "visit_ip" inet NOT NULL, "visit_location" varchar(255) NOT NULL, "visit_device" varchar(255) NOT NULL, "activity_id" integer NOT NULL, "user_id" integer NOT NULL); (params None)
+2015-09-26 12:37:23,590 [DEBUG] django.db.backends.schema: CREATE TABLE "Activity_applicationthrough" ("id" serial NOT NULL PRIMARY KEY, "apply_at" timestamp with time zone NOT NULL, "updated_at" timestamp with time zone NOT NULL, "status" varchar(10) NOT NULL, "is_active" boolean NOT NULL, "activity_id" integer NOT NULL, "user_id" integer NOT NULL); (params None)
+2015-09-26 12:37:23,611 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD COLUMN "activity_type_id" integer NULL; (params [])
+2015-09-26 12:37:23,612 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "activity_type_id" DROP DEFAULT; (params [])
+2015-09-26 12:37:23,630 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD COLUMN "backup_id" integer NULL; (params [])
+2015-09-26 12:37:23,630 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "backup_id" DROP DEFAULT; (params [])
+2015-09-26 12:37:23,668 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD COLUMN "host_id" integer NOT NULL; (params [])
+2015-09-26 12:37:23,669 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "host_id" DROP DEFAULT; (params [])
+2015-09-26 12:37:23,701 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_applicationthrough" ADD CONSTRAINT "Activity_applicationthrough_activity_id_de64fdf7596b660_uniq" UNIQUE ("activity_id", "user_id"); (params [])
+2015-09-26 12:37:23,702 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitylikethrough" ADD CONSTRAINT "Activity_a_activity_id_2cd5900a4c9ff782_fk_Activity_activity_id" FOREIGN KEY ("activity_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,704 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitylikethrough" ADD CONSTRAINT "Activity_activityliket_user_id_3e3030db0c3e0d50_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,705 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activitylikethrough_f8a3193a" ON "Activity_activitylikethrough" ("activity_id"); (params [])
+2015-09-26 12:37:23,706 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activitylikethrough_e8701ad4" ON "Activity_activitylikethrough" ("user_id"); (params [])
+2015-09-26 12:37:23,707 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityvisitrecord" ADD CONSTRAINT "Activity_a_activity_id_6cdbcf076b6f6264_fk_Activity_activity_id" FOREIGN KEY ("activity_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,708 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activityvisitrecord" ADD CONSTRAINT "Activity_activityvisit_user_id_655300272700dbca_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,710 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activityvisitrecord_f8a3193a" ON "Activity_activityvisitrecord" ("activity_id"); (params [])
+2015-09-26 12:37:23,711 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activityvisitrecord_e8701ad4" ON "Activity_activityvisitrecord" ("user_id"); (params [])
+2015-09-26 12:37:23,711 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_applicationthrough" ADD CONSTRAINT "Activity_a_activity_id_62fe9bc0368e1e57_fk_Activity_activity_id" FOREIGN KEY ("activity_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,713 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_applicationthrough" ADD CONSTRAINT "Activity_applicationth_user_id_7b421effbf6d35db_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,714 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_applicationthrough_f8a3193a" ON "Activity_applicationthrough" ("activity_id"); (params [])
+2015-09-26 12:37:23,715 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_applicationthrough_e8701ad4" ON "Activity_applicationthrough" ("user_id"); (params [])
+2015-09-26 12:37:23,716 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_b6159b48" ON "Activity_activity" ("activity_type_id"); (params [])
+2015-09-26 12:37:23,717 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD CONSTRAINT "A_activity_type_id_582866e18ea87c55_fk_Activity_activitytype_id" FOREIGN KEY ("activity_type_id") REFERENCES "Activity_activitytype" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,718 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_8a277038" ON "Activity_activity" ("backup_id"); (params [])
+2015-09-26 12:37:23,719 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD CONSTRAINT "Activity_act_backup_id_18972d628043de2e_fk_Activity_activity_id" FOREIGN KEY ("backup_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,721 [DEBUG] django.db.backends.schema: CREATE INDEX "Activity_activity_8396f175" ON "Activity_activity" ("host_id"); (params [])
+2015-09-26 12:37:23,722 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD CONSTRAINT "Activity_activity_host_id_3ed208a591594330_fk_auth_user_id" FOREIGN KEY ("host_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:23,766 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD COLUMN "reward_share_limit" integer DEFAULT %s NOT NULL; (params [500])
+2015-09-26 12:37:23,776 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "reward_share_limit" DROP DEFAULT; (params [])
+2015-09-26 12:37:23,905 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "reward_for_share" SET DEFAULT %s; (params [0])
+2015-09-26 12:37:23,906 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "reward_for_share" DROP DEFAULT; (params [])
+2015-09-26 12:37:23,925 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD COLUMN "poster_zipped" varchar(100) NULL; (params [])
+2015-09-26 12:37:23,926 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "poster_zipped" DROP DEFAULT; (params [])
+2015-09-26 12:37:23,947 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitytype" ADD COLUMN "default_poster" varchar(100) DEFAULT %s NOT NULL; (params [u'defaultPosters/default.jpg'])
+2015-09-26 12:37:23,950 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitytype" ALTER COLUMN "default_poster" DROP DEFAULT; (params [])
+2015-09-26 12:37:24,025 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" DROP CONSTRAINT "A_activity_type_id_582866e18ea87c55_fk_Activity_activitytype_id"; (params [])
+2015-09-26 12:37:24,027 [DEBUG] django.db.backends.schema: UPDATE "Activity_activity" SET "activity_type_id" = %s WHERE "activity_type_id" IS NULL; (params [None])
+2015-09-26 12:37:24,028 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "activity_type_id" SET NOT NULL; (params [])
+2015-09-26 12:37:24,028 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD CONSTRAINT "A_activity_type_id_582866e18ea87c55_fk_Activity_activitytype_id" FOREIGN KEY ("activity_type_id") REFERENCES "Activity_activitytype" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,087 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "reward_for_share" SET DEFAULT %s; (params [5])
+2015-09-26 12:37:24,088 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "reward_for_share" DROP DEFAULT; (params [])
+2015-09-26 12:37:24,107 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "poster" DROP NOT NULL; (params [])
+2015-09-26 12:37:24,126 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD COLUMN "reward_gift" boolean DEFAULT %s NOT NULL; (params [False])
+2015-09-26 12:37:24,132 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "reward_gift" DROP DEFAULT; (params [])
+2015-09-26 12:37:24,155 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD COLUMN "reward_gift_detail" text DEFAULT %s NOT NULL; (params [''])
+2015-09-26 12:37:24,161 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "reward_gift_detail" DROP DEFAULT; (params [])
+2015-09-26 12:37:24,182 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ADD COLUMN "poster_thumbnail" varchar(100) NULL; (params [])
+2015-09-26 12:37:24,182 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "poster_thumbnail" DROP DEFAULT; (params [])
+2015-09-26 12:37:24,199 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "reward_for_share" SET DEFAULT %s; (params [0])
+2015-09-26 12:37:24,200 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activity" ALTER COLUMN "reward_for_share" DROP DEFAULT; (params [])
+2015-09-26 12:37:24,219 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitytype" ADD COLUMN "default_poster_mobile" varchar(100) DEFAULT %s NOT NULL; (params [u'defaultPosters/default.jpg'])
+2015-09-26 12:37:24,222 [DEBUG] django.db.backends.schema: ALTER TABLE "Activity_activitytype" ALTER COLUMN "default_poster_mobile" DROP DEFAULT; (params [])
+2015-09-26 12:37:24,229 [DEBUG] django.db.backends.schema: CREATE TABLE "Homepage_homepageissue" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp with time zone NOT NULL, "issue_num" integer NOT NULL); (params None)
+2015-09-26 12:37:24,258 [DEBUG] django.db.backends.schema: CREATE TABLE "Homepage_homepageposter" ("id" serial NOT NULL PRIMARY KEY, "poster" varchar(100) NOT NULL, "poster_type" integer NOT NULL, "issue_id" integer NOT NULL, "related_activity_id" integer NOT NULL); (params None)
+2015-09-26 12:37:24,261 [DEBUG] django.db.backends.schema: ALTER TABLE "Homepage_homepageposter" ADD CONSTRAINT "Homepage_issue_id_5c4d39fa74acd601_fk_Homepage_homepageissue_id" FOREIGN KEY ("issue_id") REFERENCES "Homepage_homepageissue" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,263 [DEBUG] django.db.backends.schema: ALTER TABLE "Homepage_homepageposter" ADD CONSTRAINT "Home_related_activity_id_b2c294bfccc4be_fk_Activity_activity_id" FOREIGN KEY ("related_activity_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,264 [DEBUG] django.db.backends.schema: CREATE INDEX "Homepage_homepageposter_12f3e382" ON "Homepage_homepageposter" ("issue_id"); (params [])
+2015-09-26 12:37:24,265 [DEBUG] django.db.backends.schema: CREATE INDEX "Homepage_homepageposter_82e8d780" ON "Homepage_homepageposter" ("related_activity_id"); (params [])
+2015-09-26 12:37:24,273 [DEBUG] django.db.backends.schema: CREATE TABLE "Welfare_welfaregift" ("id" serial NOT NULL PRIMARY KEY, "address" varchar(255) NOT NULL); (params None)
+2015-09-26 12:37:24,282 [DEBUG] django.db.backends.schema: CREATE TABLE "Notification_activitynotification" ("id" serial NOT NULL PRIMARY KEY, "description" varchar(255) NOT NULL, "read" boolean NOT NULL, "created_at" timestamp with time zone NOT NULL, "notification_type" varchar(20) NOT NULL); (params None)
+2015-09-26 12:37:24,307 [DEBUG] django.db.backends.schema: CREATE TABLE "Notification_notificationcenter" ("id" serial NOT NULL PRIMARY KEY, "user_id" integer NOT NULL UNIQUE); (params None)
+2015-09-26 12:37:24,337 [DEBUG] django.db.backends.schema: CREATE TABLE "Notification_systemnotification" ("id" serial NOT NULL PRIMARY KEY, "description" varchar(255) NOT NULL, "read" boolean NOT NULL, "created_at" timestamp with time zone NOT NULL, "notification_center_id" integer NOT NULL); (params None)
+2015-09-26 12:37:24,373 [DEBUG] django.db.backends.schema: CREATE TABLE "Notification_welfarenotification" ("id" serial NOT NULL PRIMARY KEY, "description" varchar(255) NOT NULL, "read" boolean NOT NULL, "created_at" timestamp with time zone NOT NULL, "gift_id" integer NULL, "notification_center_id" integer NOT NULL, "related_activity_id" integer NOT NULL); (params None)
+2015-09-26 12:37:24,404 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_activitynotification" ADD COLUMN "notification_center_id" integer NOT NULL; (params [])
+2015-09-26 12:37:24,404 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_activitynotification" ALTER COLUMN "notification_center_id" DROP DEFAULT; (params [])
+2015-09-26 12:37:24,430 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_activitynotification" ADD COLUMN "related_activity_id" integer NOT NULL; (params [])
+2015-09-26 12:37:24,431 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_activitynotification" ALTER COLUMN "related_activity_id" DROP DEFAULT; (params [])
+2015-09-26 12:37:24,463 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_activitynotification" ADD COLUMN "related_user_id" integer NULL; (params [])
+2015-09-26 12:37:24,464 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_activitynotification" ALTER COLUMN "related_user_id" DROP DEFAULT; (params [])
+2015-09-26 12:37:24,465 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_notificationcenter" ADD CONSTRAINT "Notification_notificat_user_id_237e81d84fe2c88a_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,466 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_systemnotification" ADD CONSTRAINT "bb5fe158a428398b90f8e25a011a7daa" FOREIGN KEY ("notification_center_id") REFERENCES "Notification_notificationcenter" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,468 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_systemnotification_0658b044" ON "Notification_systemnotification" ("notification_center_id"); (params [])
+2015-09-26 12:37:24,469 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_welfarenotification" ADD CONSTRAINT "Notification_gift_id_293bb36c91406245_fk_Welfare_welfaregift_id" FOREIGN KEY ("gift_id") REFERENCES "Welfare_welfaregift" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,470 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_welfarenotification" ADD CONSTRAINT "D78a106cbaf7821990a340aacfbec622" FOREIGN KEY ("notification_center_id") REFERENCES "Notification_notificationcenter" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,472 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_welfarenotification" ADD CONSTRAINT "No_related_activity_id_4df7e3b672865a80_fk_Activity_activity_id" FOREIGN KEY ("related_activity_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,473 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_welfarenotification_addd09df" ON "Notification_welfarenotification" ("gift_id"); (params [])
+2015-09-26 12:37:24,474 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_welfarenotification_0658b044" ON "Notification_welfarenotification" ("notification_center_id"); (params [])
+2015-09-26 12:37:24,475 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_welfarenotification_82e8d780" ON "Notification_welfarenotification" ("related_activity_id"); (params [])
+2015-09-26 12:37:24,476 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_activitynotification_0658b044" ON "Notification_activitynotification" ("notification_center_id"); (params [])
+2015-09-26 12:37:24,477 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_activitynotification" ADD CONSTRAINT "D5ee6feead796fc74316a588c8eef6ef" FOREIGN KEY ("notification_center_id") REFERENCES "Notification_notificationcenter" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,478 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_activitynotification_82e8d780" ON "Notification_activitynotification" ("related_activity_id"); (params [])
+2015-09-26 12:37:24,479 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_activitynotification" ADD CONSTRAINT "Not_related_activity_id_d0e5217980b004a_fk_Activity_activity_id" FOREIGN KEY ("related_activity_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,480 [DEBUG] django.db.backends.schema: CREATE INDEX "Notification_activitynotification_78df12e4" ON "Notification_activitynotification" ("related_user_id"); (params [])
+2015-09-26 12:37:24,481 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_activitynotification" ADD CONSTRAINT "Notification_a_related_user_id_489b038754b00150_fk_auth_user_id" FOREIGN KEY ("related_user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,649 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_activitynotification" ADD COLUMN "reserved" varchar(20) DEFAULT %s NOT NULL; (params [''])
+2015-09-26 12:37:24,655 [DEBUG] django.db.backends.schema: ALTER TABLE "Notification_activitynotification" ALTER COLUMN "reserved" DROP DEFAULT; (params [])
+2015-09-26 12:37:24,772 [DEBUG] django.db.backends.schema: CREATE TABLE "Profile_riceteam" ("id" serial NOT NULL PRIMARY KEY, "team_coin" integer NOT NULL, "host_id" integer NOT NULL UNIQUE); (params None)
+2015-09-26 12:37:24,816 [DEBUG] django.db.backends.schema: CREATE TABLE "Profile_riceteamcontribution" ("id" serial NOT NULL PRIMARY KEY, "contributed_coin" integer NOT NULL, "team_id" integer NOT NULL, "user_id" integer NOT NULL); (params None)
+2015-09-26 12:37:24,858 [DEBUG] django.db.backends.schema: CREATE TABLE "Profile_userprofile" ("id" serial NOT NULL PRIMARY KEY, "is_active" boolean NOT NULL, "name" varchar(50) NOT NULL, "phoneNum" varchar(20) NOT NULL, "groupName" varchar(200) NOT NULL, "birthDate" date NOT NULL, "gender" varchar(2) NOT NULL, "avatar" varchar(100) NOT NULL, "identified" boolean NOT NULL, "identified_date" date NULL, "coin" integer NOT NULL, "created_at" timestamp with time zone NOT NULL, "updated_at" timestamp with time zone NOT NULL, "promotion_code" varchar(100) NULL, "user_id" integer NOT NULL UNIQUE); (params None)
+2015-09-26 12:37:24,869 [DEBUG] django.db.backends.schema: CREATE TABLE "Profile_verifycode" ("id" serial NOT NULL PRIMARY KEY, "phoneNum" varchar(20) NOT NULL, "code" varchar(6) NOT NULL, "created_at" timestamp with time zone NOT NULL, "is_active" boolean NOT NULL); (params None)
+2015-09-26 12:37:24,912 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_riceteam" ADD CONSTRAINT "Profile_riceteam_host_id_5f6bb0f56a0c4762_fk_auth_user_id" FOREIGN KEY ("host_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,914 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_riceteamcontribution" ADD CONSTRAINT "Profile_ricetea_team_id_2d889c84ffd4f0d1_fk_Profile_riceteam_id" FOREIGN KEY ("team_id") REFERENCES "Profile_riceteam" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,915 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_riceteamcontribution" ADD CONSTRAINT "Profile_riceteamcontri_user_id_5a4b337c50ec7093_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,916 [DEBUG] django.db.backends.schema: CREATE INDEX "Profile_riceteamcontribution_f6a7ca40" ON "Profile_riceteamcontribution" ("team_id"); (params [])
+2015-09-26 12:37:24,917 [DEBUG] django.db.backends.schema: CREATE INDEX "Profile_riceteamcontribution_e8701ad4" ON "Profile_riceteamcontribution" ("user_id"); (params [])
+2015-09-26 12:37:24,918 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_userprofile" ADD CONSTRAINT "Profile_userprofile_user_id_34bb1c2e4f12aeee_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:24,961 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_userprofile" ADD COLUMN "avatar_social" varchar(100) NULL; (params [])
+2015-09-26 12:37:24,963 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_userprofile" ALTER COLUMN "avatar_social" DROP DEFAULT; (params [])
+2015-09-26 12:37:25,001 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_userprofile" ALTER COLUMN "name" SET DEFAULT %s; (params ['\xe7\x94\xa8\xe6\x88\xb7\xe6\x98\xb5\xe7\xa7\xb0'])
+2015-09-26 12:37:25,002 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_userprofile" ALTER COLUMN "name" DROP DEFAULT; (params [])
+2015-09-26 12:37:25,045 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_userprofile" ADD COLUMN "avatar_zipped" varchar(100) NULL; (params [])
+2015-09-26 12:37:25,046 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_userprofile" ALTER COLUMN "avatar_zipped" DROP DEFAULT; (params [])
+2015-09-26 12:37:25,089 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_userprofile" ALTER COLUMN "name" SET DEFAULT %s; (params [''])
+2015-09-26 12:37:25,090 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_userprofile" ALTER COLUMN "name" DROP DEFAULT; (params [])
+2015-09-26 12:37:25,135 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_riceteamcontribution" ADD COLUMN "registration_promoted" boolean DEFAULT %s NOT NULL; (params [False])
+2015-09-26 12:37:25,139 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_riceteamcontribution" ALTER COLUMN "registration_promoted" DROP DEFAULT; (params [])
+2015-09-26 12:37:25,319 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_userprofile" ALTER COLUMN "avatar" DROP NOT NULL; (params [])
+2015-09-26 12:37:25,363 [DEBUG] django.db.backends.schema: CREATE TABLE "Promotion_share" ("id" serial NOT NULL PRIMARY KEY, "total_reward_max" integer NOT NULL, "total_reward" integer NOT NULL, "created_at" timestamp with time zone NOT NULL, "is_active" boolean NOT NULL, "share_code" varchar(100) NULL, "activity_id" integer NOT NULL, "user_id" integer NULL); (params None)
+2015-09-26 12:37:25,417 [DEBUG] django.db.backends.schema: CREATE TABLE "Promotion_sharerecord" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp with time zone NOT NULL, "finished" boolean NOT NULL, "is_active" boolean NOT NULL, "actual_reward_for_share" integer NOT NULL, "actual_reward_for_finish" integer NOT NULL, "application_id" integer NULL UNIQUE, "share_id" integer NOT NULL, "target_user_id" integer NOT NULL); (params None)
+2015-09-26 12:37:25,462 [DEBUG] django.db.backends.schema: ALTER TABLE "Promotion_sharerecord" ADD CONSTRAINT "Promotion_sharerecord_share_id_20300181fa0591a9_uniq" UNIQUE ("share_id", "target_user_id"); (params [])
+2015-09-26 12:37:25,507 [DEBUG] django.db.backends.schema: ALTER TABLE "Promotion_share" ADD CONSTRAINT "Promotion_share_user_id_6555d847613ef19c_uniq" UNIQUE ("user_id", "activity_id"); (params [])
+2015-09-26 12:37:25,509 [DEBUG] django.db.backends.schema: ALTER TABLE "Promotion_share" ADD CONSTRAINT "Promotion__activity_id_38df6f4e1c28fbf1_fk_Activity_activity_id" FOREIGN KEY ("activity_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:25,510 [DEBUG] django.db.backends.schema: ALTER TABLE "Promotion_share" ADD CONSTRAINT "Promotion_share_user_id_30091e02c1d9259d_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:25,511 [DEBUG] django.db.backends.schema: CREATE INDEX "Promotion_share_f8a3193a" ON "Promotion_share" ("activity_id"); (params [])
+2015-09-26 12:37:25,512 [DEBUG] django.db.backends.schema: CREATE INDEX "Promotion_share_e8701ad4" ON "Promotion_share" ("user_id"); (params [])
+2015-09-26 12:37:25,513 [DEBUG] django.db.backends.schema: ALTER TABLE "Promotion_sharerecord" ADD CONSTRAINT "bc781f793a0d54f47eedccd7a7f87f27" FOREIGN KEY ("application_id") REFERENCES "Activity_applicationthrough" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:25,515 [DEBUG] django.db.backends.schema: ALTER TABLE "Promotion_sharerecord" ADD CONSTRAINT "Promotion_share_share_id_153a2bdd96975259_fk_Promotion_share_id" FOREIGN KEY ("share_id") REFERENCES "Promotion_share" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:25,516 [DEBUG] django.db.backends.schema: ALTER TABLE "Promotion_sharerecord" ADD CONSTRAINT "Promotion_share_target_user_id_23cf4cff5603f9d5_fk_auth_user_id" FOREIGN KEY ("target_user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:25,517 [DEBUG] django.db.backends.schema: CREATE INDEX "Promotion_sharerecord_6dcc1338" ON "Promotion_sharerecord" ("share_id"); (params [])
+2015-09-26 12:37:25,518 [DEBUG] django.db.backends.schema: CREATE INDEX "Promotion_sharerecord_35cad009" ON "Promotion_sharerecord" ("target_user_id"); (params [])
+2015-09-26 12:37:25,564 [DEBUG] django.db.backends.schema: ALTER TABLE "Promotion_share" DROP COLUMN "total_reward_max" CASCADE; (params [])
+2015-09-26 12:37:25,573 [DEBUG] django.db.backends.schema: CREATE TABLE "Questionnaire_answersheet" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp with time zone NOT NULL, "modified_at" timestamp with time zone NOT NULL, "is_active" boolean NOT NULL); (params None)
+2015-09-26 12:37:25,584 [DEBUG] django.db.backends.schema: CREATE TABLE "Questionnaire_choice" ("id" serial NOT NULL PRIMARY KEY, "description" varchar(50) NOT NULL, "multi_choice" boolean NOT NULL, "order_in_list" integer NOT NULL, "created_at" timestamp with time zone NOT NULL, "modified_at" timestamp with time zone NOT NULL, "is_active" boolean NOT NULL); (params None)
+2015-09-26 12:37:25,594 [DEBUG] django.db.backends.schema: CREATE TABLE "Questionnaire_choicequestion" ("id" serial NOT NULL PRIMARY KEY, "question" varchar(200) NOT NULL, "required" boolean NOT NULL, "order_in_list" integer NOT NULL, "multi_choice" boolean NOT NULL); (params None)
+2015-09-26 12:37:25,606 [DEBUG] django.db.backends.schema: CREATE TABLE "Questionnaire_fileanswer" ("id" serial NOT NULL PRIMARY KEY, "file" varchar(100) NOT NULL, "is_image" boolean NOT NULL, "answer_sheet_id" integer NOT NULL); (params None)
+2015-09-26 12:37:25,623 [DEBUG] django.db.backends.schema: CREATE TABLE "Questionnaire_multichoiceanswer" ("id" serial NOT NULL PRIMARY KEY, "answer_sheet_id" integer NOT NULL, "question_id" integer NOT NULL); (params None)
+2015-09-26 12:37:25,627 [DEBUG] django.db.backends.schema: CREATE TABLE "Questionnaire_multichoiceanswer_choices" ("id" serial NOT NULL PRIMARY KEY, "multichoiceanswer_id" integer NOT NULL, "choice_id" integer NOT NULL, UNIQUE ("multichoiceanswer_id", "choice_id")); (params None)
+2015-09-26 12:37:25,640 [DEBUG] django.db.backends.schema: CREATE TABLE "Questionnaire_nonchoicequestion" ("id" serial NOT NULL PRIMARY KEY, "question" varchar(200) NOT NULL, "required" boolean NOT NULL, "order_in_list" integer NOT NULL, "type" smallint NOT NULL); (params None)
+2015-09-26 12:37:25,690 [DEBUG] django.db.backends.schema: CREATE TABLE "Questionnaire_questionnaire" ("id" serial NOT NULL PRIMARY KEY, "created_at" timestamp with time zone NOT NULL, "modified_at" timestamp with time zone NOT NULL, "is_active" boolean NOT NULL, "activity_id" integer NOT NULL); (params None)
+2015-09-26 12:37:25,694 [DEBUG] django.db.backends.schema: CREATE TABLE "Questionnaire_questionnaire_participants" ("id" serial NOT NULL PRIMARY KEY, "questionnaire_id" integer NOT NULL, "user_id" integer NOT NULL, UNIQUE ("questionnaire_id", "user_id")); (params None)
+2015-09-26 12:37:25,713 [DEBUG] django.db.backends.schema: CREATE TABLE "Questionnaire_singlechoiceanswer" ("id" serial NOT NULL PRIMARY KEY, "answer_sheet_id" integer NOT NULL, "choice_id" integer NOT NULL, "question_id" integer NOT NULL); (params None)
+2015-09-26 12:37:25,737 [DEBUG] django.db.backends.schema: CREATE TABLE "Questionnaire_textanswer" ("id" serial NOT NULL PRIMARY KEY, "text" text NOT NULL, "answer_sheet_id" integer NOT NULL, "question_id" integer NOT NULL); (params None)
+2015-09-26 12:37:25,809 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_nonchoicequestion" ADD COLUMN "questionnaire_id" integer NOT NULL; (params [])
+2015-09-26 12:37:25,810 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_nonchoicequestion" ALTER COLUMN "questionnaire_id" DROP DEFAULT; (params [])
+2015-09-26 12:37:25,875 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_fileanswer" ADD COLUMN "question_id" integer NOT NULL; (params [])
+2015-09-26 12:37:25,876 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_fileanswer" ALTER COLUMN "question_id" DROP DEFAULT; (params [])
+2015-09-26 12:37:25,934 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_choicequestion" ADD COLUMN "questionnaire_id" integer NOT NULL; (params [])
+2015-09-26 12:37:25,935 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_choicequestion" ALTER COLUMN "questionnaire_id" DROP DEFAULT; (params [])
+2015-09-26 12:37:25,999 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_choice" ADD COLUMN "question_id" integer NOT NULL; (params [])
+2015-09-26 12:37:26,000 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_choice" ALTER COLUMN "question_id" DROP DEFAULT; (params [])
+2015-09-26 12:37:26,066 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_answersheet" ADD COLUMN "questionnaire_id" integer NOT NULL; (params [])
+2015-09-26 12:37:26,067 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_answersheet" ALTER COLUMN "questionnaire_id" DROP DEFAULT; (params [])
+2015-09-26 12:37:26,123 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_answersheet" ADD COLUMN "user_id" integer NOT NULL; (params [])
+2015-09-26 12:37:26,124 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_answersheet" ALTER COLUMN "user_id" DROP DEFAULT; (params [])
+2015-09-26 12:37:26,125 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_fileanswer" ADD CONSTRAINT "ae77d14dee54255b8ff7ef79cef786fa" FOREIGN KEY ("answer_sheet_id") REFERENCES "Questionnaire_answersheet" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,127 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_fileanswer_6dbfd740" ON "Questionnaire_fileanswer" ("answer_sheet_id"); (params [])
+2015-09-26 12:37:26,129 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_multichoiceanswer" ADD CONSTRAINT "D8094a54a3cfcc3ea359364041064859" FOREIGN KEY ("answer_sheet_id") REFERENCES "Questionnaire_answersheet" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,130 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_multichoiceanswer" ADD CONSTRAINT "D016708961df4e05622c1690e9cd5f89" FOREIGN KEY ("question_id") REFERENCES "Questionnaire_choicequestion" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,132 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_multichoiceanswer_6dbfd740" ON "Questionnaire_multichoiceanswer" ("answer_sheet_id"); (params [])
+2015-09-26 12:37:26,133 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_multichoiceanswer_7aa0f6ee" ON "Questionnaire_multichoiceanswer" ("question_id"); (params [])
+2015-09-26 12:37:26,135 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_multichoiceanswer_choices" ADD CONSTRAINT "D795ed0429358a40014af373650618cc" FOREIGN KEY ("multichoiceanswer_id") REFERENCES "Questionnaire_multichoiceanswer" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,136 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_multichoiceanswer_choices" ADD CONSTRAINT "Questionn_choice_id_10bc1e072ad260a1_fk_Questionnaire_choice_id" FOREIGN KEY ("choice_id") REFERENCES "Questionnaire_choice" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,138 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_multichoiceanswer_choices_c6936201" ON "Questionnaire_multichoiceanswer_choices" ("multichoiceanswer_id"); (params [])
+2015-09-26 12:37:26,139 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_multichoiceanswer_choices_428bb064" ON "Questionnaire_multichoiceanswer_choices" ("choice_id"); (params [])
+2015-09-26 12:37:26,140 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_questionnaire" ADD CONSTRAINT "Questionna_activity_id_3d1ee7dbca77dce1_fk_Activity_activity_id" FOREIGN KEY ("activity_id") REFERENCES "Activity_activity" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,142 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_questionnaire_f8a3193a" ON "Questionnaire_questionnaire" ("activity_id"); (params [])
+2015-09-26 12:37:26,143 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_questionnaire_participants" ADD CONSTRAINT "D0aec637c0e77088e2f6c106da2e1af7" FOREIGN KEY ("questionnaire_id") REFERENCES "Questionnaire_questionnaire" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,144 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_questionnaire_participants" ADD CONSTRAINT "Questionnaire_question_user_id_32c0b5bee1e734db_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,145 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_questionnaire_participants_a5301291" ON "Questionnaire_questionnaire_participants" ("questionnaire_id"); (params [])
+2015-09-26 12:37:26,146 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_questionnaire_participants_e8701ad4" ON "Questionnaire_questionnaire_participants" ("user_id"); (params [])
+2015-09-26 12:37:26,147 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_singlechoiceanswer" ADD CONSTRAINT "D76537faa33a11ec3c9deaec64a6aaba" FOREIGN KEY ("answer_sheet_id") REFERENCES "Questionnaire_answersheet" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,148 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_singlechoiceanswer" ADD CONSTRAINT "Questionn_choice_id_45c3f4103ab3c3c4_fk_Questionnaire_choice_id" FOREIGN KEY ("choice_id") REFERENCES "Questionnaire_choice" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,149 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_singlechoiceanswer" ADD CONSTRAINT "D74f53eb04fa363ce731d11d722541e6" FOREIGN KEY ("question_id") REFERENCES "Questionnaire_choicequestion" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,151 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_singlechoiceanswer_6dbfd740" ON "Questionnaire_singlechoiceanswer" ("answer_sheet_id"); (params [])
+2015-09-26 12:37:26,152 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_singlechoiceanswer_428bb064" ON "Questionnaire_singlechoiceanswer" ("choice_id"); (params [])
+2015-09-26 12:37:26,153 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_singlechoiceanswer_7aa0f6ee" ON "Questionnaire_singlechoiceanswer" ("question_id"); (params [])
+2015-09-26 12:37:26,153 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_textanswer" ADD CONSTRAINT "D9fd8b5a8da12e23c8f297c8b5a14a87" FOREIGN KEY ("answer_sheet_id") REFERENCES "Questionnaire_answersheet" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,155 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_textanswer" ADD CONSTRAINT "d410940b490e47341f3b0558d2b5c5e1" FOREIGN KEY ("question_id") REFERENCES "Questionnaire_nonchoicequestion" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,156 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_textanswer_6dbfd740" ON "Questionnaire_textanswer" ("answer_sheet_id"); (params [])
+2015-09-26 12:37:26,157 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_textanswer_7aa0f6ee" ON "Questionnaire_textanswer" ("question_id"); (params [])
+2015-09-26 12:37:26,158 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_nonchoicequestion_a5301291" ON "Questionnaire_nonchoicequestion" ("questionnaire_id"); (params [])
+2015-09-26 12:37:26,159 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_nonchoicequestion" ADD CONSTRAINT "c2855d4b26a4f3ce282789b4787fdcfc" FOREIGN KEY ("questionnaire_id") REFERENCES "Questionnaire_questionnaire" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,160 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_fileanswer_7aa0f6ee" ON "Questionnaire_fileanswer" ("question_id"); (params [])
+2015-09-26 12:37:26,161 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_fileanswer" ADD CONSTRAINT "c3d7c59a79bee9ee2de3cf14c3fe4c3e" FOREIGN KEY ("question_id") REFERENCES "Questionnaire_nonchoicequestion" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,162 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_choicequestion_a5301291" ON "Questionnaire_choicequestion" ("questionnaire_id"); (params [])
+2015-09-26 12:37:26,163 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_choicequestion" ADD CONSTRAINT "D434d7eb79ddae95660a6ee765ad4fac" FOREIGN KEY ("questionnaire_id") REFERENCES "Questionnaire_questionnaire" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,164 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_choice_7aa0f6ee" ON "Questionnaire_choice" ("question_id"); (params [])
+2015-09-26 12:37:26,165 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_choice" ADD CONSTRAINT "D320f70b94de0b7d4d400831fddb5149" FOREIGN KEY ("question_id") REFERENCES "Questionnaire_choicequestion" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,166 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_answersheet_a5301291" ON "Questionnaire_answersheet" ("questionnaire_id"); (params [])
+2015-09-26 12:37:26,167 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_answersheet" ADD CONSTRAINT "D70b4064b2c4131d1bb1c5d0c6bb0e51" FOREIGN KEY ("questionnaire_id") REFERENCES "Questionnaire_questionnaire" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,168 [DEBUG] django.db.backends.schema: CREATE INDEX "Questionnaire_answersheet_e8701ad4" ON "Questionnaire_answersheet" ("user_id"); (params [])
+2015-09-26 12:37:26,169 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_answersheet" ADD CONSTRAINT "Questionnaire_answershe_user_id_970d0ba6ac3ce17_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:26,358 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_choicequestion" ADD COLUMN "created_at" timestamp with time zone DEFAULT %s NOT NULL; (params [datetime.datetime(2015, 7, 26, 1, 44, 50, 127970, tzinfo=<UTC>)])
+2015-09-26 12:37:26,362 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_choicequestion" ALTER COLUMN "created_at" DROP DEFAULT; (params [])
+2015-09-26 12:37:26,420 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_nonchoicequestion" ADD COLUMN "created_at" timestamp with time zone DEFAULT %s NOT NULL; (params [datetime.datetime(2015, 7, 26, 1, 45, 6, 606635, tzinfo=<UTC>)])
+2015-09-26 12:37:26,423 [DEBUG] django.db.backends.schema: ALTER TABLE "Questionnaire_nonchoicequestion" ALTER COLUMN "created_at" DROP DEFAULT; (params [])
+2015-09-26 12:37:26,674 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ADD COLUMN "coin_cost" integer DEFAULT %s NOT NULL; (params [0])
+2015-09-26 12:37:26,677 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ALTER COLUMN "coin_cost" DROP DEFAULT; (params [])
+2015-09-26 12:37:26,735 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ADD COLUMN "created_at" timestamp with time zone NOT NULL; (params [])
+2015-09-26 12:37:26,787 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ADD COLUMN "getted" boolean DEFAULT %s NOT NULL; (params [False])
+2015-09-26 12:37:26,790 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ALTER COLUMN "getted" DROP DEFAULT; (params [])
+2015-09-26 12:37:26,846 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ADD COLUMN "rmb" integer DEFAULT %s NOT NULL; (params [0])
+2015-09-26 12:37:26,849 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ALTER COLUMN "rmb" DROP DEFAULT; (params [])
+2015-09-26 12:37:26,900 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ADD COLUMN "target_id" integer NOT NULL; (params [])
+2015-09-26 12:37:26,963 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ADD COLUMN "zfb_account" varchar(50) DEFAULT %s NOT NULL; (params [''])
+2015-09-26 12:37:26,966 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ALTER COLUMN "zfb_account" DROP DEFAULT; (params [])
+2015-09-26 12:37:27,024 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ALTER COLUMN "address" DROP NOT NULL; (params [])
+2015-09-26 12:37:27,025 [DEBUG] django.db.backends.schema: CREATE INDEX "Welfare_welfaregift_55e2df16" ON "Welfare_welfaregift" ("target_id"); (params [])
+2015-09-26 12:37:27,027 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ADD CONSTRAINT "Welfare_welfaregift_target_id_5373a318cb02170d_fk_auth_user_id" FOREIGN KEY ("target_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:27,082 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ADD COLUMN "getted_date" timestamp with time zone NULL; (params [])
+2015-09-26 12:37:27,083 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ALTER COLUMN "getted_date" DROP DEFAULT; (params [])
+2015-09-26 12:37:27,220 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" DROP CONSTRAINT "Welfare_welfaregift_target_id_5373a318cb02170d_fk_auth_user_id"; (params [])
+2015-09-26 12:37:27,221 [DEBUG] django.db.backends.schema: ALTER TABLE "Welfare_welfaregift" ADD CONSTRAINT "Welfare_welfaregift_target_id_5373a318cb02170d_fk_auth_user_id" FOREIGN KEY ("target_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:27,283 [DEBUG] django.db.backends.schema: CREATE TABLE "django_admin_log" ("id" serial NOT NULL PRIMARY KEY, "action_time" timestamp with time zone NOT NULL, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint NOT NULL CHECK ("action_flag" >= 0), "change_message" text NOT NULL, "content_type_id" integer NULL, "user_id" integer NOT NULL); (params None)
+2015-09-26 12:37:27,288 [DEBUG] django.db.backends.schema: ALTER TABLE "django_admin_log" ADD CONSTRAINT "djan_content_type_id_697914295151027a_fk_django_content_type_id" FOREIGN KEY ("content_type_id") REFERENCES "django_content_type" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:27,290 [DEBUG] django.db.backends.schema: ALTER TABLE "django_admin_log" ADD CONSTRAINT "django_admin_log_user_id_52fdd58701c5f563_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:27,291 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_417f1b1c" ON "django_admin_log" ("content_type_id"); (params [])
+2015-09-26 12:37:27,292 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_e8701ad4" ON "django_admin_log" ("user_id"); (params [])
+2015-09-26 12:37:27,406 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" ALTER COLUMN "name" DROP NOT NULL; (params [])
+2015-09-26 12:37:27,462 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" DROP COLUMN "name" CASCADE; (params [])
+2015-09-26 12:37:27,526 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_permission" ALTER COLUMN "name" TYPE varchar(255); (params [])
+2015-09-26 12:37:27,588 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" ALTER COLUMN "email" TYPE varchar(254); (params [])
+2015-09-26 12:37:27,855 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" ALTER COLUMN "last_login" DROP NOT NULL; (params [])
+2015-09-26 12:37:27,868 [DEBUG] django.db.backends.schema: CREATE TABLE "social_auth_association" ("id" serial NOT NULL PRIMARY KEY, "server_url" varchar(255) NOT NULL, "handle" varchar(255) NOT NULL, "secret" varchar(255) NOT NULL, "issued" integer NOT NULL, "lifetime" integer NOT NULL, "assoc_type" varchar(64) NOT NULL); (params None)
+2015-09-26 12:37:27,881 [DEBUG] django.db.backends.schema: CREATE TABLE "social_auth_code" ("id" serial NOT NULL PRIMARY KEY, "email" varchar(75) NOT NULL, "code" varchar(32) NOT NULL, "verified" boolean NOT NULL); (params None)
+2015-09-26 12:37:27,891 [DEBUG] django.db.backends.schema: CREATE TABLE "social_auth_nonce" ("id" serial NOT NULL PRIMARY KEY, "server_url" varchar(255) NOT NULL, "timestamp" integer NOT NULL, "salt" varchar(65) NOT NULL); (params None)
+2015-09-26 12:37:27,954 [DEBUG] django.db.backends.schema: CREATE TABLE "social_auth_usersocialauth" ("id" serial NOT NULL PRIMARY KEY, "provider" varchar(32) NOT NULL, "uid" varchar(255) NOT NULL, "extra_data" text NOT NULL, "user_id" integer NOT NULL); (params None)
+2015-09-26 12:37:28,020 [DEBUG] django.db.backends.schema: ALTER TABLE "social_auth_usersocialauth" ADD CONSTRAINT "social_auth_usersocialauth_provider_2f763109e2c4a1fb_uniq" UNIQUE ("provider", "uid"); (params [])
+2015-09-26 12:37:28,029 [DEBUG] django.db.backends.schema: ALTER TABLE "social_auth_code" ADD CONSTRAINT "social_auth_code_email_75f27066d057e3b6_uniq" UNIQUE ("email", "code"); (params [])
+2015-09-26 12:37:28,037 [DEBUG] django.db.backends.schema: ALTER TABLE "social_auth_nonce" ADD CONSTRAINT "social_auth_nonce_server_url_36601f978463b4_uniq" UNIQUE ("server_url", "timestamp", "salt"); (params [])
+2015-09-26 12:37:28,039 [DEBUG] django.db.backends.schema: CREATE INDEX "social_auth_code_c1336794" ON "social_auth_code" ("code"); (params [])
+2015-09-26 12:37:28,040 [DEBUG] django.db.backends.schema: CREATE INDEX "social_auth_code_code_32d820bdeaa954bc_like" ON "social_auth_code" ("code" varchar_pattern_ops); (params [])
+2015-09-26 12:37:28,041 [DEBUG] django.db.backends.schema: ALTER TABLE "social_auth_usersocialauth" ADD CONSTRAINT "social_auth_usersocial_user_id_193b2d80880502b2_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:28,042 [DEBUG] django.db.backends.schema: CREATE INDEX "social_auth_usersocialauth_e8701ad4" ON "social_auth_usersocialauth" ("user_id"); (params [])
+2015-09-26 12:37:28,133 [DEBUG] django.db.backends.schema: ALTER TABLE "social_auth_usersocialauth" DROP CONSTRAINT "social_auth_usersocial_user_id_193b2d80880502b2_fk_auth_user_id"; (params [])
+2015-09-26 12:37:28,134 [DEBUG] django.db.backends.schema: ALTER TABLE "social_auth_usersocialauth" ADD CONSTRAINT "social_auth_usersocial_user_id_193b2d80880502b2_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-09-26 12:37:28,147 [DEBUG] django.db.backends.schema: ALTER TABLE "social_auth_code" ALTER COLUMN "email" TYPE varchar(254); (params [])
+2015-09-26 12:37:28,160 [DEBUG] django.db.backends.schema: CREATE TABLE "django_session" ("session_key" varchar(40) NOT NULL PRIMARY KEY, "session_data" text NOT NULL, "expire_date" timestamp with time zone NOT NULL); (params None)
+2015-09-26 12:37:28,163 [DEBUG] django.db.backends.schema: CREATE INDEX "django_session_de54fa62" ON "django_session" ("expire_date"); (params [])
+2015-09-26 12:37:28,164 [DEBUG] django.db.backends.schema: CREATE INDEX "django_session_session_key_461cfeaa630ca218_like" ON "django_session" ("session_key" varchar_pattern_ops); (params [])
+2015-09-26 12:47:27,429 [DEBUG] Activity.forms: 上传的持续时间参数为0d7h0m, 计算得到的持续时间为420m
+2015-09-26 12:47:32,763 [DEBUG] Activity.views: The share code is: c60d442dfc6f1309620b0d605da9db39
+2015-09-26 12:47:44,792 [DEBUG] Activity.views: The share code is: c60d442dfc6f1309620b0d605da9db39
+2015-09-26 12:47:58,589 [DEBUG] Activity.views: The share code is: c60d442dfc6f1309620b0d605da9db39
+2015-09-28 13:41:52,724 [DEBUG] Activity.views: The share code is: c60d442dfc6f1309620b0d605da9db39
+2015-09-28 13:42:45,424 [DEBUG] Activity.forms: 上传的持续时间参数为0d11h0m, 计算得到的持续时间为660m
+2015-09-28 13:42:51,776 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-09-28 13:43:04,371 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-09-28 13:44:44,364 [DEBUG] root: 创建用户条目，用户名为testcoin，密码为huang9040601
+2015-09-28 13:45:30,131 [DEBUG] Profile.views: 用户|test coin(id: 3)|注册第二步失败，错误信息为: <bound method ErrorDict.as_data of {'code': [u'\u9a8c\u8bc1\u7801\u4e0d\u5339\u914d']}>
+2015-09-28 13:45:44,848 [DEBUG] Profile.views: 用户|test coin(id: 3)|注册第二步失败，错误信息为: <bound method ErrorDict.as_data of {'code': [u'\u9a8c\u8bc1\u7801\u4e0d\u5339\u914d']}>
+2015-09-28 13:47:04,907 [DEBUG] Profile.views: 用户|test coin(id: 3)|注册第二步失败，错误信息为: <bound method ErrorDict.as_data of {'code': [u'\u9a8c\u8bc1\u7801\u4e0d\u5339\u914d']}>
+2015-09-28 13:57:00,044 [DEBUG] Activity.views: The share code is: c60d442dfc6f1309620b0d605da9db39
+2015-09-28 13:57:17,452 [DEBUG] Activity.views: The share code is: c60d442dfc6f1309620b0d605da9db39
+2015-09-28 13:57:17,474 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|test coin(username: testcoin)|，对应的活动是|找米企业用户认证程序(id: 1)|
+2015-09-28 13:57:29,002 [DEBUG] Activity.views: Code not found
+2015-09-28 13:57:29,093 [DEBUG] Activity.views: Code not found
+2015-09-28 13:57:30,038 [DEBUG] Activity.views: Code not found
+2015-09-28 13:58:00,801 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-09-28 13:58:02,282 [DEBUG] Activity.views: 试图报名活动，对应活动为|测试活动|(id:8), 当前用户为|Zhaomi Admin|(lena)
+2015-09-28 13:58:02,304 [DEBUG] Activity.views: 申请与分享记录绑定失败, 本次报名为用户|username: lena|报名活动|id: 8|,code:092d18be1a5d269bc56203a2d11c0218
+2015-09-28 13:58:05,123 [DEBUG] Activity.views: The share code is: c60d442dfc6f1309620b0d605da9db39
+2015-09-28 13:58:16,475 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-09-28 13:58:41,160 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-09-28 14:00:22,139 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-09-28 14:01:07,163 [DEBUG] root: 创建用户条目，用户名为testcoin2，密码为huang9040601
+2015-09-28 14:18:24,387 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-09-28 14:18:29,566 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-09-28 14:18:57,524 [DEBUG] root: 创建用户条目，用户名为testcoin3，密码为huang9040601
+2015-09-28 14:20:29,269 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-09-28 14:20:41,160 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-09-28 14:20:41,275 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-09-28 14:21:03,688 [DEBUG] root: 创建用户条目，用户名为huangyan，密码为huang9040601
+2015-09-28 14:24:28,862 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-09-28 14:24:43,576 [DEBUG] root: 创建用户条目，用户名为huangyan14，密码为huang9040601
+2015-09-28 14:29:09,631 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-09-28 14:29:57,316 [DEBUG] root: 创建用户条目，用户名为huangyan，密码为huang9040601
+2015-09-28 14:30:25,113 [DEBUG] Profile.views: 注册第二步，从操作用户名为huangyan，session中存储的密码是huang9040601
+2015-09-28 14:30:27,333 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-09-28 14:30:27,349 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|woody huang(username: huangyan)|，对应的活动是|测试活动(id: 8)|

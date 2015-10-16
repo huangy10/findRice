@@ -23,6 +23,7 @@ def send_sms(apikey, text, mobile):
     This utility function enables sending sms to the user given its phone number, api key
      and the message content.
     """
+    print "验证码为：" + text
     params = urllib.urlencode({'apikey': apikey, 'text': text, 'mobile': mobile})
     headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
     conn = httplib.HTTPConnection(host, port=port, timeout=30)

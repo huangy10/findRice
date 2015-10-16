@@ -78,10 +78,9 @@
                 </div>
             </form>
         </div>
-        {# <img src="//zhao-mi.net/assets/imgs/detail-banner.png"> #}
         <img src="//zhao-mi.net/assets/imgs/detail-banner.png">
     </div>
-    <div id="mine-container" {% if act %}data-action="{{ act.id }}"{% endif %}>
+    <div id="mine-container" {% if act %}data-action="{{ act.id }}"{% endif %} class="fn-clr">
         {% block menu_bar %}
             <div id="mine-type" class="fn-clr">
                 {% block categories %}

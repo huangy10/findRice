@@ -7,5 +7,11 @@
       <schema-pattern>find_rice_db.*</schema-pattern>
       <default-schemas>find_rice_db.*</default-schemas>
     </data-source>
+    <data-source name="Django default" uuid="63ffac47-60dd-4208-8d29-b6ff2f43e9b4">
+      <user-name>find_rice2</user-name>
+      <user-password>dfd9dfc2dfcbdfc4dfcddfc2dfcbdfc3</user-password>
+      <schema-pattern>find_rice_db.pg_catalog find_rice_db.public</schema-pattern>
+      <default-schemas>find_rice_db.pg_catalog find_rice_db.public</default-schemas>
+    </data-source>
   </component>
 </project>

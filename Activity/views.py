@@ -312,6 +312,7 @@ def create_new_activity_1(request):
                 data['start_time'] = u'开始时间不能早于当前时间'
             if 'end_time' in errors:
                 data['end_time'] = u'结束时间不能早于开始时间'
+
             if data == {}:
                 data['unknown'] = u'未知错误'
             return JsonResponse({

@@ -9,7 +9,7 @@
     </div>
     <div id="apply-list">
         {% for data in data_set %}
-        <div class="apply-item" data-target="{{ data.user.id }}">
+        <div class="apply-item" data-target="{{ data.user.id }}" {% if act.status == 2 %}data-status="finished"{% endif %}>
             <div class="apply-item-content fn-clr">
                     <span class="portrait">
                         <img src="{{ data.user.profile.avatar_url }}" alt="">
@@ -21,7 +21,7 @@
                     <button class="z-btn red" data-optype="deny">拒绝</button>
                 {% elif data.apply.status == "approved" %}
                     <button class="z-btn green" data-optype="finish">确认完成</button>
-                    <button class="z-btn green" data-optype="approve_cancel">取消通过</button>
+                    <button class="z-btn red" data-optype="approve_cancel">取消通过</button>
                 {% elif data.apply.status == "denied" %}
                     <button class="z-btn green" data-optype="deny_cancel">取消拒绝</button>
                     <button class="z-btn red">已谢绝</button>
@@ -39,7 +39,7 @@
                 <div class="apply-answers">
                     {% for answer in data.answers %}
                         <div class="apply-answer">
-                            <p>{{ answer.question }}</p>
+                            <p>{{ forloop.counter }}. {{ answer.question }}</p>
                             {% if answer.file %}
                                 <div class="answer-img">
                                 <img src="{{ answer.file.url }}" alt="">

@@ -7,7 +7,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="//zhao-mi.net/m/build/mine.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/build/activity.js"></script>
 </head>
 <body>
 {% csrf_token %}
@@ -46,7 +46,7 @@
         </div>
         <div class="mine-content" data-action="{{ act.id }}" id="mine-container">
             {% for data in data_set %}
-                <div class="tr apply-item" data-target="{{ data.user.id }}">
+                <div class="tr apply-item" data-target="{{ data.user.id }}"  {% if act.status == 2 %}data-status="finished"{% endif %}>
                     <div class="zui-flex tr-item">
                         <div class="zui-cell zui-flex-fixed">{{ forloop.counter }}.
                             <span class="img"><img src="{{ data.user.profile.avatar_url }}" alt=""/></span>
@@ -54,16 +54,16 @@
                         <div class="zui-cell "><span class="name">{{ data.user.profile.name }}</span></div>
                         <div class="zui-cell zui-flex-fixed apply-item-content">
                             {% if data.apply.status == "applying" %}
-                                <button class="zui-btn btn-refuse" data-optype="deny">拒绝</button>
-                                <button class="zui-btn btn-passed" data-optype="approve">通过</button>
+                                <button class="zui-btn btn-refuse zui-btn-important" data-optype="deny">拒绝</button>
+                                <button class="zui-btn btn-passed zui-btn-action" data-optype="approve">通过</button>
                             {% elif data.apply.status == "approved" %}
-                                <button class="zui-btn btn-passed" data-optype="finish">确认完成</button>
-                                <button class="zui-btn btn-passed" data-optype="approve_cancel">取消通过</button>
+                                <button class="zui-btn btn-passed zui-btn-action" data-optype="finish">确认完成</button>
+                                <button class="zui-btn btn-passed zui-btn-important" data-optype="approve_cancel">取消通过</button>
                             {% elif data.apply.status == "denied" %}
-                                <button class="zui-btn btn-passed" data-optype="deny_cancel">取消拒绝</button>
-                                <button class="zui-btn btn-refuse">已谢绝</button>
+                                <button class="zui-btn btn-passed zui-btn-action" data-optype="deny_cancel">取消拒绝</button>
+                                <button class="zui-btn btn-refuse zui-btn-important">已谢绝</button>
                             {% else %}
-                                <button class="zui-btn btn-passed" data-optype="finished">已完成</button>
+                                <button class="zui-btn btn-passed zui-btn-action" data-optype="finished">已完成</button>
                             {% endif %}
                         </div>
                         <div class="zui-cell zui-flex-fixed"><div class="look-detail">详情 <i class="zui-icon icon-arrow-up"></i></div></div>
