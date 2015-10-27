@@ -84,7 +84,6 @@ def user_login(request):
     return render(request, choose_template_by_device(request, "Profile/login.html", "Profile/mobile/login.html"), args)
 
 
-@login_required()
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect("/")
@@ -152,6 +151,7 @@ def register_step_1(request):
                   args)
 
 
+@login_required()
 @require_http_methods(["GET", "POST"])
 def register_step_2(request):
     try:
@@ -400,6 +400,7 @@ def mine_start(request, start, size):
     }
     args.update(csrf(request))
     return render(request, choose_template_by_device(request, "Profile/start.html", "Profile/mobile/start.html"), args)
+
 
 @require_GET
 @login_required()

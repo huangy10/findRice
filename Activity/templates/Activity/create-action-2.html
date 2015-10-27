@@ -144,7 +144,7 @@
         </div>
         <div id="action-criteria-btns">
             <button class="z-btn next" type="submit">下一步</button>
-            <a class="z-btn prev" href="/action/{{ activity.id }}/create/1">上一步</a>
+            <a class="z-btn prev" href="/action/{{ activity.id }}/{% if edit %}edit{% else %}create{% endif %}/1">上一步</a>
         </div>
         </form>
     </div>

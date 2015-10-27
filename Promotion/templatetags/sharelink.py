@@ -1,5 +1,5 @@
 from django.template import Library
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from Promotion.models import Share
 register = Library()
 
@@ -14,3 +14,7 @@ def share_link(context, activity):
         return share.get_share_link()
     except ObjectDoesNotExist:
         return ""
+    except MultipleObjectsReturned:
+        share = Share.objects.filter(activity=activity, user=user).first()
+        Share.objects.filter(activity=activity, user=user).last().delete()
+        return share.get_share_link()
