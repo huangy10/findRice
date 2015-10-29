@@ -14,10 +14,7 @@ from .models import VerifyCode
 from .tasks import create_zipped_avatar
 
 
-class UserRegisterFormStep1(forms.ModelForm):
-
-    class Meta:
-        model = get_user_model()
+class UserRegisterFormStep1(forms.Form):
 
     error_messages = {
         'password_mismatch': "两次输入的密码不匹配",

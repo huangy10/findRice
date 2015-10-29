@@ -80,7 +80,8 @@ class ActivityCreationForm(forms.ModelForm):
             obj.last_length
         ))
         type_no = int(self.cleaned_data.get("activity_type"))
-        obj.activity_type = ActivityType.objects.all()[type_no]
+        print self.cleaned_data
+        obj.activity_type = list(ActivityType.objects.all())[type_no]
         if self.cleaned_data['poster'] is not None or not self.is_bound:
             obj.poster = self.cleaned_data['poster']
 
@@ -98,6 +99,13 @@ class ActivityCreationForm(forms.ModelForm):
 
         obj.is_active = False   # 创建的表格在问卷生成以后才会有效
         obj.host = self.user
+
+        if not obj.host.profile.identified and self.instance.pk is None:
+            obj.identified = False
+            obj.reward_for_share = 0
+            obj.reward_for_share_and_finished_percentage = 0
+            obj.reward_share_limit = 0
+
         if commit:
             obj.save()
             # copy a new instance of the act object

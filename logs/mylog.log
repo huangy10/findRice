@@ -707,3 +707,69 @@
 2015-09-28 14:30:25,113 [DEBUG] Profile.views: 注册第二步，从操作用户名为huangyan，session中存储的密码是huang9040601
 2015-09-28 14:30:27,333 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
 2015-09-28 14:30:27,349 [DEBUG] Activity.views: 分享记录创建，点进来的用户是|woody huang(username: huangyan)|，对应的活动是|测试活动(id: 8)|
+2015-10-28 22:24:03,777 [DEBUG] Activity.forms: 上传的持续时间参数为1d0h35m, 计算得到的持续时间为1475m
+2015-10-28 22:24:07,889 [DEBUG] Activity.forms: 上传的持续时间参数为1d0h35m, 计算得到的持续时间为1475m
+2015-10-28 22:24:08,676 [DEBUG] Activity.forms: 上传的持续时间参数为1d0h35m, 计算得到的持续时间为1475m
+2015-10-28 22:24:17,830 [DEBUG] Activity.forms: 上传的持续时间参数为1d0h35m, 计算得到的持续时间为1475m
+2015-10-28 22:24:18,725 [DEBUG] Activity.forms: 上传的持续时间参数为1d0h35m, 计算得到的持续时间为1475m
+2015-10-28 22:24:19,220 [DEBUG] Activity.forms: 上传的持续时间参数为1d0h35m, 计算得到的持续时间为1475m
+2015-10-28 22:24:19,436 [DEBUG] Activity.forms: 上传的持续时间参数为1d0h35m, 计算得到的持续时间为1475m
+2015-10-28 22:24:19,671 [DEBUG] Activity.forms: 上传的持续时间参数为1d0h35m, 计算得到的持续时间为1475m
+2015-10-28 22:25:46,087 [DEBUG] Activity.forms: 上传的持续时间参数为0d6h0m, 计算得到的持续时间为360m
+2015-10-28 22:25:55,206 [DEBUG] Activity.forms: 上传的持续时间参数为0d6h0m, 计算得到的持续时间为360m
+2015-10-28 22:26:54,504 [DEBUG] Activity.forms: 上传的持续时间参数为0d6h0m, 计算得到的持续时间为360m
+2015-10-28 22:27:09,883 [DEBUG] Activity.views: The share code is: 99ded8538cec9b2bde48f1a1ce0f1cd7
+2015-10-28 22:52:44,953 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h0m, 计算得到的持续时间为60m
+2015-10-28 22:52:56,640 [DEBUG] Activity.views: The share code is: fdc810a860fdc06935f86eb944050d2d
+2015-10-29 11:08:18,913 [DEBUG] Activity.views: The share code is: fdc810a860fdc06935f86eb944050d2d
+2015-10-29 11:08:23,328 [DEBUG] Activity.views: The share code is: 99ded8538cec9b2bde48f1a1ce0f1cd7
+2015-10-29 11:08:26,563 [DEBUG] Activity.views: The share code is: 092d18be1a5d269bc56203a2d11c0218
+2015-10-29 11:08:29,924 [DEBUG] Activity.views: The share code is: c60d442dfc6f1309620b0d605da9db39
+2015-10-29 11:08:39,564 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h0m, 计算得到的持续时间为60m
+2015-10-29 11:08:39,622 [DEBUG] Activity.views: 找到到问卷为id＝6, 其创建时间是2015-10-28 14:52:50.493033+00:00
+2015-10-29 11:08:41,310 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[]
+2015-10-29 11:08:48,593 [DEBUG] Activity.views: The share code is: fdc810a860fdc06935f86eb944050d2d
+2015-10-29 13:19:51,221 [DEBUG] Activity.views: The share code is: fdc810a860fdc06935f86eb944050d2d
+2015-10-29 13:20:24,400 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h0m, 计算得到的持续时间为60m
+2015-10-29 13:20:24,476 [DEBUG] Activity.views: 找到到问卷为id＝7, 其创建时间是2015-10-29 03:08:41.310557+00:00
+2015-10-29 13:21:01,992 [DEBUG] Activity.views: The share code is: fdc810a860fdc06935f86eb944050d2d
+2015-10-29 13:21:05,220 [DEBUG] Activity.views: The share code is: fdc810a860fdc06935f86eb944050d2d
+2015-10-29 13:21:17,767 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h0m, 计算得到的持续时间为60m
+2015-10-29 13:21:17,796 [DEBUG] Activity.views: 找到到问卷为id＝7, 其创建时间是2015-10-29 03:08:41.310557+00:00
+2015-10-29 13:21:49,624 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[]
+2015-10-29 13:21:58,832 [DEBUG] Activity.views: The share code is: fdc810a860fdc06935f86eb944050d2d
+2015-10-29 13:22:36,388 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h0m, 计算得到的持续时间为60m
+2015-10-29 13:22:36,439 [DEBUG] Activity.views: 找到到问卷为id＝8, 其创建时间是2015-10-29 05:21:49.624970+00:00
+2015-10-29 13:27:46,597 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h0m, 计算得到的持续时间为60m
+2015-10-29 13:27:46,626 [DEBUG] Activity.views: 找到到问卷为id＝8, 其创建时间是2015-10-29 05:21:49.624970+00:00
+2015-10-29 13:29:43,295 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[]
+2015-10-29 13:30:36,691 [DEBUG] Activity.views: The share code is: fdc810a860fdc06935f86eb944050d2d
+2015-10-29 13:30:49,438 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h0m, 计算得到的持续时间为60m
+2015-10-29 13:30:49,857 [DEBUG] Activity.views: 找到到问卷为id＝9, 其创建时间是2015-10-29 05:29:43.295647+00:00
+2015-10-29 13:30:52,250 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[]
+2015-10-29 13:30:58,385 [DEBUG] Activity.views: The share code is: fdc810a860fdc06935f86eb944050d2d
+2015-10-29 13:31:07,124 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h0m, 计算得到的持续时间为60m
+2015-10-29 13:31:07,152 [DEBUG] Activity.views: 找到到问卷为id＝10, 其创建时间是2015-10-29 05:30:52.250357+00:00
+2015-10-29 13:31:13,065 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[]
+2015-10-29 13:31:30,014 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h0m, 计算得到的持续时间为60m
+2015-10-29 13:31:30,043 [DEBUG] Activity.views: 找到到问卷为id＝11, 其创建时间是2015-10-29 05:31:13.066095+00:00
+2015-10-29 13:31:32,445 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[]
+2015-10-29 13:31:41,175 [DEBUG] Activity.views: The share code is: fdc810a860fdc06935f86eb944050d2d
+2015-10-29 13:31:47,507 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h0m, 计算得到的持续时间为60m
+2015-10-29 13:31:47,537 [DEBUG] Activity.views: 找到到问卷为id＝12, 其创建时间是2015-10-29 05:31:32.446288+00:00
+2015-10-29 13:31:49,962 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[]
+2015-10-29 13:33:03,981 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h0m, 计算得到的持续时间为60m
+2015-10-29 13:33:04,010 [DEBUG] Activity.views: 找到到问卷为id＝13, 其创建时间是2015-10-29 05:31:49.963178+00:00
+2015-10-29 13:33:48,360 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h0m, 计算得到的持续时间为60m
+2015-10-29 13:33:48,390 [DEBUG] Activity.views: 找到到问卷为id＝13, 其创建时间是2015-10-29 05:31:49.963178+00:00
+2015-10-29 13:34:00,536 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[]
+2015-10-29 13:34:07,652 [DEBUG] Activity.views: 找到到问卷为id＝13, 其创建时间是2015-10-29 05:31:49.963178+00:00
+2015-10-29 13:35:21,230 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h0m, 计算得到的持续时间为60m
+2015-10-29 13:35:21,692 [DEBUG] Activity.views: 找到到问卷为id＝13, 其创建时间是2015-10-29 05:31:49.963178+00:00
+2015-10-29 13:41:16,180 [DEBUG] Activity.forms: 上传的持续时间参数为0d1h0m, 计算得到的持续时间为60m
+2015-10-29 13:41:16,600 [DEBUG] Activity.views: 找到到问卷为id＝13, 其创建时间是2015-10-29 05:31:49.963178+00:00
+2015-10-29 13:41:18,079 [DEBUG] Activity.views: 编辑活动第二步，提交到新到问卷结构是[]
+2015-10-29 14:12:25,407 [DEBUG] Profile.views: 注册用户第一步失败，错误信息为: <bound method ErrorDict.as_data of {'username': [u'\u7528\u6237\u540d\u8bf7\u4f7f\u7528\u5b57\u6bcd\uff0c\u6570\u5b57\u6216\u8005\u4e0b\u5212\u7ebf']}>
+2015-10-29 14:12:29,644 [DEBUG] Profile.views: 注册用户第一步失败，错误信息为: <bound method ErrorDict.as_data of {'username': [u'\u7528\u6237\u540d\u8bf7\u4f7f\u7528\u5b57\u6bcd\uff0c\u6570\u5b57\u6216\u8005\u4e0b\u5212\u7ebf']}>
+2015-10-29 14:12:49,547 [DEBUG] Profile.views: 注册用户第一步失败，错误信息为: <bound method ErrorDict.as_data of {'username': [u'\u7528\u6237\u540d\u8bf7\u4f7f\u7528\u5b57\u6bcd\uff0c\u6570\u5b57\u6216\u8005\u4e0b\u5212\u7ebf']}>
+2015-10-29 14:14:00,755 [DEBUG] root: 创建用户条目，用户名为huangyan14，密码为huang9040601

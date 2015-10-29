@@ -578,7 +578,7 @@ def edit_activity_2(request, action_id):
     if request.method == "POST":
         data = simplejson.loads(request.POST["criteria"])
         # 从POST上来的json数据中构造问卷
-	logger.debug(u"编辑活动第二步，提交到新到问卷结构是{0}".format(request.POST["criteria"]))
+        logger.debug(u"编辑活动第二步，提交到新到问卷结构是{0}".format(request.POST["criteria"]))
         try:
             questionnaire = create_questionnaire_with_json({"criteria": data}, activity, is_active=False)
             request.session["questionnaire_id_tmp"] = questionnaire.id
@@ -659,7 +659,6 @@ def save_an_activity(request, action_id):
         activity.is_active = False
         backup.save()
         activity.save()
-
         return JsonResponse({
             "success": True,
             "data": {

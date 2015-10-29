@@ -33198,3 +33198,178 @@ AttributeError: 'NoneType' object has no attribute 'id'
 2015-09-28 14:19:40,335 [WARNING] django.request: Not Found: /register
 2015-09-28 14:21:43,791 [WARNING] django.request: Not Found: /register
 2015-09-28 23:40:04,779 [WARNING] django.request: Not Found: /admin/config.php
+2015-10-28 22:20:55,335 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-10-28 22:20:55,382 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-10-28 22:20:59,073 [ERROR] django.request: Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 108, in get_response
+    response = middleware_method(request)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/middleware/common.py", line 74, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 647, in is_valid_path
+    resolve(path, urlconf)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 522, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 368, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 368, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 240, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 247, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/utils/lru_cache.py", line 101, in wrapper
+    result = user_function(*args, **kwds)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/urlresolvers.py", line 106, in get_callable
+    mod = import_module(mod_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 24, in <module>
+    from .forms import UserRegisterFormStep1, UserRegisterFormStep2
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 17, in <module>
+    class UserRegisterFormStep1(forms.ModelForm):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/models.py", line 274, in __new__
+    "needs updating." % name
+ImproperlyConfigured: Creating a ModelForm without either the 'fields' attribute or the 'exclude' attribute is prohibited; form UserRegisterFormStep1 needs updating.
+2015-10-28 22:20:59,241 [WARNING] django.request: Not Found: /favicon.ico
+2015-10-28 22:24:03,781 [ERROR] django.request: Internal Server Error: /action/new/create/1
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 66, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 294, in create_new_activity_1
+    act = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/forms.py", line 102, in save
+    if not obj.host.profile.identified and not self.is_bound():
+TypeError: 'bool' object is not callable
+2015-10-28 22:24:07,890 [ERROR] django.request: Internal Server Error: /action/new/create/1
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 66, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 294, in create_new_activity_1
+    act = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/forms.py", line 102, in save
+    if not obj.host.profile.identified and not self.is_bound():
+TypeError: 'bool' object is not callable
+2015-10-28 22:24:08,677 [ERROR] django.request: Internal Server Error: /action/new/create/1
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 66, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 294, in create_new_activity_1
+    act = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/forms.py", line 102, in save
+    if not obj.host.profile.identified and not self.is_bound():
+TypeError: 'bool' object is not callable
+2015-10-28 22:24:17,831 [ERROR] django.request: Internal Server Error: /action/new/create/1
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 66, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 294, in create_new_activity_1
+    act = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/forms.py", line 102, in save
+    if not obj.host.profile.identified and not self.is_bound():
+TypeError: 'bool' object is not callable
+2015-10-28 22:24:18,726 [ERROR] django.request: Internal Server Error: /action/new/create/1
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 66, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 294, in create_new_activity_1
+    act = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/forms.py", line 102, in save
+    if not obj.host.profile.identified and not self.is_bound():
+TypeError: 'bool' object is not callable
+2015-10-28 22:24:19,221 [ERROR] django.request: Internal Server Error: /action/new/create/1
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 66, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 294, in create_new_activity_1
+    act = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/forms.py", line 102, in save
+    if not obj.host.profile.identified and not self.is_bound():
+TypeError: 'bool' object is not callable
+2015-10-28 22:24:19,437 [ERROR] django.request: Internal Server Error: /action/new/create/1
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 66, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 294, in create_new_activity_1
+    act = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/forms.py", line 102, in save
+    if not obj.host.profile.identified and not self.is_bound():
+TypeError: 'bool' object is not callable
+2015-10-28 22:24:19,672 [ERROR] django.request: Internal Server Error: /action/new/create/1
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 66, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 294, in create_new_activity_1
+    act = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/forms.py", line 102, in save
+    if not obj.host.profile.identified and not self.is_bound():
+TypeError: 'bool' object is not callable
+2015-10-28 22:25:46,089 [ERROR] django.request: Internal Server Error: /action/new/create/1
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 66, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 294, in create_new_activity_1
+    act = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/forms.py", line 102, in save
+    if not obj.host.profile.identified and not self.is_bound():
+TypeError: 'bool' object is not callable
+2015-10-28 22:25:55,208 [ERROR] django.request: Internal Server Error: /action/new/create/1
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 66, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 294, in create_new_activity_1
+    act = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/forms.py", line 102, in save
+    if not obj.host.profile.identified and not self.is_bound():
+TypeError: 'bool' object is not callable
+2015-10-29 14:14:00,756 [ERROR] django.request: Internal Server Error: /register/basic
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 98, in register_step_1
+    user = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 84, in save
+    user = super(UserRegisterFormStep1, self).save(commit=False)
+AttributeError: 'super' object has no attribute 'save'
