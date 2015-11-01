@@ -38,6 +38,7 @@ from .tasks import create_zipped_avatar
 
 logger = logging.getLogger(__name__)
 
+# TODO: 重新改造整个后台的注册、登陆系统
 
 @require_http_methods(["GET", "POST"])
 def user_login(request):
