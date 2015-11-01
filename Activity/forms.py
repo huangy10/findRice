@@ -105,6 +105,8 @@ class ActivityCreationForm(forms.ModelForm):
             obj.reward_for_share = 0
             obj.reward_for_share_and_finished_percentage = 0
             obj.reward_share_limit = 0
+        else:
+            obj.identified = True
 
         if commit:
             obj.save()
