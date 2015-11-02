@@ -5,8 +5,6 @@ import simplejson
 import json
 import excel_response
 import logging
-import urlparse
-from datetime import datetime
 
 from django.utils import timezone
 from django.conf import settings
@@ -32,7 +30,6 @@ from Promotion.models import ShareRecord, Share
 from Welfare.models import WelfareGift
 from findRice.utils import choose_template_by_device
 
-from social.backends.utils import load_backends
 from .tasks import create_zipped_avatar
 # Create your views here.
 

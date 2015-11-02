@@ -88,11 +88,16 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username.encode("utf-8")
 
+    # 米团系统重大修改，现在，每个用户最多只能拥有一名米团团长，而且必须在用户注册时指定
+    team_leader = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+', verbose_name='米团长')
+
     def save(self, *args, **kwargs):
 
         if self.identified and self.identified_date is None:
+            # 自动设置认证日期
             self.identified_date = timezone.now()
         if self.promotion_code is None:
+            # 当用户还没有推广码时，创建一个新的。这个推广码将来会和这个用户永久的、唯一的绑定在一起
             raw_code = self.user.username + str(self.created_at) + "disturbing string"
             md5 = hashlib.md5(raw_code.encode('utf-8'))
             self.promotion_code = md5.hexdigest()
