@@ -21,7 +21,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.template.loader import render_to_string
 from django.db.models import F
 
-from .forms import UserRegisterFormStep1, UserRegisterFormStep2
+from .forms import UserRegisterFormStep1, UserRegisterFormStep2, UserRegisterForm
 from .forms import PasswordChangeForm, ProfileChangeForm
 from Activity.models import Activity, ApplicationThrough
 from .models import RiceTeamContribution, UserProfile
@@ -40,18 +40,16 @@ logger = logging.getLogger(__name__)
 
 # TODO: 重新改造整个后台的注册、登陆系统
 
+
 @require_http_methods(["GET", "POST"])
 def user_login(request):
     if request.method == "POST":
         username = request.POST.get("username", "").strip()
         pwd = request.POST.get("pwd", "").strip()
         user = auth.authenticate(username=username, password=pwd)
-        if user is not None and user.profile.is_active:
+        if user is not None and user.is_active:
             auth.login(request, user)
-            if 'next' in request.session:
-                next_url = request.session.pop('next')
-            else:
-                next_url = '/'
+            next_url = request.session.pop('next', '/')
             success_info = {
                 "success": True,
                 "data": {
@@ -59,28 +57,23 @@ def user_login(request):
                 }
             }
             return HttpResponse(json.dumps(success_info))
-            # return HttpResponseRedirect(request.GET.get("next", "/"))
         else:
             error_info = {
                 "success": False
             }
             data = {}
-            if (not auth.get_user_model().objects.filter(username=username).exists())\
-                    and (not UserProfile.objects.filter(phoneNum=username).exists()):
+            if not auth.get_user_model().objects.filter(username=username).exists():
                 data['username'] = '该用户名不存在'
             else:
                 data['pwd'] = '密码错误'
-            if data == {}:
-                data['unknown'] = '未知错误'
             error_info['data'] = data
             return HttpResponse(json.dumps(error_info))
-
+    # 将在GET参数里面的next参数暂时存储在session中
     request.session["next"] = request.GET.get("next", "/")
     args = {}
     args.update(csrf(request))
+    # 这个next参数会被埋在登陆页面的注册按钮，构造/register?next=/url/to/next的链接
     args['next'] = request.GET.get("next", None)
-    available_backends = load_backends(settings.AUTHENTICATION_BACKENDS)
-    args["available_ends"] = available_backends
 
     return render(request, choose_template_by_device(request, "Profile/login.html", "Profile/mobile/login.html"), args)
 
@@ -88,6 +81,31 @@ def user_login(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect("/")
+
+
+@require_http_methods(['GET', 'POST'])
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            next_url = request.session.pop('next', '/')
+            return HttpResponse(json.dumps({'success': True, 'data': {'url': next_url}}))
+        else:
+            errors = form.errors
+            logger.debug(u'用户注册过程中出错，错误信息为：%s' % errors)
+            return HttpResponse(json.dumps({'success': False, 'data': errors}))
+    # TODO: 这里为了稳定性考虑，避免使用session，故code应该埋点在网页中被post上来
+    if 'next' in request.GET:
+        request.session['next'] = request.GET['next']
+    args = {}
+    args.update(csrf(request))
+    args['form'] = UserRegisterForm()
+    return render(request,
+                  choose_template_by_device(request,
+                                            "Profile/register.html",
+                                            "Profile/mobile/register.html"),
+                  args)
 
 
 @require_http_methods(["GET", "POST"])
@@ -644,7 +662,7 @@ def mine_info(request):
                                        and not user.is_authenticated()):
         # We always attach the promotion code after the user info url
         #  so read the promotion code from GET
-        return HttpResponseRedirect('/register/basic?code=' + request.GET['code'])
+        return HttpResponseRedirect('/register?code=' + request.GET['code'])
     args = {"user": user}
     args.update(csrf(request))
     return render(request, "Profile/mobile/mine.html", args)

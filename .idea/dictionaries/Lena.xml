@@ -2,6 +2,8 @@
   <dictionary name="Lena">
     <words>
       <w>addon</w>
+      <w>csrf</w>
+      <w>csrftoken</w>
       <w>unapply</w>
     </words>
   </dictionary>

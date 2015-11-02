@@ -33373,3 +33373,105 @@ Traceback (most recent call last):
   File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 84, in save
     user = super(UserRegisterFormStep1, self).save(commit=False)
 AttributeError: 'super' object has no attribute 'save'
+2015-11-01 18:25:44,832 [ERROR] django.request: Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 65, in user_login
+    if not auth.get_user_model().objects.fitler(username=username).exists():
+AttributeError: 'UserManager' object has no attribute 'fitler'
+2015-11-01 23:21:46,997 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-11-01 23:21:47,026 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-11-01 23:21:49,514 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-11-01 23:21:49,523 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-11-02 09:03:16,534 [WARNING] django.request: Not Found: //cm.jd.com/tx
+2015-11-02 20:21:34,001 [ERROR] django.request: Internal Server Error: /register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 90, in register
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 393, in full_clean
+    self._clean_form()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 417, in _clean_form
+    cleaned_data = self.clean()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 53, in clean
+    password1 = self.cleaned_data['password1']
+KeyError: 'password1'
+2015-11-02 20:26:05,115 [ERROR] django.request: Internal Server Error: /register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 91, in register
+    form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 65, in save
+    user.profile.avatar = self.cleaned_data['avatar']
+KeyError: 'avatar'
+2015-11-02 20:51:08,049 [ERROR] django.request: Internal Server Error: /register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 90, in register
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 393, in full_clean
+    self._clean_form()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 417, in _clean_form
+    cleaned_data = self.clean()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 69, in clean
+    im = Image.open(self.avatar)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/PIL/Image.py", line 2255, in open
+    fp = io.BytesIO(fp.read())
+AttributeError: 'NoneType' object has no attribute 'read'
+2015-11-02 20:54:36,646 [ERROR] django.request: Internal Server Error: /register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 91, in register
+    form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 82, in save
+    user.save()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 710, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 747, in save_base
+    update_fields=update_fields, raw=raw, using=using)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/dispatch/dispatcher.py", line 201, in send
+    response = receiver(signal=self, sender=sender, **named)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/models.py", line 142, in post_save_receiver
+    user.profile.save()     # 在user保存以后总是保存其profile
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/models.py", line 99, in save
+    super(UserProfile, self).save(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 710, in save
+    force_update=force_update, update_fields=update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 738, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/base.py", line 800, in _save_table
+    for f in non_pks]
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/files.py", line 315, in pre_save
+    file.save(file.name, file, save=False)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/files.py", line 94, in save
+    self.name = self.storage.save(name, content, max_length=self.field.max_length)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/files/storage.py", line 64, in save
+    name = self._save(name, content)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/files/storage.py", line 253, in _save
+    for chunk in content.chunks():
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/files/base.py", line 80, in chunks
+    self.seek(0)
+ValueError: I/O operation on closed file.

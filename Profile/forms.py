@@ -2,6 +2,7 @@
 import datetime
 import logging
 import re
+from PIL import Image
 
 from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone
@@ -12,6 +13,75 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from .models import UserProfile
 from .models import VerifyCode
 from .tasks import create_zipped_avatar
+
+
+logger = logging.getLogger(__name__)
+
+
+class UserRegisterForm(forms.Form):
+
+    nickname = forms.CharField(max_length=100)
+    password1 = forms.CharField(max_length=30)
+    password2 = forms.CharField(max_length=30)
+    phone_num = forms.CharField(max_length=20)
+    avatar = forms.FileInput()
+    code = forms.CharField(max_length=6)
+    share_code = forms.CharField(required=False)
+
+    def __init__(self, *args, **kwargs):
+        super(UserRegisterForm, self).__init__(*args, **kwargs)
+        if len(args) < 2 or 'avatar' not in args[1]:
+            self.avatar = None
+        else:
+            self.avatar = args[1]['avatar']
+
+    def clean_phone_num(self):
+        phone_num = self.cleaned_data['phone_num']
+        if get_user_model().objects.filter(username=phone_num).exists():
+            raise forms.ValidationError(u'该手机号已经被注册了', code='phone_num_already_exists')
+        return phone_num
+
+    def clean_share_code(self):
+        share_code = self.cleaned_data['share_code']
+        # TODO: 后续修改米团系统时，在这里加上补充，将被推广的用户纳入推广者的米团
+        # 这里share code错误不用raise错误，但是要写入日志
+        return share_code
+
+    def clean(self):
+        """ 在这里检查验证码和password2
+        """
+        # 检查密码的匹配
+        password2 = self.cleaned_data['password2']
+        password1 = self.cleaned_data['password1']
+        if not 8 < len(password1) < 30:
+            self.add_error('password1', u'密码长度不符合要求，密码长度请控制在8-30位')
+        if password1 != password2:
+            self.add_error('password2', u'两次输入的密码不一致')
+        # 检查验证码
+        code = self.cleaned_data['code']
+        phone = self.cleaned_data['phone_num']
+        time_threshold = timezone.now() - datetime.timedelta(minutes=5)
+        if not VerifyCode.objects.filter(
+                phoneNum=phone, code=code, created_at__gt=time_threshold, is_active=True).exists():
+            self.add_error('code', u'验证码错误')
+        # 验证头像的格式，只接受图像文件
+        try:
+            if self.avatar is not None:
+                Image.open(self.avatar)
+        except IOError:
+            self.add_error('avatar', u'头像格式错误')
+
+    def save(self):
+        phone = self.cleaned_data['phone_num']
+        user = get_user_model().objects.create(username=phone)
+        user.set_password(self.cleaned_data['password1'])
+        user.profile.phoneNum = phone
+        user.profile.avatar = self.avatar
+        user.save()
+        logger.debug(u'用户%s成功完成分注册' % phone)
+        # 完成注册以后将无用的验证码删除
+        VerifyCode.objects.filter(phoneNum=phone).delete()
+        return user
 
 
 class UserRegisterFormStep1(forms.Form):
