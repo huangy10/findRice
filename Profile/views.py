@@ -21,7 +21,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.template.loader import render_to_string
 from django.db.models import F
 
-from .forms import UserRegisterFormStep1, UserRegisterFormStep2, UserRegisterForm
+from .forms import UserRegisterForm, PasswordResetForm
 from .forms import PasswordChangeForm, ProfileChangeForm
 from Activity.models import Activity, ApplicationThrough
 from .models import RiceTeamContribution, UserProfile
@@ -101,199 +101,11 @@ def register(request):
     args = {}
     args.update(csrf(request))
     args['form'] = UserRegisterForm()
+    # TODO: 注意，这里模板渲染应当不再使用form
     return render(request,
                   choose_template_by_device(request,
                                             "Profile/register.html",
                                             "Profile/mobile/register.html"),
-                  args)
-
-
-@require_http_methods(["GET", "POST"])
-def register_step_1(request):
-    form = UserRegisterFormStep1()
-    if request.method == "POST":
-        form = UserRegisterFormStep1(request.POST)
-        if form.is_valid():
-            user = form.save()
-            # username = request.POST["username"]
-            # pwd = request.POST["password1"]
-            # new_user = auth.authenticate(username=username,
-            #                              password=pwd)
-            # auth.login(request, new_user)
-            request.session["register_username"] = user.username
-            request.session["password"] = request.POST["password1"]
-
-            success_info = {
-                "success": True,
-                "data": {
-                    "url": "/register"
-                }
-            }
-            return HttpResponse(json.dumps(success_info))
-        else:
-            error_info = {
-                "success": False
-            }
-            errors = form.errors
-            logger.debug(u"注册用户第一步失败，错误信息为: %s" % errors.as_data)
-            data = {}
-            if "password1" in errors:
-                data["pwd"] = errors["password1"][0]
-            if "password2" in errors:
-                data["pwd-confirm"] = errors["password2"][0]
-            if "username" in errors:
-                data["username"] = ""
-            if data == {}:
-                data["unknown"] = "未知错误，请联系管理员"
-            error_info["data"] = data
-            return HttpResponse(json.dumps(error_info))
-
-    if 'code' in request.GET:
-        # if Share code if founded in the GET parameters, then save it to the session
-        request.session['code'] = request.GET['code']
-    elif 'next' in request.GET:
-        next_url = request.GET.get('next')
-        params = urlparse.parse_qs(urlparse.urlparse(next_url).query)
-        if 'code' in params:
-            request.session['code'] = params.get('code')[0]
-            print '从get参数中发现了next连接，从中提取到的code为{0}'.format(request.session['code'])
-
-    args = {}
-    args.update(csrf(request))
-    args['form'] = form
-    available_backends = load_backends(settings.AUTHENTICATION_BACKENDS)
-    args["available_ends"] = available_backends
-    return render(request,
-                  choose_template_by_device(request,
-                                            "Profile/register.html",
-                                            "Profile/mobile/register.html"),
-                  args)
-
-
-@login_required()
-@require_http_methods(["GET", "POST"])
-def register_step_2(request):
-    try:
-        user = get_object_or_404(get_user_model(),
-                                 username=request.session.get("register_username", ""),
-                                 is_active=False,
-                                 profile__is_active=False)
-    except Http404:
-        return HttpResponseRedirect('/')
-    # if not user.is_authenticated() or user.profile.is_active:
-    #     return HttpResponseRedirect("/register/basic")
-    form = UserRegisterFormStep2()
-    if request.method == "POST":
-        form = UserRegisterFormStep2(request.POST, request.FILES, instance=user.profile, initial={})
-        if form.is_valid():
-            form.save()
-            # User successfully registered,
-            if 'code' in request.session:
-                try:
-                    promote_profile = UserProfile.objects.get(promotion_code=request.session['code'])
-                    RiceTeamContribution.objects.create(team=promote_profile.user.rice_team,
-                                                        user=user,
-                                                        registration_promoted=True)
-                    request.session.pop('code')
-
-                except ObjectDoesNotExist:
-                    try:
-                        print u"注册第二步，发现有效的分享code: {0}".format(request.session['code'])
-                        share = get_object_or_404(Share, share_code=request.session['code'])
-                        RiceTeamContribution.objects.create(team=share.user.rice_team,
-                                                            user=user,
-                                                            registration_promoted=True)
-                        print u"注册第二步，发现有效的分享code: {0}".format(request.session['code'])
-                        request.session.pop('code')
-                    except Http404:
-                        return JsonResponse({'success': False, 'data': {'code': 'invalid share code'}},
-                                            content_type='text/html')
-
-            logger.debug(
-                u"注册第二步，从操作用户名为%s，session中存储的密码是%s" % (user.username, request.session['password']))
-            auth_user = auth.authenticate(username=user.username, password=request.session["password"])
-            auth.login(request, auth_user)
-            #
-            if 'next' in request.session:
-                next_url = request.session.pop('next')
-            else:
-                next_url = '/'
-            success_info = {
-                "success": True,
-                "data": {
-                    "url": next_url
-                }
-            }
-            return HttpResponse(json.dumps(success_info))
-        else:
-            errors = form.errors
-            logger.debug(u"用户|%s(id: %s)|注册第二步失败，错误信息为: %s" % (user.profile.name, user.id, errors.as_data))
-            error_info = {"success": False}
-            data = {}
-            if "code" in errors:
-                data["verifycode"] = errors["code"][0]
-            if "phoneNum" in errors:
-                data["mobile"] = errors["phoneNum"][0]
-            if data == {}:
-                data["unknown"] = "未知错误，请联系管理员"
-            error_info["data"] = data
-            return HttpResponse(json.dumps(error_info))
-
-    args = {}
-    args.update(csrf(request))
-    args['form'] = form
-
-    return render(request,
-                  choose_template_by_device(request,
-                                            "Profile/register-addon.html",
-                                            "Profile/mobile/register-addon.html"),
-                  args)
-
-
-@login_required()
-def register_addon_for_social(request):
-    user = request.user
-    if user.profile.is_active:
-        return HttpResponseRedirect(request.session.get('next', '/'))
-
-    form = UserRegisterFormStep2()
-    if request.method == "POST":
-        form = UserRegisterFormStep2(request.POST, request.FILES, instance=user.profile, initial={})
-        if form.is_valid():
-            form.save()
-            if 'next' in request.session:
-                next_url = request.session.pop('next')
-            else:
-                next_url = '/'
-            success_info = {
-                "success": True,
-                "data": {
-                    "url": next_url
-                }
-            }
-            return HttpResponse(json.dumps(success_info))
-        else:
-            errors = form.errors
-            logger.debug(u"用户|%s(id: %s)|注册第二步失败，错误信息为: %s" % (user.profile.name, user.id, errors.as_data))
-            error_info = {"success": False}
-            data = {}
-            if "code" in errors:
-                data["verifycode"] = errors["code"][0]
-            if "phoneNum" in errors:
-                data["mobile"] = errors["phoneNum"][0]
-            if data == {}:
-                data["unknown"] = "未知错误，请联系管理员"
-            error_info["data"] = data
-            return HttpResponse(json.dumps(error_info))
-
-    args = {}
-    args.update(csrf(request))
-    args['form'] = form
-    args['social'] = True
-    return render(request,
-                  choose_template_by_device(request,
-                                            "Profile/register-addon.html",
-                                            "Profile/mobile/register-addon.html"),
                   args)
 
 
@@ -332,17 +144,14 @@ def user_modify(request):
 def reset_password(request):
     form = PasswordChangeForm()
     if request.method == "POST":
-        form = PasswordChangeForm(request.POST)
+        form = PasswordResetForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            username = user.username
-            pwd = request.POST.get("password1")
-            new_user = auth.authenticate(username=username, password=pwd)
-            auth.login(request, new_user)
+            form.save()
+            # 当用户没有登陆时将其导到登陆界面，否则返回首页
             success_info = {
                 "success": True,
                 "data": {
-                    "url": "/"
+                    "url": "/" if request.user.is_authenticated() else '/login'
                 }
             }
             return HttpResponse(json.dumps(success_info))
