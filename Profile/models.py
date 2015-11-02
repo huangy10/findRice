@@ -116,19 +116,14 @@ def get_reward_from_share_record(sender, **kwargs):
         return
     user = share_record.share.user
     if share_record.finished:
-        user.profile.coin += share_record.actual_reward_for_finish
-        user.rice_team.team_coin += share_record.actual_reward_for_finish
-        contribution = RiceTeamContribution.objects.get_or_create(team=user.rice_team,
-                                                                  user=share_record.target_user)[0]
-        contribution.contributed_coin += share_record.actual_reward_for_finish
-        contribution.save()
-    # else:
-    #     user.profile.coin += share_record.actual_reward_for_share
-    #     user.rice_team.team_coin += share_record.actual_reward_for_share
-    #     contribution = RiceTeamContribution.objects.get_or_create(team=user.rice_team,
-    #                                                               user=share_record.target_user)[0]
-    #     contribution.contributed_coin += share_record.actual_reward_for_share
-    #     contribution.save()
+        # TODO: 米币结算系统需要重构
+        # user.profile.coin += share_record.actual_reward_for_finish
+        # user.rice_team.team_coin += share_record.actual_reward_for_finish
+        # contribution = RiceTeamContribution.objects.get_or_create(team=user.rice_team,
+        #                                                           user=share_record.target_user)[0]
+        # contribution.contributed_coin += share_record.actual_reward_for_finish
+        # contribution.save()
+        pass
     user.profile.save()
     user.rice_team.save()
 
@@ -141,37 +136,16 @@ def post_save_receiver(sender, **kwargs):
         user.profile = UserProfile.objects.create(user=user, gender="u",
                                                   birthDate=timezone.datetime(year=1970, month=1, day=1).date(),
                                                   name=user.username)
-        # 以及一个米团
-        user.rice_team = RiceTeam.objects.create(host=user)
     else:
         user.profile.save()     # 在user保存以后总是保存其profile
 
 
-class RiceTeam(models.Model):
-    host = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name="米团主人", related_name="rice_team")       # 米团的主人
-    members = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name="米团成员", through="RiceTeamContribution",
-                                     related_name="rice_team_as_member")
-
-    team_coin = models.IntegerField(default=0, verbose_name="团队米币")
-
-    def total_members(self):
-        return RiceTeamContribution.objects.filter(team=self).count()
-
-    @cached_property
-    def promoted_registration(self):
-        return RiceTeamContribution.objects.filter(team=self, registration_promoted=True).count()
-
-    class Meta:
-        verbose_name = "米团"
-        verbose_name_plural = "米团"
-
-
 class RiceTeamContribution(models.Model):
-    team = models.ForeignKey(RiceTeam)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    leader = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
 
-    contributed_coin = models.IntegerField(default=0)
-    registration_promoted = models.BooleanField(default=False)      # 是否由本团长推广注册
+    contributed_coin = models.IntegerField(default=0, verbose_name='贡献的米币')
+    related_share_record = models.ForeignKey(ShareRecord, verbose_name='相关的分享记录')
 
     class Meta:
         verbose_name_plural = "米团贡献"

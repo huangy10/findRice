@@ -4,6 +4,7 @@
       <w>addon</w>
       <w>csrf</w>
       <w>csrftoken</w>
+      <w>optype</w>
       <w>unapply</w>
     </words>
   </dictionary>

@@ -26,7 +26,7 @@ from .models import RiceTeamContribution, UserProfile
 from .models import VerifyCode
 from .utils import send_sms, from_size_check_required, profile_active_required
 from Notification.signals import send_notification
-from Promotion.models import ShareRecord, Share
+from Promotion.models import ShareRecord
 from Welfare.models import WelfareGift
 from findRice.utils import choose_template_by_device
 
@@ -458,6 +458,80 @@ def manage_an_activity(request):
         excel_data = generate_excel_data()
         return excel_response.ExcelResponse(excel_data, output_name=(activity.name+u"报名列表").encode("utf-8"))
     elif optype == "ready_required":
+        pass
+
+
+@login_required()
+def manage_an_activity2(request):
+    user = request.user
+    # 解析操作参数
+    if request.method == 'GET':
+        optype = request.GET['optype']
+        action_id = request.GET['action_id']
+        target_id = request.GET['target_id']
+    else:
+        optype = request.GET["optype"]
+        action_id = request.GET["action"]
+        target_id = request.GET["target"]
+    # 获取目标活动
+    activity = get_object_or_404(Activity, id=action_id, is_active=True)
+    # 检查当前用户的操作权限
+    if not activity.host_id != user.id:
+        return HttpResponse(json.dumps({'success': False, 'data': {'error': 'Permission Denied'}}))
+    # 获取目标用户
+    try:
+        target_user = get_user_model().objects.select_related('profile').get(id=target_id)
+    except ObjectDoesNotExist:
+        target_user = None
+
+    # 开始按照optype参数的种类注意检查操作
+    if optype == 'approve':
+        # 通过申请操作
+        if target_user is None:
+            return HttpResponse(json.dumps({"success": False, "data": {"error": "参数缺失"}}))
+        approved_num = ApplicationThrough.objects.filter(activity=activity, is_active=True, status='approved').count()
+        if approved_num >= activity.max_attend:
+            # 如果当前已经通过的人数超过了最大运行的人数，则申请失败
+            return HttpResponse(json.dumps({"success": False, "data": {"error": "该活动已报满"}}))
+        # 查找出申请记录
+        try:
+            applicant = ApplicationThrough.objects.get(activity=activity, user=target_user, is_active=True)
+            applicant.status = "approved"
+            applicant.save()
+            send_notification.send(sender=get_user_model(),
+                                   notification_center=target_user.notification_center,
+                                   notification_type="activity_notification",
+                                   activity=activity,
+                                   user=target_user,
+                                   activity_notification_type="apply_approved")
+
+            if activity.id in Activity.objects.identification_acts_id:
+                target_user.profile.identified = True
+                target_user.profile.identified_date = timezone.now()
+                target_user.profile.save()
+            return HttpResponse(json.dumps({"success": True, "data": {}}))
+        except ObjectDoesNotExist:
+            return HttpResponse(json.dumps({"success": False, "data": {"error": "目标并未申请本活动"}}))
+
+    elif optype == 'approve_cancel':
+        # 取消通过目标用户的申请
+        if target_user is None:
+            return HttpResponse(json.dumps({"success": False, "data": {"error": "参数缺失"}}))
+        try:
+            applicant = ApplicationThrough.objects.get(
+                activity=activity, user=target_user, is_active=True, status='approved')
+            applicant.status = 'applying'
+            applicant.save()
+            # 检查这是否牵涉到认证用户，若是，需要剥夺相关用户的认证
+            if activity.id in Activity.objects.identification_acts_id:
+                target_user.profile.identified = False
+                target_user.profile.save()
+            return HttpResponse(json.dumps({"success": True, "data": {}}))
+        except ObjectDoesNotExist:
+            return HttpResponse(json.dumps({"success": False, "data": {"error": "目标并未申请本活动或者其申请未被通过"}}))
+
+    elif optype == 'deny':
+        # 拒绝某个人的申
         pass
 
 
