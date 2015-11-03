@@ -109,25 +109,6 @@ class UserProfile(models.Model):
         verbose_name_plural = "用户详情"
 
 
-@receiver(share_record_signal)
-def get_reward_from_share_record(sender, **kwargs):
-    share_record = kwargs["share_record"]
-    if not share_record.is_active:      # check if this share reward is valid
-        return
-    user = share_record.share.user
-    if share_record.finished:
-        # TODO: 米币结算系统需要重构
-        # user.profile.coin += share_record.actual_reward_for_finish
-        # user.rice_team.team_coin += share_record.actual_reward_for_finish
-        # contribution = RiceTeamContribution.objects.get_or_create(team=user.rice_team,
-        #                                                           user=share_record.target_user)[0]
-        # contribution.contributed_coin += share_record.actual_reward_for_finish
-        # contribution.save()
-        pass
-    user.profile.save()
-    user.rice_team.save()
-
-
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def post_save_receiver(sender, **kwargs):
     user = kwargs["instance"]
@@ -140,12 +121,24 @@ def post_save_receiver(sender, **kwargs):
         user.profile.save()     # 在user保存以后总是保存其profile
 
 
+class ContributionManager(models.Manager):
+
+    def create(self, **kwargs):
+        activity = kwargs['related_share_record'].activity
+        kwargs['contributed_coin'] = activity.reward * activity.reward_for_share_and_finished_percentage
+        return super(ContributionManager, self).create(**kwargs)
+
+
 class RiceTeamContribution(models.Model):
-    leader = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
+    leader = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+', verbose_name='米团长', null=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
 
     contributed_coin = models.IntegerField(default=0, verbose_name='贡献的米币')
-    related_share_record = models.ForeignKey(ShareRecord, verbose_name='相关的分享记录')
+    activity = models.ForeignKey(Activity, verbose_name='相关活动')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    objects = ContributionManager()
 
     class Meta:
         verbose_name_plural = "米团贡献"

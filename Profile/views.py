@@ -495,15 +495,17 @@ def manage_an_activity2(request):
             return HttpResponse(json.dumps({"success": False, "data": {"error": "该活动已报满"}}))
         # 查找出申请记录
         try:
-            applicant = ApplicationThrough.objects.get(activity=activity, user=target_user, is_active=True)
+            applicant = ApplicationThrough.objects.get(activity=activity, user=target_user, is_active=True,
+                                                       status__in=['applying, denied'])
             applicant.status = "approved"
             applicant.save()
-            send_notification.send(sender=get_user_model(),
-                                   notification_center=target_user.notification_center,
-                                   notification_type="activity_notification",
-                                   activity=activity,
-                                   user=target_user,
-                                   activity_notification_type="apply_approved")
+            send_notification.send(
+                sender=get_user_model(),
+                notification_center=target_user.notification_center,
+                notification_type="activity_notification",
+                activity=activity,
+                user=target_user,
+                activity_notification_type="apply_approved")
 
             if activity.id in Activity.objects.identification_acts_id:
                 target_user.profile.identified = True
@@ -531,8 +533,101 @@ def manage_an_activity2(request):
             return HttpResponse(json.dumps({"success": False, "data": {"error": "目标并未申请本活动或者其申请未被通过"}}))
 
     elif optype == 'deny':
-        # 拒绝某个人的申
-        pass
+        # 拒绝某个人的申请
+        if target_user is None:
+            return HttpResponse(json.dumps({"success": False, "data": {"error": "参数缺失"}}))
+        # 首先检索出目标用户的申请记录, 修改记录的状态
+        try:
+            applicant = ApplicationThrough.objects.get(activity=activity, user=target_user, is_active=True,
+                                                       status__in=['applying', 'approved'])
+            applicant.status = 'denied'
+            applicant.save()
+            # 向目标用户发送通知
+            send_notification.send(
+                sender=get_user_model(),
+                notification_center=target_user.notification_center,
+                notification_type="activity_notification",
+                activity=activity,
+                user=target_user,
+                activity_notification_type="apply_rejected")
+            # 返回json响应
+            return HttpResponse(json.dumps({'success': True, 'data': {}}))
+        except ObjectDoesNotExist:
+            return HttpResponse(json.dumps({"success": False, "data": {"error": "目标并未申请本活动"}}))
+
+    elif optype == 'deny_cancel':
+        # 取消拒绝
+        if target_user is None:
+            return HttpResponse(json.dumps({"success": False, "data": {"error": "参数缺失"}}))
+        try:
+            applicant = ApplicationThrough.objects.get(
+                activity=activity, user=target_user, is_active=True, status='denied')
+            applicant.status = 'applying'
+            applicant.save()
+            return HttpResponse(json.dumps({'success': True, 'data': {}}))
+        except ObjectDoesNotExist:
+            return HttpResponse(json.dumps({"success": False, "data": {"error": "目标并未申请本活动或者其申请未被拒绝"}}))
+
+    elif optype == 'finish':
+        # 完成活动
+        if target_user is None:
+            return HttpResponse(json.dumps({"success": False, "data": {"error": "参数缺失"}}))
+        if activity.status != 2:
+            return HttpResponse(json.dumps({'success': False, "data": {'error': '活动尚未结束'}}))
+        try:
+            applicant = ApplicationThrough.objects.get(
+                activity=activity, user=target_user, is_active=True, status='approved')
+            applicant.status = 'finished'
+            applicant.save()
+            # 向目标用户发送消息
+            send_notification.send(
+                sender=get_user_model(),
+                notification_center=target_user.notification_center,
+                notification_type='activity_notification',
+                activity=activity,
+                user=target_user,
+                activity_notification_type='activity_finished')
+            # TODO: 这里要确定应该是向米团长还是活动分享人发送通知
+            try:
+                share_record = ShareRecord.objects.get(user=user, activity=activity)
+            except ObjectDoesNotExist:
+                share_record = None
+            # TODO: 米币结算
+            rice_leader = target_user.profile.rice_leader
+            contribution = RiceTeamContribution.objects.create(
+                leader=target_user.profile.rice_leader, user=target_user, activity=activity)
+            if rice_leader is not None:
+                rice_leader.profile.coin += contribution.contributed_coin
+                rice_leader.save()
+            return HttpResponse(json.dumps({'success': True, 'data': {}}))
+        except ObjectDoesNotExist:
+            return HttpResponse(json.dumps({'success': False, 'data': {'error': '目标并未申请或者申请未被通过'}}))
+
+    elif optype == "excel":
+        def generate_excel_data():
+            applicants = ApplicationThrough.objects.filter(activity=activity,
+                                                           is_active=True)
+            column_names = [u"用户姓名", u"性别", u"出生日期", u"年龄", u"联系方式", u"报名时间", u"申请状态"]
+
+            def row_generator(app):
+                # accept the applicant data as input, output the row data for the excel file
+                row_user_profile = app.user.profile
+                row_data = [row_user_profile.name,
+                            row_user_profile.get_gender_display(),
+                            row_user_profile.birthDate.strftime("%Y-%m-%d"),
+                            str(row_user_profile.age),
+                            row_user_profile.phoneNum,
+                            timezone.make_naive(timezone.localtime(app.apply_at)).strftime("%Y-%m-%d %H-%M-%S"),
+                            app.get_status_display()]
+                return row_data
+
+            data = map(row_generator, applicants)
+            return [column_names] + data
+        excel_data = generate_excel_data()
+        return excel_response.ExcelResponse(excel_data, output_name=(activity.name+u"报名列表").encode("utf-8"))
+
+    else:
+        return HttpResponse(json.dumps({'success': False, 'data':{'error': '操作未定义'}}))
 
 
 @profile_active_required
