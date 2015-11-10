@@ -25,6 +25,7 @@
     <div id="header-c">
         <a href="/" id="logo">找米</a>
         {% if user %}
+            <div id="data-id" data-value="1" style="display: none"></div>
             <a id="personal-info" class="action" href="/mine/start">
                 <img src="{{ user.profile.avatar_url }}" alt="我的个人信息">
             </a>
@@ -35,6 +36,7 @@
                 {% endif %}
             </div>
         {% else %}
+            <div id="data-id" data-value="0" style="display: none"></div>
             <div id="reg" class="action"><a class="z-btn" href="/login{% if share_code %}?next=/action/{{ act.id }}?code={{ share_code }}{% endif %}">注册/登录</a></div>
         {% endif %}
         <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">创建活动</a></div>
