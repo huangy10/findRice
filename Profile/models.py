@@ -89,7 +89,7 @@ class UserProfile(models.Model):
         return self.user.username.encode("utf-8")
 
     # 米团系统重大修改，现在，每个用户最多只能拥有一名米团团长，而且必须在用户注册时指定
-    team_leader = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+', verbose_name='米团长')
+    team_leader = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+', verbose_name='米团长', null=True)
 
     def save(self, *args, **kwargs):
 

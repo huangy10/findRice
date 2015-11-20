@@ -84,7 +84,25 @@ def check_activity_detail(request, action_id):
     activity = get_object_or_404(Activity, id=action_id, is_active=True)
     user = request.user
 
-    if activity.host_id != user.id:
+    if user.is_authenticated():
+        if "code" in request.GET:
+            promotion_code = request.GET.get('code')
+            if promotion_code == user.profile.promotion_code:
+                # 如果当前的code是本用户
+                promotion_code = request.GET.get("precode", None)
+            else:
+                # 如果当前的code不是当前用户的,那么重整url
+                return HttpResponseRedirect("/action/{0}?code={1}&precode={2}".format(
+                    action_id, user.profile.promotion_code, promotion_code
+                ))
+        else:
+            return HttpResponseRedirect("/action/%s?code=%s" % (action_id, user.profile.promotion_code))
+    else:
+        promotion_code = request.GET.get("code")
+
+    # 到这里为止,promotion_code, 表征的就是向当前用户推广的推广者, 如果没有推广者,则为None,
+
+    if user.is_authenticated() and activity.host_id != user.id:
         # 更新浏览次数
         activity.viewed_times += 1
         activity.save()
@@ -113,32 +131,33 @@ def check_activity_detail(request, action_id):
             "file_questions": file_questions,
             "user": user,
             "like": liked,
-            "promotion_code": request.GET.get('code', user.profile.promotion_code),
+            "promotion_code": promotion_code,
             "questionnaire": has_questions,
         }
         args.update(csrf(request))
         return render(request,
                       choose_template_by_device(request,
-                                                "Activity/detail.html",
+                                                "Activity/activity_detail2.html",
                                                 "Activity/mobile/detail.html"),
                       args)
     except ObjectDoesNotExist:
         args = {
             "act": activity,
             "user": user,
-            "promotion_code": request.GET.get('code', user.profile.promotion_code),
+            "promotion_code": promotion_code,
             "like": liked,
         }
         args.update(csrf(request))
         return render(request,
                       choose_template_by_device(request,
-                                                "Activity/detail.html",
+                                                "Activity/activity_detail2.html",
                                                 "Activity/mobile/detail.html"),
                       args)
 
 
 @require_POST
 def apply_an_activity(request, action_id):
+    print "Duang"
     user = request.user
     activity = get_object_or_404(Activity, id=action_id, is_active=True)
     if not user.is_authenticated():

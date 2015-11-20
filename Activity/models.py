@@ -242,8 +242,12 @@ class Activity(models.Model):
         return tz.normalize(self.start_time).strftime("%y/%m/%d %H:%M")+" - "+tz.normalize(self.end_time).strftime("%y/%m/%d %H:%M")
 
     def get_applying_num(self):
-        return ApplicationThrough.objects.filter(activity=self,
-                                                 status="approved").count()
+        return ApplicationThrough.objects.filter(activity=self, is_active=True,
+                                                 status__in=["applying", "approved", "finished"]).count()
+
+    def get_approved_num(self):
+        return ApplicationThrough.objects.filter(activity=self, is_active=True,
+                                                 status__in=["approved", "finished"]).count()
 
     def get_absolute_url(self):
         return reverse("detail", args=[str(self.id), ])

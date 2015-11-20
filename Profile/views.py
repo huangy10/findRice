@@ -98,6 +98,18 @@ def register(request):
     args = {}
     args.update(csrf(request))
     args['form'] = UserRegisterForm()
+    # TODO: 注意这里要从next参数里面解析code
+    if "next" in request.GET:
+        next_url = request.GET.get('next')
+        find_code = re.match(r'/action/(\d+)\?code=(\w+)', next_url)
+        if find_code is not None:
+            promotion_code = find_code.groups()[1]
+        else:
+            promotion_code = None
+    else:
+        promotion_code = None
+    args['promotion_code'] = promotion_code
+
     # TODO: 注意，这里模板渲染应当不再使用form
     return render(request,
                   choose_template_by_device(request,

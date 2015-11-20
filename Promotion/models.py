@@ -17,7 +17,7 @@ class ShareRecord(models.Model):
      而且由于米币结算系统和分享系统的解锁，故单独的分享code也不再需要，本APP的model简化为只需要ShareRecord
     """
     sharer = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+', verbose_name='被分享者')      # 分享着
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+', related_name='分享着')        # 被分享着
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+', verbose_name='分享着')        # 被分享着
     activity = models.ForeignKey(Activity, related_name='share_records')        # 被分享的活动
     share_time = models.DateTimeField(auto_now_add=True, verbose_name='分享日期')
 

@@ -1,0 +1,157 @@
+{% load duration_filter %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>消息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../modules/activity/css/activity_detail.css" />
+    
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/placeholder/jquery.placeholder.min.js"></script>
+    <script type="text/javascript" src="../modules/activity/js/activity_detail.js"></script>
+</head>
+<body>
+<div id="header">
+    <div id="header-c">
+        <a href="//zhao-mi.net" id="logo">找米</a>
+        <!--<div id="personal-info" class="action">
+            <img src="//zhao-mi.net/assets/imgs/portrait.png" alt="我的个人信息">
+        </div>-->
+        <div id="msg" class="action"><a class="z-btn">消息</a></div>
+
+        <div id="pub" class="action"><a class="z-btn">发布活动</a></div>
+        <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
+    </div>        
+</div>
+<div id="detail-bg">
+    <img src="//zhao-mi.net/assets/imgs/detail-banner.png">
+</div>
+<input type="hidden" name="csrfmiddlewaretoken" value="GKfokgpXjyQ9n12Ivb094edvZ5vcy7bR">
+<input type="hidden" value="20790d9f7c3f57c8ac60b9dbd4663aea" name="share_code">
+<form method="post" action="http://59.66.201.97/action/1" enctype="multipart/form-data" id="J_formDetail">
+{% csrf_token %}
+<div class="wrap-content">
+	<div class="top-wrap">
+ 		<div class="left-main fLeft">
+ 		<div class="top-title">
+ 			<h4 class="fLeft">{{ act.name }}</h4>
+ 			<span class="fRight">{{ act.reward_description }}</span>
+ 		</div>
+ 		
+ 		<div class="user-info">
+ 			<div class="fLeft">
+ 				<img src="{{ act.post_url }}" />
+ 			</div>
+ 			<div class="fLeft type-detail">
+ 				<span>主办方：{{ act.host.profile.name }}</span>
+ 				<span>类型：{{ act.activity_type.type_name }}</span>
+ 			</div>
+ 			<a href="#" class="approve-user fLeft">认证用户</a>
+ 		</div>
+ 			
+ 		<div class="user-list">
+ 			{% for line in act.get_description|seperate_to_p %}
+                <p>{{ line }}</p>
+            {% endfor %}
+ 		</div>
+ 		
+ 		<!--活动信息-->
+ 		<h4 class="title-line">活动信息</h4>
+		<div class="detail-items">
+		    <p class="location" title="北京待定">地点：{{ act.loc_description }}</p>
+		    <p class="num">人数：{{ act.get_approved_num }}/{{ act.max_attend }} 人 {{ act.get_applying_num }}人已申请</p>
+		    <p class="time">时间：{{ act.get_duration_description }}</p>
+		    <p class="extra">耗时：{{ act.last_length|duration }}</p>
+	    </div>
+	    
+ 		<!--报名条件-->
+ 		<div id="wrap_apply">
+	 		<h4 class="title-line">报名条件</h4>
+			<div class="answer-module">
+				<h5>1：请问您的年龄段在？</h5>
+				<div class="option-list dan-radio">
+					<div class="party-line">
+						<div class="round fLeft"><div class="color-round"></div></div>
+						<span class="fLeft">大于30岁</span>
+					</div>
+					<div class="party-line">
+						<div class="round fLeft"><div></div></div>
+						<span class="fLeft">15-30岁</span>
+					</div>
+					<div class="party-line">
+						<div class="round fLeft"><div></div></div>
+						<span class="fLeft">15岁以下</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="answer-module">
+				<h5>2：请问您的年龄段在？(多选)</h5>
+				<div class="option-list more-radio" >
+					<div class="party-line">
+						<div class="round fLeft"><div class="color-round"></div></div>
+						<span class="fLeft">大于30岁</span>
+					</div>
+					<div class="party-line">
+						<div class="round fLeft"><div></div></div>
+						<span class="fLeft">15-30岁</span>
+					</div>
+					<div class="party-line">
+						<div class="round fLeft"><div></div></div>
+						<span class="fLeft">15岁以下</span>
+					</div>
+				</div>
+			</div>
+			<div class="answer-module">
+				<h5>3：请填写俱乐部会员ID</h5>
+				<textarea class="text-detail"></textarea>
+			</div>
+			<div class="answer-module">
+				<h5>4：下次愿意参加什么活动？</h5>
+				<textarea class="text-detail borderE4"></textarea>
+			</div>
+			<div class="answer-module">
+			<h5>5：请上传你的驾驶证？</h5>
+			<div class="main-flie">
+				<div class="file-btn fLeft">
+					请选择文件
+					<input type="file" accept="image/png, image/jpg, image/jpeg" />
+				</div>
+				<span class="fLeft hint-info">仅支持png/jpg/jpeg</span>
+			</div>
+		</div>
+ 		</div>
+ 	</div>
+	<div class="right-main fRight" >
+		<div class="fRight">
+			<img src="../assets/imgs/action-pic.png" />
+		</div>
+		
+		<div class="shade-main fRight">
+			<a  href="#" class="btn-shade-sc">
+				<p></p>
+				已收藏
+			</a>
+			<a  href="#" class="btn-shade-fx">
+				<p></p>
+				我要分享
+			</a>
+		</div>
+		
+	</div> 	
+ 	</div>
+ 	<div class="bottom-wrap fRight">
+		<div class="shade-main ">
+			<a  href="#" class="btn-shade-fx fLeft">
+				<p></p>
+				我要分享
+			</a>
+			<input type="submit"  class="btn-shade-bm fLeft" id="J_apply" value="报名" />
+		</div>
+ 		<div class="warning-size">本活动由主办方发起，并由主办方负责组织、安排、结算。找米有权对用户违法行为进行监督处罚。</div>
+ 	</div>
+</div>
+</form>
+</body>    
+</html>

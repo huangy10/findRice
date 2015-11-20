@@ -35,6 +35,8 @@ class UserRegisterForm(forms.Form):
         else:
             self.avatar = args[1]['avatar']
 
+        self.rice_leader = None
+
     def clean_phone_num(self):
         phone_num = self.cleaned_data['phone_num']
         if get_user_model().objects.filter(username=phone_num).exists():
@@ -47,7 +49,7 @@ class UserRegisterForm(forms.Form):
         # 这里share code错误不用raise错误，但是要写入日志
         if promotion_code != '':
             try:
-                rice_leader = get_user_model().objects.get(profile__promotion_code=promotion_code)
+                self.rice_leader = get_user_model().objects.get(profile__promotion_code=promotion_code)
             except ObjectDoesNotExist:
                 pass
         return promotion_code
@@ -82,15 +84,10 @@ class UserRegisterForm(forms.Form):
         user.set_password(self.cleaned_data['password1'])
         user.profile.phoneNum = phone
         user.profile.avatar = self.avatar
-        # 查看promotion_code
-        promotion_code = self.cleaned_data['promotion_code']
-        try:
-            rice_leader = get_user_model().objects.get(profile__promotion_code=promotion_code)
-            user.profile.rice_leader = rice_leader
-        except ObjectDoesNotExist:
-            pass
+        if self.rice_leader is not None:
+            user.profile.rice_leader = self.rice_leader
         user.save()
-        logger.debug(u'用户%s成功完成分注册' % phone)
+        logger.debug(u'用户%s成功完成了注册' % phone)
         # 完成注册以后将无用的验证码删除
         VerifyCode.objects.filter(phoneNum=phone).delete()
         return user

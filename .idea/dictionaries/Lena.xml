@@ -5,6 +5,7 @@
       <w>csrf</w>
       <w>csrftoken</w>
       <w>optype</w>
+      <w>precode</w>
       <w>unapply</w>
     </words>
   </dictionary>

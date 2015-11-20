@@ -33475,3 +33475,249 @@ Traceback (most recent call last):
   File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/files/base.py", line 80, in chunks
     self.seek(0)
 ValueError: I/O operation on closed file.
+2015-11-16 19:42:00,114 [ERROR] django.request: Internal Server Error: /
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 53, in wrapper
+    *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/findRice/views.py", line 57, in index_list
+    return render(request, choose_template_by_device(request, "list.html", "home-mobile/list.html"), args)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/loader.py", line 98, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/loader.py", line 35, in get_template
+    return engine.get_template(template_name, dirs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/backends/django.py", line 30, in get_template
+    return Template(self.engine.get_template(template_name, dirs))
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/engine.py", line 167, in get_template
+    template, origin = self.find_template(template_name, dirs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/engine.py", line 141, in find_template
+    source, display_name = loader(name, dirs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/loaders/base.py", line 13, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/loaders/base.py", line 23, in load_template
+    template = Template(source, origin, template_name, self.engine)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/base.py", line 190, in __init__
+    self.nodelist = engine.compile_string(template_string, origin)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/engine.py", line 261, in compile_string
+    return parser.parse()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/base.py", line 341, in parse
+    compiled_result = compile_func(self, token)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/defaulttags.py", line 1163, in load
+    (taglib, e))
+TemplateSyntaxError: 'sharelink' is not a valid tag library: ImportError raised loading Promotion.templatetags.sharelink: cannot import name Share
+2015-11-16 19:42:00,369 [WARNING] django.request: Not Found: /favicon.ico
+2015-11-16 19:42:00,432 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-11-16 19:42:00,442 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-11-16 20:03:17,467 [WARNING] django.request: Not Found: /accounts/login/
+2015-11-16 20:03:17,554 [WARNING] django.request: Not Found: /favicon.ico
+2015-11-16 20:17:30,120 [WARNING] django.request: Not Found: /http:/www.taobao.com/
+2015-11-16 20:40:14,070 [WARNING] django.request: Not Found: /http:/passport.tianya.cn/register/default.jsp
+2015-11-16 21:43:11,967 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:13:40,161 [WARNING] django.request: Method Not Allowed (GET): /action/198/apply
+2015-11-18 21:13:40,221 [WARNING] django.request: Not Found: /favicon.ico
+2015-11-18 21:13:49,629 [WARNING] django.request: Method Not Allowed (GET): /action/198/apply
+2015-11-18 21:13:49,683 [WARNING] django.request: Not Found: /favicon.ico
+2015-11-18 21:16:44,446 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-11-18 21:16:44,500 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-11-18 21:17:11,540 [WARNING] django.request: Method Not Allowed (GET): /action/198/apply
+2015-11-18 21:17:14,503 [WARNING] django.request: Method Not Allowed (GET): /action/198/apply
+2015-11-18 21:17:17,647 [WARNING] django.request: Method Not Allowed (GET): /action/198/apply
+2015-11-18 21:19:28,659 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:21:46,020 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:22:47,327 [WARNING] django.request: Method Not Allowed (GET): /action/198/apply
+2015-11-18 21:26:56,996 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:27:38,662 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:27:50,607 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:28:20,011 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:39:12,743 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/198/apply
+2015-11-18 21:39:12,989 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:39:19,878 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:39:19,899 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/198/apply
+2015-11-18 21:41:49,925 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:41:49,937 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/198/apply
+2015-11-18 21:41:53,008 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/198/apply
+2015-11-18 21:41:53,271 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:41:57,796 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:41:58,106 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/198/apply
+2015-11-18 21:42:53,513 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:42:53,523 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/198/apply
+2015-11-18 21:44:59,896 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:44:59,898 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/198/apply
+2015-11-18 21:48:32,549 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:51:50,027 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/198/apply
+2015-11-18 21:51:50,182 [WARNING] django.request: Not Found: /favicon.ico
+2015-11-18 21:51:50,228 [WARNING] django.request: Not Found: /favicon.ico
+2015-11-18 21:52:56,919 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/198/apply
+2015-11-18 21:52:56,930 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:55:57,898 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/198/apply
+2015-11-18 21:55:57,963 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/198/apply
+2015-11-18 21:58:59,502 [WARNING] django.request: Not Found: /accounts/login/
+2015-11-18 21:58:59,547 [WARNING] django.request: Not Found: /favicon.ico
+2015-11-18 21:59:00,984 [WARNING] django.request: Not Found: /action/119
+2015-11-18 21:59:01,907 [WARNING] django.request: Not Found: /action/198
+2015-11-18 21:59:38,275 [WARNING] django.request: Not Found: /action/198
+2015-11-18 21:59:38,549 [WARNING] django.request: Not Found: /accounts/login/
+2015-11-18 22:00:25,378 [ERROR] django.request: Internal Server Error: /action/10
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 117, in check_activity_detail
+    questionnaire = Questionnaire.objects.get(activity=activity, is_active=True)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/manager.py", line 127, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 338, in get
+    (self.model._meta.object_name, num)
+MultipleObjectsReturned: get() returned more than one Questionnaire -- it returned 9!
+2015-11-18 22:00:35,510 [WARNING] django.request: Not Found: /action/119
+2015-11-18 22:00:44,709 [WARNING] django.request: Not Found: /action/119
+2015-11-18 22:01:05,005 [ERROR] django.request: Internal Server Error: /action/7
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 155, in check_activity_detail
+    args)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/loader.py", line 99, in render_to_string
+    return template.render(context, request)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/backends/django.py", line 74, in render
+    return self.template.render(context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/base.py", line 209, in render
+    return self._render(context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/base.py", line 201, in _render
+    return self.nodelist.render(context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/base.py", line 903, in render
+    bit = self.render_node(node, context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/debug.py", line 79, in render_node
+    return node.render(context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/debug.py", line 89, in render
+    output = self.filter_expression.resolve(context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/base.py", line 647, in resolve
+    obj = self.var.resolve(context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/base.py", line 787, in resolve
+    value = self._resolve_lookup(context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/base.py", line 825, in _resolve_lookup
+    current = getattr(current, bit)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/related.py", line 452, in __get__
+    rel_obj = self.get_queryset(instance=instance).get(**params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 328, in get
+    num = len(clone)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 144, in __len__
+    self._fetch_all()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 965, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 238, in iterator
+    results = compiler.execute_sql()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 837, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+ProgrammingError: column Profile_userprofile.team_leader_id does not exist
+LINE 1: ...ated_at", "Profile_userprofile"."promotion_code", "Profile_u...
+                                                             ^
+
+2015-11-18 22:01:10,980 [WARNING] django.request: Not Found: /action/119
+2015-11-18 22:02:10,243 [ERROR] django.request: Internal Server Error: /action/7
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 155, in check_activity_detail
+    args)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/loader.py", line 99, in render_to_string
+    return template.render(context, request)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/backends/django.py", line 74, in render
+    return self.template.render(context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/base.py", line 209, in render
+    return self._render(context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/base.py", line 201, in _render
+    return self.nodelist.render(context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/base.py", line 903, in render
+    bit = self.render_node(node, context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/debug.py", line 79, in render_node
+    return node.render(context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/debug.py", line 89, in render
+    output = self.filter_expression.resolve(context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/base.py", line 647, in resolve
+    obj = self.var.resolve(context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/base.py", line 787, in resolve
+    value = self._resolve_lookup(context)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/template/base.py", line 825, in _resolve_lookup
+    current = getattr(current, bit)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/fields/related.py", line 452, in __get__
+    rel_obj = self.get_queryset(instance=instance).get(**params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 328, in get
+    num = len(clone)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 144, in __len__
+    self._fetch_all()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 965, in _fetch_all
+    self._result_cache = list(self.iterator())
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 238, in iterator
+    results = compiler.execute_sql()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 837, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/utils.py", line 97, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/backends/utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+ProgrammingError: column Profile_userprofile.team_leader_id does not exist
+LINE 1: ...ated_at", "Profile_userprofile"."promotion_code", "Profile_u...
+                                                             ^
+
+2015-11-18 22:12:56,078 [WARNING] django.request: Not Found: /action/119
+2015-11-18 22:12:57,344 [WARNING] django.request: Not Found: /action/119
+2015-11-18 22:12:58,259 [WARNING] django.request: Not Found: /action/119
+2015-11-18 22:12:59,720 [WARNING] django.request: Not Found: /action/119
+2015-11-18 22:13:16,734 [WARNING] django.request: Not Found: /social/profile
+2015-11-18 22:13:28,856 [WARNING] django.request: Not Found: /social/profile
+2015-11-18 22:13:47,186 [WARNING] django.request: Not Found: /social/profile
+2015-11-18 22:14:00,452 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/1/apply
+2015-11-18 22:14:00,826 [WARNING] django.request: Not Found: /favicon.ico
+2015-11-18 22:23:15,146 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/1/apply
+2015-11-18 22:23:15,489 [WARNING] django.request: Method Not Allowed (GET): /action/1/apply
+2015-11-18 22:24:30,403 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/1/apply
+2015-11-18 22:26:17,062 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/1/apply
+2015-11-18 22:42:59,400 [WARNING] django.request: Not Found: /modules/activity/css/activity_detail.css
+2015-11-18 22:42:59,409 [WARNING] django.request: Not Found: /modules/activity/js/activity_detail.js
+2015-11-18 22:42:59,534 [WARNING] django.request: Not Found: /assets/imgs/action-pic.png
+2015-11-18 22:42:59,827 [WARNING] django.request: Not Found: /favicon.ico
+2015-11-18 22:43:01,138 [WARNING] django.request: Not Found: /modules/activity/css/activity_detail.css
+2015-11-18 22:43:01,139 [WARNING] django.request: Not Found: /modules/activity/js/activity_detail.js
+2015-11-18 22:43:01,268 [WARNING] django.request: Not Found: /assets/imgs/action-pic.png
+2015-11-18 22:48:12,056 [WARNING] django.request: Not Found: /modules/activity/js/activity_detail.js
+2015-11-18 22:48:12,057 [WARNING] django.request: Not Found: /modules/activity/css/activity_detail.css
+2015-11-18 22:48:12,124 [WARNING] django.request: Not Found: /assets/imgs/action-pic.png
+2015-11-18 22:48:19,048 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/1/apply
+2015-11-18 22:48:42,161 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/1/apply
+2015-11-18 22:48:42,164 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/1
+2015-11-18 22:49:01,289 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/1/apply
+2015-11-18 22:49:01,293 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/1
+2015-11-18 22:49:43,219 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/1/apply
+2015-11-18 22:49:43,223 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /action/1
+2015-11-18 22:52:10,361 [WARNING] django.request: Forbidden (CSRF cookie not set.): /action/1/apply
+2015-11-18 22:52:10,463 [WARNING] django.request: Not Found: /modules/activity/css/activity_detail.css
+2015-11-18 22:52:10,471 [WARNING] django.request: Not Found: /modules/activity/js/activity_detail.js
+2015-11-18 22:52:10,704 [WARNING] django.request: Not Found: /assets/imgs/action-pic.png
+2015-11-18 23:11:37,671 [WARNING] django.request: Not Found: /modules/activity/css/activity_detail.css
+2015-11-18 23:11:37,680 [WARNING] django.request: Not Found: /modules/activity/js/activity_detail.js
+2015-11-18 23:11:37,686 [WARNING] django.request: Not Found: /assets/imgs/action-pic.png
