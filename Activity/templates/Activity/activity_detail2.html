@@ -4,12 +4,17 @@
 <head>
     <title>消息</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="../modules/activity/css/activity_detail.css" />
-    
-    <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
-    <script type="text/javascript" src="//zhao-mi.net/lib/placeholder/jquery.placeholder.min.js"></script>
-    <script type="text/javascript" src="../modules/activity/js/activity_detail.js"></script>
+{#    <link rel="stylesheet" href="../modules/activity/css/activity_detail.css" />#}
+{#    #}
+{#    <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>#}
+{#    <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>#}
+{#    <script type="text/javascript" src="//zhao-mi.net/lib/placeholder/jquery.placeholder.min.js"></script>#}
+{#    <script type="text/javascript" src="../modules/activity/js/activity_detail.js"></script>#}
+    <link rel="stylesheet" href="//localhost/static/modules/activity/css/activity_detail.css" />
+    <script type="text/javascript" src="//localhost/static/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//localhost/static/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//localhost/static/lib/placeholder/jquery.placeholder.min.js"></script>
+    <script type="text/javascript" src="//localhost/static/modules/activity/js/activity_detail.js"></script>
 </head>
 <body>
 <div id="header">
@@ -25,7 +30,8 @@
     </div>        
 </div>
 <div id="detail-bg">
-    <img src="//zhao-mi.net/assets/imgs/detail-banner.png">
+{#    <img src="//zhao-mi.net/assets/imgs/detail-banner.png">#}
+    <img src="//localhost/static/assets/imgs/detail-banner.png" alt="">
 </div>
 <input type="hidden" name="csrfmiddlewaretoken" value="GKfokgpXjyQ9n12Ivb094edvZ5vcy7bR">
 <input type="hidden" value="20790d9f7c3f57c8ac60b9dbd4663aea" name="share_code">
@@ -41,7 +47,7 @@
  		
  		<div class="user-info">
  			<div class="fLeft">
- 				<img src="{{ act.post_url }}" />
+ 				<img src="{{ act.poster_url }}" />
  			</div>
  			<div class="fLeft type-detail">
  				<span>主办方：{{ act.host.profile.name }}</span>
@@ -125,7 +131,7 @@
  	</div>
 	<div class="right-main fRight" >
 		<div class="fRight">
-			<img src="../assets/imgs/action-pic.png" />
+			<img src="/static/assets/imgs/action-pic.png" />
 		</div>
 		
 		<div class="shade-main fRight">

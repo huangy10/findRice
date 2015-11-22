@@ -1,0 +1,339 @@
+html,body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, hr, input, legend, li, ol, p, pre, td, textarea, th, ul,div {
+    margin: 0;
+    padding: 0;
+}
+body, button, input, select, textarea {
+    font: 12px/1.5 tahoma,arial,'微软雅黑',\5b8b\4f53,sans-serif;
+}
+body {
+    background-color: #eaeaea!important;
+}
+a{text-decoration: none;}
+.fLeft{float: left;}
+.fRight{float: right;}
+/*** 头部 ***/
+#header {
+    height: 66px;
+    background-color: #fff;
+    font-size: 18px;
+    color: #747474;
+}
+
+#header #header-c {
+    width: 1190px;
+    margin: 0 auto;
+}
+
+#header #header-c #logo {
+    display: inline-block;
+    float: left;
+    width: 50px;
+    height: 50px;
+    background: url(http://zhao-mi.net/assets/imgs/logo.png) no-repeat 0 0;
+    margin-left: 40px;
+    margin-top: 8px;
+    font-size: 34px;
+    color: #5e5e5e;
+    line-height: 1;
+    text-indent: -9999em;
+}
+#header #header-c .action {
+    float: right;
+    margin-top: 9pt;
+    margin-right: 9pt;
+}
+#header #header-c .action {
+    float: right;
+    margin-top: 9pt;
+    margin-right: 9pt;
+}
+#header #header-c .action {
+    float: right;
+    margin-top: 9pt;
+    margin-right: 9pt;
+}
+#header #header-c .action a {
+    height: 40px;
+    line-height: 38px;
+    border: 1px solid #cfcfcf;
+    background-color: transparent;
+    font-size: 14px;
+    outline: 0;
+    color: #b8b8b8;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    background-clip: padding-box;
+}
+.z-btn, .z-btn:hover {
+    color: #666;
+}
+.z-btn {
+    border: solid 1px #999;
+    background-color: #fff;
+}
+.z-btn, .z-btn-action, .z-btn-checked, .z-btn-disabled, .z-btn-hint, .z-btn-important, .z-btn-pic {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 23px;
+    font-size: 14px;
+    vertical-align: middle;
+    overflow: visible;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-family: Helvetica Neue;
+}
+
+#header #header-c #search input {
+width: 194px;
+height: 40px;
+line-height: 38px;
+padding-left: 42px;
+border: 1px solid #cfcfcf;
+font-size: 14px;
+outline: 0;
+background: url(http://zhao-mi.net/assets/imgs/icons.png) no-repeat -13pc -219px;
+-webkit-border-radius: 20px;
+border-radius: 20px;
+background-clip: padding-box;
+}
+
+
+
+/***    主要内容   ***/
+#detail-bg{
+    width:100%;
+    min-width: 1000px;
+    position: relative;
+    z-index: 1;
+}
+#detail-bg img {
+    width: 100%;
+    height:220px;
+    display: block;
+}
+.wrap-content {
+    width: 1000px;
+    margin: 0 auto 95px;
+    background: #fff;
+    margin-top:-118px;
+    position: relative;
+    z-index: 2;
+    padding:40px 39px 54px 40px;
+    overflow: hidden;
+    box-sizing: border-box;
+    font-size:14px;
+    color:#727272;
+}
+.top-wrap{
+    border-bottom: 1px solid #f1f1f1;
+    overflow: hidden;
+}
+.left-main{
+    width:600px;
+}
+.top-title{
+    padding-bottom: 20px;
+    overflow: hidden;
+}
+.top-title h4{
+    width:400px;
+    color:#4b4b4b;
+    font-size:22pt;
+}
+.top-title span{
+    color:#ff4545;
+    font-size:24px;
+}
+.user-info{
+    height:60px;
+    line-height:60px;
+}
+.user-info .fLeft img{width:60px;height:60px;}
+.approve-user{
+    display: block;
+    width:75px;
+    height:26px;
+    line-height:26px;
+    text-align: center;
+    color:#fff;
+    background: #f5a623;
+    border:none;
+    margin-top:17px;
+}
+.type-detail{
+    padding-left: 20px;
+    color: #4B4B4B;
+}
+.type-detail span{
+    padding-right:15px;
+}
+.user-list {
+    width:426px;
+    clear: both;
+    margin:26px 0 30px;
+    overflow: hidden;
+}
+.user-list p{
+    line-height:24px;
+    margin-bottom: 10px;
+}
+.title-line{
+    height:40px;
+    font-size:18px;
+    border-bottom: 2px solid #f1f1f1;
+    margin-bottom:22px;
+    color: #4B4B4B;
+}
+.detail-items{
+    margin-left:-6px;
+    margin-bottom: 44px;
+    overflow: hidden;
+}
+
+.detail-items p {
+    height: 2pc;
+    line-height: 2pc;
+    margin: 0;
+    padding-left: 62px;
+    background: url(http://zhao-mi.net/assets/imgs/icons.png) no-repeat 0 0;
+}
+.detail-items .location {background-position: -10000px;}
+.detail-items .num {background-position: -252px -50px;}
+.detail-items .time {background-position: -252px -89px;}
+.detail-items .extra {background-position: -252px -93pt;}
+
+.answer-module{
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+.answer-module h5{
+    font-size:16px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color:#4b4b4b;
+}
+.party-line{
+    height:22px;
+    line-height:22px;
+    margin-bottom: 26px;
+    margin-left:5px;
+}
+.round{
+    width:20px;
+    height:20px;
+    border-radius: 20px;
+    border:1px solid #818181;
+    margin-right: 30px;
+    cursor: pointer;
+}
+.round div{
+    width:16px;
+    height:16px;
+    border-radius: 16px;
+    background: #d6d6d6;
+    margin-left: 2px;
+    margin-top: 2px;
+}
+.round .color-round{background: #7b7b7b;}
+.text-detail{
+    width:430px;
+    height:50px;
+    border:1px solid #4b4b4b;
+    resize:none;
+    outline:none;
+    font-size:14px;
+    overflow:hidden;
+    margin-left:5px;
+}
+.answer-module .borderE4{border:1px solid #e4e4e4;}
+.file-btn{
+    width:147px;
+    height:40px;
+    line-height:40px;
+    text-align: center;
+    border-radius: 30px;
+    border: 1px solid #e4e4e4;
+    position: relative;
+    cursor: pointer;
+}
+.file-btn input{
+    position: absolute;
+    left: 0;
+    top:0;
+    width:100%;
+    height:40px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+}
+.hint-info{
+    line-height:40px;
+    color:#e4e4e4;
+    padding-left: 4px;
+}
+.shade-main{clear: both;color:#727272;}
+.shade-main a{
+    display: block;
+    width:140px;
+    height:40px;
+    line-height:40px;
+    text-indent: 60px;
+    border-radius: 30px;
+    margin-top:14px;
+    position: relative;
+}
+.btn-shade-sc{
+    color:#ff8585;
+    border: 1px solid #ff8585;
+}
+.btn-shade-sc p{
+    width:38px;
+    height:28px;
+    position: absolute;
+    left: 15px;
+    top:2px;
+    background: url(http://zhao-mi.net/assets/imgs/icons.png) no-repeat -87px -15px;
+}
+.btn-shade-fx{
+    color:#727272;
+    border: 1px solid #bebebe;
+}
+
+.btn-shade-fx p{
+    width:38px;
+    height:24px;
+    position: absolute;
+    left: 10px;
+    top:6px;
+    background: url(http://zhao-mi.net/assets/imgs/icons.png) no-repeat -210px -360px;
+}
+.bottom-wrap{
+    width:254px;
+    margin-top:10px;
+    margin-right:34px;
+}
+.bottom-wrap .btn-shade-bm{
+    width:90px;
+    height:40px;
+    color:#fff;
+    text-align: center;
+    text-indent: 0;
+    background: #7ed321;
+    margin-left:20px;
+    display: block;
+    border:none;
+    border-radius: 30px;
+    margin-top: 14px;
+    cursor: pointer;
+}
+.warning-size{
+    clear: both;
+    line-height:20px;
+    padding-top:18px;
+}
+.no-selected{
+	background-color: #b4b4b4 !important;
+	cursor: default !important;
+}	

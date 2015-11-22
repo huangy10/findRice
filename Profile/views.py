@@ -43,6 +43,7 @@ def user_login(request):
     if request.method == "POST":
         username = request.POST.get("username", "").strip()
         pwd = request.POST.get("pwd", "").strip()
+        print username, pwd
         user = auth.authenticate(username=username, password=pwd)
         if user is not None and user.is_active:
             auth.login(request, user)
@@ -72,7 +73,7 @@ def user_login(request):
     # 这个next参数会被埋在登陆页面的注册按钮，构造/register?next=/url/to/next的链接
     args['next'] = request.GET.get("next", None)
 
-    return render(request, choose_template_by_device(request, "Profile/login.html", "Profile/mobile/login.html"), args)
+    return render(request, choose_template_by_device(request, "Profile/new_login.html", "Profile/mobile/login.html"), args)
 
 
 def logout(request):
@@ -113,7 +114,7 @@ def register(request):
     # TODO: 注意，这里模板渲染应当不再使用form
     return render(request,
                   choose_template_by_device(request,
-                                            "Profile/register.html",
+                                            "Profile/new_register.html",
                                             "Profile/mobile/register.html"),
                   args)
 

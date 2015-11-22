@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>我的米团</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/placeholder/jquery.placeholder.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/build/mine.js"></script>
+</head>
+<body>
+<div id="header">
+    <div id="header-c">
+        <a href="//zhao-mi.net" id="logo">找米</a>
+        <div id="reg" class="action"><a class="z-btn">注册/登陆</a></div>
+        <div id="pub" class="action"><a class="z-btn">发布活动</a></div>
+        <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
+    </div>
+</div>
+<div id="content">
+    <div id="mine-bg">
+        <div id="personal-info-origin">
+            <span id="portrait" class="portrait"><img src="//zhao-mi.net/assets/imgs/portrait.png"></span>
+            <div class="info-items">
+                <div class="main-items">
+                    <span class="name">龚子仪</span>
+                    <span class="numMibi">72米币</span>
+                    <button class="z-btn exchange">兑换米币</button>
+                    <span class="edit"></span>
+                </div>
+                <div class="sub-items">
+                    <span class="mobile">15911111111</span>
+                    <span class="gender">男</span>
+                    <span class="age">21岁</span>
+                </div>
+            </div>
+        </div>
+        <div id="personal-info-modify">
+            <form action="/user/modify" id="personal-info-form" enctype="multipart/form-data" method="post">
+                <div id="portrait-c">
+                    <img src="//zhao-mi.net/assets/imgs/portrait.png"/>
+                    <label for="portrait"></label>
+                    <input id="portrait" name="portrait" type="file" class="fn-hide"></input>
+                </div>
+                <div class="info-items">
+                    <div class="main-items">
+                        <input id="info-name" name="name" type="text" placeholder="龚子仪"/>
+                    </div>
+                    <div class="sub-items">
+                        <input id="info-mobile" name="mobile" type="text" placeholder="1591111111"></input>
+                        <input id="info-gender" name="gender" type="text" placeholder="男"/>
+                        <input id="info-bday" name="bday" type="date" placeholder="1988-09-26"/>
+                        <button class="z-btn save-info">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <img src="//zhao-mi.net/assets/imgs/detail-banner.png">
+    </div>
+    <div id="mine-container">
+        <div id="mine-type" class="fn-clr">
+            <a class="mine-create" href="//zhao-mi.net/demo/start.html">我发起的活动</a>
+            <a class="mine-apply" href="//zhao-mi.net/demo/apply.html">我报名的活动</a>
+            <a class="mine-like" href="//zhao-mi.net/demo/like.html">我关注的活动</a>
+            <a class="mine-group selected">我的米团</a>
+            <span class="hotline">找米客服联系电话：400-22236678</span>
+        </div>
+        <div id="group-info">
+            <span id="my-group">我的团队<em>24</em>人</span>
+            <span id="group-mibi">团队米币<em>242</em></span>
+        </div>
+        <div id="tbl">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>贡献米币</th>
+                        <th>团队米币</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span class="seqno">1.</span><span class="portrait-c"><img src="//zhao-mi.net/assets/imgs/portrait.png"></span><span class="name">龚子仪</span>
+                        </td>
+                        <td class="center">72</td>
+                        <td class="center">3</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="seqno">2.</span><span class="portrait-c"><img src="//zhao-mi.net/assets/imgs/portrait.png"></span><span class="name">龚子仪</span>
+                        </td>
+                        <td class="center">72</td>
+                        <td class="center">3</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="seqno">3.</span><span class="portrait-c"><img src="//zhao-mi.net/assets/imgs/portrait.png"></span><span class="name">龚子仪</span>
+                        </td>
+                        <td class="center">72</td>
+                        <td class="center">3</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>    
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>注册页面 - 补充信息</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="//zhao-mi.net/lib/jqueryui/jquery-ui.css"/>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jqueryui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/placeholder/jquery.placeholder.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/build/register.js"></script>
+</head>
+<body>
+    <div id="header">
+        <a class="logo" href="/">找米</a>
+        <a class="quit" href="/"></a>
+    </div>
+
+    <div id="container">
+    <form id="register" action="">
+        <p class="title-txt">验证手机/补充信息</p>
+        <!-- <form action="//zhao-mi.net/login" method="post"> -->
+            <div id="portrait-c">
+                <img src="//zhao-mi.net/assets/imgs/portrait.png"/>
+                <label for="portrait"></label>
+                <input id="portrait" type="file" class="fn-hide"></input>
+                <span>头像上传成功</span>
+            </div>
+            <div id="mobile-wrapper" class="fn-clr">
+                <div id="mobile-c">
+                    <input id="mobile" placeholder="请输入手机号码"></input>    
+                </div>
+                <button id="sendcode" class="z-btn">发送验证码</button>
+            </div>
+            <div id="verifycode-c">
+                <input id="verifycode" name="verifycode" placeholder="请输入验证码"></input>
+            </div>
+            <div id="name-c">
+                <input id="name" name="name" placeholder="请输入姓名/企业名"></input>
+            </div>
+            <div id="bday-c">
+                <div class="input-group date form_datetime">
+                    <input id="bday" name="bday" class="form-control bday-i" size="16" type="text" value="" readonly placeholder="请选择您的出生日期">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+            </div>
+            <div id="gender-c">
+                <p>请选择您的性别</p>
+                <ul id="gender-droplist">
+                    <li data-val="m" data-txt="男">男</li>
+                    <li data-val="f" data-txt="女">女</li>
+                </ul>
+                <input type="hidden" id="gender" name="gender"></input>
+            </div>
+            <div id="login-btn-c" class="fn-clr">
+                <button id="register-btn" type="submit" class="z-btn register-btn">注册</button>
+                <a class="statement" href="//zhao-mi.net/statement.html">找米免责声明</a>
+            </div>
+    </form>
+        
+    </div>
+    <link rel="stylesheet" type="text/css" href="//zhao-mi.net/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//zhao-mi.net/lib/datepicker/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript" src="//zhao-mi.net/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/datepicker/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/datepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+</body>
+</html>

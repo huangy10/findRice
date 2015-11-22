@@ -6533,3 +6533,4 @@
 2015-11-18 22:09:57,130 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_userprofile" ALTER COLUMN "team_leader_id" DROP NOT NULL; (params [])
 2015-11-18 22:09:57,131 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_userprofile" ADD CONSTRAINT "Profile_userpro_team_leader_id_7691a359f808c791_fk_auth_user_id" FOREIGN KEY ("team_leader_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
 2015-11-18 22:13:31,242 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=|q=
+2015-11-22 14:42:16,869 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=|q=

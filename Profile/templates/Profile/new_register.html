@@ -1,0 +1,99 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>找米-搜索</title>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="{% static 'lib/common/new_common.css' %}"/>
+    <link rel="stylesheet" href="{% static "modules/login/css/login.less" %}"/>
+    <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
+ 	<script type="text/javascript" src="{% static "lib/common/new_common.js" %}"></script>
+</head>
+<body>
+<div class="wrapper">
+	<div class="header">
+		<div class="header-center">
+	        <div class="fLeft">
+	            <a class="logo item" href="/">找米</a>
+	        </div>
+        </div>
+    </div>
+	<!--主要内容-->
+	<div class="content-mian">
+		<div class="fLeft left-matter">
+				<h4>注册</h4>
+				<p></p>
+				<div class="l-hint-info">找米网是专业的市场调查发布与参与平台，用户可发布活动信息，参与者也可以通过推广注册笼络自己的米团，活的持续收益。<br/><br/>找米网活动均为实名邀请制，信息不完整将被拒绝</div>
+		</div>
+		<div class="fLeft right-main register-warp">
+			<div class="logo-mian">
+				<!--头像-->
+				<div class="head-portrait">
+					<img src="{% static "assets/imgs/portrait.png" %}" />
+					<input type="file" />
+				</div>
+				<!--end-->
+				<div class="find-pwd">
+					<div class="input-frame fLeft">
+						<div class="icon-picture fLeft"><i class="icon-phone"></i></div>
+						<input type="text" class="fLeft phone-type"   placeholder="请输入手机号" autocomplete="off"/>
+					</div>
+					<input type="button" class="fRight btn-findPwd " value="获取验证码" />
+				</div>
+				<div class="input-frame">
+					<div class="icon-picture fLeft"><i class="icon-verifycode"></i></div>
+					<input type="text" class="fLeft code-sytles"   placeholder="请输入验证码" autocomplete="off"/>
+				</div>
+				
+				<div class="input-frame">
+					<div class="icon-picture fLeft"><i></i></div>
+					<input type="text" class="fLeft user-type" placeholder="请输入真实姓名/企业名" autocomplete="off">
+				</div>
+				
+				<div class="input-frame">
+					<div class="icon-picture fLeft"><i class="password"></i></div>
+					<input type="text" class="fLeft "   placeholder="请设定密码" autocomplete="off"/>
+				</div>
+				
+				<div class="input-frame">
+					<div class="icon-picture fLeft"><i class="passwordS"></i></div>
+					<input type="text" class="fLeft "   placeholder="请确认密码" autocomplete="off"/>
+				</div>
+				
+				<div class="select-main">
+					<select class="fLeft">
+						<option>请选择出生日期</option>
+						<option>1990</option>
+						<option>1991</option>
+						<option>1992</option>
+					</select>
+					<select class="fRight">
+						<option>请选择性别</option>
+						<option>男</option>
+						<option>女</option>
+					</select>
+				</div>
+				
+				<div class="footer-register">
+					<div class="register-main">
+						<a href="#" class="btn-shade-bm fRight">注册</a>
+						<div class="fRight">免责声明</div>
+					</div>
+					<a href="#" class="fRight logo-next">
+						<div class="fLeft">登录</div>
+						<img src="{% static "assets/imgs/login.png" %}" class="fRight">
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>
+	<!--底部图片-->
+	<img src="{% static "assets/imgs/footere.png" %}" class="position-footer"/>
+</div>
+
+</body>    
+</html>

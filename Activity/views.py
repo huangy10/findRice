@@ -157,7 +157,6 @@ def check_activity_detail(request, action_id):
 
 @require_POST
 def apply_an_activity(request, action_id):
-    print "Duang"
     user = request.user
     activity = get_object_or_404(Activity, id=action_id, is_active=True)
     if not user.is_authenticated():
