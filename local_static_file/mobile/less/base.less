@@ -1,0 +1,156 @@
+//全局基础样式
+// reset
+//
+//## thanks
+// antui  http://gitlab.alibaba-inc.com/h5app/antui/raw/master/src/8.7/base/reset.less
+/**
+ * Thanks to:
+ * normalize.css, http://necolas.github.io/normalize.css/
+ * */
+
+*, *:before, *:after {
+  /* 设置元素的盒模型为border-box */
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  /* 使Chrome使用小于12px的字体 */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* 去除点击元素后的高亮效果 */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/*去除元素周围的虚线*/
+*:focus {
+  outline: none;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* 清除内外边距 */
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements */
+dl, dt, dd, ul, ol, li, /* list elements */
+pre, /* text formatting elements */
+fieldset, legend, button, input, textarea, form, /* form elements */
+th, td, /* table elements */
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+em {
+  font-style: normal;
+}
+
+strong {
+  font-weight: 700;
+}
+button, input, select, textarea {
+  font-size: 100%;
+  font-family: inherit;
+}
+
+/*重置文本格式*/
+a {
+  text-decoration:none;
+}
+
+a:hover, a:active {
+  color: black;
+}
+
+q:before, q:after {
+  content: "";
+}
+
+/* 重置表格元素 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 去除默认边框 */
+fieldset, img {
+  border: none;
+}
+
+/* 重置列表元素 */
+ul, ol {
+  list-style: none;
+}
+
+
+textarea,
+input[type="text"],
+input[type="submit"],
+input[type="password"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+
+
+// 布局
+.zui-clear{
+  clear: both;
+}
+
+.clearfix, .zui-clr {
+  .clearfix();
+}
+
+/* float */
+.zui-left{
+  float: left;
+}
+
+.zui-right{
+  float: right;
+}
+
+
+/* display */
+.zui-hide{
+  display: none;
+}
+.zui-show{
+  display: block;
+}
+
+
+/* position */
+.zui-locate{
+  position: relative;
+}
+
+
+.zui-fixed,
+.zui-fixed-bottom {
+  position:fixed!important;
+  left:0;
+  right:0;
+  z-index: 99;
+  width: 100%;
+}
+.zui-fixed{
+  top:0;
+}
+.zui-fixed-bottom{
+  bottom: 0;
+}
+a{
+  color: #666;
+}

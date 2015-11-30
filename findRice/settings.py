@@ -138,6 +138,9 @@ FR_SHARE_LINK_TEMPLATE = "/action/%s?code=%s"  # 分享链接模板
 DEFAULT_PROFILE = "default_avatars/default_avatar.png"
 DEFAULT_POSTER_PATH = "defaultPosters/default.jpg"
 
+SMS_KEY = "b2bc04ed9bbc52b10b3b68e5656eb08f"        # 云片网
+SMS_TEMPLATE = "您的验证码是%s【找米网】"
+
 """导入第三方登陆模块的设置"""
 
 AUTHENTICATION_BACKENDS = (

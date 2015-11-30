@@ -33881,3 +33881,195 @@ LINE 1: ...ated_at", "Profile_userprofile"."promotion_code", "Profile_u...
 2015-11-22 20:28:47,987 [WARNING] django.request: Not Found: /assets/imgs/login.png
 2015-11-22 20:30:38,941 [WARNING] django.request: Not Found: /assets/imgs/login.png
 2015-11-22 20:30:38,942 [WARNING] django.request: Not Found: /assets/imgs/footere.png
+2015-11-22 21:22:28,036 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-11-22 21:22:28,091 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-11-22 21:22:29,602 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-11-22 21:22:29,611 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-11-27 13:56:05,297 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-11-27 13:56:05,345 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-11-27 13:56:47,245 [WARNING] django.request: Not Found: /favicon.ico
+2015-11-27 14:06:22,339 [WARNING] django.request: Not Found: /lib/common/laydate.dev.js
+2015-11-27 14:10:40,009 [WARNING] django.request: Not Found: /lib/common/laydate.dev.js
+2015-11-27 14:10:44,916 [WARNING] django.request: Not Found: /lib/common/laydate.dev.js
+2015-11-27 14:20:42,836 [WARNING] django.request: Not Found: /favicon.ico
+2015-11-27 14:21:45,271 [ERROR] django.request: Internal Server Error: /register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 88, in register
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 393, in full_clean
+    self._clean_form()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 417, in _clean_form
+    cleaned_data = self.clean()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 61, in clean
+    password2 = self.cleaned_data['password2']
+KeyError: 'password2'
+2015-11-27 14:22:19,401 [ERROR] django.request: Internal Server Error: /register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 88, in register
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 393, in full_clean
+    self._clean_form()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 417, in _clean_form
+    cleaned_data = self.clean()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 61, in clean
+    password2 = self.cleaned_data['password2']
+KeyError: 'password2'
+2015-11-27 14:49:25,137 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-11-27 14:49:25,149 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-11-27 14:49:25,249 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-11-27 14:49:25,257 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-11-27 15:19:25,168 [WARNING] django.request: Not Found: /action/10
+2015-11-28 14:22:54,905 [WARNING] django.request: Not Found: /apple-touch-icon-precomposed.png
+2015-11-28 14:22:54,923 [WARNING] django.request: Not Found: /apple-touch-icon.png
+2015-11-29 15:54:29,545 [WARNING] django.request: Not Found: /favicon.ico
+2015-11-29 16:07:32,419 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /sendcode
+2015-11-29 16:24:14,834 [ERROR] django.request: Internal Server Error: /register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 88, in register
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 393, in full_clean
+    self._clean_form()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 417, in _clean_form
+    cleaned_data = self.clean()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 62, in clean
+    password2 = self.cleaned_data['password2']
+KeyError: 'password2'
+2015-11-29 16:24:22,857 [ERROR] django.request: Internal Server Error: /sendcode
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 331, in send_verify_code
+    code = settings.SMS_TEMPLATE % code
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/__init__.py", line 49, in __getattr__
+    return getattr(self._wrapped, name)
+AttributeError: 'Settings' object has no attribute 'SMS_TEMPLATE'
+2015-11-29 16:27:19,344 [ERROR] django.request: Internal Server Error: /sendcode
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 331, in send_verify_code
+    code = settings.SMS_TEMPLATE % code
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/conf/__init__.py", line 49, in __getattr__
+    return getattr(self._wrapped, name)
+AttributeError: 'Settings' object has no attribute 'SMS_TEMPLATE'
+2015-11-29 21:14:59,317 [WARNING] django.request: Forbidden (CSRF token missing or incorrect.): /login
+2015-11-29 21:27:33,425 [WARNING] django.request: Not Found: /social/profile
+2015-11-29 21:35:43,039 [ERROR] django.request: Internal Server Error: /register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 88, in register
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 393, in full_clean
+    self._clean_form()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 417, in _clean_form
+    cleaned_data = self.clean()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 63, in clean
+    password2 = self.cleaned_data['password2']
+KeyError: 'password2'
+2015-11-29 21:47:56,257 [ERROR] django.request: Internal Server Error: /register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 88, in register
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 393, in full_clean
+    self._clean_form()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 417, in _clean_form
+    cleaned_data = self.clean()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 63, in clean
+    password2 = self.cleaned_data['password2']
+KeyError: 'password2'
+2015-11-29 21:48:23,565 [ERROR] django.request: Internal Server Error: /register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 88, in register
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 393, in full_clean
+    self._clean_form()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 417, in _clean_form
+    cleaned_data = self.clean()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 63, in clean
+    password2 = self.cleaned_data['password2']
+KeyError: 'password2'
+2015-11-29 21:49:46,397 [ERROR] django.request: Internal Server Error: /register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 88, in register
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 393, in full_clean
+    self._clean_form()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 417, in _clean_form
+    cleaned_data = self.clean()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 63, in clean
+    password2 = self.cleaned_data['password2']
+KeyError: 'password2'
+2015-11-29 22:02:21,069 [ERROR] django.request: Internal Server Error: /register
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/views/decorators/http.py", line 45, in inner
+    return func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/views.py", line 88, in register
+    if form.is_valid():
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 184, in is_valid
+    return self.is_bound and not self.errors
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 176, in errors
+    self.full_clean()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 393, in full_clean
+    self._clean_form()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/forms/forms.py", line 417, in _clean_form
+    cleaned_data = self.clean()
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/forms.py", line 63, in clean
+    password2 = self.cleaned_data['password2']
+KeyError: 'password2'

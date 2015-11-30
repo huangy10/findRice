@@ -1,14 +1,15 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>找米-搜索</title>
     <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="{% static 'lib/common/new_common.css' %}"/>
-    <link rel="stylesheet" href="{% static "modules/login/css/login.less" %}"/>
+{#    <link rel="stylesheet" href="{% static "modules/login/css/login.less" %}"/>#}
     <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "lib/jquery-form/jquery.form.js" %}"></script>
  	<script type="text/javascript" src="{% static "lib/common/new_common.js" %}"></script>
 </head>
 <body>
@@ -27,6 +28,9 @@
 				<p></p>
 				<div class="l-hint-info">找米网是专业的市场调查发布与参与平台，用户可发布活动信息，参与者也可以通过推广注册笼络自己的米团，活的持续收益。<br/><br/>找米网活动均为实名邀请制，信息不完整将被拒绝</div>
 		</div>
+        <form action="/register" method="post" id="register-form">
+            {% csrf_token %}
+            <input type="hidden" value="{{ promotion_code }}" name="promotion_code">
 		<div class="fLeft right-main register-warp">
 			<div class="logo-mian">
 				<!--头像-->
@@ -38,38 +42,33 @@
 				<div class="find-pwd">
 					<div class="input-frame fLeft">
 						<div class="icon-picture fLeft"><i class="icon-phone"></i></div>
-						<input type="text" class="fLeft phone-type"   placeholder="请输入手机号" autocomplete="off"/>
+						<input type="text" class="fLeft phone-type" placeholder="请输入手机号" autocomplete="off" name="phone_num"/>
 					</div>
-					<input type="button" class="fRight btn-findPwd " value="获取验证码" />
+                    <input type="button" class="fRight btn-findPwd " value="获取验证码" onclick="sendcode('.btn-findPwd','.phone-type')"/>
 				</div>
 				<div class="input-frame">
 					<div class="icon-picture fLeft"><i class="icon-verifycode"></i></div>
-					<input type="text" class="fLeft code-sytles"   placeholder="请输入验证码" autocomplete="off"/>
+					<input type="text" class="fLeft code-sytles"   placeholder="请输入验证码" autocomplete="off" name="code"/>
 				</div>
 				
 				<div class="input-frame">
 					<div class="icon-picture fLeft"><i></i></div>
-					<input type="text" class="fLeft user-type" placeholder="请输入真实姓名/企业名" autocomplete="off">
+					<input type="text" class="fLeft user-type username" placeholder="请输入真实姓名/企业名" autocomplete="off" name="nickname">
 				</div>
 				
 				<div class="input-frame">
 					<div class="icon-picture fLeft"><i class="password"></i></div>
-					<input type="text" class="fLeft "   placeholder="请设定密码" autocomplete="off"/>
+					<input type="password" class="fLeft pwd"   placeholder="请设定密码" autocomplete="off" name="password1"/>
 				</div>
 				
 				<div class="input-frame">
 					<div class="icon-picture fLeft"><i class="passwordS"></i></div>
-					<input type="text" class="fLeft "   placeholder="请确认密码" autocomplete="off"/>
+					<input type="password" class="fLeft repeatPwd"   placeholder="请确认密码" autocomplete="off" name="password2"/>
 				</div>
 				
 				<div class="select-main">
-					<select class="fLeft">
-						<option>请选择出生日期</option>
-						<option>1990</option>
-						<option>1991</option>
-						<option>1992</option>
-					</select>
-					<select class="fRight">
+					<input type="text" id="birthdate" name="birthDate" placeholder="请选择出生日期"/>
+					<select class="fRight sex-second" name="gender">
 						<option>请选择性别</option>
 						<option>男</option>
 						<option>女</option>
@@ -78,17 +77,18 @@
 				
 				<div class="footer-register">
 					<div class="register-main">
-						<a href="#" class="btn-shade-bm fRight">注册</a>
-						<div class="fRight">免责声明</div>
+                        <button type="submit" class="btn-shade-bm">注册</button>
+{#						<a href="/register" class="btn-shade-bm fRight">注册</a>#}
+						<a target="_blank" href="/statement"><div class="fRight">免责声明</div></a>
 					</div>
-					<a href="#" class="fRight logo-next">
-						<div class="fLeft">登录</div>
+					<a href="/login" class="fRight logo-next">
+                        <div class="fLeft">登录</div>
 						<img src="{% static "assets/imgs/login.png" %}" class="fRight">
 					</a>
 				</div>
 			</div>
 		</div>
-		
+		</form>
 		
 	</div>
 	<!--底部图片-->
@@ -97,3 +97,9 @@
 
 </body>    
 </html>
+<script type="text/javascript" src="{% static "lib/common/laydate.dev.js" %}"></script>
+<script type="text/javascript">
+        laydate({
+            elem: '#birthdate'
+        });
+</script>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>创建活动第一步</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="//zhao-mi.net/m/lib/mobiscroll/css/mobiscroll.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/moment/moment.min.js"></script>
+    <script src="//zhao-mi.net/m/lib/mobiscroll/js/mobiscroll.js" type="text/javascript"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/build/create-basic.js"></script>
+</head>
+<body>
+<div  class="wrapper page-process-01" id="pageCreateAction">
+    <div class="header zui-flex" id="header">
+        <div class="zui-cell logo-warp">
+            <a href="./list.html" class="logo item">找米</a>
+        </div>
+        <div class="zui-cell zui-flex-fixed ">
+            <div class="nav">
+                <a href="//zhao-mi.net/m/demo/search.html" class="nav-item">
+                    <i class="zui-icon icon-search"></i>
+                </a>
+                <a href="//zhao-mi.net/m/demo/list.html" class="nav-item active">
+                    <i class="zui-icon icon-plus"></i>
+                </a>
+                <a href="//zhao-mi.net/m/demo/message.html" class="nav-item">
+                    <i class="zui-icon icon-email"></i>
+                </a>
+                <a href="//zhao-mi.net/m/demo/mine.html" class="nav-item user">
+                    <img src="//zhao-mi.net/m/assets/img/user.png" alt=""/>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="banner">
+
+        <div class="process  zui-flex">
+            <div class="zui-cell zui-flex-fixed">
+                <div class="step step-01">1</div>
+            </div>
+            <div class="zui-cell"><div class="line"></div></div>
+            <div class="zui-cell zui-flex-fixed">
+                <div class="step step-02">2</div>
+            </div>
+            <div class="zui-cell"><div class="line"></div></div>
+            <div class="zui-cell zui-flex-fixed">
+                <div class="step step-03">3</div>
+            </div>
+
+        </div>
+        <img src="//zhao-mi.net/m/assets/img/banner-publish.jpg" alt=""/>
+    </div>
+
+    <div class="main">
+        <form action="/action/new/create/1" method="post" id="createActionStep" class="step-01">
+            <ul>
+                <li>
+                    <div class="active-name">活动名称</div>
+                    <div class="input-wrapper">
+                        <input type="text" class="zui-input-text" value="" id="name" data-required="true" placeholder="请输入活动名称"/>
+                    </div>
+                </li>
+                <li>
+                    <div class="active-name">主办方</div>
+                    <div class="input-wrapper">
+                        <span class="zui-input-text" id="hostName">主办方名称</span>
+                    </div>
+                    <div class="zui-align-right">
+                        <div class="zui-btn">申请成为实名用户</div><i class="zui-icon icon-medal"></i>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="active-name"><i class="zui-icon icon-address"></i>活动地点</div>
+                    <div class="input-wrapper">
+                        <input type="text" data-required="true"  data-select-area="true" data-select-target="#NowProvince,#NowCity" data-select-title="请选择省份" class="zui-input-text" value="" id="prov_city" readonly placeholder="选择地区" />
+                        <br/>
+                        <input type="text" class="zui-input-text" value="" id="other-local-msg" placeholder="输入详细地点" data-required="true" />
+                    </div>
+                </li>
+
+                <li>
+                    <div class="active-name"><i class="zui-icon icon-date"></i>活动时间</div>
+                    <div class="input-wrapper ">
+                        <div class="zui-flex">
+                            <div class="zui-cell">
+                            <label class="start-date-lbl date-lbl" for="start-date">
+                                <input id="start-date" type="hidden" readonly="readonly"  data-required="true" name="start-name" class="zui-input-text select-date-time" value="" placeholder="请选择开始时间" />
+                                <span class="ph">请选择开始时间</span>
+                            </label>
+                            </div>
+                            <div class="zui-cell end-time">
+                            <label class="end-date-lbl date-lbl" for="end-date">
+                                <input id="end-date" type="hidden" readonly="readonly"  data-required="true" name="end-name" class="zui-cell zui-input-text select-date-time" value="" placeholder="请选择结束时间" />
+                                <span class="ph">请选择结束时间</span>
+                            </label>
+                            </div>
+                        </div>
+                        <div class="Validform_checktip  Validform_wrong"></div>
+                    </div>
+
+                </li>
+
+                <li>
+                    <div class="active-name"><i class="zui-icon icon-distance"></i>持续时间</div>
+                    <div class="input-wrapper distance-input">
+                        <div class="zui-flex">
+                            <div class="zui-flex zui-cell">
+                                <div class="zui-cell">
+                                    <input id="id_day" type="text" class="zui-input-text distance-day" name="day" value="0" data-rule-type="number" />
+                                </div>
+                                <span class="zui-cell "><span class="text">天</span></span>
+                            </div>
+                            <div class="zui-flex zui-cell">
+                                <div class="zui-cell ">
+                                    <input id="id_hour" type="text" class="zui-input-text distance-hour" name="hour" value="0" data-rule-type="number" data-min-length="0" data-max-length="23" data-error-msg="请输入0~23" />
+                                </div>
+                                <span class="zui-cell "><span class="text">时</span></span>
+
+                            </div>
+                            <div class="zui-flex zui-cell">
+                                <div class="zui-cell">
+                                    <input id="id_minute" type="text" class="zui-input-text distance-minute" name="minute" value="0" data-rule-type="number" data-min-length="0" data-max-length="59" data-error-msg="请输入0~59" />
+                                </div>
+                                <span class="zui-cell "><span class="text">分</span></span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+
+                <li>
+                    <div class="active-name"><i class="zui-icon icon-number"></i>活动人数</div>
+                    <div class="input-wrapper">
+                        <input type="text" class="zui-input-text" id="id_max_attend" value="" placeholder="请输入活动人数" data-rule-type="number" data-min-length="1" data-error-msg="最少人数为1"/>
+                    </div>
+                </li>
+
+
+                <li>
+                    <div class="active-name"><i class="zui-icon icon-price"></i>奖励金额
+                        <label class="active-gift">
+                            礼品 <div class="zui-checkbox">
+
+                            <input type="checkbox" name="x2"  />
+                            <span class="zui-icon-checkbox"></span>
+                        </div>
+                        </label>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="text" class="zui-input-text" id="id_reward" value="" placeholder="请输入活动奖励" data-rule-type="number" data-min-length="0" data-error-msg="输入有误" data-required="true"/>
+                    </div>
+                    <div class="input-wrapper  input-gift">
+                        <input type="text" class="zui-input-text" id="id_gift" value="" placeholder="请输入活动奖励" data-rule-type="number" data-min-length="0" data-error-msg="输入有误" data-required="true"/>
+                    </div>
+                </li>
+
+
+                <li>
+                    <div class="active-name">活动简介</div>
+                    <div class="input-wrapper">
+                        <textarea name="" id="desc" cols="30" rows="10" class="zui-input-textarea"  placeholder="请输入活动简介" data-required="required"></textarea>
+                    </div>
+                </li>
+
+
+                <li>
+                    <div class="active-name">活动类型</div>
+                    <div class="input-wrapper select-wrapper">
+                        <input type="hidden" name="action-type" id="action-type" data-required="true" />
+                        <span  class="select-activity-type"  > 请选择活动类型</span>
+
+                        <div class="select-list-content">
+                            <span data-val="1">类型1</span>
+                            <span data-val="2">类型2</span>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li>
+                    <div class="active-name">活动海报</div>
+                    <div class="input-wrapper">
+                        <input type="file" class="zui-input-text" value="" id="poster" placeholder="请选胎动一张活动海报"/>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="zui-align-right next-w">
+                <button type="submit" class="zui-btn zui-btn-action">下一步</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+<!--下拉弹出部分 end-->
+<div class="selectdialog" id="SelectDialog">
+    <div class="select-dia-mask">
+    </div>
+    <div class="select-dia-table">
+        <div class="select-dia-cell">
+            <div class="select-dia">
+            </div>
+        </div>
+    </div>
+</div>
+<script id="dialogarea" type="text/html">
+    <h3>{{title}}</h3>
+    <div class="select-dia-con">
+        <ul class="area select-dia-list">
+            {{each list as value i}}
+            <li data-value="{{value.Value}}" data-index="{{value.Key}}" class="select-area-check" data-target="{{target}}">{{value.Value}}</li>
+            {{/each}}
+        </ul>
+    </div>
+</script>
+
+</body>
+</html>

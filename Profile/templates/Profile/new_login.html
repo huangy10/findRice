@@ -28,7 +28,7 @@
 					<div class="l-hint-info">保持登录状态分享活动或注册页面给你的朋友，朋友后续参加的活动都会给你带来持续收益</div>
 				</div>
 				<div class="fLeft right-main">
-                        <form method="post" action="/login" autocomplete="off">
+                        <form method="post" action="/login" autocomplete="off" id="">
                         {% csrf_token %}
 						<img src="{% static "assets/imgs/Nbanner.png" %}"  class="img-fit"/>
 						<div class="logo-mian">
@@ -41,10 +41,10 @@
 								<input type="password" class="fLeft " placeholder="请输入密码" autocomplete="off" name="pwd">
 							</div>
 							<div class="footer-login">
-								<input type="submit" value="登录" class="btn-logos">
+								<button type="submit" class="btn-logos">登录</button>
 								<div class="forget-main">
 									<a href="/resetpwd" class="fLeft">忘记密码？</a>
-									<a href="/register" class="fRight zc-style">
+									<a href="/register{% if next %}?next={{ next }}{% endif %}" class="fRight zc-style">
 										<span class="fLeft">注册</span>
 										<img src="{% static "assets/imgs/login.png" %}" class="fRight">
 									</a>

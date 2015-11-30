@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>登录</title>
+    <link rel="shortcut icon" type="image/png" href="{% static "favicon.png" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="{% static "mobile/lib/common/new_common.css" %}"/>
+    <link rel="stylesheet" href="{% static "mobile/modules/login/css/new_login.css" %}"/>
+    <script type="text/javascript" src="{% static "mobile/build/zepto.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "mobile/lib/common/new_common.js" %}"></script>
+</head>
+<body>
+<div class="wrapper">
+	<div class="header">
+        <div class="fLeft">
+            <a href="/"><div class="logo item">找米</div></a>
+        </div>
+    </div>
+    <!--banner图-->
+	<a href="#"><img src="{% static "mobile/assets/img/Nbanner.jpg" %}" class="img-fit"/></a>
+	
+	<!--主要内容-->
+	<div class="a-wrap">
+		<p class="login-size">登录</p>
+		<div class="logo-mian">
+            <form action="/login" method="post" autocomplete="off">
+            {% csrf_token %}
+			<div class="input-frame">
+				<div class="icon-picture fLeft"><i ></i></div>
+				<input type="text" class="fLeft"   placeholder="请输入手机号" autocomplete="off" name="username" />
+			</div>
+			
+			<div class="input-frame">
+				<div class="icon-picture fLeft"><i class="password"></i></div>
+				<input type="text" class="fLeft "   placeholder="请输入密码" autocomplete="off" name="pwd"/>
+			</div>
+			<div class="footer-login">
+				<input type="submit" value="登录" class="btn-logos"/>
+				<div class="forget-main">
+					<a href="/resetpwd" class="fLeft">忘记密码？</a>
+					<a href="/register{% if next %}?next={{ next }}{% endif %}" class="fRight">
+						<div class="fLeft">注册</div>
+						<i class="next-picture"></i>
+					</a>
+				</div>
+			</div>
+            </form>
+		</div>
+		
+		
+	</div>
+</div>
+
+</body>    
+</html>

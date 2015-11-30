@@ -27,6 +27,7 @@ class UserRegisterForm(forms.Form):
     avatar = forms.FileInput()
     code = forms.CharField(max_length=6)
     promotion_code = forms.CharField(required=False)
+    gender = forms.CharField(max_length=2)
 
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
@@ -52,6 +53,7 @@ class UserRegisterForm(forms.Form):
                 self.rice_leader = get_user_model().objects.get(profile__promotion_code=promotion_code)
             except ObjectDoesNotExist:
                 pass
+        logger.debug(u"检测到推广代码")
         return promotion_code
 
     def clean(self):
@@ -84,6 +86,7 @@ class UserRegisterForm(forms.Form):
         user.set_password(self.cleaned_data['password1'])
         user.profile.phoneNum = phone
         user.profile.avatar = self.avatar
+        user.profile.gender = self.cleaned_data['gender']
         if self.rice_leader is not None:
             user.profile.rice_leader = self.rice_leader
         user.save()

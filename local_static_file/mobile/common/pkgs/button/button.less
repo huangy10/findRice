@@ -1,0 +1,148 @@
+@import "./../../../less/mixins";
+
+//基础按钮
+//有默认 height, padding
+.zui-btn {
+  @btn-default-border-color: #979797;
+  display: inline-block;
+  .box-sizing(border-box);
+
+  line-height: 27px;
+  height: 27px;
+  font-size: 12px;
+  vertical-align: middle;
+  text-align: center;
+  overflow: visible;
+  cursor: pointer;
+  background: #fff;
+  .btn-font-family();
+
+
+  &.small {
+    min-width: 50px;
+    height: 25px;
+    line-height: 25px;
+
+    font-size: 13px;
+  }
+
+  .border-radius(25px); //是否要加前缀
+  -webkit-background-clip: padding-box;
+  padding: 0 12px;
+  border: 1px solid @btn-default-border-color;
+  color: @btn-default-color;
+  // 加上fui-mode 使用在底部操作区域
+
+
+  &.zui-btn-disabled{
+    color: @btn-default-disabled-color;
+  }
+
+}
+.zui-btn, .zui-btn-pic{
+  &, &:hover {
+    border: solid @btn-border-width #bebebe;
+    color: @btn-default-color;
+    background-color: @btn-default-bg;
+  }
+  &:active, &.pressing {
+    //color: @btn-d; 无
+
+
+    background-color: #ebebeb;
+    /* border-color: #e5e5e5; */
+    color: #666;
+  }
+  &.zui-btn-disabled{
+    color: @btn-default-disabled-color;
+    background-color: @btn-default-disabled-bg;
+  }
+}
+
+.zui-btn-hint, .zui-btn-checked{
+  &, &:hover {
+    border: solid @btn-border-width @btn-hint-border-color;
+    color: @btn-hint-color;
+    background-color:@btn-hint-bg;
+  }
+  &:active, &.pressing {
+    color: @btn-hint-color; //应该可以删除
+    background-color: @btn-hint-press-bg;
+  }
+  &.zui-btn-disabled{
+    color: @btn-hint-disabled-color;
+    background-color: @btn-hint-disabled-bg;
+    border-color: @btn-hint-disabled-border-color;
+  }
+
+  .icon {
+    width: 24px;
+  }
+  &>.icon, &>span{
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 24px;
+  }
+}
+.zui-btn-checked {
+  position: relative;
+  &:after {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-size: cover;
+    content: '\0020';
+  }
+}
+
+
+.zui-btn.zui-btn-important {
+  &, &:hover{
+    color: #fff;
+    border: 1px solid  transparent;
+    background-color:  #F56467;
+  }
+  &:active, &.pressing, &:hover{
+    background-color: #e16164;
+  }
+
+  &.zui-btn-disabled {
+    color: @btn-important-color;
+    background-color:@btn-important-disabled-bg;
+  }
+}
+
+
+.zui-btn-flex.zui-btn-action, .zui-btn-action  {
+  color: #fff;
+  background-color: #7ED321;
+  border-color: transparent;
+  &.pressing{
+    background-color: #7ED321;
+  }
+  &:active, &:hover{
+    background-color: #77cc21;
+    color: #fff;
+    border-color: transparent;
+  }
+}
+.zui-btn-flex {
+  &, &:hover{
+    .border-radius(0); //是否要加前缀
+    padding: 0;
+    border: none;
+    width:100%;
+  }
+
+  &.zui-btn-disabled{
+    background-color: #a6a6a6;
+    color:#fff;
+  }
+}
+
+
+

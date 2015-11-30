@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>找米-图片</title>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../modules/picture_zoom/css/picture_zoom.css" />
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../build/pinchzoom.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('div.pinch-zoom').each(function () {
+                new RTP.PinchZoom($(this), {});
+            });
+        })
+    </script>
+</head>
+<body>
+	<h3>双击缩放图片</h3>
+    <div class="page">
+        <div class="pinch-zoom">
+            <img src="../assets/img/banner.png" />
+        </div>
+    </div>
+</body>    
+</html>

@@ -1,0 +1,58 @@
+@import '../normalize/normalize.css';
+@import "../../less/zui";
+//======= function =======
+.bgImage(@path){
+  background-image: url("http://zhao-mi.net/m/modules/@{path}");
+}
+.bgImageFormAssets(@name){
+  background-image: url("http://zhao-mi.net/m/assets/img/@{name}")
+}
+.bgSize(@width, @height){
+   -webkit-background-size: @width @height;
+   background-size: @width @height;
+}
+.bgPosition(@left, @top){
+  background-position: @left @top;
+}
+//======= end function =======
+
+input, textarea{
+  .border-radius(0);
+}
+body{
+  font-size: 12px;
+}
+.text-overflow{
+  .text-overflow();
+}
+
+
+.zui-align-right {
+  text-align: right;
+  &>div{
+    display: inline-block;
+  }
+}
+
+.zui-align-center{
+  text-align: center;
+}
+.zui-link{
+  color:#4A90E2;
+  font-size: 12px;
+  text-decoration: underline;
+}
+.clearfix{
+  .clearfix();
+}
+
+
+@import "./header";
+@import "./icon";
+@import "./top-tab";
+@import "./activity-list-item";
+@import "../../common/pkgs/selector/radio-checkbox.less";
+@import "../../common/pkgs/input/input.less";
+@import "../../common/pkgs/selector/radio-checkbox.less";
+@import "../../common/pkgs/modal/modal.less";
+

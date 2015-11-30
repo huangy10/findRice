@@ -1,0 +1,45 @@
+@import "./../../../less/mixins";
+
+.zui-input-text {
+  border: 1px solid #BEBEBE;
+  display: block;
+  padding: 3px 10px;
+  font-size: 12px;
+  width: 100%;
+  height: 40px;
+  line-height: 32px;
+
+  &:focus {
+    border: 1px solid #7ED321;
+  }
+}
+
+.zui-input-select{
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+
+  height: 40px;
+  width:100%;
+  padding: 2px 5px;
+
+  border: solid 1px #BEBEBE;
+  color: #666;
+  position: relative;
+  .border-radius(0);
+  background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat  right center transparent;
+
+  &:after {
+    width: 25px;
+    height: 25px;
+    content:"";
+    position: absolute;
+    right:0;
+    top:0;
+  }
+}
+.zui-input-textarea{
+  border: solid 1px #BEBEBE;
+  width:100%;
+  padding: 5px 5px;
+}

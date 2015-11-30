@@ -31,6 +31,7 @@ def send_sms(apikey, text, mobile):
     response = conn.getresponse()
     response_str = response.read()
     conn.close()
+    print response_str
     return response_str
 
 

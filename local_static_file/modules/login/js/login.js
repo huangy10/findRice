@@ -1,9 +1,3 @@
-require('../../../common/pkgs/button/button');
-require('../css/login');
-
-var zhaomi = require('../../../lib/common/common');
-var utils = require('../../../common/utils');
-
 $(function() {
 
     // placeholder polyfill

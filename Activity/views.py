@@ -137,7 +137,7 @@ def check_activity_detail(request, action_id):
         args.update(csrf(request))
         return render(request,
                       choose_template_by_device(request,
-                                                "Activity/activity_detail2.html",
+                                                "Activity/detail.html",
                                                 "Activity/mobile/detail.html"),
                       args)
     except ObjectDoesNotExist:
@@ -150,7 +150,7 @@ def check_activity_detail(request, action_id):
         args.update(csrf(request))
         return render(request,
                       choose_template_by_device(request,
-                                                "Activity/activity_detail2.html",
+                                                "Activity/detail.html",
                                                 "Activity/mobile/detail.html"),
                       args)
 
@@ -699,6 +699,7 @@ def copy_an_activity(request, action_id):
     }, content_type='text/html')
 
 
+@login_required()
 def like_an_activity(request):
     if not request.user.is_authenticated():
         return JsonResponse({'success': True, 'data': {'url': '/login?next=%s' % request.META["HTTP_REFERER"]}},

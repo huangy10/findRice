@@ -144,7 +144,7 @@ a{text-decoration: none;}
 .input-frame .password{background-position: -31px 0px;height:14px;padding-left:25px;}
 .input-frame .passwordS{background-position: -184px 0px;height:23px;padding-left:19px;margin-top:0;}
 .input-frame .icon-phone{background-position:-102px 0px;height:18px;padding-left:20px;}
-.input-frame .icon-verifycode{background-position:-144px 0px;height:19px;padding-left:22px;}
+.input-frame .icon-verifycode{background-position:-144px 0px;height:19px;padding-left:22px;margin-top:2px;}
 .footer-login{
 	margin-top:18px;
 }
@@ -219,6 +219,7 @@ a{text-decoration: none;}
     color: #adadad;
     margin-top: 5px;
     background: #fff;
+    cursor: pointer;
 }
 .reset-main{
     margin-top: 18px;
@@ -268,6 +269,17 @@ a{text-decoration: none;}
 	margin-bottom: 15px;
 	overflow: hidden;
 }
+.select-main input{
+	width:48%;
+	height: 45px;
+	line-height: 45px;
+    font-size: 12px;
+    color: #E4E4E4;
+    border: 2px solid #d8d8d8;
+    padding-left: 10px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
 .select-main select{
 	width:48%;
 	height: 45px;
@@ -294,6 +306,7 @@ a{text-decoration: none;}
     text-indent: 0;
     background: #7ed321;
     border-radius: 20px;
+    border:none;
 }
 .logo-next div{
     color: #8bc847;
@@ -309,3 +322,6 @@ a{text-decoration: none;}
 .select-main select:hover{border:2px solid #4b4b4b;}
 .phone-type{color: #727272;font-size:14px;}
 .border4B{border:2px solid #4B4B4B;}
+.laydate_body .laydate_bottom .laydate_btn a{line-height: 20px !important;}
+#laydate_table th{height: 20px;}
+.sendCode{cursor: default;background-color: #ccc;color: #fff;}

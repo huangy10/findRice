@@ -1,0 +1,55 @@
+*, body, p, h1, h2, h3, h4, h5, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select, img {
+	margin: 0;
+	padding: 0;
+	font-family: 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+}
+body {
+	min-width: 320px;
+	width: 100%;
+	max-width: 640px;
+	margin: 0 auto;
+	font-family: 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+	color: #323232;
+	background: #fff;
+}
+* {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);	
+}
+input{outline:none;}
+.fLeft{float: left;}
+.fRight{float: right;}
+a{text-decoration: none;}
+.mt5{margin-top:5px;}
+.mt10{margin-top:10px;}
+.mt15{margin-top:15px;}
+.mt20{margin-top:20px;}
+.img-fit{
+	display: block;
+	width:100%;
+	height: auto;
+}
+/***头部***/
+
+.wrapper{
+		min-width: 320px;
+		width: 100%;
+		max-width: 640px;
+		margin:0 auto;
+		background: #fff;
+}
+.header{
+	height:50px;
+	padding:0 15px;
+}
+.header .logo {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	margin-top: 10px;
+	font-size: 24px;
+	line-height: 24px;
+	text-indent: -9999px;
+	background: url(http://zhao-mi.net/m/assets/img/108_108.png) no-repeat 0 0;
+	background-size: cover;
+}
+.input-frame:hover{border:1px solid #4B4B4B;}

@@ -101,9 +101,9 @@ def send_del_notification_to_candidate(act):
 
 
 @app.task()
-def create_share_thumbnail(act):
+def create_share_thumbnail(act, force=False):
     """ 生成适用于分享到朋友圈的缩略图，尺寸为300 * 300
     """
-    if act.poster_thumbnail:
+    if act.poster_thumbnail and not force:
         return
     cut_image_to_size((184, 136), act, 'poster', 'thumbnail')

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>活动详情页面</title>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/build/detail.js"></script>
+</head>
+<body>
+<div class="wrapper" id="pageDetail">
+    <div class="header zui-flex">
+        <div class="zui-cell logo-warp">
+            <a href="./list.html" class="logo item">找米</a>
+            <div class="city item">地区 <i class="item zui-icon icon-arrow-up"></i></div>
+        </div>
+        <div class="zui-cell zui-flex-fixed">
+            <div class="zui-btn btn-search"><i class="zui-icon icon-search"></i></div>
+        </div>
+        <div class="zui-cell zui-flex-fixed">
+            <div class="zui-btn zui-btn-pic btn-publish"><i class="zui-icon icon-plus"></i></div>
+        </div>
+
+        <div class="zui-cell zui-flex-fixed">
+            <div class="zui-btn btn-login">登录</div>
+        </div>
+    </div>
+    <div class="banner">
+        <div class="like icon-like"><i class="zui-icon icon-like"></i></div>
+        <img src="/m/modules/detail/img/banner.jpg" alt=""/>
+    </div>
+    <div class="main">
+        <div class="detail">
+            <div class="title zui-flex">
+                 <div class="zui-cell">
+                     标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题
+                 </div>
+                <span class="price">￥600</span>
+            </div>
+            <div class="title-desc">主办方：TNS 类型：母婴 <div class="m-tag"><span class="hot">热门推荐</span></div></div>
+            <div class="img-w">
+                <img src="/m/modules/detail/img/banner.jpg" width="100%" alt="">
+            </div>
+            <div class="content">
+                <p>a) 年龄：25-35岁</p>
+                <p>b)收入：个人月收入8000元以上，家庭月收入2万元以上（个人无收入的，以家庭月收入为准）</p>
+                <p>c) 学历：专科以上</p>
+                <p>d) 其他：常规性规避医疗美容行业、调研、营销从业人员；半年内没有参加过市场调研活动；北京居住5年以上等</p>
+            </div>
+
+
+            <div class="concact-msg">
+                <div class="address"><i class="zui-icon icon-address"></i>北京市海淀区颐和园东路</div>
+                <div class="date"><i class="zui-icon icon-date"></i>15/6/24 13:00 - 15/7/23     </div>
+                <div class="distance"><i class="zui-icon icon-distance"></i>1d30h</div>
+                <div class="number"><i class="zui-icon icon-number"></i> 7/17</div>
+
+            </div>
+        </div>
+        <form id="formCondition" action="comment.php" method="post">
+        <div class="condition">
+            <div class="title">报名条件</div>
+
+
+                <div class="question question-radio ">
+                    <div class="question-type">
+                        1. 单选题
+                    </div>
+
+                    <div class="content input-wrapper">
+                        <div class="item" data-type="radio">
+                            <div class="question-tt">请问您的学历是？</div>
+
+                            <div class="question-result ">
+
+                                <div class="result-item">
+                                    <div class="zui-radio">
+                                        <input type="radio" name="x2" value="1"  datatype="" nullmsg="此项不能为空"   />
+                                        <span class="zui-icon-radio"></span>
+                                    </div>
+                                    <label>高中</label>
+                                </div>
+
+                                <div class="result-item">
+                                    <div class="zui-radio">
+                                        <input type="radio" name="x2" value="2"  />
+                                        <span class="zui-icon-radio"></span>
+                                    </div>
+                                    <label>高中</label>
+                                </div>
+
+                                <div class="result-item">
+                                    <div class="zui-radio">
+                                        <input type="radio" name="x2" value="3"   />
+                                        <span class="zui-icon-radio"></span>
+                                    </div>
+                                    <label>高中</label>
+                                </div>
+                            </div>
+                            <div class="Validform_checktip"></div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="question question-checkbox ">
+                    <div class="question-type">
+                        2. 多选题
+                    </div>
+
+                    <div class="content input-wrapper">
+                        <div class="item" data-type="checkbox">
+                            <div class="question-tt">请问您的学历是？</div>
+                            <div class="question-result ">
+                                <div class="result-item">
+                                    <div class="zui-radio">
+                                        <input type="checkbox" name="x3" value="c1"
+                                               datatype="*" nullmsg="此项不能为空"    />
+                                        <span class="zui-icon-radio"></span>
+                                    </div>
+                                    <label>高中</label>
+                                </div>
+
+                                <div class="result-item">
+                                    <div class="zui-radio">
+                                        <input type="checkbox" name="x3" value="c2"  />
+                                        <span class="zui-icon-radio"></span>
+                                    </div>
+                                    <label>高中</label>
+                                </div>
+
+                                <div class="result-item">
+                                    <div class="zui-radio">
+                                        <input type="checkbox" name="x3" value="c3"  />
+                                        <span class="zui-icon-radio"></span>
+                                    </div>
+                                    <label>高中</label>
+                                </div>
+                            </div>
+                            <div class="Validform_checktip"></div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="question question-textarea ">
+                    <div class="question-type">
+                        3. 问答题
+                    </div>
+                    <div class="content">
+                        <div class="item" data-type="question">
+                            <div class="question-tt">请问您的学历是？</div>
+                            <div class="question-result input-wrapper">
+                                    <textarea name="" cols="30" rows="3"
+                                              datatype="s5-16"
+                                              nullmsg="请输入您的学历信息"
+                                              errormsg="请输入最少10个,最多160个字符！"
+                                            ></textarea>
+                           </div>
+                            <div class="Validform_checktip"></div>
+
+                        </div>
+                    </div>
+               </div>
+
+                <div class="question question-textarea ">
+                    <div class="question-type">
+                        4. 图片
+                    </div>
+                    <div class="content input-wrapper">
+                        <div class="item" data-type="upload">
+                            <div class="question-tt">请上传你的职业照</div>
+                            <div class="question-result input-wrapper">
+                                <div class="upload">
+                                    <input type="file" name="" id=""   data-null-msg="请选择一张图片" data-error-msg=""  />
+                                </div>
+                            </div>
+                            <div class="Validform_checktip"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+        </div>
+        <div class="bottom">
+            <!-- <div class="zui-btn zui-btn-pic"><i></i>分享获得10米币</div> -->
+            <button type="submit" class="zui-btn zui-btn-action btn-submit" ><i></i>报名</button>
+        </div>
+        </form>
+
+    </div>
+</div>
+
+
+</body>    
+</html>

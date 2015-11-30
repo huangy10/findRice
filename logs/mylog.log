@@ -6534,3 +6534,14 @@
 2015-11-18 22:09:57,131 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_userprofile" ADD CONSTRAINT "Profile_userpro_team_leader_id_7691a359f808c791_fk_auth_user_id" FOREIGN KEY ("team_leader_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
 2015-11-18 22:13:31,242 [DEBUG] findRice.views: 搜索参数为: hot=|type=1|loc=|q=
 2015-11-22 14:42:16,869 [DEBUG] findRice.views: 搜索参数为: hot=|type=|loc=|q=
+2015-11-27 14:24:30,237 [DEBUG] Profile.views: 用户注册过程中出错，错误信息为：<ul class="errorlist"><li>password1<ul class="errorlist"><li>密码长度不符合要求，密码长度请控制在8-30位</li></ul></li><li>code<ul class="errorlist"><li>验证码错误</li></ul></li></ul>
+2015-11-27 14:55:46,356 [DEBUG] Profile.views: 用户注册过程中出错，错误信息为：<ul class="errorlist"><li>code<ul class="errorlist"><li>验证码错误</li></ul></li></ul>
+2015-11-27 14:56:21,421 [DEBUG] Profile.views: 用户注册过程中出错，错误信息为：<ul class="errorlist"><li>code<ul class="errorlist"><li>验证码错误</li></ul></li></ul>
+2015-11-29 16:43:43,764 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-11-29 21:30:15,206 [DEBUG] Profile.forms: 检测到推广代码
+2015-11-29 21:30:15,305 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-11-29 21:35:43,039 [DEBUG] Profile.forms: 检测到推广代码
+2015-11-29 21:47:56,257 [DEBUG] Profile.forms: 检测到推广代码
+2015-11-29 21:48:23,565 [DEBUG] Profile.forms: 检测到推广代码
+2015-11-29 21:49:46,396 [DEBUG] Profile.forms: 检测到推广代码
+2015-11-29 22:02:21,069 [DEBUG] Profile.forms: 检测到推广代码

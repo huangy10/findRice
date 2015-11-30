@@ -1,0 +1,222 @@
+.right-main a{
+	width:25px;
+	height:25px;
+	border: 1px solid #c7c7c7;
+	border-radius: 50%;
+	margin-top:12px;
+	margin-left:10px;
+}
+.right-main i {
+width: 25px;
+height: 25px;
+display: inline-block;
+font-size: 0;
+line-height: 0;
+vertical-align: middle;
+background-image: url("http://zhao-mi.net/m/assets/img/icon500x500.png");
+background-size: 250px 250px;
+background-position: 0 -1px;
+}
+.t-add i{
+	background-position:-25px -1px ;
+}
+.t-email i{background-position: -201px 0;}
+.user-picture{
+	width:30px;
+	height:30px;
+	display: block;
+	margin-top:10px;
+	margin-left:15px;
+}
+.a-wrap{
+	padding:15px 20px;
+	overflow: hidden;
+}
+.main-info{
+	width:100%;
+}
+.top-price{
+	overflow: hidden;
+}
+.top-price h4{
+	width:71%;
+	font-size:16px;
+	color:#4b4b4b;
+	line-height: 26px;
+	margin-bottom: 10px;
+}
+.a-wrap .hot-tj{
+	background: #ff7a7a;
+	margin:8px 0 16px;
+}
+.approve-main{
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+.left-info-detail{
+	width:71%;
+}
+
+.userInfo{
+	height:30px;
+	line-height: 30px;
+	font-size:12px;
+	color:#727272;
+}
+.userInfo img{
+	width:30px;
+	height:30px;
+	display: block;
+	margin-right: 12px;
+}
+.right-info-detail{
+	text-align: right;
+}
+.right-info-detail p{
+	color: #ff4545;
+	font-size: 16px;
+}
+.approve-user {
+	display: block;
+	width: 55px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	color: #fff;
+	background: #f5a623;
+	border: none;
+	font-size:12px;
+}
+.user-list{
+	padding:15px 0;
+	color:#727272;
+	font-size:14px;
+	overflow: hidden;
+}
+.user-list p{
+	margin-bottom: 10px;
+}
+.title-line {
+	height: 35px;
+	font-size: 18px;
+	border-bottom: 1px solid #dcdcdc;
+	margin-bottom: 15px;
+}
+.detail-items{
+	padding-bottom:15px;
+	overflow: hidden;
+}
+.detail-items p{
+	margin-bottom: 15px;
+	color:#727272;
+	font-size:14px;
+}
+.detail-items p i{
+	width: 25px;
+	height: 25px;
+	display: inline-block;
+	font-size: 0;
+	line-height: 0;
+	margin-right: 15px;
+	vertical-align: middle;
+	background-image: url("http://zhao-mi.net/m/assets/img/icon500x500.png");
+	background-size: 250px 250px;
+	background-position: 0 -1px;
+}
+.detail-items p:nth-child(1) i{background-position: -75px -2px;}
+.detail-items p:nth-child(2) i{background-position: -98px -2px;}
+.detail-items p:nth-child(3) i{background-position: -150px -2px;}
+.detail-items p:nth-child(4) i{background-position: -125px -2px;}
+.answer-module {
+	margin-bottom: 15px;
+	font-size:14px;
+	color:#727272;
+	overflow: hidden;
+}
+.answer-module h5 {
+	font-size: 14px;
+	margin-bottom: 20px;
+	font-weight: bold;
+	color: #4b4b4b;
+}
+.party-line {
+	height: 18px;
+	line-height: 18px;
+	margin-bottom: 20px;
+	margin-left:5px;
+}
+.round {
+	width: 18px;
+	height: 18px;
+	border-radius: 18px;
+	border: 1px solid #818181;
+	margin-right: 22px;
+	cursor: pointer;
+}
+.round div {
+	width: 14px;
+	height: 14px;
+	border-radius: 14px;
+	background: #d6d6d6;
+	margin-left: 2px;
+	margin-top: 2px;
+}
+.round .color-round {
+	background: #7b7b7b;
+}
+.text-detail {
+	width: 200px;
+	height: 45px;
+	border: 1px solid #4b4b4b;
+	resize: none;
+	outline: none font-size:14px;
+	overflow: hidden;
+	margin-left:5px;
+}
+.answer-module .borderE4 {
+	border: 1px solid #e4e4e4;
+}
+
+.file-btn {
+	width: 130px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-radius: 30px;
+	border: 1px solid #e4e4e4;
+	position: relative;
+	cursor: pointer;
+}
+.file-btn input{
+    position: absolute;
+    left: 0;
+    top:0;
+    width:100%;
+    height:40px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer;
+}
+.hint-info{
+    line-height:40px;
+    color:#e4e4e4;
+    padding-left: 4px;
+}
+.footer-end-wrie{
+	width:100%;
+	height:1px;
+	background: #dedede;
+	margin:5px 0 20px;
+}
+.btn-shade-bm {
+		width: 105px;
+		height: 40px;
+		line-height:40px;
+		font-size:16px;
+		color: #fff;
+		text-align: center;
+		text-indent: 0;
+		background: #7ed321;
+		border-radius: 20px;
+}

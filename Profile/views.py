@@ -73,7 +73,7 @@ def user_login(request):
     # 这个next参数会被埋在登陆页面的注册按钮，构造/register?next=/url/to/next的链接
     args['next'] = request.GET.get("next", None)
 
-    return render(request, choose_template_by_device(request, "Profile/new_login.html", "Profile/mobile/login.html"), args)
+    return render(request, choose_template_by_device(request, "Profile/new_login.html", "Profile/mobile/new_login.html"), args)
 
 
 def logout(request):
@@ -107,6 +107,8 @@ def register(request):
             promotion_code = find_code.groups()[1]
         else:
             promotion_code = None
+    elif "code" in request.GET:
+        promotion_code = request.GET.get("code")
     else:
         promotion_code = None
     args['promotion_code'] = promotion_code
@@ -115,7 +117,7 @@ def register(request):
     return render(request,
                   choose_template_by_device(request,
                                             "Profile/new_register.html",
-                                            "Profile/mobile/register.html"),
+                                            "Profile/mobile/new_register.html"),
                   args)
 
 
@@ -316,7 +318,6 @@ def send_verify_code(request):
     code = ""
     for i in range(0, 6):
         code += random.choice("1234567890")
-
     if VerifyCode.objects.filter(phoneNum=phone, is_active=True).exists():
 
         record = VerifyCode.objects.filter(phoneNum=phone, is_active=True)[0]
