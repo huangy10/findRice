@@ -6545,3 +6545,22 @@
 2015-11-29 21:48:23,565 [DEBUG] Profile.forms: 检测到推广代码
 2015-11-29 21:49:46,396 [DEBUG] Profile.forms: 检测到推广代码
 2015-11-29 22:02:21,069 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 19:52:06,486 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 19:52:06,593 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-12-01 20:59:16,526 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 20:59:16,534 [DEBUG] Profile.views: 用户注册过程中出错，错误信息为：<ul class="errorlist"><li>password1<ul class="errorlist"><li>密码长度不符合要求，密码长度请控制在8-30位</li></ul></li><li>password2<ul class="errorlist"><li>两次输入的密码不一致</li></ul></li><li>code<ul class="errorlist"><li>验证码错误</li></ul></li></ul>
+2015-12-01 21:36:54,074 [DEBUG] Profile.forms: 用户15201525181修改了密码
+2015-12-01 21:41:11,295 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 21:41:41,167 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 21:44:03,719 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 21:45:37,888 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 21:45:53,527 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 21:46:37,958 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 21:46:42,771 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 21:46:53,689 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 21:47:26,197 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 21:47:52,685 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 21:50:23,032 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 21:50:23,033 [DEBUG] Profile.views: 用户注册过程中出错，错误信息为：<ul class="errorlist"><li>password1<ul class="errorlist"><li>密码长度不符合要求，密码长度请控制在8-30位</li></ul></li></ul>
+2015-12-01 21:50:32,279 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-01 21:50:32,362 [DEBUG] Profile.forms: 用户15611789985成功完成了注册

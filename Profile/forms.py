@@ -130,7 +130,7 @@ class PasswordResetForm(forms.Form):
         phone = self.cleaned_data['phone_num']
         user = get_user_model().objects.get(username=phone)
         user.set_password(self.cleaned_data['password1'])
-        self.profile.phoneNum = phone
+        user.profile.phoneNum = phone
         user.save()
         logger.debug(u'用户%s修改了密码' % phone)
         return user

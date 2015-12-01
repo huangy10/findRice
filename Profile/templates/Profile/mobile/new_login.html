@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>登录</title>
     <link rel="shortcut icon" type="image/png" href="{% static "favicon.png" %}">
@@ -8,8 +8,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="{% static "mobile/lib/common/new_common.css" %}"/>
     <link rel="stylesheet" href="{% static "mobile/modules/login/css/new_login.css" %}"/>
-    <script type="text/javascript" src="{% static "mobile/build/zepto.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "mobile/lib/common/new_common.js" %}"></script>
+    <script type="text/javascript" src="{% static "mobile/lib/jquery/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "mobile/lib/jquery-form/jquery.form.js" %}"></script>
+    <script type="text/javascript" src="{% static "lib/common/new_common.js" %}"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -25,19 +26,19 @@
 	<div class="a-wrap">
 		<p class="login-size">登录</p>
 		<div class="logo-mian">
-            <form action="/login" method="post" autocomplete="off">
+            <form action="/login" method="post" autocomplete="off" id="login-form">
             {% csrf_token %}
 			<div class="input-frame">
 				<div class="icon-picture fLeft"><i ></i></div>
-				<input type="text" class="fLeft"   placeholder="请输入手机号" autocomplete="off" name="username" />
+				<input type="text" class="fLeft username"   placeholder="请输入手机号" autocomplete="off" name="username" />
 			</div>
 			
 			<div class="input-frame">
 				<div class="icon-picture fLeft"><i class="password"></i></div>
-				<input type="text" class="fLeft "   placeholder="请输入密码" autocomplete="off" name="pwd"/>
+				<input type="password" class="fLeft pwd" placeholder="请输入密码" autocomplete="off" name="pwd"/>
 			</div>
 			<div class="footer-login">
-				<input type="submit" value="登录" class="btn-logos"/>
+				<button type="submit"  class="btn-logos"/>登录</button>
 				<div class="forget-main">
 					<a href="/resetpwd" class="fLeft">忘记密码？</a>
 					<a href="/register{% if next %}?next={{ next }}{% endif %}" class="fRight">
@@ -48,8 +49,6 @@
 			</div>
             </form>
 		</div>
-		
-		
 	</div>
 </div>
 

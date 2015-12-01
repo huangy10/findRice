@@ -49,6 +49,7 @@
 .input-frame input{
 	width:87%;
 	height:25px;
+	line-height:25px;
 	margin-top:10px;
 	border:none;
 	display: block;
@@ -171,6 +172,7 @@
     text-indent: 0;
     background: #7ed321;
     border-radius: 20px;
+	border:none;
 }
 .register-main{
 	text-align: right;
@@ -209,3 +211,4 @@
 	margin-top: 1px;
 }
 .border4B{border: 1px solid #4B4B4B;}
+.sendCode{cursor: default;background-color: #ccc;color: #fff;}

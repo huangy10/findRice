@@ -188,7 +188,7 @@ def reset_password(request):
     args.update(csrf(request))
     args['form'] = form
 
-    return render(request, choose_template_by_device(request, "Profile/reset-pwd.html", "Profile/mobile/reset-pwd.html"), args)
+    return render(request, choose_template_by_device(request, "Profile/find_password.html", "Profile/mobile/find_password.html"), args)
 
 
 @login_required()
