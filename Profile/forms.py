@@ -27,6 +27,7 @@ class UserRegisterForm(forms.Form):
     avatar = forms.FileInput()
     code = forms.CharField(max_length=6)
     promotion_code = forms.CharField(required=False)
+    birthDate = forms.DateField()
     gender = forms.CharField(max_length=2)
 
     def __init__(self, *args, **kwargs):
@@ -35,26 +36,6 @@ class UserRegisterForm(forms.Form):
             self.avatar = None
         else:
             self.avatar = args[1]['avatar']
-
-        self.rice_leader = None
-
-    def clean_phone_num(self):
-        phone_num = self.cleaned_data['phone_num']
-        if get_user_model().objects.filter(username=phone_num).exists():
-            raise forms.ValidationError(u'该手机号已经被注册了', code='phone_num_already_exists')
-        return phone_num
-
-    def clean_promotion_code(self):
-        promotion_code = self.cleaned_data['promotion_code']
-        # TODO: 后续修改米团系统时，在这里加上补充，将被推广的用户纳入推广者的米团
-        # 这里share code错误不用raise错误，但是要写入日志
-        if promotion_code != '':
-            try:
-                self.rice_leader = get_user_model().objects.get(profile__promotion_code=promotion_code)
-            except ObjectDoesNotExist:
-                pass
-        logger.debug(u"检测到推广代码")
-        return promotion_code
 
     def clean(self):
         """ 在这里检查验证码和password2
@@ -69,6 +50,9 @@ class UserRegisterForm(forms.Form):
         # 检查验证码
         code = self.cleaned_data['code']
         phone = self.cleaned_data['phone_num']
+        if get_user_model().objects.filter(username=phone).exists():
+            self.add_error('phone_num', u"该手机号已经被注册了")
+            return
         time_threshold = timezone.now() - datetime.timedelta(minutes=5)
         if not VerifyCode.objects.filter(
                 phoneNum=phone, code=code, created_at__gt=time_threshold, is_active=True).exists():
@@ -87,8 +71,17 @@ class UserRegisterForm(forms.Form):
         user.profile.phoneNum = phone
         user.profile.avatar = self.avatar
         user.profile.gender = self.cleaned_data['gender']
-        if self.rice_leader is not None:
-            user.profile.rice_leader = self.rice_leader
+        user.profile.name = self.cleaned_data['nickname']
+        user.profile.birthDate = self.cleaned_data['birthDate']
+        user.profile.is_active = True
+        try:
+            if "promotion_code" in self.cleaned_data:
+                leader = get_user_model().objects.get(profile__promotion_code=self.cleaned_data['promotion_code'])
+                user.profile.team_leader = leader
+        except ObjectDoesNotExist:
+            pass
+        # if self.rice_leader is not None:
+        #     user.profile.rice_leader = self.rice_leader
         user.save()
         logger.debug(u'用户%s成功完成了注册' % phone)
         # 完成注册以后将无用的验证码删除

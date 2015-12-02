@@ -6,7 +6,7 @@ register = Library()
 
 @register.simple_tag(name="share_link", takes_context=True)
 def share_link(context, activity):
-    return "deprecated"
+    return "/action/%s" % activity.id
     # user = context.get("user", None)
     # if user and not user.is_authenticated():
     #     user = None

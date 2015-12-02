@@ -57,12 +57,12 @@
     <div class="mine">
         <div class="mine-header">
             <i class="zui-icon icon-number"></i>
-            <span>我的团队 <em>{{ user.rice_team.total_members }}</em> 人</span>
-            <span>团队米币 <em>{{ user.rice_team.team_coin }}</em></span>
-            <span>我推广的注册 <em>{{ user.rice_team.promoted_registration }}</em>人</span>
+            <span>我的团队 <em>{{ member_num }}</em> 人</span>
+            <span>团队米币 <em>{{ user.profile.coin }}</em></span>
+{#            <span>我推广的注册 <em>{{ user.rice_team.promoted_registration }}</em>人</span>#}
         </div>
         <div class="mine-content">
-	    {% if contributions %}
+	    {% if members %}
             <div class="th zui-flex ">
                 <div class="zui-cell"></div>
                 <div class="zui-cell zui-flex-fixed">
@@ -77,13 +77,13 @@
                 </div>
             </div>
 	    {% endif %}
-            {% for contrib in contributions %}
+            {% for m in members %}
             <div class="tr">
                 <div class="zui-flex tr-item">
-                    <div class="zui-cell zui-flex-fixed">{{ forloop.counter }}. <span class="img"><img src="{{ contrib.user.profile.avatar_url }}" alt=""/></span> </div>
-                    <div class="zui-cell "><span class="name">{{ contrib.user.profile.name }}</span></div>
-                    <div class="zui-cell zui-flex-fixed"><span class="center">{{ contrib.contributed_coin }}</span></div>
-                    <div class="zui-cell zui-flex-fixed"><span class="center">{{ contrib.user.rice_team.team_coin }}</span></div>
+                    <div class="zui-cell zui-flex-fixed">{{ forloop.counter }}. <span class="img"><img src="{{ m.profile.avatar_url }}" alt=""/></span> </div>
+                    <div class="zui-cell "><span class="name">{{ m.profile.name }}</span></div>
+                    <div class="zui-cell zui-flex-fixed"><span class="center">{% if m.contributed_coin %}{{ m.contributed_coin }}{% else %}0{% endif %}</span></div>
+                    <div class="zui-cell zui-flex-fixed"><span class="center">{{ m.profile.coin }}</span></div>
                 </div>
             </div>
             {% endfor %}

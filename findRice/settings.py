@@ -130,7 +130,7 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_PROFILE_MODULE = "Profile.UserProfile"
-
+LOGIN_URL = "/login"
 
 """下面是一些自定义的变量"""
 

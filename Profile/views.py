@@ -17,7 +17,7 @@ from django.http import HttpResponseRedirect, Http404, HttpResponse, JsonRespons
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.loader import render_to_string
-from django.db.models import F
+from django.db.models import F, Sum
 
 from .forms import UserRegisterForm, PasswordResetForm
 from .forms import PasswordChangeForm, ProfileChangeForm
@@ -86,7 +86,9 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            user_auth = auth.authenticate(username=user.username, password=request.POST["password1"])
+            auth.login(request, user_auth)
             next_url = request.session.pop('next', '/')
             return HttpResponse(json.dumps({'success': True, 'data': {'url': next_url}}))
         else:
@@ -278,11 +280,14 @@ def mine_group(request, start, size):
     # 注意，这里先去掉分页，直接返回所有的米团成员
     # contributions = RiceTeamContribution.objects.filter(team=user.rice_team,
     #                                                     user__profile__is_active=True)[start:start+size]
-    contributions = RiceTeamContribution.objects.filter(team=user.rice_team,
-                                                        user__profile__is_active=True)
+    # contributions = RiceTeamContribution.objects.filter(leader=user,
+    #                                                     user__is_active=True)
+    team_members = get_user_model().objects.filter(profile__team_leader=user).\
+        annotate(contributed_coin=Sum("my_contributions__contributed_coin"))
     args = {
         "user": user,
-        "contributions": contributions
+        "member_num": team_members.count(),
+        "members": team_members
     }
     args.update(csrf(request))
     return render(request, choose_template_by_device(request, "Profile/group.html", "Profile/mobile/group.html"), args)
@@ -332,10 +337,10 @@ def send_verify_code(request):
     code = settings.SMS_TEMPLATE % code
     response_status = send_sms(settings.SMS_KEY, code, phone)
     status_code = int(re.match(r'\{"code":(-?\d+),.*', response_status).group(1))
-    if status_code != 0:
-        record.is_active = False
-        record.save()
-        return JsonResponse({'success': False, 'data': {}}, content_type='text/html')
+    # if status_code != 0:
+    #     record.is_active = False
+    #     record.save()
+    #     return JsonResponse({'success': False, 'data': {}}, content_type='text/html')
     return JsonResponse({'success': True}, content_type='text/html')
 
 

@@ -111,6 +111,7 @@ def check_activity_detail(request, action_id):
         liked = ActivityLikeThrough.objects.filter(user=user, activity=activity).exists()
     else:
         liked = False
+        user = None
 
     # 取出问卷
     try:

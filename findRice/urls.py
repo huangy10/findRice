@@ -24,7 +24,7 @@ urlpatterns = patterns("",
 
     url(r'^', include("social.apps.django_app.urls", namespace="social")),
     url(r'^', include("Profile.urls", namespace='profile')),
-    url(r'^action/', include("Activity.urls")),
+    url(r'^action/', include("Activity.urls", namespace='action')),
     url(r'^search$', "findRice.views.search_list"),
     url(r'^searchpage$', "findRice.views.search_page"),
     url(r'^statement$', 'findRice.views.statement'),

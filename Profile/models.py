@@ -131,7 +131,7 @@ class ContributionManager(models.Manager):
 
 class RiceTeamContribution(models.Model):
     leader = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+', verbose_name='米团长', null=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='my_contributions')
 
     contributed_coin = models.IntegerField(default=0, verbose_name='贡献的米币')
     activity = models.ForeignKey(Activity, verbose_name='相关活动')

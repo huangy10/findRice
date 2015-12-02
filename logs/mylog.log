@@ -6564,3 +6564,60 @@
 2015-12-01 21:50:23,033 [DEBUG] Profile.views: 用户注册过程中出错，错误信息为：<ul class="errorlist"><li>password1<ul class="errorlist"><li>密码长度不符合要求，密码长度请控制在8-30位</li></ul></li></ul>
 2015-12-01 21:50:32,279 [DEBUG] Profile.forms: 检测到推广代码
 2015-12-01 21:50:32,362 [DEBUG] Profile.forms: 用户15611789985成功完成了注册
+2015-12-02 13:19:23,205 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:23,314 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-12-02 13:19:24,582 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:24,915 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:25,127 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:25,332 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:25,515 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:25,694 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:25,893 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:26,080 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:34,533 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:34,771 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:34,962 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:35,157 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:35,309 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:37,805 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:38,115 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:38,275 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:19:38,421 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:20:19,815 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:21:26,018 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:24:07,397 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:24:07,480 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-12-02 13:30:10,566 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:30:10,668 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-12-02 13:33:12,988 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 13:33:13,081 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-12-02 13:55:46,841 [DEBUG] Activity.views: 报名活动成功，对应活动为|测试活动|(id:1), 当前用户为|15201525182|(15201525182)
+2015-12-02 14:04:27,683 [DEBUG] Profile.forms: 检测到推广代码
+2015-12-02 14:04:27,776 [DEBUG] Profile.forms: 用户15201525183成功完成了注册
+2015-12-02 14:16:17,049 [DEBUG] Profile.forms: 检测到推广代码:0ba0b985f402dfd10fcf4c0251b9b357
+2015-12-02 14:16:17,135 [DEBUG] Profile.forms: 用户15201089408成功完成了注册
+2015-12-02 14:23:05,886 [DEBUG] Profile.forms: 检测到推广代码:None
+2015-12-02 14:23:05,983 [DEBUG] Profile.forms: 用户15201089408成功完成了注册
+2015-12-02 14:26:35,834 [DEBUG] Profile.forms: 检测到推广代码:0ba0b985f402dfd10fcf4c0251b9b357
+2015-12-02 14:26:35,928 [DEBUG] Profile.forms: 用户15201089408成功完成了注册
+2015-12-02 14:32:31,943 [DEBUG] Profile.forms: 检测到推广代码:2d8c32d33d1269d72ea8fac979de9ec9
+2015-12-02 14:32:32,049 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-12-02 14:35:26,777 [DEBUG] Profile.forms: 检测到推广代码:2d8c32d33d1269d72ea8fac979de9ec9
+2015-12-02 14:35:26,866 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-12-02 14:37:52,759 [DEBUG] Profile.forms: 检测到推广代码:2d8c32d33d1269d72ea8fac979de9ec9
+2015-12-02 14:37:52,854 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-12-02 14:41:20,225 [DEBUG] Profile.forms: 检测到推广代码:2d8c32d33d1269d72ea8fac979de9ec9
+2015-12-02 14:41:46,842 [DEBUG] Profile.forms: 检测到推广代码:2d8c32d33d1269d72ea8fac979de9ec9
+2015-12-02 14:41:46,935 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-12-02 14:44:10,838 [DEBUG] Profile.forms: 检测到推广代码:2d8c32d33d1269d72ea8fac979de9ec9
+2015-12-02 14:44:10,935 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-12-02 14:49:29,343 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-12-02 14:51:17,697 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-12-02 15:21:16,182 [DEBUG] Profile.views: 用户注册过程中出错，错误信息为：<ul class="errorlist"><li>code<ul class="errorlist"><li>验证码错误</li></ul></li></ul>
+2015-12-02 15:22:25,129 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-12-02 15:26:15,084 [DEBUG] Profile.forms: 用户15201525181成功完成了注册
+2015-12-02 15:54:41,879 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_riceteamcontribution" DROP CONSTRAINT "Profile_riceteamcontri_user_id_5a4b337c50ec7093_fk_auth_user_id"; (params [])
+2015-12-02 15:54:41,890 [DEBUG] django.db.backends.schema: ALTER TABLE "Profile_riceteamcontribution" ADD CONSTRAINT "Profile_riceteamcontri_user_id_5a4b337c50ec7093_fk_auth_user_id" FOREIGN KEY ("user_id") REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED; (params [])
+2015-12-02 15:59:43,057 [DEBUG] Profile.views: 用户注册过程中出错，错误信息为：<ul class="errorlist"><li>phone_num<ul class="errorlist"><li>该手机号已经被注册了</li></ul></li></ul>
+2015-12-02 16:01:41,076 [DEBUG] Profile.views: 用户注册过程中出错，错误信息为：<ul class="errorlist"><li>phone_num<ul class="errorlist"><li>该手机号已经被注册了</li></ul></li></ul>
+2015-12-02 16:03:39,318 [DEBUG] Profile.forms: 用户15201525189成功完成了注册

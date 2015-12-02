@@ -35,7 +35,7 @@
             </div>
         {% else %}
             <div id="data-id" data-value="0" style="display: none"></div>
-            <div id="reg" class="action"><a class="z-btn" href="/login{% if share_code %}?next=/action/{{ act.id }}?code={{ share_code }}{% endif %}">注册/登录</a></div>
+            <div id="reg" class="action"><a class="z-btn" href="/login{% if promotion_code %}?next=/action/{{ act.id }}?code={{ promotion_code }}{% endif %}">注册/登录</a></div>
         {% endif %}
         <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">创建活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
@@ -48,7 +48,7 @@
     <div id="detail-container" data-link="{% share_link act %}" {% if act.status == 2 %}class="finished"{% endif %}>
         <form id="apply-form" action="/action/{{ act.id }}/apply" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="hidden" value="{{ share_code }}" name="share_code">
+            <input type="hidden" value="{{ promotion_code }}" name="promotion_code">
             <div id="detail-important" class="fn-clr">
                 <div class="detail-name-w {% if act.reward_gift %}with-present{% endif %}">
                     <span class="detail-name">{{ act.name }}</span>
