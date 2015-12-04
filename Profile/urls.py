@@ -11,7 +11,7 @@ urlpatterns = patterns("Profile.views",
                        url(r"^mine/like$", "mine_like", name="mine_like"),
                        url(r"^mine/info$", "mine_info", name="mine_info"),
                        url(r'^mine/exchange$', 'exchange_for_rmb', name='exchange'),
-                       url(r"^mine/manage$", "manage_an_activity", name="manage"),
+                       url(r"^mine/manage$", "manage_an_activity2", name="manage"),
                        url(r"^sendcode$", "send_verify_code", name="send_code"),
                        url(r"^user/modify$", "user_modify", name="user_modify"),
                        )

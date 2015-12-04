@@ -489,9 +489,9 @@ def manage_an_activity2(request):
         action_id = request.GET['action_id']
         target_id = request.GET['target_id']
     else:
-        optype = request.GET["optype"]
-        action_id = request.GET["action"]
-        target_id = request.GET["target"]
+        optype = request.POST["optype"]
+        action_id = request.POST["action"]
+        target_id = request.POST["target"]
     # 获取目标活动
     activity = get_object_or_404(Activity, id=action_id, is_active=True)
     # 检查当前用户的操作权限
@@ -515,7 +515,7 @@ def manage_an_activity2(request):
         # 查找出申请记录
         try:
             applicant = ApplicationThrough.objects.get(activity=activity, user=target_user, is_active=True,
-                                                       status__in=['applying, denied'])
+                                                       status__in=['applying', 'denied'])
             applicant.status = "approved"
             applicant.save()
             send_notification.send(
@@ -611,13 +611,12 @@ def manage_an_activity2(request):
                 share_record = ShareRecord.objects.get(user=user, activity=activity)
             except ObjectDoesNotExist:
                 share_record = None
-            # TODO: 米币结算
-            rice_leader = target_user.profile.rice_leader
+            team_leader = target_user.profile.team_leader
             contribution = RiceTeamContribution.objects.create(
-                leader=target_user.profile.rice_leader, user=target_user, activity=activity)
-            if rice_leader is not None:
-                rice_leader.profile.coin += contribution.contributed_coin
-                rice_leader.save()
+                leader=team_leader, user=target_user, activity=activity)
+            if team_leader is not None and activity.host.profile.identified:
+                team_leader.profile.coin += contribution.contributed_coin
+                team_leader.save()
             return HttpResponse(json.dumps({'success': True, 'data': {}}))
         except ObjectDoesNotExist:
             return HttpResponse(json.dumps({'success': False, 'data': {'error': '目标并未申请或者申请未被通过'}}))

@@ -34961,3 +34961,9 @@ Traceback (most recent call last):
   File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/db/models/query.py", line 201, in __getitem__
     return list(qs)[0]
 IndexError: list index out of range
+2015-12-02 21:48:22,982 [WARNING] django.request: Not Found: /lib/common/laydate.dev.js
+2015-12-02 22:02:32,523 [WARNING] django.request: Not Found: /lib/common/laydate.dev.js
+2015-12-02 22:02:41,963 [WARNING] django.request: Not Found: /lib/common/laydate.dev.js
+2015-12-02 22:05:35,068 [WARNING] django.request: Not Found: /lib/common/laydate.dev.js
+2015-12-02 22:05:36,914 [WARNING] django.request: Not Found: /lib/common/laydate.dev.js
+2015-12-03 16:09:51,129 [WARNING] django.request: Not Found: /http:/www.baidu.com/

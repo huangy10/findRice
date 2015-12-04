@@ -124,7 +124,7 @@ def post_save_receiver(sender, **kwargs):
 class ContributionManager(models.Manager):
 
     def create(self, **kwargs):
-        activity = kwargs['related_share_record'].activity
+        activity = kwargs['activity']
         kwargs['contributed_coin'] = activity.reward * activity.reward_for_share_and_finished_percentage
         return super(ContributionManager, self).create(**kwargs)
 

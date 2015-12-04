@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2786099684">
+  <component name="DataSourceManagerImpl" format="xml" hash="2958646053">
     <data-source source="LOCAL" name="PostgreSQL - find_rice_db@localhost" uuid="a13791ef-6727-45ef-9990-5e9ec5e50ad6">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>

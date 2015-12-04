@@ -331,14 +331,14 @@ class ApplicationThrough(models.Model):
 
     objects = ApplicationThroughManager()
 
-    def save(self, *args, **kwargs):
-        super(ApplicationThrough, self).save(*args, **kwargs)
-        if self.status == "finished":
-            try:
-                self.share_record.finished = True
-                self.share_record.save()
-            except ObjectDoesNotExist:
-                pass
+    # def save(self, *args, **kwargs):
+    #     super(ApplicationThrough, self).save(*args, **kwargs)
+    #     if self.status == "finished":
+    #         try:
+    #             self.share_record.finished = True
+    #             self.share_record.save()
+    #         except ObjectDoesNotExist:
+    #             pass
 
     class Meta:
         verbose_name = "参与"
