@@ -95,11 +95,11 @@ class PasswordResetForm(forms.Form):
     phone_num = forms.CharField(max_length=20)
     code = forms.CharField(max_length=6)
 
-    def clean_phone_num(self):
-        phone_num = self.cleaned_data['phone_num']
-        if not get_user_model().objects.filter(username=phone_num).exists():
-            raise forms.ValidationError(u'该手机号尚未被注册', code='phone_num_does_not_exists')
-        return phone_num
+    # def clean_phone_num(self):
+    #     phone_num = self.cleaned_data['phone_num']
+    #     if not get_user_model().objects.filter(username=phone_num).exists():
+    #         raise forms.ValidationError(u'该手机号尚未被注册', code='phone_num_does_not_exists')
+    #     return phone_num
 
     def clean(self):
         """ 在这里检查验证码和password2
@@ -114,6 +114,8 @@ class PasswordResetForm(forms.Form):
         # 检查验证码
         code = self.cleaned_data['code']
         phone = self.cleaned_data['phone_num']
+        if not get_user_model().objects.filter(profile__phoneNum=phone).exists():
+            self.add_error('phone_num', u'该手机号尚未被注册')
         time_threshold = timezone.now() - datetime.timedelta(minutes=5)
         if not VerifyCode.objects.filter(
                 phoneNum=phone, code=code, created_at__gt=time_threshold, is_active=True).exists():

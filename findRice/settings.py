@@ -51,6 +51,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -144,6 +145,7 @@ SMS_TEMPLATE = "您的验证码是%s【找米网】"
 """导入第三方登陆模块的设置"""
 
 AUTHENTICATION_BACKENDS = (
+    'Profile.backends.PhoneNumAuthenticateBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 

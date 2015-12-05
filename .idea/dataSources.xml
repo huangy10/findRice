@@ -8,16 +8,16 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/find_rice_db</jdbc-url>
     </data-source>
     <data-source source="LOCAL" name="Django default" uuid="63ffac47-60dd-4208-8d29-b6ff2f43e9b4">
-      <driver-ref>postgresql</driver-ref>
+      <driver-ref>e950362e-746e-48d2-9f0d-d512e1eac4d3</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://127.0.0.1/find_rice_db</jdbc-url>
       <libraries>
         <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/postgresql-driver-license.txt</url>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/xerial-sqlite-license.txt</url>
         </library>
         <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/postgresql-9.4-1201.jdbc4.jar</url>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/sqlite-jdbc-3.8.9.jar</url>
         </library>
       </libraries>
     </data-source>

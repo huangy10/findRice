@@ -250,7 +250,7 @@ class Activity(models.Model):
                                                  status__in=["approved", "finished"]).count()
 
     def get_absolute_url(self):
-        return reverse("detail", args=[str(self.id), ])
+        return reverse("action:detail", args=[str(self.id), ])
 
     def get_backup(self):
         if self.backup is None:
