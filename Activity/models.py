@@ -63,7 +63,7 @@ class ActivityType(models.Model):
 
 class ActivityManager(models.Manager):
 
-    @property
+    @cached_property
     def identification_act(self):
         """申请成为认证用户的特殊活动
         """
@@ -71,6 +71,13 @@ class ActivityManager(models.Manager):
             host__is_staff=True, host__is_superuser=True, is_active=True
         ).order_by('-created_at').first()
         return act
+
+    @cached_property
+    def identification_acts_id(self):
+        acts = Activity.objects.filter(
+            host__is_staff=True, host__is_superuser=True, is_active=True
+        ).order_by('-created_at').values_list('id', flat=True)
+        return acts
 
 
 class Activity(models.Model):
@@ -235,11 +242,15 @@ class Activity(models.Model):
         return tz.normalize(self.start_time).strftime("%y/%m/%d %H:%M")+" - "+tz.normalize(self.end_time).strftime("%y/%m/%d %H:%M")
 
     def get_applying_num(self):
-        return ApplicationThrough.objects.filter(activity=self,
-                                                 status="approved").count()
+        return ApplicationThrough.objects.filter(activity=self, is_active=True,
+                                                 status__in=["applying", "approved", "finished"]).count()
+
+    def get_approved_num(self):
+        return ApplicationThrough.objects.filter(activity=self, is_active=True,
+                                                 status__in=["approved", "finished"]).count()
 
     def get_absolute_url(self):
-        return reverse("detail", args=[str(self.id), ])
+        return reverse("action:detail", args=[str(self.id), ])
 
     def get_backup(self):
         if self.backup is None:
@@ -296,7 +307,7 @@ class ApplicationThroughManager(models.Manager):
                 return obj, True
             else:
                 if created:
-                    return obj, created
+                    return obj, created, ''
                 else:
                     return obj, created, "已经报名过该活动"
 
@@ -320,14 +331,14 @@ class ApplicationThrough(models.Model):
 
     objects = ApplicationThroughManager()
 
-    def save(self, *args, **kwargs):
-        super(ApplicationThrough, self).save(*args, **kwargs)
-        if self.status == "finished":
-            try:
-                self.share_record.finished = True
-                self.share_record.save()
-            except ObjectDoesNotExist:
-                pass
+    # def save(self, *args, **kwargs):
+    #     super(ApplicationThrough, self).save(*args, **kwargs)
+    #     if self.status == "finished":
+    #         try:
+    #             self.share_record.finished = True
+    #             self.share_record.save()
+    #         except ObjectDoesNotExist:
+    #             pass
 
     class Meta:
         verbose_name = "参与"

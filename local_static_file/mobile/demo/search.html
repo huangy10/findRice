@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>找米-搜索</title>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="//zhao-mi.net/m/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/m/build/search.js"></script>
+</head>
+<body>
+<div class="wrapper" id="pageList">
+	<div class="header zui-flex">
+        <div class="zui-cell logo-warp">
+            <div class="logo item">找米</div>
+        </div>
+        <div class="nav">
+            <a href="//zhao-mi.net/m/demo/list.html" class="nav-item active">
+                <i class="zui-icon icon-search"></i>
+            </a>
+
+            <!--<div class="zui-cell zui-flex-fixed">-->
+            <!--<div class="zui-btn zui-btn-pic btn-publish"><i class="zui-icon icon-plus"></i>发布活动</div>-->
+            <!--</div>-->
+            <a href="//zhao-mi.net/m/demo/create-action-1.html" class="nav-item">
+                <i class="zui-icon icon-plus"></i>
+            </a>
+            <a href="//zhao-mi.net/m/demo/login.html" class="nav-item btn-login">
+                <span>登录</span>
+            </a>
+        </div>
+
+    </div>
+
+
+    <div class="main">
+        <div class="search-input">
+            <form action="/search" method="get" >
+
+            <input type="text" name="q" id="search-input" class="input" placeholder="请输入你搜索的关键词"/>
+            <div class="zui-align-center">
+                <button type="submit"  class="zui-btn zui-btn-action" id="search-btn">搜索</button>
+            </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+</body>    
+</html>

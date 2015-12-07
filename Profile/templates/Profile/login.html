@@ -33,22 +33,9 @@
             </div>
             <div id="login-btn-c" class="fn-clr">
                 <button type="submit" class="z-btn login-btn">登录</button>
-                <a class="z-btn register-btn" href="/register/basic{% if next %}?next={{ next }}{% endif %}">注册</a>
+                <a class="z-btn register-btn" href="/register{% if next %}?next={{ next }}{% endif %}">注册</a>
                 <a class="reset-pwd" href="/resetpwd">忘记密码</a>
             </div>
-{#            <div id="login-splitline" class="fn-clr">#}
-{#                <span id="left-bottom"></span>#}
-{#                <span id="right-bottom"></span>#}
-{#            </div>#}
-{#            <div id="login-others">#}
-{#                <span id="or-txt">或</span>#}
-{#                <p>通过社交账号直接登录</p>#}
-{#                <div id="socials">#}
-{#                    <a id="wechat" href="{% url "social:begin" backend='weixin' %}?next=/social/profile"></a>#}
-{#                    <a id="qq" href="{% url "social:begin" backend='qq' %}?next=/social/profile"></a>#}
-{#                    <a id="sina" href="{% url "social:begin" backend='weibo' %}?next=social/profile" class="last"></a>#}
-{#                </div>#}
-{#            </div>#}
         </form>
         
     </div>

@@ -1,0 +1,20 @@
+/* !!cmd:lessbuild=false */
+// Text overflow
+// Requires inline-block or block for proper styling
+
+.text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* http://dev.opera.com/static/dstorey/text/text-overflow.html */
+/* https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariCSSRef/Articles/StandardCSSProperties.html */
+
+.line-overflow(@value: 2){
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: @value;
+    -webkit-box-orient: vertical;
+}

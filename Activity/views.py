@@ -1,5 +1,6 @@
 # coding=utf-8
 import simplejson
+import json
 import logging
 
 from django.shortcuts import render, get_object_or_404
@@ -9,6 +10,7 @@ from django.views.decorators.http import require_http_methods, require_GET, requ
 from django.http import HttpResponseForbidden, HttpResponseRedirect, HttpResponse, Http404, JsonResponse
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 
 from .models import Activity, ApplicationThrough, ActivityType, ActivityLikeThrough
@@ -18,7 +20,7 @@ from .tasks import send_del_notification_to_candidate
 from Questionnaire.models import SingleChoiceAnswer, MultiChoiceAnswer, TextAnswer, FileAnswer
 from Questionnaire.models import AnswerSheet, Questionnaire, ChoiceQuestion, NonChoiceQuestion
 from Questionnaire.utils import create_questionnaire_with_json, create_answer_set_with_json
-from Promotion.models import Share, ShareRecord
+from Promotion.models import ShareRecord
 from Notification.signals import send_notification
 from findRice.utils import choose_template_by_device
 from Profile.utils import profile_active_required
@@ -41,7 +43,7 @@ def check_applicant_list(request, action_id):
 
     applicant = ApplicationThrough.objects.filter(activity=activity,
                                                   activity__is_active=True,
-                                                  user__profile__is_active=True,
+                                                  user__is_active=True,
                                                   is_active=True)
 
     def findall(a):
@@ -77,64 +79,53 @@ def check_applicant_list(request, action_id):
 
 @require_GET
 def check_activity_detail(request, action_id):
+    """ 不必要在这个步骤里面追踪Share code，事实上share code已经全面取消。但是在这个页面中需要埋入当前用户的promotion code
+    """
     activity = get_object_or_404(Activity, id=action_id, is_active=True)
     user = request.user
-    if not user.is_authenticated():
-        user = None
-    like = False
-    share = None
 
-    if 'code' in request.GET and user is not None:
-        # Check if this code is related to the user
-        share_code = request.GET.get('code')
-        if Share.objects.filter(share_code=share_code, user=user).exists():
-            # 如果分享CODE是由当前用户产生的，尝试获取pre_code，如果pre_code不存在的话，仍然保留原值
-            share_code = request.GET.get('pre_code', share_code)
+    if user.is_authenticated():
+        if "code" in request.GET:
+            promotion_code = request.GET.get('code')
+            if promotion_code == user.profile.promotion_code:
+                # 如果当前的code是本用户
+                promotion_code = request.GET.get("precode", None)
+            else:
+                # 如果当前的code不是当前用户的,那么重整url
+                return HttpResponseRedirect("/action/{0}?code={1}&precode={2}".format(
+                    action_id, user.profile.promotion_code, promotion_code
+                ))
         else:
-            # 如果当期CODE来自其他人，redirect以更新code，但是将现在的code以pre_code参数保留
-            share = Share.objects.get_or_create(activity=activity, user=user)[0]
-            return HttpResponseRedirect('/action/{0}?code={1}&pre_code={2}'.format(
-                action_id, share.share_code, share_code))
+            return HttpResponseRedirect("/action/%s?code=%s" % (action_id, user.profile.promotion_code))
     else:
-        share_code = request.GET.get('code', None)
+        promotion_code = request.GET.get("code")
 
-    if activity.host != request.user:
-        # 增加浏览记录
+    # 到这里为止,promotion_code, 表征的就是向当前用户推广的推广者, 如果没有推广者,则为None,
+
+    if user.is_authenticated() and activity.host_id != user.id:
+        # 更新浏览次数
         activity.viewed_times += 1
         activity.save()
-        # Check if this activity is liked by the user
-        if request.user.is_authenticated():
-            user = request.user
-            like = ActivityLikeThrough.objects.filter(activity=activity, user=user).exists()
-    if share_code:
-        logger.debug(u'The share code is: %s' % share_code)
+    # 查看当前用户是否点赞过这个用户
+    if user.is_authenticated():
+        liked = ActivityLikeThrough.objects.filter(user=user, activity=activity).exists()
     else:
-        logger.debug(u'Code not found')
+        liked = False
+        user = None
 
-    if share_code and user\
-            and not ApplicationThrough.objects.filter(activity=activity, user=request.user).exists():
-        share = get_object_or_404(Share, share_code=share_code, activity=activity)
-        obj, created = ShareRecord.objects.get_or_create(share=share, target_user=request.user)
-        if created:
-            logger.debug(u'分享记录创建，点进来的用户是|%s(username: %s)|，对应的活动是|%s(id: %s)|' % (
-                request.user.profile.name, request.user.username, activity.name, activity.id))
-    elif request.user.is_authenticated():
-        share = Share.objects.get_or_create(activity=activity, user=request.user)
-    else:
-        share = Share.objects.get_or_create(activity=activity, user=None)
-    if Questionnaire.objects.filter(activity=activity, is_active=True).exists():
-        questionnaire = Questionnaire.objects.filter(activity=activity, is_active=True)[0]
-        single_choice_questions = ChoiceQuestion.objects.filter(questionnaire=questionnaire,
-                                                                multi_choice=False)
-        multi_choice_questions = ChoiceQuestion.objects.filter(questionnaire=questionnaire,
-                                                               multi_choice=True)
-        text_questions = NonChoiceQuestion.objects.filter(questionnaire=questionnaire,
-                                                          type=0)
-        file_questions = NonChoiceQuestion.objects.filter(questionnaire=questionnaire,
-                                                          type=1)
-        q_if = True
+    # 取出问卷
+    questionnaire = Questionnaire.objects.filter(activity=activity, is_active=True).first()
+
+    if questionnaire is not None:
+        # questionnaire = Questionnaire.objects.get(activity=activity, is_active=True)
+        single_choice_questions = ChoiceQuestion.objects.filter(questionnaire=questionnaire, multi_choice=False)
+        multi_choice_questions = ChoiceQuestion.objects.filter(questionnaire=questionnaire, multi_choice=True)
+        text_questions = NonChoiceQuestion.objects.filter(questionnaire=questionnaire, type=0)
+        file_questions = NonChoiceQuestion.objects.filter(questionnaire=questionnaire, type=1)
         if len(single_choice_questions) + len(multi_choice_questions) + len(text_questions) + len(file_questions) == 0:
-            q_if = False
+            has_questions = False
+        else:
+            has_questions = True
         args = {
             "act": activity,
             "single_choice_questions": single_choice_questions,
@@ -142,10 +133,9 @@ def check_activity_detail(request, action_id):
             "text_questions": text_questions,
             "file_questions": file_questions,
             "user": user,
-            "like": like,
-            "share": share,
-            "questionnaire": q_if,
-            "share_code": share_code
+            "like": liked,
+            "promotion_code": promotion_code,
+            "questionnaire": has_questions,
         }
         args.update(csrf(request))
         return render(request,
@@ -157,9 +147,8 @@ def check_activity_detail(request, action_id):
         args = {
             "act": activity,
             "user": user,
-            "like": like,
-            "share": share,
-            "share_code": share_code
+            "promotion_code": promotion_code,
+            "like": liked,
         }
         args.update(csrf(request))
         return render(request,
@@ -171,68 +160,45 @@ def check_activity_detail(request, action_id):
 
 @require_POST
 def apply_an_activity(request, action_id):
-    if not request.user.is_authenticated():
+    user = request.user
+    activity = get_object_or_404(Activity, id=action_id, is_active=True)
+    if not user.is_authenticated():
+        # 如果用户没有登陆，将其到引导登陆页面
         next_url = '/login?next=/action/%s' % action_id
-        if 'share_code' in request.POST:
-            next_url += "?code=%s" % request.POST.get("share_code")
-        return JsonResponse({'success': True, 'data': {'url': next_url}}
-                            , content_type='text/html')
-    activity = get_object_or_404(Activity, id=action_id)
-    logger.debug(u"试图报名活动，对应活动为|{0:s}|(id:{1:d}), 当前用户为|{2:s}|({3:s})"
-                 .format(activity.name, activity.id, request.user.profile.name, request.user.username))
-    # 2015/8/8 取消用户不得报名自己创建的活动的限制
-    # if activity.host == request.user:
-    #     # 如果是当前登陆用户自己创建的活动，则跳转到申请列表页
-    #     # Log first
-    #     logger.debug(u"报名出错，试图报名自己的活动，对应活动为|%s|(id:%s), 当前用户为|%s|(%s)"
-    #                  % (activity.name, activity.id, request.user.profile.name, request.user.username))
-    #     return JsonResponse({"success": False, "data": {"error": "不能报名自己的活动"}})
+        # 注意追踪推广参数
+        if 'promotion_code' in request.POST:
+            next_url += '?code=%s' % request.POST['promotion_code']
+        return HttpResponse(json.dumps({'success': True, 'data': {'url': next_url}}))
 
-    # Check if there exist a valid questionnaire for this activity
-    if Questionnaire.objects.filter(activity=activity, is_active=True).exists():
+    # 确认用户已经登陆以后，开始开始申请活动
+    try:
         # Then load the answer data and create the answer sheet
-        q = Questionnaire.objects.filter(activity=activity)[0]
-        json = simplejson.loads(request.POST.get("answer", ""))
+        q = Questionnaire.objects.get(activity=activity, is_active=True)
+        json_data = simplejson.loads(request.POST.get("answer", "{}"))
         try:
-            create_answer_set_with_json({"answer": json}, request, q, request.user)
+            create_answer_set_with_json({"answer": json_data}, request, q, request.user)
         except ValidationError:
             logger.debug(u"创建答案失败，发生了Validation错误，提交的json格式为：{0:s}".format(json))
             raise ValidationError(u"创建答案失败")
-
-    # Try to apply this activity, validations are done in this function
-    application = ApplicationThrough.objects.try_to_apply(activity=activity,
-                                                          user=request.user, )
-
-    # Create the response according
-    if application[1]:
-        # Associate this application with the share_record
-        if 'share_code' in request.POST:
-            share_code = request.POST.get('share_code', '')
-            try:
-                share = Share.objects.get(share_code=share_code, activity=activity)
-                share_record = ShareRecord.objects.get(share=share, target_user=request.user)
-                share_record.application = application[0]
-                share_record.save()
-                logger.debug(u"申请与分享记录成功绑定, 本次报名为用户|username: %s|报名活动|id: %s|,code为%s" %
-                             (request.user.username, activity.id, share_code))
-            except ObjectDoesNotExist:
-                # Just drop the share code if it is invalid
-                logger.debug(u"申请与分享记录绑定失败, 本次报名为用户|username: %s|报名活动|id: %s|,code:%s" %
-                             (request.user.username, activity.id, share_code))
-        send_notification.send(sender=get_user_model(),
-                               notification_type="activity_notification",
-                               notification_center=activity.host.notification_center,
-                               activity=activity,
-                               user=request.user,
-                               activity_notification_type="activity_applied")
-        return JsonResponse({
-            "success": True,
-            "data": {
-                "url": "/mine/apply"
-            }
-        }, content_type='text/html')
+    except ObjectDoesNotExist:
+        # 如果问卷不存在，那么直接跳过这一步即可
+        pass
+    # 此时，尝试申请活动
+    application, success, error_info = ApplicationThrough.objects.try_to_apply(activity=activity, user=user)
+    if success:
+        # 在这里我们需要检查当前用户是否是由其他用户分享过来的
+        code = request.POST.get('promotion_code', None)
+        if code is not None:
+            sharer = get_user_model().objects.get(profile__promotion_code=code)
+            ShareRecord.objects.create(sharer=sharer, user=user, activity=activity)
+        # 在日志内记录本次申请行为
+        logger.debug(u"报名活动成功，对应活动为|{0:s}|(id:{1:d}), 当前用户为|{2:s}|({3:s})"
+                     .format(activity.name, activity.id, request.user.profile.name, request.user.username))
+        return HttpResponse(json.dumps({'success': True, 'data': {'url': '/mine/apply'}}))
     else:
-        return JsonResponse({"success": False, "data": {"id": application[2]}}, content_type='text/html')
+        logger.debug(u"报名活动失败，对应活动为|{0:s}|(id:{1:d}), 当前用户为|{2:s}|({3:s})，原因为:{4:s}"
+                     .format(activity.name, activity.id, request.user.profile.name, request.user.username, error_info))
+        return HttpResponse(json.dumps({'success': False, 'data': {'id': error_info}}))
 
 
 @login_required()
@@ -258,30 +224,6 @@ def unapply_an_activity(request, action_id):
             "url": "/mine/apply"
         }
     }, content_type='text/html')
-
-
-@require_POST
-@login_required()
-@profile_active_required
-def stop_accepting_apply(request, action_id):
-    activity = get_object_or_404(Activity, id=action_id)
-    if not activity.host == request.user:
-        return JsonResponse({"success": False, "data": {}}, content_type='text/html')
-    activity.accept_apply = False
-    activity.save()
-    return JsonResponse({"success": True, "data": {}}, content_type='text/html')
-
-
-@require_POST
-@login_required()
-@profile_active_required
-def restart_accepting_apply(request, action_id):
-    activity = get_object_or_404(Activity, id=action_id)
-    if not activity.host == request.user:
-        return JsonResponse({"success": False, "data": {}}, content_type='text/html')
-    activity.accept_apply = True
-    activity.save()
-    return JsonResponse({"success": True, "data": {}}, content_type='text/html')
 
 
 @login_required()
@@ -461,15 +403,17 @@ def publish_an_activity(request, action_id):
     # if get_activity_session_representation(activity) != act_info:
     # return HttpResponseRedirect("/action/new/create/1")
 
+    q_id = request.session.get("questionnaire_id_tmp", -1)
+
     if request.method == "POST":
         activity.is_active = True
         activity.is_published = True
         activity.save()
-        share = Share.objects.get_or_create(user=request.user, activity=activity)[0]
+
         return JsonResponse({
             "success": True,
             "data": {
-                "url": share.get_share_link()
+                "url": reverse('action:activity_detail', args=(action_id, ))
             }
         }, content_type='text/html')
 
@@ -634,7 +578,6 @@ def save_an_activity(request, action_id):
     if not activity.host == request.user:
         return HttpResponseForbidden()
     q_id = request.session.get("questionnaire_id_tmp", -1)
-    q_id = int(q_id)
 
     if request.method == "POST":
         if activity.backup is None or not activity.is_active:
@@ -651,6 +594,7 @@ def save_an_activity(request, action_id):
             questionnaire = Questionnaire.objects.filter(activity=activity, is_active=False, id=q_id)[0]
             questionnaire.is_active = True
             questionnaire.save()
+
         backup = activity.backup
         tmp = backup.id
         backup.id = activity.id
@@ -761,30 +705,7 @@ def copy_an_activity(request, action_id):
     }, content_type='text/html')
 
 
-@require_GET
 @login_required()
-@profile_active_required
-def get_share_link(request, action_id):
-    activity = get_object_or_404(Activity, id=action_id, is_active=True)
-    share = Share.objects.get_or_create(user=request.user,
-                                        activity=activity)
-    share_link = share.get_share_link()
-    HttpResponse("")
-
-
-@login_required()
-@profile_active_required
-def visit_from_share(request, action_id):
-    """We create a share record here, and redirect the visitor to the detail page"""
-    if "code" not in request.GET:
-        raise Http404
-    share_code = request.GET.get("code", "")
-    activity = get_object_or_404(Activity, id=action_id)
-    share = get_object_or_404(Share, share_code=share_code, activity=activity)
-    ShareRecord.objects.get_or_create(share=share, target_user=request.user)
-    return HttpResponseRedirect("/action/%s/detail" % activity.id)
-
-
 def like_an_activity(request):
     if not request.user.is_authenticated():
         return JsonResponse({'success': True, 'data': {'url': '/login?next=%s' % request.META["HTTP_REFERER"]}},

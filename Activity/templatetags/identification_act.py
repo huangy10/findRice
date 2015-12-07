@@ -10,6 +10,6 @@ register = Library()
 def identification_act_url():
     act = Activity.objects.identification_act
     if act is not None:
-        return reverse('activity_detail', args=[act.id, ])
+        return reverse('action:activity_detail', args=[act.id, ])
     else:
         return None

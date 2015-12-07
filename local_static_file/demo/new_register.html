@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>找米-搜索</title>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../lib/common/new_common.css"/>
+    <script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/jquery-form/jquery.form.js"></script>
+ 	<script type="text/javascript" src="../lib/common/new_common.js"></script>
+
+</head>
+<body>
+<div class="wrapper">
+	<div class="header">
+		<div class="header-center">
+	        <div class="fLeft">
+	            <div class="logo item">找米</div>
+	        </div>
+	        <a href="#" class="fRight btn-login">注册/登录</a>
+        </div>
+    </div>
+    <form autocomplete="off" method="post" id="register-form" action="/register/basic">
+    <input type="hidden" name="csrfmiddlewaretoken" value="X930rRIl6IMm1OOhGBvqipBr9n41pQGT">
+	<!--主要内容-->
+	<div class="content-mian">
+		
+		<div class="fLeft left-matter">
+				<h4>注册</h4>
+				<p></p>
+				<div class="l-hint-info">找米网是专业的市场调查发布与参与平台，用户可发布活动信息，参与者也可以通过推广注册笼络自己的米团，活的持续收益。<br/><br/>找米网活动均为实名邀请制，信息不完整将被拒绝</div>
+		</div>
+		<div class="fLeft right-main register-warp">
+			<div class="logo-mian">
+				<!--头像-->
+				<div class="head-portrait">
+					<img src="../assets/imgs/portrait.png" />
+					<input type="file" />
+				</div>
+				<!--end-->
+				<div class="find-pwd">
+					<div class="input-frame fLeft">
+						<div class="icon-picture fLeft"><i class="icon-phone"></i></div>
+						<input type="text" class="fLeft phone-type" name="mobile"  placeholder="请输入手机号" autocomplete="off"/>
+					</div>
+					<input type="button" class="fRight btn-findPwd " value="获取验证码" onclick="sendcode('.btn-findPwd','.phone-type')"/>
+				</div>
+				<div class="input-frame">
+					<div class="icon-picture fLeft"><i class="icon-verifycode"></i></div>
+					<input type="text" class="fLeft code-sytles" name="code"  placeholder="请输入验证码" autocomplete="off"/>
+				</div>
+				
+				<div class="input-frame">
+					<div class="icon-picture fLeft"><i></i></div>
+					<input type="text"  class="fLeft user-type username" name="username" placeholder="请输入真实姓名/企业名" autocomplete="off" />
+				</div>
+				
+				<div class="input-frame">
+					<div class="icon-picture fLeft"><i class="password"></i></div>
+					<input type="text" class="fLeft pwd"  name="pwd " placeholder="请设定密码" autocomplete="off"/>
+				</div>
+				
+				<div class="input-frame">
+					<div class="icon-picture fLeft"><i class="passwordS"></i></div>
+					<input type="text" class="fLeft repeatPwd"   name="repeatPwd" placeholder="请确认密码" autocomplete="off"/>
+				</div>
+				
+				<div class="select-main">
+					<input type="text" id="birthdate" placeholder="请选择出生日期" name="birthdate"/>
+					<select class="fRight sex-second">
+						<option>请选择性别</option>
+						<option>男</option>
+						<option>女</option>
+					</select>
+				</div>
+				
+				<div class="footer-register">
+					<div class="register-main">
+						<button type="submit" class="btn-shade-bm fRight" value="注册">注册</button>
+						<div class="fRight">免责声明</div>
+					</div>
+					<a href="#" class="fRight logo-next">
+						<div class="fLeft">登录</div>
+						<img src="../assets/imgs/login.png" class="fRight">
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	</form>
+	<!--底部图片-->
+	<img src="../assets/imgs/footere.png" class="position-footer"/>
+</div>
+
+</body>    
+</html>
+<script type="text/javascript" src="../lib/common/laydate.dev.js"></script>
+<script type="text/javascript">
+        laydate({
+            elem: '#birthdate'
+        });
+</script>

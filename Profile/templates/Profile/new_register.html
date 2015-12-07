@@ -1,0 +1,165 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>找米-搜索</title>
+    <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="{% static 'lib/common/new_common.css' %}"/>
+{#    <link rel="stylesheet" href="{% static "modules/login/css/login.less" %}"/>#}
+    <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "lib/jquery-form/jquery.form.js" %}"></script>
+ 	<script type="text/javascript" src="{% static "lib/common/new_common.js" %}"></script>
+    <style type="text/css">
+		#imghead{border-radius: 50%;}
+		input{-webkit-appearance:none;}
+	</style>
+</head>
+<body>
+<div class="wrapper">
+	<div class="header">
+		<div class="header-center">
+	        <div class="fLeft">
+	            <a class="logo item" href="/">找米</a>
+	        </div>
+        </div>
+    </div>
+	<!--主要内容-->
+	<div class="content-mian">
+		<div class="fLeft left-matter">
+				<h4>注册</h4>
+				<p></p>
+				<div class="l-hint-info">找米网是专业的市场调查发布与参与平台，用户可发布活动信息，参与者也可以通过推广注册笼络自己的米团，活的持续收益。<br/><br/>找米网活动均为实名邀请制，信息不完整将被拒绝</div>
+		</div>
+        <form action="/register" method="post" id="register-form">
+            {% csrf_token %}
+            <input type="hidden" value="{{ promotion_code }}" name="promotion_code">
+		<div class="fLeft right-main register-warp">
+			<div class="logo-mian">
+				<!--头像-->
+				<div class="head-portrait">
+                    <div id="preview" style="width:100%;height: 100%;">
+					    <img src="{% static "assets/imgs/portrait.png" %}" id="imghead"/>
+                    </div>
+					<input type="file" name="avatar" onchange="previewImage(this)"/>
+				</div>
+				<!--end-->
+				<div class="find-pwd">
+					<div class="input-frame fLeft">
+						<div class="icon-picture fLeft"><i class="icon-phone"></i></div>
+						<input type="text" class="fLeft phone-type" placeholder="请输入手机号" autocomplete="off" name="phone_num"/>
+					</div>
+                    <input type="button" class="fRight btn-findPwd " value="获取验证码" onclick="sendcode('.btn-findPwd','.phone-type')"/>
+				</div>
+				<div class="input-frame">
+					<div class="icon-picture fLeft"><i class="icon-verifycode"></i></div>
+					<input type="text" class="fLeft code-sytles"   placeholder="请输入验证码" autocomplete="off" name="code"/>
+				</div>
+				
+				<div class="input-frame">
+					<div class="icon-picture fLeft"><i></i></div>
+					<input type="text" class="fLeft user-type username" placeholder="请输入真实姓名/企业名" autocomplete="off" name="nickname">
+				</div>
+				
+				<div class="input-frame">
+					<div class="icon-picture fLeft"><i class="password"></i></div>
+					<input type="password" class="fLeft pwd"   placeholder="请设定密码" autocomplete="off" name="password1"/>
+				</div>
+				
+				<div class="input-frame">
+					<div class="icon-picture fLeft"><i class="passwordS"></i></div>
+					<input type="password" class="fLeft repeatPwd"   placeholder="请确认密码" autocomplete="off" name="password2"/>
+				</div>
+				
+				<div class="select-main">
+					<input type="text" id="birthdate" name="birthDate" placeholder="请选择出生日期"/>
+					<select class="fRight sex-second" name="gender">
+						<option>请选择性别</option>
+						<option>男</option>
+						<option>女</option>
+					</select>
+				</div>
+				
+				<div class="footer-register">
+					<div class="register-main">
+                        <button type="submit" class="btn-shade-bm">注册</button>
+{#						<a href="/register" class="btn-shade-bm fRight">注册</a>#}
+						<a target="_blank" href="/statement"><div class="fRight">免责声明</div></a>
+					</div>
+					<a href="/login" class="fRight logo-next">
+                        <div class="fLeft">登录</div>
+						<img src="{% static "assets/imgs/login.png" %}" class="fRight">
+					</a>
+				</div>
+			</div>
+		</div>
+		</form>
+		
+	</div>
+	<!--底部图片-->
+	<img src="{% static "assets/imgs/footere.png" %}" class="position-footer"/>
+</div>
+
+</body>    
+</html>
+<script type="text/javascript" src="{% static "lib/common/laydate.dev.js" %}"></script>
+<script type="text/javascript">
+        laydate({
+            elem: '#birthdate'
+        });
+    //图片上传预览    IE是用了滤镜。
+        function previewImage(file)
+        {
+          var MAXWIDTH  = 260;
+          var MAXHEIGHT = 180;
+          var div = document.getElementById('preview');
+          if (file.files && file.files[0])
+          {
+              div.innerHTML ='<img id=imghead>';
+              var img = document.getElementById('imghead');
+              img.onload = function(){
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                img.width  =  rect.width;
+                img.height =  rect.height;
+              }
+              var reader = new FileReader();
+              reader.onload = function(evt){img.src = evt.target.result;}
+              reader.readAsDataURL(file.files[0]);
+          }
+          else //兼容IE
+          {
+            var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+            file.select();
+            var src = document.selection.createRange().text;
+            div.innerHTML = '<img id=imghead>';
+            var img = document.getElementById('imghead');
+            img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+            status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+            div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;"+sFilter+src+"\"'></div>";
+          }
+        }
+        function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+            var param = {top:0, left:0, width:width, height:height};
+            if( width>maxWidth || height>maxHeight )
+            {
+                rateWidth = width / maxWidth;
+                rateHeight = height / maxHeight;
+
+                if( rateWidth > rateHeight )
+                {
+                    param.width =  maxWidth;
+                    param.height = Math.round(height / rateWidth);
+                }else
+                {
+                    param.width = Math.round(width / rateHeight);
+                    param.height = maxHeight;
+                }
+            }
+
+            param.left = Math.round((maxWidth - param.width) / 2);
+            param.top = Math.round((maxHeight - param.height) / 2);
+            return param;
+        }
+</script>

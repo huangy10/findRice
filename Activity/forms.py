@@ -6,7 +6,7 @@ from django import forms
 from django.utils import timezone
 
 from .models import Activity, ActivityType
-from .tasks import create_zipped_poster
+from .tasks import create_zipped_poster, create_share_thumbnail
 
 logger = logging.getLogger(__name__)
 
@@ -112,7 +112,9 @@ class ActivityCreationForm(forms.ModelForm):
             obj.save()
             # copy a new instance of the act object
             if obj.poster:
-                create_zipped_poster.delay(copy.deepcopy(obj), force=True)
+                new_obj = copy.deepcopy(obj)
+                create_zipped_poster.delay(new_obj, force=True)
+                create_share_thumbnail(new_obj, force=True)
         return obj
 
     class Meta:

@@ -51,6 +51,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -92,8 +93,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'find_rice_db',
-        'USER': 'find_rice2',
-        'PASSWORD': 'shanghai',
+        'USER': 'Lena',
+        'PASSWORD': 'huang9040601',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -119,7 +120,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'demo'),
+    os.path.join(BASE_DIR, 'local_static_file'),
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -130,7 +131,7 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_PROFILE_MODULE = "Profile.UserProfile"
-
+LOGIN_URL = "/login"
 
 """下面是一些自定义的变量"""
 
@@ -138,49 +139,15 @@ FR_SHARE_LINK_TEMPLATE = "/action/%s?code=%s"  # 分享链接模板
 DEFAULT_PROFILE = "default_avatars/default_avatar.png"
 DEFAULT_POSTER_PATH = "defaultPosters/default.jpg"
 
+SMS_KEY = "b2bc04ed9bbc52b10b3b68e5656eb08f"        # 云片网
+SMS_TEMPLATE = "您的验证码是%s【找米网】"
+
 """导入第三方登陆模块的设置"""
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.weibo.WeiboOAuth2',
-    'social.backends.qq.QQOAuth2',
-    'social.backends.weixin.WeixinOAuth2',
     'Profile.backends.PhoneNumAuthenticateBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
-
-SOCIAL_AUTH_PIPELINE = (
-    'social.pipeline.social_auth.social_details',
-    'social.pipeline.social_auth.social_uid',
-    'social.pipeline.social_auth.auth_allowed',
-    'social.pipeline.social_auth.social_user',
-    'social.pipeline.user.get_username',
-    'social.pipeline.user.create_user',
-    'Profile.pipeline.set_profile_info',  # <--- set the path to the function
-    'social.pipeline.social_auth.associate_user',
-    'social.pipeline.social_auth.load_extra_data',
-    'social.pipeline.user.user_details'
-)
-
-LOGIN_URL = "/login"
-LOGIN_REDIRECT_URL = "/social/profile"
-SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/social/profile'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/social/profile'
-
-SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
-SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
-
-SOCIAL_AUTH_WEIXIN_KEY = 'wx218f67074bcf7ff2'
-SOCIAL_AUTH_WEIXIN_SECRET = 'cde463e8b93495b9d9076a27f682f4f6'
-SOCIAL_AUTH_WEIXIN_SCOPE = ['snsapi_login', ]
-
-SOCIAL_AUTH_QQ_KEY = '101237228'
-SOCIAL_AUTH_QQ_SECRET = 'db373313738366dacdaf5ce2f1af3dac'
-
-SOCIAL_AUTH_WEIBO_KEY = '3584375890'
-SOCIAL_AUTH_WEIBO_SECRET = '4d86b28c6fdf9ccc6709df03996bdde8'
-
-SMS_KEY = "b2bc04ed9bbc52b10b3b68e5656eb08f"        # 云片网
-SMS_TEMPLATE = "您的验证码是%s【找米网】"
 
 ###################################################################
 # Logging

@@ -31,6 +31,7 @@ def send_sms(apikey, text, mobile):
     response = conn.getresponse()
     response_str = response.read()
     conn.close()
+    print response_str
     return response_str
 
 
@@ -60,9 +61,9 @@ def profile_active_required(method):
      Profile information. Note that this decorator must be placed after the login_required decorator
     """
     def wrapper(request, *args, **kwargs):
-        user = request.user     # Get current user, and check its profile obj
-        if user.is_authenticated() and not user.profile.is_active:
-            return HttpResponseRedirect('/social/profile')
+        # user = request.user     # Get current user, and check its profile obj
+        # if user.is_authenticated() and not user.profile.is_active:
+        #     return HttpResponseRedirect('/social/profile')
         return method(request, *args, **kwargs)
 
     return wrapper

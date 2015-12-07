@@ -1,0 +1,26 @@
+ *, body, p, h1, h2, h3, h4, h5, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select, img {
+    margin: 0;
+    padding: 0;
+    font-family: 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+}
+body {
+    min-width: 320px;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    font-family: 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+    color: #323232;
+    background: #000;
+}
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);  
+}
+.pinch-zoom{
+	width:100%;
+}
+ div.pinch-zoom img{
+    width: 100%;
+    height: auto;
+    display: block;
+    -webkit-user-drag: none;
+}

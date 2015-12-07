@@ -3,6 +3,7 @@ import uuid
 
 from django.db import models
 from django.utils import timezone
+from django.utils.encoding import smart_str
 from django.core.exceptions import ValidationError
 from django.conf import settings
 
@@ -23,7 +24,7 @@ class Questionnaire(models.Model):
     participants = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
     def __str__(self):
-        return (self.activity.name + " 的问卷").encode("utf-8")
+        return smart_str(self.activity.name + " 的问卷")
 
     class Meta:
         verbose_name = "问卷"

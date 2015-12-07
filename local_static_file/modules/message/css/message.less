@@ -1,0 +1,98 @@
+@import '../../../lib/common/common.less';
+
+body {
+    background-color: #eaeaea!important;
+}
+#content {
+    width: 1190px;
+    min-height: 500px;
+    margin: 0 auto;
+    font-family: 'HeiTi SC';
+    #action-bg {
+        position: relative;
+        img {
+            width: 100%;
+        }
+        .msg-txt {
+            position: absolute;
+            top: 30px;
+            left: 530px;
+            font-size: 36px;
+            color: white;
+        }
+    }
+    #action-container {
+        position: relative;
+        width: 1000px;
+        min-height: 500px;
+        padding: 20px 20px 80px 20px;
+        margin: -120px auto 100px auto;
+        .border-radius(10px);
+        background-color: white;
+        .msg-content {
+            width: 600px;
+            margin: 0 auto;
+            .msg-item {
+                padding-top: 10px;
+                .msg-icon {
+                    float: left;
+                    display: inline-block;
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 10px;
+                    &.sys {
+                        .icons-bg(-235px -1116px);
+                    }
+                    &.info {
+                        .icons-bg(-148px -1116px);
+                    }
+                }
+                .msg-item-c {
+                    overflow: hidden;
+                    padding-bottom: 10px;
+                    border-bottom: 1px solid #eee;
+                    .title {
+                        color: #727272;
+                    }
+                    .msg {
+                        display: inline-block;
+                        width: 440px;
+                        color: #727272;
+                        margin-top: 16px;
+                        &.long {
+                            width: 480px;
+                        }
+                        a {
+                            margin: 0 4px;
+                            color: #EF4347;
+                        }
+                    }
+                    .bonus {
+                        float: right;
+                        color: #727272;
+                        margin-top: 16px;
+                    }
+                    .z-btn {
+                        float: right;
+                    }
+                    .confirm-btn {
+                        height: 30px;
+                        line-height: 30px;
+                        margin-left: 12px;
+                        color: white;
+                        border: none;
+                        background-color: #7ed321;
+                        .border-radius(15px);
+                    }
+                    .reject-btn {
+                        height: 30px;
+                        line-height: 30px;
+                        margin-left: 12px;
+                        .border-radius(15px);
+                    }
+                }
+                
+            }
+        }
+    }
+}

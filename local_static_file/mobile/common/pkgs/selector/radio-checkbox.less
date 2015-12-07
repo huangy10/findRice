@@ -1,0 +1,102 @@
+@import "./../../../less/mixins";
+@check-ok-image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoAQMAAAC2MCouAAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAFRJREFUCNeVjbERwCAIAJOzSJkRGMXRyGiOwgiWFjkV3sZWim/4h+to0hd84AszVLY9cP+IDbEiWlCCJsWN6pEbij0oSZU0Q2mk25lknF8sPIRnMwFAahqkr8KaZQAAAABJRU5ErkJggg==';
+
+.zui-checkbox, .zui-radio {
+  display:inline-block;
+  position:relative;
+  line-height:24px;
+  width: 20px;
+  height: 20px;
+  .lh-box-sizing(border-box);
+  //padding: 2px 0 0 2px;
+  vertical-align: middle;
+
+
+}
+
+.zui-icon-radio {
+  .lh-border-radius(50%);
+}
+.zui-icon-checkbox{
+  .lh-border-radius(2px);
+}
+
+.zui-icon-checkbox , .zui-icon-radio{
+  position:absolute;
+  width: 16px;
+  height: 16px;
+
+  border:1px solid #d9d9d9;
+  background: #FFF;
+
+  //fix bug
+  .lh-transform(rotate(0deg));
+}
+
+input[type=checkbox], input[type=radio] {
+  position:absolute;
+  top: 0;
+  left: 0;
+  opacity:0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  border:0 none;
+  -webkit-appearance:none;
+
+  &:checked + .zui-icon-checkbox {
+    border-width:0;
+    background-color: #ef4347;
+  }
+
+  &:checked + .zui-icon-checkbox:after {
+    display:block;
+    background-image: url('@{check-ok-image}');
+    content: "";
+    width: 100%;
+    height: 100%;
+    .lh-background-size(100%, 100%);
+    border:none!important;
+  }
+
+  &:disabled + .zui-icon-checkbox{
+    background-color:#f0f0f0;
+    border:1px solid #e3e3e3;
+  }
+
+  &:disabled:checked + .zui-icon-checkbox:after{
+    background-color:#ef4347;
+    border:1px solid #e3e3e3;
+  }
+
+
+  &:checked + .zui-icon-radio {
+    background-color: #fff;
+    border-color: #7b7b7b;
+  }
+  &:checked + .zui-icon-radio:after {
+    @value: 12px;
+    display:block;
+
+    width: @value;
+    height: @value;
+    background-color: #7b7b7b;
+    content: "";
+    .lh-border-radius(50%);
+    left: 50%;
+    top: 50%;
+    margin-left: -(@value/2);
+    margin-top: -(@value/2);
+    position: absolute;
+  }
+
+  &:disabled + .zui-icon-radio{
+    background-color:#f0f0f0;
+    border:1px solid #e3e3e3;
+  }
+
+  &:disabled:checked + .zui-icon-radio:after{
+    background-color:#fff;
+    border:1px solid #e3e3e3;
+  }
+}

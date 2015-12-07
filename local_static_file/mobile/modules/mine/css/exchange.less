@@ -1,0 +1,61 @@
+@import '../../../lib/common/common.less';
+
+#exchange-box {
+    display: none;
+    padding: 0 20px;
+    margin-top: 20px;
+    .exchange-txt {
+        margin-top: 0;
+        color: #4B4B4B;
+        font-size: 16px;
+        line-height: 30px;
+        text-align: center;
+    }
+    .exchange-input {
+        width: 280px;
+        margin: 40px auto 40px;
+        .exchange-item {
+            margin-bottom: 12px;
+            .exchange-img {
+                float: left;
+                display: inline-block;
+                width: 60px;
+                height: 40px;
+                background: url(//zhao-mi.net/m/assets/img/icon500x500.png) -42px -180px no-repeat;
+                background-size: 250px 250px;
+                &-alipay {
+                    background: url(//zhao-mi.net/m/assets/img/icon500x500.png) -92px -180px no-repeat;
+                    background-size: 250px 250px;
+                }
+            }
+            input {
+                width: 200px;
+                height: 40px;
+                line-height: 34px;
+                font-size: 12px;
+                margin-left: 12px;
+                outline: none;
+                text-indent: 1em;
+                &:focus {
+                    border: 1px solid #7ed321;
+                }
+            }
+        }
+    }
+    .exchange-btn {
+        margin-bottom: 20px;
+        text-align: center;
+        button {
+            height: 36px;
+            line-height: 36px;
+            border: none;
+            color: white;
+            padding: 0 30px;
+            font-size: 16px;
+            .border-radius(18px);
+            &.green {
+                background-color: #7ed321; 
+            }
+        }
+    }
+}

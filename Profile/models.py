@@ -88,11 +88,16 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username.encode("utf-8")
 
+    # 米团系统重大修改，现在，每个用户最多只能拥有一名米团团长，而且必须在用户注册时指定
+    team_leader = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+', verbose_name='米团长', null=True)
+
     def save(self, *args, **kwargs):
 
         if self.identified and self.identified_date is None:
+            # 自动设置认证日期
             self.identified_date = timezone.now()
         if self.promotion_code is None:
+            # 当用户还没有推广码时，创建一个新的。这个推广码将来会和这个用户永久的、唯一的绑定在一起
             raw_code = self.user.username + str(self.created_at) + "disturbing string"
             md5 = hashlib.md5(raw_code.encode('utf-8'))
             self.promotion_code = md5.hexdigest()
@@ -104,30 +109,6 @@ class UserProfile(models.Model):
         verbose_name_plural = "用户详情"
 
 
-@receiver(share_record_signal)
-def get_reward_from_share_record(sender, **kwargs):
-    share_record = kwargs["share_record"]
-    if not share_record.is_active:      # check if this share reward is valid
-        return
-    user = share_record.share.user
-    if share_record.finished:
-        user.profile.coin += share_record.actual_reward_for_finish
-        user.rice_team.team_coin += share_record.actual_reward_for_finish
-        contribution = RiceTeamContribution.objects.get_or_create(team=user.rice_team,
-                                                                  user=share_record.target_user)[0]
-        contribution.contributed_coin += share_record.actual_reward_for_finish
-        contribution.save()
-    # else:
-    #     user.profile.coin += share_record.actual_reward_for_share
-    #     user.rice_team.team_coin += share_record.actual_reward_for_share
-    #     contribution = RiceTeamContribution.objects.get_or_create(team=user.rice_team,
-    #                                                               user=share_record.target_user)[0]
-    #     contribution.contributed_coin += share_record.actual_reward_for_share
-    #     contribution.save()
-    user.profile.save()
-    user.rice_team.save()
-
-
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def post_save_receiver(sender, **kwargs):
     user = kwargs["instance"]
@@ -136,37 +117,28 @@ def post_save_receiver(sender, **kwargs):
         user.profile = UserProfile.objects.create(user=user, gender="u",
                                                   birthDate=timezone.datetime(year=1970, month=1, day=1).date(),
                                                   name=user.username)
-        # 以及一个米团
-        user.rice_team = RiceTeam.objects.create(host=user)
     else:
         user.profile.save()     # 在user保存以后总是保存其profile
 
 
-class RiceTeam(models.Model):
-    host = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name="米团主人", related_name="rice_team")       # 米团的主人
-    members = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name="米团成员", through="RiceTeamContribution",
-                                     related_name="rice_team_as_member")
+class ContributionManager(models.Manager):
 
-    team_coin = models.IntegerField(default=0, verbose_name="团队米币")
-
-    def total_members(self):
-        return RiceTeamContribution.objects.filter(team=self).count()
-
-    @cached_property
-    def promoted_registration(self):
-        return RiceTeamContribution.objects.filter(team=self, registration_promoted=True).count()
-
-    class Meta:
-        verbose_name = "米团"
-        verbose_name_plural = "米团"
+    def create(self, **kwargs):
+        activity = kwargs['activity']
+        kwargs['contributed_coin'] = activity.reward * activity.reward_for_share_and_finished_percentage
+        return super(ContributionManager, self).create(**kwargs)
 
 
 class RiceTeamContribution(models.Model):
-    team = models.ForeignKey(RiceTeam)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    leader = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='+', verbose_name='米团长', null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='my_contributions')
 
-    contributed_coin = models.IntegerField(default=0)
-    registration_promoted = models.BooleanField(default=False)      # 是否由本团长推广注册
+    contributed_coin = models.IntegerField(default=0, verbose_name='贡献的米币')
+    activity = models.ForeignKey(Activity, verbose_name='相关活动')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    objects = ContributionManager()
 
     class Meta:
         verbose_name_plural = "米团贡献"

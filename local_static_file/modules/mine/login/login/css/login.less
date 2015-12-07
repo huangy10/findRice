@@ -1,0 +1,174 @@
+@import '../../../lib/common/common.less';
+
+body {
+    background: url(http://zhao-mi.net/assets/imgs/login-bg.png) no-repeat 0 0;
+    background-size: 100%;
+    padding-bottom: 50px;
+    #header {
+        height: 40px;
+        line-height: 40px;
+        padding: 10px;
+        .logo {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            background: url(http://zhao-mi.net/assets/imgs/32_32_w.png) no-repeat 0 0;
+            font-size: 36px;
+            color: white;
+            text-indent: -9999px;
+        }
+        .quit {
+            float: right;
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            margin-right: 10px;
+            cursor: pointer;
+            .icons-bg(-88px -350px);
+            .border-radius(18px);
+            background-color: grey;
+        }
+    }
+    #container {
+        width: 400px;
+        margin: 160px auto 0 auto;
+        .title-txt {
+            text-align: center;
+            color: white;
+            font-size: 40px;
+        }
+        #username-c {
+            height: 40px;
+            line-height: 40px;
+            padding-left: 36px;
+            border-bottom: 1px solid white;
+            input {
+                letter-spacing: 2px;
+            }
+            .icons-bg(-220px -397px);
+            &.err {
+                border-bottom: 1px solid red;
+            }
+            &.focus {
+                border-bottom: 1px solid green;
+            }
+        }
+        #pwd-c {
+            height: 40px;
+            line-height: 40px;
+            padding-left: 36px;
+            border-bottom: 1px solid white;
+            margin-top: 20px;
+            .icons-bg(-223px -439px);
+            &.err {
+                border-bottom: 1px solid red;
+            }
+            &.focus {
+                border-bottom: 1px solid green;
+            }
+            input {
+                letter-spacing: 2px;
+            }
+        }
+        input {
+            width: 360px;
+            border: none;
+            color: white;
+            background-color: transparent;
+            height: 24px;
+            line-height: 24px;
+            &:focus {
+                outline: none;
+            }
+        }
+        #login-btn-c {
+            position: relative;
+            z-index: 50;
+            padding-bottom: 10px;
+            margin-top: 20px;
+            .login-btn, .register-btn {
+                float: right;
+                height: 36px;
+                line-height: 36px;
+                .border-radius(18px);
+                color: white;
+                box-sizing: border-box;
+            }
+            .login-btn {
+                border: none;
+                background-color: #7ed321;
+            }
+            .register-btn {
+                border: 1px solid white;
+                background-color: transparent;
+                margin-right: 20px;
+            }
+            .reset-pwd {
+                text-decoration: underline;
+                float: right;
+                margin-right: 16px;
+                margin-top: 17px;
+                color: white;
+            }
+        }
+        #login-splitline {
+            span {
+                display: inline-block;
+                width: 180px;
+                height: 30px;
+                border-bottom: 1px solid #eee;
+            }
+            #left-bottom {
+                float: left;
+            }
+            #right-bottom {
+                float: right;
+            }
+        }
+        #login-others {
+            text-align: center;
+            margin-top: -10px;
+            color: white;
+            #or-txt {
+                position: relative;
+                z-index: 100;
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                margin-top: -30px;
+            }
+            p {
+                font-size: 14px;
+                color: #B8B8B8;
+                text-align: center;
+            }
+            #socials {
+                width: 190px;
+                margin: 10px auto;
+                a {
+                    float: left;
+                    display: inline-block;
+                    width: 36px;
+                    height: 36px;
+                    margin-right: 40px;
+                    cursor: pointer;
+                    .icons-bg(-26px -284px);
+                    &.last {
+                        margin-right: 0;
+                    }
+                }
+                #wechat {
+
+                }
+                #qq {
+                    .icons-bg(-29px -350px);
+                }
+                #sina {
+                    .icons-bg(-30px -418px);
+                }
+            }
+        }
+    }
+}

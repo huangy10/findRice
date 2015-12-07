@@ -96,7 +96,7 @@
     </div>
     <form id="formCondition" action="/action/{{ act.id }}/apply" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="hidden" value="{{ share_code }}" name="share_code">
+        <input type="hidden" value="{{ promotion_code }}" name="promotion_code">
         {% if questionnaire %}
             <div class="condition">
                 <div class="title">报名条件</div>

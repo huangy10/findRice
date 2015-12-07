@@ -8,9 +8,6 @@
     <title>{{ act.name }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="icon" type="image/png" href="//zhao-mi.net/favicon.png">
-    {# <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script> #}
-    {# <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script> #}
-    {# <script type="text/javascript" src="{% static "build/detail.js" %}"></script> #}
     <link rel="stylesheet" href="//zhao-mi.net/lib/jqueryui/jquery-ui.css"/>
     <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/jquery-form/jquery.form.js"></script>
@@ -19,12 +16,14 @@
     <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/lib/placeholder/jquery.placeholder.min.js"></script>
     <script type="text/javascript" src="//zhao-mi.net/build/detail.js"></script>
+
 </head>
 <body>
 <div id="header">
     <div id="header-c">
         <a href="/" id="logo">找米</a>
         {% if user %}
+            <div id="data-id" data-value="1" style="display: none"></div>
             <a id="personal-info" class="action" href="/mine/start">
                 <img src="{{ user.profile.avatar_url }}" alt="我的个人信息">
             </a>
@@ -35,7 +34,8 @@
                 {% endif %}
             </div>
         {% else %}
-            <div id="reg" class="action"><a class="z-btn" href="/login{% if share_code %}?next=/action/{{ act.id }}?code={{ share_code }}{% endif %}">注册/登录</a></div>
+            <div id="data-id" data-value="0" style="display: none"></div>
+            <div id="reg" class="action"><a class="z-btn" href="/login{% if promotion_code %}?next=/action/{{ act.id }}?code={{ promotion_code }}{% endif %}">注册/登录</a></div>
         {% endif %}
         <div id="pub" class="action"><a href="/action/new/create/1" class="z-btn">创建活动</a></div>
         <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
@@ -48,7 +48,7 @@
     <div id="detail-container" data-link="{% share_link act %}" {% if act.status == 2 %}class="finished"{% endif %}>
         <form id="apply-form" action="/action/{{ act.id }}/apply" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="hidden" value="{{ share_code }}" name="share_code">
+            <input type="hidden" value="{{ promotion_code }}" name="promotion_code">
             <div id="detail-important" class="fn-clr">
                 <div class="detail-name-w {% if act.reward_gift %}with-present{% endif %}">
                     <span class="detail-name">{{ act.name }}</span>

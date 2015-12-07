@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>我关注的活动页面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="//zhao-mi.net/lib/jqueryui/jquery-ui.css"/>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/placeholder/jquery.placeholder.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/jqueryui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/build/mine.js"></script>
+</head>
+<body>
+<div id="header">
+    <div id="header-c">
+        <a href="//zhao-mi.net" id="logo">找米</a>
+        <div id="reg" class="action"><a class="z-btn">注册/登陆</a></div>
+        <div id="pub" class="action"><a class="z-btn">发布活动</a></div>
+        <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
+    </div>
+</div>
+<div id="content">
+    <div id="mine-bg">
+        <div id="personal-info-origin">
+            <span class="portrait"><img src="//zhao-mi.net/assets/imgs/portrait.png"></span>
+            <div class="info-items">
+                <div class="main-items">
+                    <span class="name">龚子仪</span>
+                    <span class="numMibi">72米币</span>
+                    <button class="z-btn exchange">兑换米币</button>
+                    <span class="edit"></span>
+                </div>
+                <div class="sub-items">
+                    <span class="mobile">15911111111</span>
+                    <span class="gender">男</span>
+                    <span class="age">21岁</span>
+                </div>
+            </div>
+        </div>
+        <img src="//zhao-mi.net/assets/imgs/detail-banner.png">
+    </div>
+    <div id="mine-container" class="fn-clr">
+        <div id="action-info">
+            <span class="action-title">护肤品家访</span>
+            <span class="action-cnt">7/14</span>
+        </div>
+        <div id="apply-list">
+            <div class="apply-item" data-action="123456" data-target="123">
+                <div class="apply-item-content fn-clr">
+                    <span class="portrait">
+                        <img src="/assets/imgs/portrait.png" alt="">
+                    </span>
+                    <span class="name">龚子仪</span>
+                    <span class="detail">详情</span>
+                    <button class="z-btn green" data-optype="approve">通过</button>
+                    <button class="z-btn red" data-optype="deny">拒绝</button>
+                </div>
+                <div class="detail-content">
+                    <div class="personal-info">
+                        <span>男</span>
+                        <span>21岁</span>
+                        <span>15911111111</span>
+                    </div>
+                    <div class="apply-answers">
+                        <div class="apply-answer">
+                            <p>1、您的性别？</p>
+                            <span>A.男</span>
+                        </div>
+                        <div class="apply-answer">
+                            <p>2、您的兴趣？</p>
+                            <span>A.读书</span><span>B.看报</span>
+                        </div>
+                        <div class="apply-answer">
+                            <p>3、您的学历？</p>
+                            <span>本科</span>
+                        </div>
+                        <div class="apply-answer">
+                            <p>4、您的照片？</p>
+                            <div class="answer-img">
+                                <img src="/assets/imgs/portrait.png" alt="">    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="apply-item" data-action="123456" data-target="123" data-status="finished">
+                <div class="apply-item-content fn-clr">
+                    <span class="portrait">
+                        <img src="//zhao-mi.net/assets/imgs/portrait.png" alt="">
+                    </span>
+                    <span class="name">龚子仪</span>
+                    <span class="detail">详情</span>
+                    <button class="z-btn green" data-optype="approve">通过</button>
+                    <button class="z-btn red" data-optype="deny">拒绝</button>
+                </div>
+                <div class="detail-content">
+                    <div class="personal-info">
+                        <span>男</span>
+                        <span>21岁</span>
+                        <span>15911111111</span>
+                    </div>
+                    <div class="apply-answers">
+                        <div class="apply-answer">
+                            <p>1、您的性别？</p>
+                            <span>A.男</span>
+                        </div>
+                        <div class="apply-answer">
+                            <p>2、您的兴趣？</p>
+                            <span>A.读书</span><span>B.看报</span>
+                        </div>
+                        <div class="apply-answer">
+                            <p>3、您的学历？</p>
+                            <span>本科</span>
+                        </div>
+                        <div class="apply-answer">
+                            <p>4、您的照片？</p>
+                            <div class="answer-img">
+                                <img src="/assets/imgs/portrait.png" alt="">    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="apply-item">
+                <div class="apply-item-content fn-clr">
+                    <span class="portrait">
+                        <img src="//zhao-mi.net/assets/imgs/portrait.png" alt="">
+                    </span>
+                    <span class="name">龚子仪</span>
+                    <span class="detail">详情</span>
+                    <button class="z-btn approve">通过</button>
+                    <button class="z-btn rejected">已谢绝</button>
+                </div>
+                <div class="detail-content">
+                    <div class="personal-info">
+                        <span>男</span>
+                        <span>21岁</span>
+                        <span>15911111111</span>
+                    </div>
+                    <div class="apply-answers">
+                        <div class="apply-answer">
+                            <p>1、您的性别？</p>
+                            <span>A.男</span>
+                        </div>
+                        <div class="apply-answer">
+                            <p>2、您的兴趣？</p>
+                            <span>A.读书</span><span>B.看报</span>
+                        </div>
+                        <div class="apply-answer">
+                            <p>3、您的学历？</p>
+                            <span>本科</span>
+                        </div>
+                        <div class="apply-answer">
+                            <p>4、您的照片？</p>
+                            <div class="answer-img">
+                                <img src="//zhao-mi.net/assets/imgs/portrait.png" alt="">    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="apply-extra">
+            <p class="export">导出成excel</p>
+        </div>
+    </div>
+</div>
+</body>    
+</html>
