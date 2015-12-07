@@ -114,8 +114,10 @@ def check_activity_detail(request, action_id):
         user = None
 
     # 取出问卷
-    try:
-        questionnaire = Questionnaire.objects.get(activity=activity, is_active=True)
+    questionnaire = Questionnaire.objects.filter(activity=activity, is_active=True).first()
+
+    if questionnaire is not None:
+        # questionnaire = Questionnaire.objects.get(activity=activity, is_active=True)
         single_choice_questions = ChoiceQuestion.objects.filter(questionnaire=questionnaire, multi_choice=False)
         multi_choice_questions = ChoiceQuestion.objects.filter(questionnaire=questionnaire, multi_choice=True)
         text_questions = NonChoiceQuestion.objects.filter(questionnaire=questionnaire, type=0)
@@ -141,7 +143,7 @@ def check_activity_detail(request, action_id):
                                                 "Activity/detail.html",
                                                 "Activity/mobile/detail.html"),
                       args)
-    except ObjectDoesNotExist:
+    else:
         args = {
             "act": activity,
             "user": user,
@@ -401,10 +403,13 @@ def publish_an_activity(request, action_id):
     # if get_activity_session_representation(activity) != act_info:
     # return HttpResponseRedirect("/action/new/create/1")
 
+    q_id = request.session.get("questionnaire_id_tmp", -1)
+
     if request.method == "POST":
         activity.is_active = True
         activity.is_published = True
         activity.save()
+
         return JsonResponse({
             "success": True,
             "data": {
@@ -573,7 +578,6 @@ def save_an_activity(request, action_id):
     if not activity.host == request.user:
         return HttpResponseForbidden()
     q_id = request.session.get("questionnaire_id_tmp", -1)
-    q_id = int(q_id)
 
     if request.method == "POST":
         if activity.backup is None or not activity.is_active:
@@ -590,6 +594,7 @@ def save_an_activity(request, action_id):
             questionnaire = Questionnaire.objects.filter(activity=activity, is_active=False, id=q_id)[0]
             questionnaire.is_active = True
             questionnaire.save()
+
         backup = activity.backup
         tmp = backup.id
         backup.id = activity.id

@@ -5,10 +5,34 @@
     <link rel="shortcut icon" type="image/png" href="//zhao-mi.net/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    	
+      
     <link rel="stylesheet" href="../lib/common/new_common.css"/>
     <link rel="stylesheet" href="../modules/login/css/new_login.css"/>
+    <script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="../build/zepto.min.js"></script>
+    <link href="../lib/mobiscroll/css/mobiscroll_002.css" rel="stylesheet" type="text/css">
+    <link href="../lib/mobiscroll/css/mobiscroll.css" rel="stylesheet" type="text/css">
+    <link href="../lib/mobiscroll/css/mobiscroll_003.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
+    <script src="../lib/mobiscroll/js/mobiscroll_002.js" type="text/javascript"></script>
+    <script src="../lib/mobiscroll/js/mobiscroll_004.js" type="text/javascript"></script>
+    <script src="../lib/mobiscroll/js/mobiscroll.js" type="text/javascript"></script>
+    <script src="../lib/mobiscroll/js/mobiscroll_003.js" type="text/javascript"></script>
+    <script src="../lib/mobiscroll/js/mobiscroll_005.js" type="text/javascript"></script>
+    
+ 
     <script type="text/javascript" src="../lib/common/new_common.js"></script>
+    
+    
+    <!--样式 改动-->
+    <style type="text/css">
+		#imghead{border-radius: 50%;width:100%;height: 100%;}
+		.avatar input{width:70px;height:70px;opacity: 0;filter: alpha(opacity=0);position: absolute;left: 0;top:0;}
+    </style>
+	<!--END-->
+	
+	
 </head>
 <body>
 <div class="wrapper">
@@ -20,9 +44,17 @@
     </div>
     <div class="file-main">
 	    <h5 class="register-size">注册</h5>
-	    <div class="avatar">
-			<img src="../assets/img/2.png" />
+	    
+	  	<!--改动-->
+	    <div class="avatar"  >
+	    	<div id="preview" style="width:100%;height: 100%;">
+				<img src="../assets/img/2.png" id="imghead" />
+			</div>
+			<input type="file"  onchange="previewImage(this)"/>
 		</div>
+		<!--END-->
+		
+		
 	</div>
 	<!--主要内容-->
 	<div class="a-wrap">
@@ -55,7 +87,9 @@
 			</div>
 			
 			<div class="select-main">
-				<input type="date" placeholder="选选择出生日期" />
+				<!--改动-->
+				<input id="appDate" type="text" placeholder="选选择出生日期"  id="birthdate"/>
+				<!--END-->
 				<select class="fRight">
 					<option>选择性别</option>
 				</select>
@@ -80,3 +114,91 @@
 
 </body>    
 </html>
+
+<script type="text/javascript">
+/**改动**/
+        //图片上传预览    IE是用了滤镜。
+        function previewImage(file)
+        {
+          var MAXWIDTH  = 260; 
+          var MAXHEIGHT = 180;
+          var div = document.getElementById('preview');
+          if (file.files && file.files[0])
+          {
+              div.innerHTML ='<img id=imghead>';
+              var img = document.getElementById('imghead');
+              img.onload = function(){
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                img.width  =  rect.width;
+                img.height =  rect.height;
+              }
+              var reader = new FileReader();
+              reader.onload = function(evt){img.src = evt.target.result;}
+              reader.readAsDataURL(file.files[0]);
+          }
+          else //兼容IE
+          {
+            var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+            file.select();
+            var src = document.selection.createRange().text;
+            div.innerHTML = '<img id=imghead>';
+            var img = document.getElementById('imghead');
+            img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+            status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+            div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;"+sFilter+src+"\"'></div>";
+          }
+        }
+        function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+            var param = {top:0, left:0, width:width, height:height};
+            if( width>maxWidth || height>maxHeight )
+            {
+                rateWidth = width / maxWidth;
+                rateHeight = height / maxHeight;
+                 
+                if( rateWidth > rateHeight )
+                {
+                    param.width =  maxWidth;
+                    param.height = Math.round(height / rateWidth);
+                }else
+                {
+                    param.width = Math.round(width / rateHeight);
+                    param.height = maxHeight;
+                }
+            }
+             
+            param.left = Math.round((maxWidth - param.width) / 2);
+            param.top = Math.round((maxHeight - param.height) / 2);
+            return param;
+        }
+	   birthday();
+	  //生日日期选择
+	 function  birthday(){
+	   var e = $("#appDate");
+	    if (e.length) {
+	        var t = (new Date).getFullYear(),
+	        i = {};
+	        i.date = {
+	            preset: "date"
+	        },
+	        i.datetime = {
+	            preset: "datetime"
+	        },
+	        i.time = {
+	            preset: "time"
+	        },
+	        i["default"] = {
+	            theme: "android-ics light",
+	            display: "modal",
+	            mode: "scroller",
+	            dateFormat: "yyyy-mm-dd",
+	            lang: "zh",
+	            showNow: !0,
+	            nowText: "",
+	            startYear: t - 70,
+	            endYear: t - 10
+	        },
+	        e.mobiscroll($.extend(i.date, i["default"]))
+	    }
+	 }
+</script>

@@ -6,10 +6,20 @@
     <link rel="shortcut icon" type="image/png" href="{% static "favicon.png" %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
     <link rel="stylesheet" href="{% static "mobile/lib/common/new_common.css" %}"/>
     <link rel="stylesheet" href="{% static "mobile/modules/login/css/new_login.css" %} "/>
     <script type="text/javascript" src="{% static "lib/jquery/jquery.min.js" %}"></script>
     <script type="text/javascript" src="{% static "lib/jquery-form/jquery.form.js" %}"></script>
+    <script type="text/javascript" src="{% static "mobile/build/zepto.min.js" %}"></script>
+    <link rel="stylesheet" href="{% static "mobile/lib/mobiscroll/css/mobiscroll_002.css"%}" type="text/css">
+    <link rel="stylesheet" href="{% static "mobile/lib/mobiscroll/css/mobiscroll.css"%}" type="text/css">
+    <link rel="stylesheet" href="{% static "mobile/lib/mobiscroll/css/mobiscroll_003.css"%}" type="text/css">
+    <script src="{% static "mobile/lib/mobiscroll/js/mobiscroll_002.js" %}" type="text/javascript"></script>
+    <script src="{% static "mobile/lib/mobiscroll/js/mobiscroll_004.js" %}" type="text/javascript"></script>
+    <script src="{% static "mobile/lib/mobiscroll/js/mobiscroll.js" %}" type="text/javascript"></script>
+    <script src="{% static "mobile/lib/mobiscroll/js/mobiscroll_003.js" %}" type="text/javascript"></script>
+    <script src="{% static "mobile/lib/mobiscroll/js/mobiscroll_005.js" %}" type="text/javascript"></script>
     <script type="text/javascript" src="{% static "lib/common/new_common.js" %}"></script>
     <style type="text/css">
 		#imghead{border-radius: 50%;width:100%;height: 100%;}
@@ -67,7 +77,7 @@
 			</div>
 			
 			<div class="select-main">
-				<input type="text" placeholder="请选择出生日期" name="birthDate" id="birthdate"/>
+				<input id="appDate" type="text" placeholder="请选择出生日期" name="birthDate" id="birthdate"/>
 				<select class="fRight sex-second" name="gender">
 					<option>选择性别</option>
                     <option>男</option>
@@ -103,6 +113,7 @@
     laydate({
             elem: '#birthdate'
         });
+        //图片上传预览    IE是用了滤镜。
         //图片上传预览    IE是用了滤镜。
         function previewImage(file)
         {
@@ -157,4 +168,34 @@
             param.top = Math.round((maxHeight - param.height) / 2);
             return param;
         }
+	   birthday();
+	  //生日日期选择
+	 function  birthday(){
+	   var e = $("#appDate");
+	    if (e.length) {
+	        var t = (new Date).getFullYear(),
+	        i = {};
+	        i.date = {
+	            preset: "date"
+	        },
+	        i.datetime = {
+	            preset: "datetime"
+	        },
+	        i.time = {
+	            preset: "time"
+	        },
+	        i["default"] = {
+	            theme: "android-ics light",
+	            display: "modal",
+	            mode: "scroller",
+	            dateFormat: "yyyy-mm-dd",
+	            lang: "zh",
+	            showNow: !0,
+	            nowText: "",
+	            startYear: t - 70,
+	            endYear: t - 10
+	        },
+	        e.mobiscroll($.extend(i.date, i["default"]))
+	    }
+	 }
 </script>
