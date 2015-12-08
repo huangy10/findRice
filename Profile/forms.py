@@ -50,7 +50,7 @@ class UserRegisterForm(forms.Form):
         # 检查验证码
         code = self.cleaned_data['code']
         phone = self.cleaned_data['phone_num']
-        if get_user_model().objects.filter(username=phone).exists():
+        if get_user_model().objects.filter(profile__phoneNum=phone).exists():
             self.add_error('phone_num', u"该手机号已经被注册了")
             return
         time_threshold = timezone.now() - datetime.timedelta(minutes=5)
