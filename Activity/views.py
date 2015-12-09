@@ -171,26 +171,27 @@ def apply_an_activity(request, action_id):
         return HttpResponse(json.dumps({'success': True, 'data': {'url': next_url}}))
 
     # 确认用户已经登陆以后，开始开始申请活动
-    try:
+    if Questionnaire.objects.filter(activity=activity, is_active=True).exists():
         # Then load the answer data and create the answer sheet
-        q = Questionnaire.objects.get(activity=activity, is_active=True)
+        q = Questionnaire.objects.filter(activity=activity, is_active=True).first()
         json_data = simplejson.loads(request.POST.get("answer", "{}"))
         try:
             create_answer_set_with_json({"answer": json_data}, request, q, request.user)
         except ValidationError:
             logger.debug(u"创建答案失败，发生了Validation错误，提交的json格式为：{0:s}".format(json))
             raise ValidationError(u"创建答案失败")
-    except ObjectDoesNotExist:
-        # 如果问卷不存在，那么直接跳过这一步即可
-        pass
+
     # 此时，尝试申请活动
     application, success, error_info = ApplicationThrough.objects.try_to_apply(activity=activity, user=user)
     if success:
         # 在这里我们需要检查当前用户是否是由其他用户分享过来的
         code = request.POST.get('promotion_code', None)
-        if code is not None:
-            sharer = get_user_model().objects.get(profile__promotion_code=code)
-            ShareRecord.objects.create(sharer=sharer, user=user, activity=activity)
+        if code is not None and code != user.profile.promotion_code:
+            try:
+                sharer = get_user_model().objects.get(profile__promotion_code=code)
+                ShareRecord.objects.create(sharer=sharer, user=user, activity=activity)
+            except ObjectDoesNotExist:
+                logger.debug(u"发现非法的promotion_code: %s" % code)
         # 在日志内记录本次申请行为
         logger.debug(u"报名活动成功，对应活动为|{0:s}|(id:{1:d}), 当前用户为|{2:s}|({3:s})"
                      .format(activity.name, activity.id, request.user.profile.name, request.user.username))

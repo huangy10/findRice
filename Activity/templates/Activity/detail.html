@@ -48,7 +48,9 @@
     <div id="detail-container" data-link="{% share_link act %}" {% if act.status == 2 %}class="finished"{% endif %}>
         <form id="apply-form" action="/action/{{ act.id }}/apply" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            {% if promotion_code %}
             <input type="hidden" value="{{ promotion_code }}" name="promotion_code">
+            {% endif %}
             <div id="detail-important" class="fn-clr">
                 <div class="detail-name-w {% if act.reward_gift %}with-present{% endif %}">
                     <span class="detail-name">{{ act.name }}</span>

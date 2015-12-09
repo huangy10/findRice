@@ -304,7 +304,7 @@ class ApplicationThroughManager(models.Manager):
                 obj.status = "applying"
                 obj.apply_at = timezone.now()
                 obj.save()
-                return obj, True
+                return obj, True, ''
             else:
                 if created:
                     return obj, created, ''
