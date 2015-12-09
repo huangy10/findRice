@@ -184,6 +184,13 @@ def apply_an_activity(request, action_id):
     # 此时，尝试申请活动
     application, success, error_info = ApplicationThrough.objects.try_to_apply(activity=activity, user=user)
     if success:
+        # 向活动的创建者发送通知
+        send_notification.send(sender=get_user_model(),
+                               notification_type="activity_notification",
+                               notification_center=activity.host.notification_center,
+                               activity=activity,
+                               user=request.user,
+                               activity_notification_type="activity_applied")
         # 在这里我们需要检查当前用户是否是由其他用户分享过来的
         code = request.POST.get('promotion_code', None)
         if code is not None and code != user.profile.promotion_code:

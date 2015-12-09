@@ -343,141 +343,141 @@ def send_verify_code(request):
     #     return JsonResponse({'success': False, 'data': {}}, content_type='text/html')
     return JsonResponse({'success': True}, content_type='text/html')
 
-
-@login_required()
-@profile_active_required
-def manage_an_activity(request):
-    if request.method == "POST":
-        optype = request.POST.get("optype", "")
-        action_id = request.POST.get("action", "")
-        target_id = request.POST.get("target", "")
-    else:
-        optype = request.GET.get("optype", "")
-        action_id = request.GET.get("action", "")
-        target_id = request.GET.get("target", "")
-    activity = get_object_or_404(Activity, id=int(action_id))
-    if not activity.host == request.user:
-        return JsonResponse({"success": False, "data": {"error": "Permission Denied"}}, content_type='text/html')
-    elif not activity.is_active:
-        return JsonResponse({"success": False, "data": {"error": "该活动不存在"}}, content_type='text/html')
-    if optype == "approve":
-        if ApplicationThrough.objects.filter(activity=activity, is_active=True, status="approved").count() >= activity.max_attend:
-            return JsonResponse({"success": True, "data": {"error": "该活动已报满"}}, content_type='text/html')
-        target = get_object_or_404(get_user_model(), id=target_id)
-        applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
-        applicant.status = "approved"
-        applicant.save()
-        # send a message to the target
-        send_notification.send(sender=get_user_model(),
-                               notification_center=target.notification_center,
-                               notification_type="activity_notification",
-                               activity=activity,
-                               user=target,
-                               activity_notification_type="apply_approved")
-        # 检查这个活动是否是用于认证的用户，如果是的话，令申请者成为认证用户
-        identification_act = Activity.objects.identification_act
-        if activity.id == identification_act.id:
-            target.profile.identified = True
-            target.profile.identified_date = timezone.now()
-            target.profile.save()
-
-        return JsonResponse({"success": True, "data": {}}, content_type='text/html')
-    elif optype == "approve_cancel":
-        target = get_object_or_404(get_user_model(), id=target_id)
-        applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
-        if not applicant.status == "approved":
-            return JsonResponse({"success": False, "data": {}}, content_type='text/html')
-        applicant.status = "applying"
-        applicant.save()
-        # 检查这个活动是否是用于认证的用户，如果是的话，则剥夺该用户的认证资格
-        identification_act = Activity.objects.identification_act
-        if activity.id == identification_act.id:
-            target.profile.identified = False
-            target.profile.save()
-        # I'm not sure about which kind of notification should be sent here
-        return JsonResponse({"success": True, "data": {}}, content_type='text/html')
-    elif optype == "deny":
-        target = get_object_or_404(get_user_model(), id=target_id)
-        applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
-        applicant.status = "denied"
-        applicant.save()
-        # No notification if defined here
-        # send a message to the target
-        send_notification.send(sender=get_user_model(),
-                               notification_center=target.notification_center,
-                               notification_type="activity_notification",
-                               activity=activity,
-                               user=target,
-                               activity_notification_type="apply_rejected")
-        return JsonResponse({"success": True, "data": {}}, content_type='text/html')
-    elif optype == "deny_cancel":
-        target = get_object_or_404(get_user_model(), id=target_id)
-        applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
-        if not applicant.status == "denied":
-            return JsonResponse({"success": False, "data": {}}, content_type='text/html')
-        applicant.status = "applying"
-        applicant.save()
-        return JsonResponse({"success": True, "data": {}}, content_type='text/html')
-    elif optype == "finish":
-        target = get_object_or_404(get_user_model(), id=target_id)
-        applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
-        if not (applicant.status == "approved" and activity.status == 2):
-            return JsonResponse({"success": False, "data": {}}, content_type='text/html')
-        applicant.status = "finished"
-        applicant.save()
-        # Send Notification to the target user
-        send_notification.send(sender=get_user_model(),
-                               notification_center=target.notification_center,
-                               notification_type='activity_notification',
-                               activity=activity,
-                               user=target,
-                               activity_notification_type='activity_finished')
-        # Check if this target user is recommended
-        try:
-            share_record = ShareRecord.objects.get(application=applicant,
-                                                   target_user=target,
-                                                   is_active=True)
-            share_record.finished = True
-            share_record.save()
-            send_notification.send(sender=get_user_model(),
-                                   notification_center=share_record.share.user.notification_center,
-                                   notification_type="activity_notification",
-                                   activity=activity,
-                                   user=target,
-                                   activity_notification_type="share_finished")
-        except ObjectDoesNotExist:
-            logger.debug(u"用户|%s(id: %s)|完成了活动|%s(id: %s)|，但是没有找到相应分享链接" % (
-                target.username, target.id, activity.name, activity.id))
-
-        return JsonResponse({"success": True, "data": {}}, content_type='text/html')
-    elif optype == "finish_cancel":
-        return JsonResponse({"success": False, "data": {}}, content_type='text/html')
-    elif optype == "detail":
-        pass
-    elif optype == "excel":
-        def generate_excel_data():
-            applicants = ApplicationThrough.objects.filter(activity=activity,
-                                                           is_active=True)
-            column_names = [u"用户姓名", u"性别", u"出生日期", u"年龄", u"联系方式", u"报名时间", u"申请状态"]
-
-            def row_generator(app):
-                # accept the applicant data as input, output the row data for the excel file
-                row_user_profile = app.user.profile
-                row_data = [row_user_profile.name,
-                            row_user_profile.get_gender_display(),
-                            row_user_profile.birthDate.strftime("%Y-%m-%d"),
-                            str(row_user_profile.age),
-                            row_user_profile.phoneNum,
-                            timezone.make_naive(timezone.localtime(app.apply_at)).strftime("%Y-%m-%d %H-%M-%S"),
-                            app.get_status_display()]
-                return row_data
-
-            data = map(row_generator, applicants)
-            return [column_names] + data
-        excel_data = generate_excel_data()
-        return excel_response.ExcelResponse(excel_data, output_name=(activity.name+u"报名列表").encode("utf-8"))
-    elif optype == "ready_required":
-        pass
+#
+# @login_required()
+# @profile_active_required
+# def manage_an_activity(request):
+#     if request.method == "POST":
+#         optype = request.POST.get("optype", "")
+#         action_id = request.POST.get("action", "")
+#         target_id = request.POST.get("target", "")
+#     else:
+#         optype = request.GET.get("optype", "")
+#         action_id = request.GET.get("action", "")
+#         target_id = request.GET.get("target", "")
+#     activity = get_object_or_404(Activity, id=int(action_id))
+#     if not activity.host == request.user:
+#         return JsonResponse({"success": False, "data": {"error": "Permission Denied"}}, content_type='text/html')
+#     elif not activity.is_active:
+#         return JsonResponse({"success": False, "data": {"error": "该活动不存在"}}, content_type='text/html')
+#     if optype == "approve":
+#         if ApplicationThrough.objects.filter(activity=activity, is_active=True, status="approved").count() >= activity.max_attend:
+#             return JsonResponse({"success": True, "data": {"error": "该活动已报满"}}, content_type='text/html')
+#         target = get_object_or_404(get_user_model(), id=target_id)
+#         applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
+#         applicant.status = "approved"
+#         applicant.save()
+#         # send a message to the target
+#         send_notification.send(sender=get_user_model(),
+#                                notification_center=target.notification_center,
+#                                notification_type="activity_notification",
+#                                activity=activity,
+#                                user=target,
+#                                activity_notification_type="apply_approved")
+#         # 检查这个活动是否是用于认证的用户，如果是的话，令申请者成为认证用户
+#         identification_act = Activity.objects.identification_act
+#         if activity.id == identification_act.id:
+#             target.profile.identified = True
+#             target.profile.identified_date = timezone.now()
+#             target.profile.save()
+#
+#         return JsonResponse({"success": True, "data": {}}, content_type='text/html')
+#     elif optype == "approve_cancel":
+#         target = get_object_or_404(get_user_model(), id=target_id)
+#         applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
+#         if not applicant.status == "approved":
+#             return JsonResponse({"success": False, "data": {}}, content_type='text/html')
+#         applicant.status = "applying"
+#         applicant.save()
+#         # 检查这个活动是否是用于认证的用户，如果是的话，则剥夺该用户的认证资格
+#         identification_act = Activity.objects.identification_act
+#         if activity.id == identification_act.id:
+#             target.profile.identified = False
+#             target.profile.save()
+#         # I'm not sure about which kind of notification should be sent here
+#         return JsonResponse({"success": True, "data": {}}, content_type='text/html')
+#     elif optype == "deny":
+#         target = get_object_or_404(get_user_model(), id=target_id)
+#         applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
+#         applicant.status = "denied"
+#         applicant.save()
+#         # No notification if defined here
+#         # send a message to the target
+#         send_notification.send(sender=get_user_model(),
+#                                notification_center=target.notification_center,
+#                                notification_type="activity_notification",
+#                                activity=activity,
+#                                user=target,
+#                                activity_notification_type="apply_rejected")
+#         return JsonResponse({"success": True, "data": {}}, content_type='text/html')
+#     elif optype == "deny_cancel":
+#         target = get_object_or_404(get_user_model(), id=target_id)
+#         applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
+#         if not applicant.status == "denied":
+#             return JsonResponse({"success": False, "data": {}}, content_type='text/html')
+#         applicant.status = "applying"
+#         applicant.save()
+#         return JsonResponse({"success": True, "data": {}}, content_type='text/html')
+#     elif optype == "finish":
+#         target = get_object_or_404(get_user_model(), id=target_id)
+#         applicant = get_object_or_404(ApplicationThrough, activity=activity, user=target, is_active=True)
+#         if not (applicant.status == "approved" and activity.status == 2):
+#             return JsonResponse({"success": False, "data": {}}, content_type='text/html')
+#         applicant.status = "finished"
+#         applicant.save()
+#         # Send Notification to the target user
+#         send_notification.send(sender=get_user_model(),
+#                                notification_center=target.notification_center,
+#                                notification_type='activity_notification',
+#                                activity=activity,
+#                                user=target,
+#                                activity_notification_type='activity_finished')
+#         # Check if this target user is recommended
+#         try:
+#             share_record = ShareRecord.objects.get(application=applicant,
+#                                                    target_user=target,
+#                                                    is_active=True)
+#             share_record.finished = True
+#             share_record.save()
+#             send_notification.send(sender=get_user_model(),
+#                                    notification_center=share_record.share.user.notification_center,
+#                                    notification_type="activity_notification",
+#                                    activity=activity,
+#                                    user=target,
+#                                    activity_notification_type="share_finished")
+#         except ObjectDoesNotExist:
+#             logger.debug(u"用户|%s(id: %s)|完成了活动|%s(id: %s)|，但是没有找到相应分享链接" % (
+#                 target.username, target.id, activity.name, activity.id))
+#
+#         return JsonResponse({"success": True, "data": {}}, content_type='text/html')
+#     elif optype == "finish_cancel":
+#         return JsonResponse({"success": False, "data": {}}, content_type='text/html')
+#     elif optype == "detail":
+#         pass
+#     elif optype == "excel":
+#         def generate_excel_data():
+#             applicants = ApplicationThrough.objects.filter(activity=activity,
+#                                                            is_active=True)
+#             column_names = [u"用户姓名", u"性别", u"出生日期", u"年龄", u"联系方式", u"报名时间", u"申请状态"]
+#
+#             def row_generator(app):
+#                 # accept the applicant data as input, output the row data for the excel file
+#                 row_user_profile = app.user.profile
+#                 row_data = [row_user_profile.name,
+#                             row_user_profile.get_gender_display(),
+#                             row_user_profile.birthDate.strftime("%Y-%m-%d"),
+#                             str(row_user_profile.age),
+#                             row_user_profile.phoneNum,
+#                             timezone.make_naive(timezone.localtime(app.apply_at)).strftime("%Y-%m-%d %H-%M-%S"),
+#                             app.get_status_display()]
+#                 return row_data
+#
+#             data = map(row_generator, applicants)
+#             return [column_names] + data
+#         excel_data = generate_excel_data()
+#         return excel_response.ExcelResponse(excel_data, output_name=(activity.name+u"报名列表").encode("utf-8"))
+#     elif optype == "ready_required":
+#         pass
 
 
 @login_required()
@@ -486,8 +486,8 @@ def manage_an_activity2(request):
     # 解析操作参数
     if request.method == 'GET':
         optype = request.GET['optype']
-        action_id = request.GET['action_id']
-        target_id = request.GET['target_id']
+        action_id = request.GET['action']
+        target_id = request.GET['target']
     else:
         optype = request.POST["optype"]
         action_id = request.POST["action"]
