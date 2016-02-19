@@ -85,6 +85,7 @@ class ActivityCreationForm(forms.ModelForm):
         if self.cleaned_data['poster'] is not None or not self.is_bound:
             obj.poster = self.cleaned_data['poster']
 
+
         # reward system
         if self.cleaned_data['present']:
             obj.reward_gift = True
@@ -114,7 +115,7 @@ class ActivityCreationForm(forms.ModelForm):
             if obj.poster:
                 new_obj = copy.deepcopy(obj)
                 create_zipped_poster.delay(new_obj, force=True)
-                create_share_thumbnail(new_obj, force=True)
+                # create_share_thumbnail(new_obj, force=True)
         return obj
 
     class Meta:

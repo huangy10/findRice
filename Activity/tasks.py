@@ -70,6 +70,8 @@ def create_zipped_poster(act, force=False):
         zipped_io.close()
 
     # at the end of this function ,create thumbnail for the act
+    if force:
+        act.poster_thumbnail = None
     create_share_thumbnail(act)
 
 

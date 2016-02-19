@@ -701,6 +701,7 @@ def copy_an_activity(request, action_id):
     act.pk = None
     act.host = request.user
     act.is_published = False
+    act.accept_apply = True
     act.save()
     if q:
         q.activity = act

@@ -123,7 +123,10 @@ class PasswordResetForm(forms.Form):
 
     def save(self):
         phone = self.cleaned_data['phone_num']
-        user = get_user_model().objects.get(username=phone)
+        try:
+            user = get_user_model().objects.get(username=phone)
+        except ObjectDoesNotExist:
+            user = get_user_model().objects.get(profile__phoneNum=phone)
         user.set_password(self.cleaned_data['password1'])
         user.profile.phoneNum = phone
         user.save()

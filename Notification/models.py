@@ -130,10 +130,10 @@ class ActivityNotification(Notification):
                 '/mine/apply', self.related_activity.name, self.related_activity.host.profile.name)
         elif self.notification_type == "apply_full":
             self.description = u"您的 <a href='{0}' target='_blank'>{1}</a>，已报满".format(
-                reverse('applicant', args=[self.related_activity.id, ]), self.related_activity.name)
+                reverse('action:applicant', args=[self.related_activity.id, ]), self.related_activity.name)
         elif self.notification_type == "ready_rejected":
             self.description = u"您的 <a href='{0}' target='_blank'>{1}</a> 中，申请人 {2} 拒绝前往".format(
-                reverse('applicant', args=[self.related_activity.id, ]),
+                reverse('action:applicant', args=[self.related_activity.id, ]),
                 self.related_activity.name,
                 self.related_users.profile.name)
         elif self.notification_type == 'share_finished':
@@ -149,7 +149,7 @@ class ActivityNotification(Notification):
         elif self.notification_type == 'activity_applied':
             self.description = u"{0} 报名了您的活动 <a href='{1}' target='_blank'>{2}</a> ".format(
                 self.related_user.profile.name,
-                reverse('applicant', args=[self.related_activity.id, ]),
+                reverse('action:applicant', args=[self.related_activity.id, ]),
                 self.related_activity.name)
         elif self.notification_type == 'activity_finished':
             self.description = u"您完成了活动 <a href='{0}' target='_blank'>{1}</a>".format(
