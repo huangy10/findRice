@@ -106,7 +106,7 @@ class ActivityCreationForm(forms.ModelForm):
             obj.reward_for_share = 0
             obj.reward_for_share_and_finished_percentage = 0
             obj.reward_share_limit = 0
-        else:
+        elif obj.host.profile.identified:
             obj.identified = True
 
         if commit:

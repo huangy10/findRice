@@ -131,4 +131,5 @@ def create_answer_set_with_json(json, request, questionnaire, user):
     except (ObjectDoesNotExist, IndexError):
         # 发生错误之后删除已经创建的答卷
         answer_set.delete()
+        raise ValidationError()
     return answer_set

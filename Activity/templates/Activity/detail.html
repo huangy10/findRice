@@ -140,5 +140,27 @@
         </form>
     </div>
 </div>
+<script type="text/javascript">
+      $(document).ready(function(){
+        $("#apply-form input").click(function(){
+          var data_id = $("#data-id").attr("data-value");
+          if (data_id == 0){
+              window.location = "/login{% if promotion_code %}?next=/action/{{ act.id }}?code={{ promotion_code }}{% endif %}";
+          }
+        });
+        $("#apply-form textarea").click(function(){
+          var data_id = $("#data-id").attr("data-value");
+          if (data_id == 0){
+              window.location = "/login{% if promotion_code %}?next=/action/{{ act.id }}?code={{ promotion_code }}{% endif %}";
+          }
+        });
+        $("#detail-questions .detail-item .detail-answers ul li").click(function(){
+          var data_id = $("#data-id").attr("data-value");
+          if (data_id == 0){
+              window.location = "/login{% if promotion_code %}?next=/action/{{ act.id }}?code={{ promotion_code }}{% endif %}";
+          }
+        });
+      });
+    </script>
 </body>
 </html>

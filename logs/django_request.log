@@ -34968,3 +34968,210 @@ IndexError: list index out of range
 2015-12-02 22:05:36,914 [WARNING] django.request: Not Found: /lib/common/laydate.dev.js
 2015-12-03 16:09:51,129 [WARNING] django.request: Not Found: /http:/www.baidu.com/
 2015-12-12 22:42:03,004 [WARNING] django.request: Not Found: /account/sendcode
+2016-04-26 22:47:16,999 [WARNING] django.request: Not Found: /favicon.ico
+2016-04-27 00:17:08,684 [ERROR] django.request: Internal Server Error: /action/new/create/1
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 67, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 244, in create_new_activity_1
+    act = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/forms.py", line 117, in save
+    create_zipped_poster.delay(new_obj, force=True)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/task.py", line 453, in delay
+    return self.apply_async(args, kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/task.py", line 560, in apply_async
+    **dict(self._get_exec_options(), **options)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/base.py", line 354, in send_task
+    reply_to=reply_to or self.oid, **options
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/amqp.py", line 305, in publish_task
+    **kwargs
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/messaging.py", line 172, in publish
+    routing_key, mandatory, immediate, exchange, declare)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 457, in _ensured
+    interval_max)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 369, in ensure_connection
+    interval_start, interval_step, interval_max, callback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/utils/__init__.py", line 243, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 237, in connect
+    return self.connection
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 741, in connection
+    self._connection = self._establish_connection()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 696, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/transport/pyamqp.py", line 116, in establish_connection
+    conn = self.Connection(**opts)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/connection.py", line 165, in __init__
+    self.transport = self.Transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/connection.py", line 186, in Transport
+    return create_transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/transport.py", line 299, in create_transport
+    return TCPTransport(host, connect_timeout)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/transport.py", line 95, in __init__
+    raise socket.error(last_err)
+error: [Errno 61] Connection refused
+2016-04-27 00:17:12,825 [ERROR] django.request: Internal Server Error: /action/new/create/1
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 67, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 244, in create_new_activity_1
+    act = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/forms.py", line 117, in save
+    create_zipped_poster.delay(new_obj, force=True)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/task.py", line 453, in delay
+    return self.apply_async(args, kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/task.py", line 560, in apply_async
+    **dict(self._get_exec_options(), **options)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/base.py", line 354, in send_task
+    reply_to=reply_to or self.oid, **options
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/amqp.py", line 305, in publish_task
+    **kwargs
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/messaging.py", line 172, in publish
+    routing_key, mandatory, immediate, exchange, declare)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 457, in _ensured
+    interval_max)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 369, in ensure_connection
+    interval_start, interval_step, interval_max, callback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/utils/__init__.py", line 243, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 237, in connect
+    return self.connection
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 741, in connection
+    self._connection = self._establish_connection()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 696, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/transport/pyamqp.py", line 116, in establish_connection
+    conn = self.Connection(**opts)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/connection.py", line 165, in __init__
+    self.transport = self.Transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/connection.py", line 186, in Transport
+    return create_transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/transport.py", line 299, in create_transport
+    return TCPTransport(host, connect_timeout)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/transport.py", line 95, in __init__
+    raise socket.error(last_err)
+error: [Errno 61] Connection refused
+2016-04-27 00:17:40,299 [WARNING] django.request: Not Found: /favicon.ico
+2016-04-27 00:18:53,165 [ERROR] django.request: Internal Server Error: /action/new/create/1
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 67, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 244, in create_new_activity_1
+    act = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/forms.py", line 117, in save
+    create_zipped_poster.delay(new_obj, force=True)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/task.py", line 453, in delay
+    return self.apply_async(args, kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/task.py", line 560, in apply_async
+    **dict(self._get_exec_options(), **options)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/base.py", line 354, in send_task
+    reply_to=reply_to or self.oid, **options
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/amqp.py", line 305, in publish_task
+    **kwargs
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/messaging.py", line 172, in publish
+    routing_key, mandatory, immediate, exchange, declare)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 457, in _ensured
+    interval_max)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 369, in ensure_connection
+    interval_start, interval_step, interval_max, callback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/utils/__init__.py", line 243, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 237, in connect
+    return self.connection
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 741, in connection
+    self._connection = self._establish_connection()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 696, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/transport/pyamqp.py", line 116, in establish_connection
+    conn = self.Connection(**opts)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/connection.py", line 165, in __init__
+    self.transport = self.Transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/connection.py", line 186, in Transport
+    return create_transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/transport.py", line 299, in create_transport
+    return TCPTransport(host, connect_timeout)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/transport.py", line 95, in __init__
+    raise socket.error(last_err)
+error: [Errno 61] Connection refused
+2016-04-27 00:20:04,076 [ERROR] django.request: Internal Server Error: /action/new/create/1
+Traceback (most recent call last):
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/core/handlers/base.py", line 132, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 22, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Profile/utils.py", line 67, in wrapper
+    return method(request, *args, **kwargs)
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/views.py", line 244, in create_new_activity_1
+    act = form.save()
+  File "/Users/Lena/Project/Backend/production/findRice/Activity/forms.py", line 117, in save
+    create_zipped_poster.delay(new_obj, force=True)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/task.py", line 453, in delay
+    return self.apply_async(args, kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/task.py", line 560, in apply_async
+    **dict(self._get_exec_options(), **options)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/base.py", line 354, in send_task
+    reply_to=reply_to or self.oid, **options
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/celery/app/amqp.py", line 305, in publish_task
+    **kwargs
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/messaging.py", line 172, in publish
+    routing_key, mandatory, immediate, exchange, declare)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 457, in _ensured
+    interval_max)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 369, in ensure_connection
+    interval_start, interval_step, interval_max, callback)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/utils/__init__.py", line 243, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 237, in connect
+    return self.connection
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 741, in connection
+    self._connection = self._establish_connection()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/connection.py", line 696, in _establish_connection
+    conn = self.transport.establish_connection()
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/kombu/transport/pyamqp.py", line 116, in establish_connection
+    conn = self.Connection(**opts)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/connection.py", line 165, in __init__
+    self.transport = self.Transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/connection.py", line 186, in Transport
+    return create_transport(host, connect_timeout, ssl)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/transport.py", line 299, in create_transport
+    return TCPTransport(host, connect_timeout)
+  File "/Users/Lena/Project/Python/Learning/ENV/lib/python2.7/site-packages/amqp/transport.py", line 95, in __init__
+    raise socket.error(last_err)
+error: [Errno 61] Connection refused
+2016-04-27 00:44:57,433 [WARNING] django.request: Not Found: /action/5
+2016-04-27 00:44:57,534 [WARNING] django.request: Not Found: /favicon.ico
+2016-04-27 00:45:00,500 [WARNING] django.request: Not Found: /action/4
+2016-04-27 00:45:03,778 [WARNING] django.request: Not Found: /action/7
+2016-04-27 00:45:05,864 [WARNING] django.request: Not Found: /action/3
+2016-04-27 00:45:08,187 [WARNING] django.request: Not Found: /action/2
+2016-04-27 00:50:29,329 [WARNING] django.request: Not Found: /favicon.ico
+2016-04-27 02:20:04,911 [WARNING] django.request: Not Found: /http:/www.jd.com/
+2016-04-27 02:50:56,052 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-27 03:03:09,519 [WARNING] django.request: Not Found: /http:/m.baidu.com/
+2016-04-27 03:03:12,663 [WARNING] django.request: Not Found: /http:/www.sogou.com/
+2016-04-27 03:03:12,815 [WARNING] django.request: Not Found: /http:/www.1dvj.com/
+2016-04-27 03:03:12,938 [WARNING] django.request: Not Found: /http:/www.kuaidaili.com/
+2016-04-27 03:33:20,183 [WARNING] django.request: Not Found: /163mx01.mxmail.netease.com:25
+2016-04-27 03:49:50,088 [WARNING] django.request: Not Found: /http:/www.baidu.com/
+2016-04-27 05:19:23,811 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr
+2016-04-27 05:35:00,665 [WARNING] django.request: Not Found: /robots.txt
+2016-04-27 05:35:00,994 [WARNING] django.request: Not Found: /sitemap.xml
+2016-04-27 05:42:44,827 [WARNING] django.request: Not Found: /http:/www.baidu.com/cache/global/img/gs.gif
+2016-04-27 07:50:43,281 [WARNING] django.request: Not Found: /http:/m.baidu.com/
+2016-04-27 07:50:44,944 [WARNING] django.request: Not Found: /http:/www.sogou.com/
+2016-04-27 07:50:45,217 [WARNING] django.request: Not Found: /http:/www.1dvj.com/
+2016-04-27 07:50:45,459 [WARNING] django.request: Not Found: /http:/www.kuaidaili.com/
+2016-04-27 08:58:00,895 [WARNING] django.request: Not Found: /favicon.ico
+2016-04-27 10:17:00,198 [WARNING] django.request: Not Found: /http:/zc.qq.com/cgi-bin/common/attr

@@ -54,7 +54,7 @@ def check_applicant_list(request, action_id):
                     }
         answer_set = []
         answer_sheet = AnswerSheet.objects.filter(user=a.user,
-                                                  questionnaire__activity=a.activity)[0]
+                                                  questionnaire__activity=a.activity).order_by('-created_at')[0]
         answer_set += list(SingleChoiceAnswer.objects.filter(answer_sheet=answer_sheet))
         answer_set += list(MultiChoiceAnswer.objects.filter(answer_sheet=answer_sheet))
         answer_set += list(TextAnswer.objects.filter(answer_sheet=answer_sheet))
@@ -705,6 +705,7 @@ def copy_an_activity(request, action_id):
     act.save()
     if q:
         q.activity = act
+        q.pk = None
         q.save()
     return JsonResponse({
         "success": True,

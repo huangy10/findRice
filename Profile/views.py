@@ -56,6 +56,7 @@ def user_login(request):
             }
             return HttpResponse(json.dumps(success_info))
         else:
+            logger.info(u"用户登陆数百,输入数据为:%s" % request.POST)
             error_info = {
                 "success": False
             }
@@ -184,6 +185,7 @@ def reset_password(request):
             if data == {}:
                 data["unknown"] = "未知错误，请联系管理员"
             error_info["data"] = data
+            logger.debug(u"修改密码失败: {0}".format(error_info))
             return HttpResponse(json.dumps(error_info))
 
     args = {}

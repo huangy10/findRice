@@ -214,6 +214,15 @@
 </div>
 </div>
 
-
+<script type="text/javascript">
+      $(document).ready(function(){
+        $("#formCondition input").click(function(){
+          var btn_login = $('.btn-login');
+          if (btn_login.length >= 1) {
+            window.location = "/login{% if promotion_code %}?next=/action/{{ act.id }}?code={{ promotion_code }}{% endif %}";
+          }
+        });
+      });
+    </script>
 </body>
 </html>
