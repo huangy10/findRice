@@ -1,3 +1,4 @@
+fabric
 pillow==2.8.2
 Django==1.8.1
 django-annoying==0.8.2
