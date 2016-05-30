@@ -1,0 +1,181 @@
+@import '../../../lib/common/common';
+
+#header {
+    height: 66px;
+    background-color: white;
+    font-size: 18px;
+    color: #747474;
+    #header-c {
+        width: 1190px;
+        margin: 0 auto;
+        #logo {
+            display: inline-block;
+            float: left;
+            width: 50px;
+            height: 50px;
+            background: url(http://zhao-mi.net/assets/imgs/logo.png) no-repeat 0 0;
+            margin-left: 40px;
+            margin-top: 8px;
+            font-size: 34px;
+            color: #5e5e5e;
+            line-height: 1;
+            text-indent: -9999em;
+        }
+        #area {
+            position: relative;
+            float: left;
+            margin-top: 9px;
+            margin-left: 12px;
+            vertical-align: middle;
+            z-index: 200;
+            cursor: pointer;
+            em {
+                float: left;
+                font-style: normal;
+                display: inline-block;
+                height: 48px;
+                line-height: 48px;
+            }
+            i {
+                float: left;
+                display: inline-block;
+                width: 36px;
+                height: 48px;
+                line-height: 48px;
+                .icons-bg(-20px -100px);
+            }
+            #area-droplist {
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 460px;
+                height: 48px;
+                line-height: 48px;
+                padding-top: 8px;
+                .prov, .city {
+                    float: left;
+                    height: 32px;
+                    line-height: 24px;
+                }
+                span {
+                    float: left;
+                    display: inline-block;
+                    width: 32px;
+                    height: 32px;
+                    line-height: 32px;
+                    &.city-txt {
+                        width: 60px;
+                    }
+                }
+                button {
+                    float: left;
+                    height: 32px;
+                    line-height: 30px;
+                    .border-radius(16px);
+                }
+            }
+        }
+        .action {
+            float: right;
+            margin-top: 12px;
+            margin-right: 12px;
+            a {
+                height: 40px;
+                line-height: 38px;
+                border: 1px solid #cfcfcf;
+                background-color: transparent;
+                font-size: 14px;
+                outline: none;
+                color: #b8b8b8;
+                .border-radius(20px);    
+            }
+        }
+
+        #reg {
+            a {
+                
+            }
+        }
+        #pub {
+            a {
+                padding-left: 34px;
+                padding-right: 18px;
+                .icons-bg(-210px -177px);
+            }
+            &.cancel-create {
+                background-color: #888;
+                .border-radius(20px);
+                a {
+                    height: 40px;
+                    line-height: 40px;
+                    border: none;
+                    color: white;
+                    .icons-bg(-88px -349px);
+                }
+            }
+        }
+        #msg {
+            position: relative;
+            overflow: visible;
+            span {
+                display: inline-block;
+                position: absolute;
+                top: -6px;
+                right: -6px;
+                text-align: center;
+                width: 20px;
+                height: 20px;
+                line-height: 23px;
+                background-color: #FF7A7A;
+                .border-radius(25px);
+                color: white;
+                font-size: 12px;
+                .border-radius(15px);
+            }
+            a {
+                padding-left: 44px;
+                padding-right: 12px;
+                min-width: 80px;
+                
+                .icons-bg(-222px -821px);
+            }
+        }
+        #personal-info {
+            width: 40px;
+            height: 40px;
+            margin-top: 12px;
+            background-color: #888;
+            cursor: pointer;
+            overflow: hidden;
+            .border-radius(40px);
+            img {
+                width: 100%;
+                height: 100%;
+            }
+            .logout {
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                border: none;
+                .icons-bg(-86px -348px);
+            }
+        }
+        #search {
+            input {
+                width: 194px;
+                height: 40px;
+                line-height: 38px;
+                padding-left: 42px;
+                border: 1px solid #cfcfcf;
+                font-size: 14px;
+                outline: none;
+                .icons-bg(-208px -219px);
+                .border-radius(20px);
+                &:focus {
+                    border: 2px solid #4b4b4b;
+                }
+            }
+        }
+    }
+}

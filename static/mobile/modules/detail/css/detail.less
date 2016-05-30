@@ -1,0 +1,167 @@
+@import '../../../lib/common/common.less';
+
+#pageDetail{
+  .main{
+    padding: 0 10px;
+    &.finished {
+      .title {
+        color: #b4b4b4;
+      }
+      .btn-submit {
+        background-color: #b4b4b4;
+      }
+    }
+  }
+  .title{
+    font-size: 25px;
+    line-height: 35px;
+    position: relative;
+
+    margin: 8px 0;
+    padding: 5px 0;
+
+    border-bottom: 1px solid #ccc;
+
+  }
+
+  .banner {
+    position: relative;
+    .like {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+    }
+    img {
+      width: 100%;
+      display: block;
+    }
+  } 
+  .detail{
+    .content {
+      color: #727272;
+
+    }
+    font-size: 12px;
+    .m-tag {
+
+      font-size: 12px;
+      float: right;
+
+      .hot{
+        display: inline-block;
+        background-color: #ff7979;
+        color: #fff;
+        padding: 2px 5px;
+        line-height: 20px;
+      }
+      .finished{
+        display: inline-block;
+        background-color: #b4b4b4;
+        color: #fff;
+        padding: 2px 5px;
+        line-height: 20px;
+      }
+
+    }
+    .img-w {
+      img {
+        width: 100%;
+      }
+    }
+    .price{
+      font-size: 24px;
+      display: inline-block;
+      background-color: #fff;
+      color: #ff7979;
+    }
+    .title-desc{
+      height: 25px;
+      line-height: 25px;
+      color: #B8B8B8;
+      margin-bottom: 5px;
+      position: relative;
+
+    }
+
+  }
+  .content {
+    p {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  }
+  .concact-msg{
+    padding: 5px 0;
+    &>div{
+      font-size: 14px;
+      margin: 5px 0;
+    }
+  }
+  .condition{
+
+    .item{
+      padding: 5px;
+      border: 1px solid #ccc;
+
+      &.error{
+        border-color: red;
+      }
+    }
+    .result-item{
+      display: inline-block;
+      vertical-align: middle;
+      height: 24px;
+      margin-right:10px;
+      label {
+        line-height: 22px;
+        display: inline-block;
+        vertical-align: top;
+      }
+    }
+    .content {
+      //border-bottom: 1px solid #ccc;
+
+      //margin: 10px 0;
+    }
+
+  }
+  .question {
+    padding: 5px 0;
+  }
+  .question-type{
+    font-size: 16px;
+    padding: 2px 5px;
+    line-height: 15px;
+    height: 20px;
+    margin-bottom: 8px;
+  }
+  .question-tt{
+    font-size: 14px;
+    line-height: 20px;
+
+  }
+  .question-result{
+    font-size: 12px;
+  }
+
+  textarea{
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+  }
+
+  .bottom{
+    text-align: right;
+
+    padding-bottom: 20px;
+    &.ing {
+      .btn-submit {
+        background-color: #cfcfcf;
+      }
+    }
+  }
+}

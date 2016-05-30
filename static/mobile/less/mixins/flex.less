@@ -1,0 +1,189 @@
+/**
+ * flexbox grid system
+ * @author: songhe.zl@alibaba-inc.com
+ * @date: 2015-04-14
+ */
+@import 'lesshat/lesshat-prefixed';
+.make-flex-grid(@grid-number: 12) {
+    .zui-flex {
+        // display flexbox
+        //display: flex !important;
+        .lh-display(flex) !important;
+
+        .lh-flex-wrap(wrap);
+        //flex-wrap: wrap;
+
+        &, *, *:after, *:before {
+            //box-sizing: border-box;
+            .lh-box-sizing(border-box);
+        }
+        // flex-direction
+        &.vertical {
+            //flex-direction: column;
+
+            .lh-flex-direction(column);
+
+            &.reverse {
+                //flex-direction: column-reverse;
+                .lh-flex-direction(column-reverse);
+            }
+
+            .zui-cell {
+                width: auto;
+            }
+
+            > .zui-cell > .zui-flex-inner {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        &.horizental {
+            .lh-flex-direction(row);
+            //flex-direction: row;
+        }
+        &.reverse {
+            //flex-direction: row-reverse;
+            .lh-flex-direction(row-reverse);
+        }
+
+        // justify-content
+        &.justify-start {
+            //justify-content: flex-start;
+            .lh-justify-content(flex-start);
+        }
+        &.justify-end {
+            //justify-content: flex-end;
+            .lh-justify-content(flex-end);
+        }
+        &.justify-center {
+            //justify-content: center;
+            .lh-justify-content(center);
+        }
+        &.justify-between {
+            //justify-content: space-between;
+            .lh-justify-content(space-between);
+        }
+        &.justify-around {
+            //justify-content: space-around;
+            .lh-justify-content(space-around);
+        }
+
+		// align-items
+        &.align-start {
+            //align-items: flex-start;
+            .lh-align-items(flex-start);
+        }
+        &.align-end {
+            //align-items: flex-end;
+            .lh-align-items(flex-end);
+        }
+        &.align-center {
+            //align-items: center;
+            .lh-align-items(center);
+        }
+        &.align-stretch {
+            //align-items: stretch;
+            .lh-align-items(stretch);;
+            .zui-cell {
+                height: auto !important;
+            }
+        }
+
+        // 子cell居中
+        &.center{
+            //justify-content: center;
+            .lh-justify-content(center);
+            .lh-align-items(center);
+            //align-items: center;
+        }
+
+		// .cell
+        > .zui-cell {
+            //flex: 1;
+            .lh-flex(1);
+            // android有些浏览器下面如果重置宽度，不会通过flex来计算宽度
+            width: 0;
+            //flex-basis: 0;
+            .lh-flex-basis(0);
+            max-width: 100%;
+            display: block;
+            padding: 0 !important;
+
+            // 解决flex-item子容器不能百分百的适配问题
+            // flex-item虽然分配来高度或宽度， 但是height实际上是auto的， 这时候子容器设置高度的时候会查找height不为auto的
+            // http://stackoverflow.com/questions/15381172/css-flexbox-child-height-100
+            position: relative;
+
+            .date {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            &.zui-flex-fixed {
+                //flex: none !important;
+                .lh-flex(none) !important;
+
+                width: auto;
+                -webkit-box-flex: 0;
+                .count, .duration {
+                    width: 65px;
+                }
+            }
+            &.align-start {
+                //align-self: flex-start;
+                .lh-align-self(flex-start);
+            }
+            &.align-end {
+                //align-self: flex-end;
+                .lh-align-self(flex-end);
+            }
+            &.align-center {
+                //align-self: center;
+                .lh-align-self(center);
+            }
+            &.align-stretch {
+                //align-items: stretch;
+                .lh-align-items(stretch);
+                height: auto !important;
+            }
+        }
+
+        // 防止图片加载前位置collapse
+        // 自定义比例的高度可重置padding-bottom的值
+        .image-box{
+            height: 0;
+            padding-bottom: 100%;
+            position: relative;
+            > img{
+                width:100%;
+                height:100%;
+                display:block;
+                position:absolute;
+            }
+        }
+
+        .grid-system();
+    }
+    .grid-system() {
+        .loop(@grid-number);
+        .loop(@index) when (@index > 0) {
+            > .zui-cell-@{index} {
+                .cell(@index);
+            }
+            > .order-@{index} {
+                //order: @index;
+                .lh-order(@index);
+            }
+            @decreased-index: @index - 1;
+            .loop(@decreased-index);
+        }
+    }
+    .cell(@index: 0) {
+        @size: percentage(@index / @grid-number);
+        //flex-basis: @size;
+        .lh-flex-basis(@size);
+        max-width: @size;
+        width: auto !important;
+    }
+}

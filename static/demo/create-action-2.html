@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>创建活动第二步</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="//zhao-mi.net/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/es5/es5-shim.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/placeholder/jquery.placeholder.min.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/lib/cityselect/jquery.cityselect.js"></script>
+    <script type="text/javascript" src="//zhao-mi.net/build/create-criteria.js"></script>
+</head>
+<body>
+<div id="header">
+    <div id="header-c">
+        <a href="//zhao-mi.net" id="logo">找米</a>
+        <div id="reg" class="action"><a class="z-btn">注册/登陆</a></div>
+        <div id="pub" class="action"><a class="z-btn">发布活动</a></div>
+        <div id="search" class="action"><input placeholder="在此输入搜索"></input></div>
+    </div>
+</div>
+<div id="content">
+    <div id="action-bg">
+        <img src="//zhao-mi.net/assets/imgs/detail-banner.png">
+        <div id="progress" class="z-process">
+          <ul class="z-steps">
+            <li class="z-node z-first-finish"><div class="z-process-label">活动基本信息</div></li>
+            <li class="z-bar z-bar-finish"><div class="z-far"></div></li>
+            <li class="z-node z-current"><div class="z-process-label">活动报名条件</div></li>
+            <li class="z-bar z-bar-wait"><div class="z-far"></div></li>
+            <li class="z-node z-last-wait"><div class="z-process-label">发布</div></li>
+          </ul>
+        </div>
+    </div>
+    <div id="criteria-operation">
+        <ul>
+            <li class="radio" data-type="radio">
+                单选
+            </li>
+            <li class="checkbox" data-type="checkbox">
+                多选
+            </li>
+            <li class="question" data-type="question">
+                问答
+            </li>
+            <li class="upload" data-type="upload">
+                图片
+            </li>
+        </ul>
+    </div>
+    <div id="action-container">
+        <p class="tips">找米已为您获取的信息：用户头像、昵称、手机号，不需要在问卷中设置</p>
+        <div id="action-criteria" class="criteria-c">
+            <div id="action-questions">
+                <!-- <div class="action-item" data-type="radio">
+                    <div class="criteria-q fn-clr">
+                        <span class="criteria-seqno">1、</span>
+                        <input class="criteria-q-input" placeholder="在这里填写你的单选问题~"></input>
+                        <span class="criteria-del"></span>
+                    </div>
+                    <div class="action-answers">
+                        <ul class="fn-clr">
+                            <li>
+                                <span class="z-radio"></span>
+                                <input class="criteria-a-input" placeholder="选项"></input>
+                                <span class="criteria-del"></span>
+                            </li>
+                            <li>
+                                <span class="z-radio"></span>
+                                <input class="criteria-a-input" placeholder="选项"></input>
+                                <span class="criteria-del"></span>
+                            </li>
+                            <li>
+                                <span class="z-radio"></span>
+                                <input class="criteria-a-input" placeholder="选项"></input>
+                                <span class="criteria-del"></span>
+                            </li>
+                            <li>
+                                <span class="criteria-add"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="action-item" data-type="checkbox">
+                    <div class="criteria-q fn-clr">
+                        <span class="criteria-seqno">2、</span>
+                        <input class="criteria-q-input" placeholder="在这里填写你的多选问题~"></input>
+                        <span class="criteria-del"></span>
+                    </div>
+                    <div class="action-answers">
+                        <ul class="fn-clr">
+                            <li>
+                                <span class="z-checkbox"></span>
+                                <input class="criteria-a-input" placeholder="选项"></input>
+                                <span class="criteria-del"></span>
+                            </li>
+                            <li>
+                                <span class="z-checkbox"></span>
+                                <input class="criteria-a-input" placeholder="选项"></input>
+                                <span class="criteria-del"></span>
+                            </li>
+                            <li>
+                                <span class="z-checkbox"></span>
+                                <input class="criteria-a-input" placeholder="选项"></input>
+                                <span class="criteria-del"></span>
+                            </li>
+                            <li>
+                                <span class="criteria-add"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="action-item" data-type="question">
+                    <div class="criteria-q fn-clr">
+                        <span class="criteria-seqno">3、</span>
+                        <input class="criteria-q-input" placeholder="请在这里填写你要问的问答题~"></input>
+                        <span class="criteria-del"></span>
+                    </div>
+                    <textarea></textarea>
+                </div>
+                <div class="action-item" data-type="upload">
+                    <div class="criteria-q fn-clr">
+                        <span class="criteria-seqno">4、</span>
+                        <input class="criteria-q-input" placeholder="请在这里填写你要求上传的文件~"></input>
+                        <span class="criteria-del"></span>
+                    </div>
+                    <input type="file"/>
+                </div> -->
+            </div>
+        </div>
+        <div id="action-criteria-btns">
+            <button class="z-btn next">下一步</button>
+            <button class="z-btn prev">上一步</button>
+        </div>
+    </div>
+</div>
+
+</body>    
+</html>

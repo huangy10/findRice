@@ -93,8 +93,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'find_rice_db',
-        'USER': 'Lena',
-        'PASSWORD': 'huang9040601',
+        'USER': 'find_rice2',
+        'PASSWORD': 'shanghai',
         'HOST': 'localhost',
         'PORT': '',
     }

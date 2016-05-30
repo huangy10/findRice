@@ -1,0 +1,65 @@
+@import '../../../lib/common/common.less';
+
+.ui-widget-content {
+  border-color: #cfcfcf!important;
+}
+
+#share-dialog {
+    text-align: center;
+    padding-bottom: 20px;
+    .share-link {
+        display: inline-block;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #eee;
+        text-align: center;
+        font-size: 14px;
+    }
+    .dialog-txt {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .dialog-txt-hint {
+        color: #ccc;
+        margin-top: 0;
+        font-size: 14px;
+    }
+    .mb0 {
+        margin-bottom: 0;
+    }
+    .share-qrcode {
+        display: inline-block;
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .socials {
+        width: 400px;
+        margin: 10px auto;
+        span {
+            float: left;
+            display: inline-block;
+            width: 72px;
+            height: 72px;
+            margin: 0 16px;
+            cursor: pointer;
+            .icons-bg(-29px -882px);
+            &.last {
+                margin-right: 0;
+            }
+        }
+        #wechat {
+            cursor: default;
+        }
+        #wechat-group {
+            .icons-bg(-25px -772px);
+            cursor: default;
+        }
+        #qq {
+            .icons-bg(-28px -1101px);
+        }
+        #sina {
+            .icons-bg(-132px -882px);
+        }
+    }
+}

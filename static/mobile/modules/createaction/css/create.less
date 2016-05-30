@@ -1,0 +1,242 @@
+@import '../../../lib/common/common.less';
+
+#pageCreateAction{
+    cursor: pointer;
+    .active-gift{
+        margin-left: 20px;
+    }
+    .input-gift{
+        margin-top: 10px;
+        display: none;
+
+    }
+    .active .input-gift {
+        display: block;
+    }
+    #hostName{
+        color:#b4b4b4;
+    }
+    .end-time{
+        margin-left:10px;
+    }
+    .select-date-time{
+        padding-left: 10px;
+    }
+    .date-lbl {
+        display: inline-block;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        border: 1px solid #BEBEBE;
+        span {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            text-indent: 1em;
+            &.ph {
+                color: #bbb;
+            }
+        }
+    }
+    .select-wrapper{
+        position: relative;
+    }
+    .input-wrapper .text{
+        line-height:40px;
+        //text-align: center;
+        display: block;
+        padding-left: 10px;
+    }
+    .distance-input {
+        padding-top: 5px;
+    }
+    .distance-input input{
+        height: 30px;
+        line-height: 30px;
+    }
+    .select-activity-type{
+        height: 40px;
+        width: 100%;
+        line-height: 36px;
+        display: block;
+        padding: 2px 5px;
+        border: solid 1px #BEBEBE;
+        color: #666;
+        position: relative;
+        -webkit-border-radius: 0;
+        -webkit-background-clip: padding-box;
+        border-radius: 0;
+        background-clip: padding-box;
+        background: url("//zhao-mi.net/m/assets/img/arrow.png") no-repeat right center transparent;
+    }
+    .select-list-content{
+        display: none;
+        border: 1px solid #bebebe;
+        position: absolute;
+        left:0;
+        width:100%;
+        top:39px;
+        background: #fff;
+        span{
+            display: block;
+            height:40px;
+            padding-left: 15px;
+            line-height: 40px;
+            font-size: 12px;
+            color: #666;
+            border-bottom: 1px solid #bebebe;;
+
+            &:last-child{
+                border-bottom: 0;
+            }
+        }
+    }
+    .main{
+        padding: 0 10px;
+    }
+    .banner{
+        position: relative;
+        .line{
+            width:100%;
+            height: 1px;
+            font-size: 0;
+            line-height: 0;
+            border-bottom: 1px solid #fff;
+            padding-top: 12px;
+        }
+
+    }
+    .process{
+        width: 220px;
+        position: absolute;
+        left: 50%;
+        .translateX(-50%);
+        top: 30px;
+    }
+
+    .process .step {
+        width: 26px;
+        height: 26px;
+        .border-radius(26px);
+        border: 1px solid #ccc;
+        color: #fff;
+        font-size: 14px;
+        text-align: center;
+        line-height: 24px;
+    }
+    .banner img{
+        width: 100%;
+        display: block;
+
+
+    }
+
+
+    &.page-process-01 .process .step-01,
+    &.page-process-02 .process .step-01,
+    &.page-process-02 .process .step-02,
+    &.page-process-03 .process .step{
+        background-color:#fff;
+        color:#000;
+        border-color: rgba(255, 255, 255, 0);
+    }
+    .active-name{
+        height: 25px;
+        line-height: 25px;
+        font-size: 14px;
+        color: #4B4B4B;
+    }
+    .main li{
+        margin:10px 0;
+    }
+    .zui-align-right{
+        padding-top: 5px;
+    }
+}
+.page-process-02 {
+    .content{
+        text-align: center;
+        height: 200px;
+        padding-top: 50px;
+        color: #B8B8B8;
+        border-bottom: 1px solid #BEBEBE;
+    }
+}
+.title{
+    font-size: 25px;
+    line-height: 35px;
+    position: relative;
+
+    padding: 5px 0;
+
+}
+.detail{
+    .content {
+        color: #727272;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #ccc;
+        p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    }
+    font-size: 12px;
+    .m-tag {
+        font-size: 12px;
+        float: right;
+        .hot{
+            display: inline-block;
+            background-color: #ff7979;
+            color: #fff;
+            padding: 2px 5px;
+            line-height: 20px;
+        }
+        
+    }
+    .price {
+        font-size: 24px;
+        display: inline-block;
+        background-color: #fff;
+        color: #ff7979;
+    }
+    .title-desc{
+        height: 25px;
+        line-height: 25px;
+        color: #B8B8B8;
+        margin-bottom: 5px;
+    }
+
+    .concact-msg{
+        padding: 5px 0;
+        &>div{
+            font-size: 14px;
+            margin: 5px 0;
+        }
+    }
+
+    .img{
+        width:100%;
+    }
+}
+
+.bottom-wrapper{
+    .zui-btn {
+        width: 70px;
+    }
+}
+.zui-align-right{
+    padding: 10px 0;
+    //a{
+    //    color:#727272;
+    //
+    //}
+
+}
+
+.next-w {
+    &.ing {
+        button {
+            background-color: #cfcfcf;
+        }
+    }
+}

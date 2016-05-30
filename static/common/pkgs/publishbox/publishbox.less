@@ -1,0 +1,51 @@
+@import '../box/box.less';
+
+
+.tip-dialog {
+  display: none;
+  .save-icon-w {
+    height: 78px;
+    margin-top: 20px;
+    text-align: center;
+    .save-icon {
+      display: inline-block;
+      width: 78px;
+      height: 78px;
+      margin-bottom: 0;
+      .icons-bg(-131px -986px);
+    }
+  }
+  .save-txt {
+    text-align: center;
+    color: #7ED321;
+  }
+  .save-tips {
+    font-size: 13px;
+    text-align: center;
+    color: #cfcfcf;
+  }
+  .btns {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    a {
+      min-width: 90px;
+      height: 40px;
+      line-height: 40px;
+      color: #cfcfcf;
+      border: 1px solid #cfcfcf;
+      .border-radius(20px);
+      &.share {
+        margin-right: 12px;
+      }
+    }
+  }
+  .goto {
+    margin-bottom: 20px;
+    text-align: center;
+    a {
+      color: #7ED321;
+      outline: none;
+    }
+  }
+}

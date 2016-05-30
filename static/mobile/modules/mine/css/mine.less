@@ -1,0 +1,256 @@
+@import '../../../lib/common/common.less';
+@import './exchange.less';
+
+.user-center{
+  text-align: center;
+  .user-pic{
+    width: 100px;
+    margin: 0 auto;
+    position: relative;
+
+  }
+  .user-msg{
+    height: 155px;
+    input{
+      width: 100px;
+    }
+
+  }
+  .edit-input{
+    line-height: 30px;
+    height: 30px;
+    text-align: center;
+    border:1px solid transparent;
+    border-bottom: 1px solid #ccc;
+  }
+  .btn-edit, .btn-save{
+    position: absolute;
+    left: 100px;
+    bottom: 10px;
+    width: 80px;
+    line-height: 25px;
+    height: 25px;
+
+  }
+  .icon-edit{
+    background-position: -100px -28px;
+
+  }
+  .upload-img-box{
+    @value: 85px;
+    width: @value;
+    height: @value;
+    .border-radius(@value);
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+    img{
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .user-name{
+    margin-top: 5px;
+    color: #4B4B4B;
+    font-size: 25px;
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+  }
+  .mibi{
+    color: #727272;
+    line-height: 25px;
+  }
+
+  #upload-image{
+    opacity: 0;
+    z-index: 9;
+  }
+  .upload-image{
+    display: none;
+  }
+  .user-name-text{
+    display: block;
+  }
+  .btn-save{
+    display: none;
+  }
+  .edit-input{
+    display: none;
+  }
+  .display-text{
+    font-size: 20px;
+    display: inline-block;
+  }
+  .edit-input:focus{
+    border-bottom-color: #7ED321;
+  }
+  .editing {
+
+    .upload-image{
+      display: inline-block;
+    }
+    .display-text{
+      display: none;
+    }
+    .edit-input{
+      display: inline-block;
+    }
+    .user-name {
+      width: 200px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 25px;
+    }
+    .name {
+      display: none;
+    }
+    .mobile {
+      display: none;
+    }
+    .gender {
+      display: none;
+    }
+    .bday {
+      display: none;
+    }
+    .btn-save{
+      display: block;
+    }
+    .mibi {
+      display: none;
+    }
+    .ops {
+      display: none;
+    }
+
+  }
+  .operation-content{
+
+  }
+
+  .edit-item{
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    display: block;
+    margin:8px auto 8px;
+  }
+
+  .mobile .edit-input{
+    width: 80px;
+  }
+
+  .gender .edit-input{
+    width: 50px;
+  }
+  .age .edit-input{
+    width: 100px;
+  }
+
+  .other-msg{
+    margin: 10px 20px;
+    border-top: 1px solid #BEBEBE;
+  }
+
+  #upload-image, .upload-image{
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+  .upload-image{
+     padding-top: 15px;
+    .icon-photo{
+
+      width: 50px;
+      height: 50px;
+      background-position: -100px -50px;
+    }
+  }
+}
+#pageActivityApplyList{
+  .activity-msg-detail{
+    display: none;
+  }
+  .tr.open{
+    .icon-arrow-up{
+      .rotateZ(180deg);
+    }
+    .activity-msg-detail{
+      display: block;
+    }
+  }
+  
+  .icon-arrow-up{
+    background-position: -52px 0;
+  }
+}
+.mine-content {
+  button {
+    float: right;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 12px;
+    padding: 0 12px;
+    .border-radius(15px);
+    &.btn-refuse {
+      color: white;
+      border: none;
+      background-color: #f56467;
+    }
+    &.btn-passed {
+      color: white;
+      border: none;
+      background-color: #7ed321;
+    }
+  } 
+}
+
+.more {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  span {
+    display: none;
+  }
+}
+.no-more {
+  button {
+    display: none;
+  }
+  span {
+    display: inline-block;
+  }
+}
+
+.bottom {
+  width: 240px;
+  height: 60px;
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  margin-left: -120px;
+  text-align: center;
+  .verified-action, .logout {
+    border: 1px solid #979797;
+    .border-radius(20px);
+    font-size: 14px;
+    color: #727272;
+    height: 39px;
+    line-height: 39px;
+    padding: 0 24px;
+  }
+  .logout {
+    margin-top: 12px;
+  }
+  .hint {
+    font-size: 14px;
+    margin-top: 16px;
+    color: #ccc;
+  }
+}
