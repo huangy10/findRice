@@ -8,6 +8,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.exceptions import ValidationError, ObjectDoesNotExist, MultipleObjectsReturned
 from django.core.urlresolvers import reverse
+from django.utils.encoding import smart_str
 from django.utils.functional import cached_property
 
 from .tasks import create_zipped_poster, create_share_thumbnail
@@ -235,7 +236,7 @@ class Activity(models.Model):
     backup = models.ForeignKey("self", related_name="master", null=True, blank=True)
 
     def __str__(self):
-        return self.name.encode("utf-8")
+        return smart_str(self.name)
 
     def get_duration_description(self):
         tz = timezone.get_current_timezone()
