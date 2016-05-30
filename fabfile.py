@@ -19,8 +19,8 @@ def deploy():
         run("git pull origin master")
         print "Applying server settings"
         # replace setting file
-        sudo("rm findRice/settings.py")
-        sudo("mv findRice/settings_remote.py findRice/settings.py")
+        run("rm findRice/settings.py")
+        run("mv findRice/settings_remote.py findRice/settings.py")
         # database migrations
         migrate_db = prompt("Did you modify the database? [Y/n]", validate=r'[yYNn]')
         if migrate_db in ["Y", "y"]:
