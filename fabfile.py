@@ -8,6 +8,8 @@ env.password = "shanghai"
 
 
 def deploy():
+    prompt("Push you local change to github before deployment!\n(Press any key to continue)")
+
     with cd("/home/findRice"):
         if not exists("./findRice"):
             print "Project not found, cloning from github: https://github.com/huangy10/findRice.git"
@@ -15,7 +17,7 @@ def deploy():
     with cd("/home/findRice/findRice"):
         print "Updating source code from github"
         # update remote code
-        run("git clean -f")
+        run("git checkout .")
         run("git pull origin master")
         print "Applying server settings"
         # replace setting file
