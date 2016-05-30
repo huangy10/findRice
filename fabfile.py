@@ -15,7 +15,7 @@ def deploy():
     with cd("/home/findRice/findRice"):
         print "Updating source code from github"
         # update remote code
-        run("git fetch")
+        run("git clean -f")
         run("git pull origin master")
         print "Applying server settings"
         # replace setting file
