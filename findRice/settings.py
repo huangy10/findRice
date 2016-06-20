@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
     'django_user_agents',
+    'django_extensions',
     'Activity',
     'Profile',
     'Questionnaire',

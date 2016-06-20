@@ -497,8 +497,8 @@ def manage_an_activity2(request):
     # 获取目标活动
     activity = get_object_or_404(Activity, id=action_id, is_active=True)
     # 检查当前用户的操作权限
-    if not activity.host_id != user.id:
-        return HttpResponse(json.dumps({'success': False, 'data': {'error': 'Permission Denied'}}))
+    if activity.host_id != user.id:
+        return HttpResponse(json.dumps({'success': False, 'data': {'error': '没有操作权限'}}))
     # 获取目标用户
     try:
         target_user = get_user_model().objects.select_related('profile').get(id=target_id)

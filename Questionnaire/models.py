@@ -58,7 +58,7 @@ class ChoiceQuestion(Question):
     class Meta:
         verbose_name = "选择题"
         verbose_name_plural = "选择题"
-	ordering = ["created_at"]
+        ordering = ("created_at", )
 
 
 TEXT_QUESTION_TYPE = 0
