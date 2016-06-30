@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
+from django.utils import timezone
 
 from Activity.models import Activity, ActivityType
 from Profile.utils import from_size_check_required
@@ -39,8 +40,9 @@ def index_list(request, start, size):
     else:
         banners = None
         footer = None
-    activities = Activity.objects.filter(is_active=True, is_published=True, identified=True)\
-        .order_by("recommended_level", "-created_at")[start: start+size]
+    activities = Activity.objects.filter(
+        is_active=True, is_published=True, identified=True, end_time__lt=timezone.now()
+    ).order_by("recommended_level", "-created_at")[start: start+size]
     act_types = ActivityType.objects.all()
 
     user = None

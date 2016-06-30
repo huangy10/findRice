@@ -134,7 +134,8 @@ TEMPLATE_DIRS = (
     # os.path.join(BASE_DIR,  'templates'),
 )
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.abspath("~/media")
 
 AUTH_PROFILE_MODULE = "Profile.UserProfile"
 LOGIN_URL = "/login"

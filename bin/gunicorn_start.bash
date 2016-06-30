@@ -8,10 +8,13 @@ DJANGO_SETTINGS_MODULE=findRice.settings # which settings file should Django use
 DJANGO_WSGI_MODULE=findRice.wsgi # WSGI module name
  
 echo "Starting $NAME as `whoami`"
+echo $HOME
  
 # Activate the virtual environment
 cd $DJANGODIR
-source ../ENV/bin/activate
+HOME=/home/findRice
+source ~/.bash_profile
+workon find_rice_env
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 # Create the run directory if it doesn't exist
