@@ -41,7 +41,7 @@ def index_list(request, start, size):
         banners = None
         footer = None
     activities = Activity.objects.filter(
-        is_active=True, is_published=True, identified=True, end_time__lt=timezone.now()
+        is_active=True, is_published=True, identified=True
     ).order_by("recommended_level", "-created_at")[start: start+size]
     act_types = ActivityType.objects.all()
 
@@ -150,7 +150,7 @@ def search_list(request, start, size):
     act = filter_loc(act)
 
     if hot == "3" and act is not None:
-        act = act.order_by("-reward")
+        act = act.filter(end_time__gt=timezone.now()).order_by("-reward")
 
     if "callback" in request.GET:
         act_data = act[start: start+size]

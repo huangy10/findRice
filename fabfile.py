@@ -70,6 +70,8 @@ def deploy():
             run("workon find_rice_env && python manage.py migrate")
 
     enabled_proj_path = "~/findRice"
+    if exists(enabled_proj_path):
+        run("rm {proj}".format(proj=enabled_proj_path))
     run("ln -s {tar} {src}".format(src=enabled_proj_path, tar=remote_proj_path))
 
     run("rm {remote_temp_zip}".format(remote_temp_zip=remote_temp_zip_path))
